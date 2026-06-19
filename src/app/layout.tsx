@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Providers from "@/components/theme/Providers";
@@ -56,6 +57,7 @@ export default function RootLayout({
           <main className="pt-[73px]">{children}</main>
           <Footer />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
