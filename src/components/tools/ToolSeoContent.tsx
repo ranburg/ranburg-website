@@ -26,7 +26,7 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold text-theme-heading">Formula & Logic</h2>
+        <h2 className="text-2xl font-bold text-theme-heading">Examples & Reference</h2>
         <p className="mt-4 leading-relaxed text-theme-muted">{tool.formula}</p>
       </section>
 

@@ -1,6 +1,6 @@
 import { SALESFORCE_TOOLS } from "./salesforceToolsData";
 
-export type ToolCategoryId = "financial" | "developer" | "text" | "design" | "salesforce";
+export type ToolCategoryId = "financial" | "developer" | "productivity" | "design" | "salesforce";
 
 export interface ToolCategory {
   id: ToolCategoryId;
@@ -35,28 +35,28 @@ export interface ToolConfig {
 export const TOOL_CATEGORIES: ToolCategory[] = [
   {
     id: "financial",
-    label: "Financial Calculators",
-    description: "Investment, revenue, and loan planning tools with inflation-adjusted insights.",
+    label: "Financial Tools",
+    description: "SIP, SWP, EMI, and investment planning calculators.",
   },
   {
     id: "developer",
-    label: "Developer & Data Utilities",
-    description: "Format, validate, and optimize code and structured data instantly.",
-  },
-  {
-    id: "text",
-    label: "Text & Formatting Wizards",
-    description: "Transform, preview, and generate text for professional content.",
-  },
-  {
-    id: "design",
-    label: "Design & Media Tools",
-    description: "Generate CSS effects and convert images for modern web workflows.",
+    label: "Developer Tools",
+    description: "JSON, SQL formatters and code utilities for developers.",
   },
   {
     id: "salesforce",
-    label: "Salesforce Developer Tools",
-    description: "Free Salesforce formula, SOQL, cron, validation rule, and OmniStudio generators.",
+    label: "Salesforce Tools",
+    description: "Free formula, SOQL, cron, Apex, and Revenue Cloud generators.",
+  },
+  {
+    id: "design",
+    label: "Design Tools",
+    description: "CSS glassmorphism generator and image conversion utilities.",
+  },
+  {
+    id: "productivity",
+    label: "Productivity Tools",
+    description: "LinkedIn formatting and professional content helpers.",
   },
 ];
 
@@ -297,7 +297,7 @@ export const TOOLS_CONFIG: ToolConfig[] = [
     slug: "linkedin-formatter",
     title: "LinkedIn Formatting & Hook Previewer",
     shortDescription: "Preview LinkedIn posts with hook analysis and formatting.",
-    category: "text",
+    category: "productivity",
     icon: "Linkedin",
     gradient: "from-blue-600 to-blue-400",
     badge: "Social Copy",
@@ -325,7 +325,7 @@ export const TOOLS_CONFIG: ToolConfig[] = [
     slug: "case-converter",
     title: "Case Converter",
     shortDescription: "Convert text between camelCase, snake_case, Title Case, and more.",
-    category: "text",
+    category: "productivity",
     icon: "Type",
     gradient: "from-teal-500 to-green-500",
     badge: "Text Utility",
@@ -353,7 +353,7 @@ export const TOOLS_CONFIG: ToolConfig[] = [
     slug: "lorem-ipsum",
     title: "Lorem Ipsum Generator",
     shortDescription: "Generate placeholder paragraphs, sentences, or words.",
-    category: "text",
+    category: "productivity",
     icon: "AlignLeft",
     gradient: "from-slate-500 to-slate-400",
     badge: "Placeholder",

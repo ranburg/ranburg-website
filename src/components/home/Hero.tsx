@@ -49,11 +49,17 @@ export default function Hero() {
             enterprise integrations — plus free Salesforce developer tools trusted by admins worldwide.
           </p>
 
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
-            <Button href="/contact" size="lg" icon>Get a Free Consultation</Button>
-            <Button href="/tools/formula-generator" variant="outline" size="lg">
-              Salesforce Tools
+          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
+            <Button href="/contact" size="lg" icon>Schedule Consultation</Button>
+            <Button href="/contact" variant="outline" size="lg">Contact Us</Button>
+          </div>
+          <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
+            <Button href="/services" variant="outline" size="lg">
+              Discuss Your Salesforce Project
               <ArrowRight className="h-4 w-4" />
+            </Button>
+            <Button href="/tools/salesforce" variant="outline" size="lg">
+              Free Salesforce Tools
             </Button>
           </div>
 

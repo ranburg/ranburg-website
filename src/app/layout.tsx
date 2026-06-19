@@ -15,9 +15,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = buildMetadata({
-  title: "Salesforce Consulting & Development Services | Ranburg LLP",
+  title: "Salesforce Consulting, Revenue Cloud & Software Development Services | Ranburg LLP",
   description:
-    "Certified Salesforce consultants in Jaipur, India. OmniStudio, Revenue Cloud, Industries Cloud, LWC, integrations, and managed services.",
+    "Certified Salesforce consultants in India. OmniStudio, Revenue Cloud, Industries Cloud, LWC, integrations & free developer tools.",
   path: "/",
   keywords: [
     "Salesforce consulting India",

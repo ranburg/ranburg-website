@@ -13,6 +13,7 @@ import { TOOL_CATEGORIES, TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { getServiceIcon } from "@/lib/serviceIcons";
 import { getToolIcon } from "@/lib/toolIcons";
+import ToolSearch from "@/components/tools/ToolSearch";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -165,6 +166,14 @@ export default function Navbar() {
 
                 {mobileToolsOpen && (
                   <div className="ml-2 space-y-4 border-l border-theme-subtle pl-4">
+                    <ToolSearch onResultClick={() => setMobileOpen(false)} maxResults={5} />
+                    <Link
+                      href="/tools/salesforce"
+                      onClick={() => setMobileOpen(false)}
+                      className="block rounded-lg px-3 py-2 text-sm font-medium text-accent hover:bg-theme-surface"
+                    >
+                      Salesforce Tool Hub →
+                    </Link>
                     {TOOL_CATEGORIES.map((cat) => (
                       <div key={cat.id}>
                         <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-accent">

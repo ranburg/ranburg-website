@@ -1,4 +1,5 @@
 import { AI_BLOG_POSTS } from "./blogConfigAi";
+import { EXTRA_SALESFORCE_BLOG_POSTS } from "./blogConfigSalesforceExtra";
 import type { BlogPost } from "./blogTypes";
 
 export type { BlogPost, BlogSection, BlogFaq } from "./blogTypes";
@@ -1014,6 +1015,7 @@ export const BLOG_POSTS: BlogPost[] = [
     relatedServices: ["salesforce-industries", "experience-cloud", "revenue-cloud"],
     relatedTools: ["soql-builder", "flow-formula-builder"],
   },
+  ...EXTRA_SALESFORCE_BLOG_POSTS,
   ...AI_BLOG_POSTS,
 ];
 

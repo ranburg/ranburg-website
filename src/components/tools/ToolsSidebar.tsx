@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { TOOL_CATEGORIES, type ToolCategoryId } from "@/lib/toolsConfig";
 
@@ -17,6 +18,12 @@ export default function ToolsSidebar({
       <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
         Filter by Category
       </p>
+      <Link
+        href="/tools/salesforce"
+        className="mb-2 block w-full rounded-xl px-4 py-3 text-left text-sm font-medium text-accent transition-all hover:bg-accent/10"
+      >
+        Salesforce Tool Hub
+      </Link>
       <button
         type="button"
         onClick={() => onCategoryChange("all")}

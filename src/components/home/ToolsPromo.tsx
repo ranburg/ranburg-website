@@ -37,9 +37,12 @@ export default function ToolsPromo() {
             );
           })}
         </div>
-        <div className="mt-10 text-center">
-          <Link href="/tools" className="inline-flex items-center gap-2 rounded-xl border border-theme px-6 py-3 text-sm font-semibold text-theme-heading hover:border-accent/40 hover:text-accent">
-            <Wrench className="h-4 w-4" /> Browse All {TOOLS_CONFIG.length} Tools
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <Link href="/tools/salesforce" className="inline-flex items-center gap-2 rounded-xl border border-theme px-6 py-3 text-sm font-semibold text-theme-heading hover:border-accent/40 hover:text-accent">
+            <Wrench className="h-4 w-4" /> Salesforce Tool Hub
+          </Link>
+          <Link href="/tools" className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline">
+            All {TOOLS_CONFIG.length} tools →
           </Link>
         </div>
       </div>
