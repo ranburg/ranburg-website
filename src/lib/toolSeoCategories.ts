@@ -1,19 +1,6 @@
 import type { ToolConfig } from "./toolsConfig";
 import { TOOLS_CONFIG } from "./toolsConfig";
 
-export interface SeoCategoryHub {
-  slug: string;
-  label: string;
-  headline: string;
-  description: string;
-  intro: string;
-  icon: string;
-  gradient: string;
-  keywords: string[];
-  relatedSlugs: string[];
-  faq: { question: string; answer: string }[];
-}
-
 export const SEO_CATEGORY_SLUGS = [
   "seo",
   "developer",
@@ -24,6 +11,19 @@ export const SEO_CATEGORY_SLUGS = [
 ] as const;
 
 export type SeoCategorySlug = (typeof SEO_CATEGORY_SLUGS)[number];
+
+export interface SeoCategoryHub {
+  slug: SeoCategorySlug;
+  label: string;
+  headline: string;
+  description: string;
+  intro: string;
+  icon: string;
+  gradient: string;
+  keywords: string[];
+  relatedSlugs: SeoCategorySlug[];
+  faq: { question: string; answer: string }[];
+}
 
 /** Maps each tool slug to one or more SEO category hubs */
 export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {

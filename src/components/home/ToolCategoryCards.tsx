@@ -19,7 +19,7 @@ export default function ToolCategoryCards() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SEO_CATEGORY_HUBS.map((cat) => {
             const Icon = getToolIcon(cat.icon);
-            const count = getToolsForSeoCategory(cat.slug as typeof cat.slug).length;
+            const count = getToolsForSeoCategory(cat.slug).length;
             return (
               <Link
                 key={cat.slug}
