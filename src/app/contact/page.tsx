@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import ContactForm from "@/components/contact/ContactForm";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
+export const metadata: Metadata = buildMetadata({
+  title: "Contact Ranburg LLP | Salesforce Consulting Inquiry",
   description:
-    "Get in touch with Ranburg LLP for IT consulting, software development, and digital transformation services.",
-};
+    "Book a free Salesforce discovery call with certified consultants in Jaipur, India. OmniStudio, Revenue Cloud, LWC, and integration projects.",
+  path: "/contact",
+  keywords: ["contact Salesforce consultant", "Ranburg LLP contact", "Salesforce consulting inquiry"],
+});
 
 const MAPS_URL = "https://maps.app.goo.gl/Cm1m7Qv2vF5cS7vr7";
 

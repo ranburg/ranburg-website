@@ -12,6 +12,16 @@ import {
   AlignLeft,
   Sparkles,
   Image,
+  Clock,
+  FunctionSquare,
+  Search,
+  ShieldCheck,
+  Workflow,
+  Calendar,
+  Gauge,
+  Layers,
+  DollarSign,
+  Code2,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -30,6 +40,16 @@ const ICON_MAP: Record<string, LucideIcon> = {
   AlignLeft,
   Sparkles,
   Image,
+  Clock,
+  FunctionSquare,
+  Search,
+  ShieldCheck,
+  Workflow,
+  Calendar,
+  Gauge,
+  Layers,
+  DollarSign,
+  Code2,
 };
 
 export function getToolIcon(name: string): LucideIcon {

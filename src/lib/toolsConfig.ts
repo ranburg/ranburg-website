@@ -1,4 +1,6 @@
-export type ToolCategoryId = "financial" | "developer" | "text" | "design";
+import { SALESFORCE_TOOLS } from "./salesforceToolsData";
+
+export type ToolCategoryId = "financial" | "developer" | "text" | "design" | "salesforce";
 
 export interface ToolCategory {
   id: ToolCategoryId;
@@ -50,6 +52,11 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
     id: "design",
     label: "Design & Media Tools",
     description: "Generate CSS effects and convert images for modern web workflows.",
+  },
+  {
+    id: "salesforce",
+    label: "Salesforce Developer Tools",
+    description: "Free Salesforce formula, SOQL, cron, validation rule, and OmniStudio generators.",
   },
 ];
 
@@ -426,6 +433,7 @@ export const TOOLS_CONFIG: ToolConfig[] = [
       { question: "What is a Base64 data URI?", answer: "A Base64 data URI embeds image data directly in HTML/CSS as a string, eliminating separate HTTP requests for small images." },
     ],
   },
+  ...SALESFORCE_TOOLS,
 ];
 
 export function getToolBySlug(slug: string): ToolConfig | undefined {

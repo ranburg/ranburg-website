@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import ServiceBento, { ServicesCTA } from "@/components/services/ServiceBento";
 import Button from "@/components/ui/Button";
 
-export const metadata: Metadata = {
-  title: "Services",
+export const metadata: Metadata = buildMetadata({
+  title: "Salesforce Consulting Services | Ranburg LLP",
   description:
-    "Explore Ranburg LLP's IT services: custom software, cloud DevOps, enterprise solutions, web & mobile apps, and IT consulting.",
-};
+    "OmniStudio, Revenue Cloud, Industries Cloud, LWC, integrations, managed services, and staff augmentation from certified Salesforce consultants in Jaipur, India.",
+  path: "/services",
+  keywords: [
+    "Salesforce consulting services",
+    "Salesforce development India",
+    "OmniStudio consultant",
+    "Revenue Cloud implementation",
+    "Experience Cloud development",
+  ],
+});
 
 export default function ServicesPage() {
   return (
@@ -15,20 +24,16 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-grid opacity-30" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-wider text-accent">
-              What We Offer
-            </p>
+            <p className="text-sm font-semibold uppercase tracking-wider text-accent">Salesforce Services</p>
             <h1 className="mt-4 text-4xl font-extrabold text-theme-heading sm:text-5xl">
-              Comprehensive <span className="text-gradient-accent">IT Services</span>
+              Certified <span className="text-gradient-accent">Salesforce</span> Consulting & Development
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-theme-muted">
-              From strategy to deployment, we provide end-to-end technology solutions
-              that drive growth, efficiency, and competitive advantage.
+              From OmniStudio and Revenue Cloud to LWC and enterprise integrations — Ranburg LLP delivers
+              end-to-end Salesforce programs for global clients from Jaipur, India.
             </p>
             <div className="mt-8">
-              <Button href="/contact" icon>
-                Discuss Your Project
-              </Button>
+              <Button href="/contact" icon>Discuss Your Salesforce Project</Button>
             </div>
           </div>
         </div>

@@ -49,10 +49,10 @@ export default function ToolsDropdown() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.15 }}
-            className="absolute left-0 top-full z-[60] w-[520px] pt-2"
+            className="absolute left-0 top-full z-[60] w-[640px] pt-2"
           >
             <div className="dropdown-panel overflow-hidden rounded-2xl">
-              <div className="grid grid-cols-2 gap-0">
+              <div className="grid grid-cols-3 gap-0">
                 {TOOL_CATEGORIES.map((category) => {
                   const tools = TOOLS_CONFIG.filter((t) => t.category === category.id);
                   return (

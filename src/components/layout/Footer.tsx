@@ -1,21 +1,25 @@
 import Link from "next/link";
 import { Zap, Mail, MapPin, Linkedin, Twitter, Github } from "lucide-react";
-import { TOOL_CATEGORIES, TOOLS_CONFIG } from "@/lib/toolsConfig";
+import { SERVICES_CONFIG } from "@/lib/servicesConfig";
+import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 
 const footerLinks = {
   company: [
     { href: "/about", label: "About Us" },
     { href: "/services", label: "Services" },
+    { href: "/blog", label: "Blog" },
+    { href: "/tools", label: "Tools" },
     { href: "/contact", label: "Contact" },
   ],
   legal: [
-    { href: "/about", label: "LLP Registration" },
-    { href: "/contact", label: "Privacy Policy" },
-    { href: "/contact", label: "Terms of Service" },
+    { href: "/privacy", label: "Privacy Policy" },
+    { href: "/terms", label: "Terms of Service" },
   ],
 };
 
 const MAPS_URL = "https://maps.app.goo.gl/Cm1m7Qv2vF5cS7vr7";
+const salesforceTools = TOOLS_CONFIG.filter((t) => t.category === "salesforce").slice(0, 6);
+const topServices = SERVICES_CONFIG.slice(0, 6);
 
 export default function Footer() {
   return (
@@ -34,8 +38,8 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm leading-relaxed text-theme-muted">
-              A registered Limited Liability Partnership delivering cutting-edge IT
-              services, digital transformation, and innovative online tools.
+              Certified Salesforce consultants in Jaipur, India — OmniStudio, Revenue Cloud,
+              Industries Cloud, LWC, integrations, and free developer tools.
             </p>
             <div className="flex gap-3">
               {[Linkedin, Twitter, Github].map((Icon, i) => (
@@ -52,9 +56,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">
-              company
-            </h3>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">Company</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
@@ -66,25 +68,31 @@ export default function Footer() {
             </ul>
           </div>
 
-          {TOOL_CATEGORIES.map((cat) => (
-            <div key={cat.id}>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">
-                {cat.label.split(" ")[0]}
-              </h3>
-              <ul className="space-y-2">
-                {TOOLS_CONFIG.filter((t) => t.category === cat.id).slice(0, 4).map((tool) => (
-                  <li key={tool.slug}>
-                    <Link
-                      href={`/tools/${tool.slug}`}
-                      className="text-sm text-theme-muted transition-colors hover:text-accent"
-                    >
-                      {tool.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">Salesforce Services</h3>
+            <ul className="space-y-2">
+              {topServices.map((service) => (
+                <li key={service.slug}>
+                  <Link href={`/services/${service.slug}`} className="text-sm text-theme-muted transition-colors hover:text-accent">
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">Salesforce Tools</h3>
+            <ul className="space-y-2">
+              {salesforceTools.map((tool) => (
+                <li key={tool.slug}>
+                  <Link href={`/tools/${tool.slug}`} className="text-sm text-theme-muted transition-colors hover:text-accent">
+                    {tool.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-theme-subtle pt-8 sm:flex-row sm:items-center sm:justify-between">
@@ -93,19 +101,18 @@ export default function Footer() {
               <Mail className="h-4 w-4" />
               admin@ranburg.com
             </a>
-            <a
-              href={MAPS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 transition-colors hover:text-accent"
-            >
+            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-colors hover:text-accent">
               <MapPin className="h-4 w-4" />
-              Find us on Google Maps
+              Jaipur, Rajasthan, India
             </a>
+            {footerLinks.legal.map((link) => (
+              <Link key={link.href} href={link.href} className="transition-colors hover:text-accent">
+                {link.label}
+              </Link>
+            ))}
           </div>
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} Ranburg LLP. All rights reserved. Registered
-            Limited Liability Partnership.
+            © {new Date().getFullYear()} Ranburg LLP. All rights reserved.
           </p>
         </div>
       </div>

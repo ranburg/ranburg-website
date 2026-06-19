@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import TeamCards from "@/components/about/TeamCards";
 import ValuesGrid from "@/components/about/ValuesGrid";
 import { Building2, Target, Users } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "About Us",
+export const metadata: Metadata = buildMetadata({
+  title: "About Ranburg LLP | Salesforce Consultants in India",
   description:
-    "Learn about Ranburg LLP — a registered Limited Liability Partnership delivering cutting-edge IT services and digital transformation.",
-};
+    "Ranburg LLP is a Jaipur-based Salesforce consulting firm specializing in OmniStudio, Revenue Cloud, Industries Cloud, and enterprise integrations.",
+  path: "/about",
+  keywords: ["Ranburg LLP", "Salesforce consultants India", "Jaipur Salesforce partner"],
+});
 
 const highlights = [
   {

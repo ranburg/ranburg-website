@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TOOLS_CONFIG, getToolBySlug } from "@/lib/toolsConfig";
+import { buildMetadata } from "@/lib/seo";
 import ToolPageShell from "@/components/tools/ToolPageShell";
 
 interface PageProps {
@@ -16,16 +17,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const tool = getToolBySlug(slug);
   if (!tool) return {};
 
-  return {
+  return buildMetadata({
     title: tool.seo.title,
     description: tool.seo.description,
+    path: `/tools/${slug}`,
     keywords: tool.seo.keywords,
-    openGraph: {
-      title: tool.seo.title,
-      description: tool.seo.description,
-      type: "website",
-    },
-  };
+  });
 }
 
 export default async function ToolPage({ params }: PageProps) {

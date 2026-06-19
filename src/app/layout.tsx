@@ -3,6 +3,9 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Providers from "@/components/theme/Providers";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import JsonLd from "@/components/seo/JsonLd";
+import { organizationJsonLd, localBusinessJsonLd, buildMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -11,21 +14,20 @@ const plusJakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Ranburg.com | Next-Gen IT Solutions & Digital Transformation",
-    template: "%s | Ranburg.com",
-  },
+export const metadata: Metadata = buildMetadata({
+  title: "Salesforce Consulting & Development Services | Ranburg LLP",
   description:
-    "Ranburg LLP delivers premium IT consulting, custom software development, cloud architecture, and innovative financial tools. Engineering next-gen digital solutions.",
+    "Certified Salesforce consultants in Jaipur, India. OmniStudio, Revenue Cloud, Industries Cloud, LWC, integrations, and managed services.",
+  path: "/",
   keywords: [
-    "IT services",
-    "software development",
-    "cloud architecture",
-    "digital transformation",
+    "Salesforce consulting India",
+    "Salesforce developer Jaipur",
+    "OmniStudio consultant",
+    "Revenue Cloud implementation",
+    "Salesforce Industries",
     "Ranburg LLP",
   ],
-};
+});
 
 export default function RootLayout({
   children,
@@ -42,6 +44,8 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen font-sans">
+        <JsonLd data={[organizationJsonLd(), localBusinessJsonLd()]} />
+        <GoogleAnalytics />
         <Providers>
           <Navbar />
           <main className="pt-[73px]">{children}</main>

@@ -7,14 +7,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Zap, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ToolsDropdown from "@/components/layout/ToolsDropdown";
+import ServicesDropdown from "@/components/layout/ServicesDropdown";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import { TOOL_CATEGORIES, TOOLS_CONFIG } from "@/lib/toolsConfig";
+import { SERVICES_CONFIG } from "@/lib/servicesConfig";
+import { getServiceIcon } from "@/lib/serviceIcons";
 import { getToolIcon } from "@/lib/toolIcons";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -30,7 +32,9 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileToolsOpen, setMobileToolsOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const isToolsActive = pathname.startsWith("/tools");
+  const isServicesActive = pathname.startsWith("/services");
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
@@ -46,29 +50,24 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden items-center gap-1 md:flex">
-            {navLinks.slice(0, 3).map((link) => (
+            {navLinks.slice(0, 1).map((link) => (
               <Link key={link.href} href={link.href} className={navLinkClass(pathname === link.href)}>
                 {link.label}
                 {pathname === link.href && (
-                  <motion.span
-                    layoutId="nav-indicator"
-                    className="absolute inset-0 -z-10 rounded-lg bg-theme-hover"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
+                  <motion.span layoutId="nav-indicator" className="absolute inset-0 -z-10 rounded-lg bg-theme-hover" transition={{ type: "spring", bounce: 0.2, duration: 0.6 }} />
                 )}
               </Link>
             ))}
+            <ServicesDropdown />
             <ToolsDropdown />
-            <Link href="/contact" className={navLinkClass(pathname === "/contact")}>
-              Contact
-              {pathname === "/contact" && (
-                <motion.span
-                  layoutId="nav-indicator"
-                  className="absolute inset-0 -z-10 rounded-lg bg-theme-hover"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-            </Link>
+            {navLinks.slice(1).map((link) => (
+              <Link key={link.href} href={link.href} className={navLinkClass(pathname === link.href || pathname.startsWith(link.href + "/"))}>
+                {link.label}
+                {(pathname === link.href || pathname.startsWith(link.href + "/")) && (
+                  <motion.span layoutId="nav-indicator" className="absolute inset-0 -z-10 rounded-lg bg-theme-hover" transition={{ type: "spring", bounce: 0.2, duration: 0.6 }} />
+                )}
+              </Link>
+            ))}
           </div>
 
           <div className="hidden items-center gap-3 md:flex">
@@ -118,6 +117,37 @@ export default function Navbar() {
                     {link.label}
                   </Link>
                 ))}
+
+                <button
+                  type="button"
+                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                  className={cn(
+                    "flex w-full items-center justify-between rounded-lg px-4 py-3 text-sm font-medium",
+                    isServicesActive ? "bg-theme-hover text-slate-900 dark:text-white" : "text-theme-muted"
+                  )}
+                >
+                  Services
+                  <ChevronDown className={cn("h-4 w-4 transition-transform", mobileServicesOpen && "rotate-180")} />
+                </button>
+
+                {mobileServicesOpen && (
+                  <div className="ml-2 space-y-1 border-l border-theme-subtle pl-4">
+                    {SERVICES_CONFIG.map((service) => {
+                      const Icon = getServiceIcon(service.icon);
+                      return (
+                        <Link
+                          key={service.slug}
+                          href={`/services/${service.slug}`}
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-theme-muted hover:text-slate-900 dark:hover:text-white"
+                        >
+                          <Icon className="h-3.5 w-3.5" />
+                          {service.title}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
 
                 <button
                   type="button"

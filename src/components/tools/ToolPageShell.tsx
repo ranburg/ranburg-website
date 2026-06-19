@@ -3,6 +3,9 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
+import { SITE } from "@/lib/siteConfig";
+import { softwareApplicationJsonLd, faqJsonLd } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import ToolRecommendations from "@/components/tools/ToolRecommendations";
 import ToolSeoContent from "@/components/tools/ToolSeoContent";
 import { TOOL_COMPONENTS } from "@/components/tools/registry";
@@ -19,9 +22,15 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
   if (!ToolComponent) notFound();
 
   const Icon = getToolIcon(tool.icon);
+  const toolUrl = `${SITE.url}/tools/${slug}`;
+  const schema = [
+    softwareApplicationJsonLd(tool.title, tool.seo.description, toolUrl, tool.badge),
+    ...(tool.faq?.length ? [faqJsonLd(tool.faq)] : []),
+  ];
 
   return (
     <div className="pb-24">
+      <JsonLd data={schema} />
       <section className="py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link

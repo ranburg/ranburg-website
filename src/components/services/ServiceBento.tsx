@@ -1,88 +1,44 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Code2,
-  Cloud,
-  Building2,
-  Smartphone,
-  Lightbulb,
-  ArrowUpRight,
-} from "lucide-react";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { SERVICES_CONFIG } from "@/lib/servicesConfig";
+import { getServiceIcon } from "@/lib/serviceIcons";
 
-const services = [
-  {
-    icon: Code2,
-    title: "Custom Software Development",
-    description:
-      "Bespoke applications engineered to your exact specifications — from internal tools to customer-facing platforms with clean architecture and maintainable codebases.",
-    span: "lg:col-span-2",
-    accent: "from-blue-500/20 to-blue-600/5",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud Architecture & DevOps",
-    description:
-      "Design, migrate, and optimize cloud infrastructure on AWS, Azure, and GCP with CI/CD pipelines and infrastructure-as-code.",
-    span: "",
-    accent: "from-cyan-500/20 to-cyan-600/5",
-  },
-  {
-    icon: Building2,
-    title: "Enterprise Solutions & CRM Integration",
-    description:
-      "Seamless Salesforce, HubSpot, and ERP integrations that unify your business data and automate workflows.",
-    span: "",
-    accent: "from-purple-500/20 to-purple-600/5",
-  },
-  {
-    icon: Smartphone,
-    title: "Web & Mobile App Engineering",
-    description:
-      "Responsive web apps and native-quality mobile experiences built with React, Next.js, React Native, and modern frameworks.",
-    span: "lg:col-span-2",
-    accent: "from-emerald-500/20 to-emerald-600/5",
-  },
-  {
-    icon: Lightbulb,
-    title: "IT Consulting & Strategy",
-    description:
-      "Technology assessments, digital roadmaps, and strategic advisory to align IT investments with business outcomes.",
-    span: "lg:col-span-3",
-    accent: "from-amber-500/20 to-amber-600/5",
-  },
-];
+const spans = ["lg:col-span-2", "", "", "lg:col-span-2", "", "", "", "lg:col-span-2", "", "lg:col-span-3"];
 
 export default function ServiceBento() {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {services.map((service, i) => {
-        const Icon = service.icon;
+      {SERVICES_CONFIG.map((service, i) => {
+        const Icon = getServiceIcon(service.icon);
+        const span = spans[i] ?? "";
         return (
           <motion.div
-            key={service.title}
+            key={service.slug}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className={`glass-card group relative overflow-hidden p-8 ${service.span}`}
+            transition={{ delay: i * 0.06 }}
+            className={span}
           >
-            <div
-              className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
-            />
-            <div className="relative">
-              <div className="mb-5 flex items-start justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 transition-all group-hover:bg-accent/20 group-hover:shadow-glow">
-                  <Icon className="h-6 w-6 text-accent transition-transform group-hover:scale-110" />
+            <Link
+              href={`/services/${service.slug}`}
+              className="glass-card group relative block h-full overflow-hidden p-8 hover:border-accent/30"
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-10`} />
+              <div className="relative">
+                <div className="mb-5 flex items-start justify-between">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${service.gradient}`}>
+                    <Icon className="h-6 w-6 text-white" />
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 text-slate-600 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
                 </div>
-                <ArrowUpRight className="h-5 w-5 text-slate-600 transition-all group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <h2 className="text-xl font-bold text-theme-heading group-hover:text-accent">{service.title}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-theme-muted">{service.shortDescription}</p>
               </div>
-              <h3 className="text-xl font-bold text-theme-heading">{service.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-theme-muted">
-                {service.description}
-              </p>
-            </div>
+            </Link>
           </motion.div>
         );
       })}
@@ -94,9 +50,13 @@ export function ServicesCTA() {
   return (
     <div className="mt-16 text-center">
       <p className="text-theme-muted">
-        Ready to discuss your project?{" "}
+        Need Salesforce expertise?{" "}
         <Link href="/contact" className="font-medium text-accent hover:underline">
-          Get in touch with our team →
+          Book a free discovery call →
+        </Link>
+        {" · "}
+        <Link href="/tools" className="font-medium text-accent hover:underline">
+          Try our free Salesforce tools
         </Link>
       </p>
     </div>
