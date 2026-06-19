@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { getRecommendedTools, type ToolConfig } from "@/lib/toolRecommendations";
+import { getRecommendedTools } from "@/lib/toolRecommendations";
+import type { ToolConfig } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
 import { getToolUseCountPlaceholder } from "@/lib/toolSeoGenerator";
 import { getPrimarySeoCategoryForTool } from "@/lib/toolSeoCategories";
