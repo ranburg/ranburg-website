@@ -24,11 +24,11 @@ export default function ToolsPage() {
             <p className="text-sm font-semibold uppercase tracking-wider text-accent">
               Tools Directory
             </p>
-            <h1 className="mt-4 text-4xl font-extrabold text-white sm:text-5xl">
+            <h1 className="mt-4 text-4xl font-extrabold text-theme-heading sm:text-5xl">
               Professional <span className="text-gradient-accent">Utilities</span> for
               Every Workflow
             </h1>
-            <p className="mt-6 text-lg text-slate-400">
+            <p className="mt-6 text-lg text-theme-muted">
               Financial calculators, developer formatters, text wizards, and design tools —
               all free, instant, and processed entirely in your browser.
             </p>

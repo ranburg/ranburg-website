@@ -12,7 +12,7 @@ export default function ToolRecommendations({ currentSlug }: ToolRecommendations
 
   return (
     <aside className="space-y-4">
-      <h3 className="text-lg font-bold text-white">Recommended Utilities</h3>
+      <h3 className="text-lg font-bold text-theme-heading">Recommended Utilities</h3>
       <p className="text-sm text-slate-500">Other tools you might find helpful</p>
       <div className="space-y-3">
         {recommended.map((tool: ToolConfig) => {
@@ -29,7 +29,7 @@ export default function ToolRecommendations({ currentSlug }: ToolRecommendations
                 <Icon className="h-5 w-5 text-white" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-white group-hover:text-accent">
+                <p className="truncate font-medium text-theme-heading group-hover:text-accent">
                   {tool.title}
                 </p>
                 <p className="truncate text-xs text-slate-500">{tool.badge}</p>

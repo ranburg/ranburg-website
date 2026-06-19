@@ -52,8 +52,8 @@ export default function ValuesGrid() {
             >
               <Icon className={`h-7 w-7 ${value.color}`} />
             </div>
-            <h3 className="text-xl font-bold text-white">{value.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-slate-400">
+            <h3 className="text-xl font-bold text-theme-heading">{value.title}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-theme-muted">
               {value.description}
             </p>
           </motion.div>

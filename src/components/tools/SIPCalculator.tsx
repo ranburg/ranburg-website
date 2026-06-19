@@ -81,7 +81,7 @@ export default function SIPCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-6 p-8">
-        <h2 className="text-xl font-bold text-white">Adjust Parameters</h2>
+        <h2 className="text-xl font-bold text-theme-heading">Adjust Parameters</h2>
         <CalculatorSlider
           label="Monthly Investment"
           value={monthlyInvestment}
@@ -156,7 +156,7 @@ export default function SIPCalculator() {
         />
 
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-sm font-semibold text-slate-300">
+          <h3 className="mb-4 text-sm font-semibold text-theme-body">
             Investment Breakdown
           </h3>
           <div className="flex items-center gap-6">
@@ -192,8 +192,8 @@ export default function SIPCalculator() {
                     className="h-3 w-3 rounded-full"
                     style={{ background: COLORS[i] }}
                   />
-                  <span className="text-sm text-slate-400">{item.name}</span>
-                  <span className="text-sm font-semibold text-white">
+                  <span className="text-sm text-theme-muted">{item.name}</span>
+                  <span className="text-sm font-semibold text-theme-heading">
                     {formatCurrency(item.value)}
                   </span>
                 </div>
@@ -203,7 +203,7 @@ export default function SIPCalculator() {
         </div>
 
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-sm font-semibold text-slate-300">Growth Over Time</h3>
+          <h3 className="mb-4 text-sm font-semibold text-theme-body">Growth Over Time</h3>
           <ResponsiveContainer width="100%" height={200}>
             <AreaChart data={results.chartData}>
               <defs>

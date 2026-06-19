@@ -84,7 +84,7 @@ export default function SWPCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-6 p-8">
-        <h2 className="text-xl font-bold text-white">Adjust Parameters</h2>
+        <h2 className="text-xl font-bold text-theme-heading">Adjust Parameters</h2>
         <CalculatorSlider
           label="Total Investment"
           value={totalInvestment}
@@ -132,7 +132,7 @@ export default function SWPCalculator() {
             unit="%"
             onChange={setInflationRate}
           />
-          <label className="flex cursor-pointer items-center gap-3 text-sm text-slate-400">
+          <label className="flex cursor-pointer items-center gap-3 text-sm text-theme-muted">
             <input
               type="checkbox"
               checked={inflationAdjustWithdrawals}
@@ -174,7 +174,7 @@ export default function SWPCalculator() {
         </div>
 
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-sm font-semibold text-slate-300">Withdrawal Breakdown</h3>
+          <h3 className="mb-4 text-sm font-semibold text-theme-body">Withdrawal Breakdown</h3>
           <div className="flex flex-col items-center gap-4 sm:flex-row">
             <ResponsiveContainer width="100%" height={180}>
               <PieChart>
@@ -205,7 +205,7 @@ export default function SWPCalculator() {
         </div>
 
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-sm font-semibold text-slate-300">
+          <h3 className="mb-4 text-sm font-semibold text-theme-body">
             Balance: Nominal vs Purchasing Power
           </h3>
           <ResponsiveContainer width="100%" height={220}>

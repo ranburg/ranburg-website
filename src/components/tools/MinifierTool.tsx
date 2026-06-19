@@ -52,7 +52,7 @@ export default function MinifierTool() {
             onClick={() => setCodeType(type)}
             className={cn(
               "rounded-lg px-4 py-2 text-sm font-medium uppercase transition-all",
-              codeType === type ? "bg-accent text-white" : "bg-white/[0.05] text-slate-400 hover:text-white"
+              codeType === type ? "bg-accent text-white" : "bg-theme-surface text-theme-muted hover:text-slate-900 dark:hover:text-white"
             )}
           >
             {type}
@@ -62,13 +62,13 @@ export default function MinifierTool() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="glass-card p-6">
-          <label className="mb-2 block text-sm font-medium text-slate-300">Source Code</label>
+          <label className="mb-2 block text-sm font-medium text-theme-body">Source Code</label>
           <textarea value={input} onChange={(e) => setInput(e.target.value)} rows={14} className="input-field font-mono text-sm" spellCheck={false} />
           <p className="mt-2 text-xs text-slate-500">{input.length} characters</p>
         </div>
         <div className="glass-card p-6">
           <div className="mb-2 flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-300">Minified Output</label>
+            <label className="text-sm font-medium text-theme-body">Minified Output</label>
             <CopyButton text={output} />
           </div>
           <textarea value={output} readOnly rows={14} className="input-field font-mono text-sm text-accent-emerald" />
@@ -80,13 +80,13 @@ export default function MinifierTool() {
         </div>
       </div>
 
-      <button type="button" onClick={handleMinify} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white">
+      <button type="button" onClick={handleMinify} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-theme-heading">
         Minify {codeType.toUpperCase()}
       </button>
 
       <div className="glass-card p-6">
         <AdvancedOptions>
-          <label className="flex items-center gap-3 text-sm text-slate-400">
+          <label className="flex items-center gap-3 text-sm text-theme-muted">
             <input type="checkbox" checked={preserveComments} onChange={(e) => setPreserveComments(e.target.checked)} className="accent-accent" />
             Preserve comments
           </label>

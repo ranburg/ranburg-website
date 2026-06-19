@@ -42,7 +42,7 @@ export default function LinkedInFormatter() {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <div className="glass-card space-y-4 p-6">
-        <label className="text-sm font-medium text-slate-300">Write Your Post</label>
+        <label className="text-sm font-medium text-theme-body">Write Your Post</label>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -61,7 +61,7 @@ export default function LinkedInFormatter() {
           <button
             type="button"
             onClick={() => setBoldSelection(!boldSelection)}
-            className="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-400 hover:text-white"
+            className="rounded-lg border border-theme px-3 py-1.5 text-xs font-medium text-theme-muted hover:text-slate-900 dark:hover:text-white"
           >
             {boldSelection ? "Normal Text" : "Bold (Unicode)"}
           </button>
@@ -70,17 +70,17 @@ export default function LinkedInFormatter() {
       </div>
 
       <div className="glass-card p-6">
-        <p className="mb-4 text-sm font-medium text-slate-300">LinkedIn Preview</p>
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+        <p className="mb-4 text-sm font-medium text-theme-body">LinkedIn Preview</p>
+        <div className="rounded-xl border border-theme bg-theme-surface p-5">
           <div className="mb-3 flex items-center gap-3">
             <div className="h-10 w-10 rounded-full bg-gradient-to-br from-accent to-accent-emerald" />
             <div>
-              <p className="text-sm font-semibold text-white">Your Name</p>
+              <p className="text-sm font-semibold text-theme-heading">Your Name</p>
               <p className="text-xs text-slate-500">Professional Title · 1h</p>
             </div>
           </div>
-          <div className="whitespace-pre-wrap text-sm leading-relaxed text-slate-300">
-            <span className="font-semibold text-white">{stats.hook}</span>
+          <div className="whitespace-pre-wrap text-sm leading-relaxed text-theme-body">
+            <span className="font-semibold text-theme-heading">{stats.hook}</span>
             {text.length > stats.hook.length && (
               <span className="text-slate-500">...see more</span>
             )}

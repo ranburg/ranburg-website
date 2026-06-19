@@ -11,7 +11,7 @@ interface ResultCardProps {
 }
 
 const variants = {
-  default: "text-white",
+  default: "text-theme-heading",
   emerald: "text-accent-emerald",
   blue: "text-accent",
 };

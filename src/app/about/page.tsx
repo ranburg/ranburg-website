@@ -38,10 +38,10 @@ export default function AboutPage() {
             <p className="text-sm font-semibold uppercase tracking-wider text-accent">
               About Ranburg
             </p>
-            <h1 className="mt-4 text-4xl font-extrabold text-white sm:text-5xl">
+            <h1 className="mt-4 text-4xl font-extrabold text-theme-heading sm:text-5xl">
               Pioneering <span className="text-gradient-accent">Digital Excellence</span>
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-slate-400">
+            <p className="mt-6 text-lg leading-relaxed text-theme-muted">
               Ranburg.com is a registered Limited Liability Partnership (LLP) dedicated
               to delivering cutting-edge IT services and digital transformation. We combine
               deep technical expertise with strategic business insight to help organizations
@@ -60,8 +60,8 @@ export default function AboutPage() {
               return (
                 <div key={item.title} className="glass-card p-6">
                   <Icon className="mb-4 h-8 w-8 text-accent" />
-                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-                  <p className="mt-2 text-sm text-slate-400">{item.description}</p>
+                  <h3 className="text-lg font-semibold text-theme-heading">{item.title}</h3>
+                  <p className="mt-2 text-sm text-theme-muted">{item.description}</p>
                 </div>
               );
             })}
@@ -73,8 +73,8 @@ export default function AboutPage() {
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-white">Our Leadership</h2>
-            <p className="mt-4 text-slate-400">
+            <h2 className="text-3xl font-bold text-theme-heading">Our Leadership</h2>
+            <p className="mt-4 text-theme-muted">
               Meet the founding partners driving Ranburg&apos;s vision forward.
             </p>
           </div>
@@ -86,8 +86,8 @@ export default function AboutPage() {
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-white">Our Values</h2>
-            <p className="mt-4 text-slate-400">
+            <h2 className="text-3xl font-bold text-theme-heading">Our Values</h2>
+            <p className="mt-4 text-theme-muted">
               The principles that guide every project we undertake.
             </p>
           </div>

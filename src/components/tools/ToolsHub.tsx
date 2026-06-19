@@ -53,10 +53,10 @@ export default function ToolsHub() {
                         <span className="text-xs font-semibold uppercase tracking-wider text-accent">
                           {tool.badge}
                         </span>
-                        <h3 className="mt-2 text-lg font-bold text-white group-hover:text-accent transition-colors">
+                        <h3 className="mt-2 text-lg font-bold text-theme-heading group-hover:text-accent transition-colors">
                           {tool.title}
                         </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-slate-400 line-clamp-2">
+                        <p className="mt-2 text-sm leading-relaxed text-theme-muted line-clamp-2">
                           {tool.shortDescription}
                         </p>
                         <div className="mt-4 flex items-center gap-2 text-sm font-medium text-accent">

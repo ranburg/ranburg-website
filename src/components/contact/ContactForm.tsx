@@ -79,8 +79,8 @@ export default function ContactForm() {
         className="glass-card flex flex-col items-center p-12 text-center"
       >
         <CheckCircle className="mb-4 h-16 w-16 text-accent-emerald" />
-        <h3 className="text-2xl font-bold text-white">Message Sent!</h3>
-        <p className="mt-2 text-slate-400">
+        <h3 className="text-2xl font-bold text-theme-heading">Message Sent!</h3>
+        <p className="mt-2 text-theme-muted">
           Thank you for reaching out. We&apos;ll get back to you within 24 hours.
         </p>
       </motion.div>
@@ -89,7 +89,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="glass-card space-y-6 p-8" noValidate>
-      <h2 className="text-2xl font-bold text-white">Send Us a Message</h2>
+      <h2 className="text-2xl font-bold text-theme-heading">Send Us a Message</h2>
 
       {(["name", "email"] as const).map((field) => (
         <div key={field} className="relative">
@@ -178,7 +178,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-blue-600 py-4 font-semibold text-white shadow-glow transition-all hover:scale-[1.01] hover:shadow-[0_0_50px_rgba(59,130,246,0.4)] active:scale-[0.99]"
+        className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-blue-600 py-4 font-semibold text-theme-heading shadow-glow transition-all hover:scale-[1.01] hover:shadow-[0_0_50px_rgba(59,130,246,0.4)] active:scale-[0.99]"
       >
         <Send className="h-4 w-4" />
         Send Message

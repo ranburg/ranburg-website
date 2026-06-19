@@ -54,7 +54,7 @@ export default function ImageConverter() {
           type="file"
           accept="image/*"
           onChange={(e) => e.target.files?.[0] && processImage(e.target.files[0])}
-          className="block w-full cursor-pointer text-sm text-slate-400 file:mr-4 file:rounded-lg file:border-0 file:bg-accent file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
+          className="block w-full cursor-pointer text-sm text-theme-muted file:mr-4 file:rounded-lg file:border-0 file:bg-accent file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
         />
         <p className="mt-3 text-xs text-slate-500">PNG, JPG, GIF, WebP — processed locally in your browser</p>
       </div>
@@ -66,7 +66,7 @@ export default function ImageConverter() {
             type="button"
             onClick={() => setFormat(f)}
             className={`rounded-lg px-4 py-2 text-sm font-medium uppercase transition-all ${
-              format === f ? "bg-accent text-white" : "bg-white/[0.05] text-slate-400"
+              format === f ? "bg-accent text-white" : "bg-theme-surface text-theme-muted"
             }`}
           >
             {f === "base64" ? "Base64 String" : "WebP Download"}
@@ -82,13 +82,13 @@ export default function ImageConverter() {
       {preview && (
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="glass-card p-6">
-            <p className="mb-3 text-sm font-medium text-slate-300">Preview</p>
+            <p className="mb-3 text-sm font-medium text-theme-body">Preview</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={preview} alt="Preview" className="max-h-64 rounded-lg object-contain" />
           </div>
           <div className="glass-card p-6">
             <div className="mb-3 flex items-center justify-between">
-              <p className="text-sm font-medium text-slate-300">Output</p>
+              <p className="text-sm font-medium text-theme-body">Output</p>
               <div className="flex gap-2">
                 <CopyButton text={output} />
                 {format === "webp" && (

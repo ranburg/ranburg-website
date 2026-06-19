@@ -78,8 +78,8 @@ export default function ServiceBento() {
                 </div>
                 <ArrowUpRight className="h-5 w-5 text-slate-600 transition-all group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
-              <h3 className="text-xl font-bold text-white">{service.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-400">
+              <h3 className="text-xl font-bold text-theme-heading">{service.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-theme-muted">
                 {service.description}
               </p>
             </div>
@@ -93,7 +93,7 @@ export default function ServiceBento() {
 export function ServicesCTA() {
   return (
     <div className="mt-16 text-center">
-      <p className="text-slate-400">
+      <p className="text-theme-muted">
         Ready to discuss your project?{" "}
         <Link href="/contact" className="font-medium text-accent hover:underline">
           Get in touch with our team →

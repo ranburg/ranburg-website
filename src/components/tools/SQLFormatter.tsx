@@ -61,12 +61,12 @@ export default function SQLFormatter() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="glass-card p-6">
-          <label className="mb-2 block text-sm font-medium text-slate-300">SQL Query</label>
+          <label className="mb-2 block text-sm font-medium text-theme-body">SQL Query</label>
           <textarea value={input} onChange={(e) => setInput(e.target.value)} rows={12} className="input-field font-mono text-sm" spellCheck={false} />
         </div>
         <div className="glass-card p-6">
           <div className="mb-2 flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-300">Formatted Output</label>
+            <label className="text-sm font-medium text-theme-body">Formatted Output</label>
             <CopyButton text={output} />
           </div>
           <textarea value={output} readOnly rows={12} className="input-field font-mono text-sm text-accent-emerald" placeholder="Formatted SQL..." />
@@ -74,21 +74,21 @@ export default function SQLFormatter() {
       </div>
 
       <div className="flex gap-3">
-        <button type="button" onClick={handleFormat} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white">Format SQL</button>
-        <button type="button" onClick={handleMinify} className="rounded-xl border border-white/20 px-6 py-2.5 text-sm font-semibold text-white hover:bg-white/5">Minify</button>
+        <button type="button" onClick={handleFormat} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-theme-heading">Format SQL</button>
+        <button type="button" onClick={handleMinify} className="rounded-xl border border-white/20 px-6 py-2.5 text-sm font-semibold text-theme-heading hover:bg-white/5">Minify</button>
       </div>
 
       <div className="glass-card p-6">
         <AdvancedOptions>
-          <label className="flex items-center gap-3 text-sm text-slate-400">
+          <label className="flex items-center gap-3 text-sm text-theme-muted">
             <input type="checkbox" checked={uppercase} onChange={(e) => setUppercase(e.target.checked)} className="accent-accent" />
             Uppercase keywords
           </label>
           <div className="flex gap-4">
-            <label className="flex items-center gap-2 text-sm text-slate-400">
+            <label className="flex items-center gap-2 text-sm text-theme-muted">
               <input type="radio" checked={indent === 2} onChange={() => setIndent(2)} className="accent-accent" /> 2-space indent
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-400">
+            <label className="flex items-center gap-2 text-sm text-theme-muted">
               <input type="radio" checked={indent === 4} onChange={() => setIndent(4)} className="accent-accent" /> 4-space indent
             </label>
           </div>

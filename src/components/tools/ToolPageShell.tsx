@@ -26,7 +26,7 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/tools"
-            className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-accent"
+            className="mb-6 inline-flex items-center gap-2 text-sm text-theme-muted transition-colors hover:text-accent"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Tools
@@ -41,10 +41,10 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
               <span className="text-xs font-semibold uppercase tracking-wider text-accent">
                 {tool.badge}
               </span>
-              <h1 className="mt-1 text-3xl font-extrabold text-white sm:text-4xl">
+              <h1 className="mt-1 text-3xl font-extrabold text-theme-heading sm:text-4xl">
                 {tool.title}
               </h1>
-              <p className="mt-3 max-w-2xl text-slate-400">{tool.shortDescription}</p>
+              <p className="mt-3 max-w-2xl text-theme-muted">{tool.shortDescription}</p>
             </div>
           </div>
         </div>

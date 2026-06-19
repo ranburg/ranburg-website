@@ -54,7 +54,7 @@ export default function Hero() {
             <span className="text-gradient">Solutions</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-400 lg:mx-0">
+          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-theme-muted lg:mx-0">
             Ranburg LLP partners with ambitious businesses to architect scalable
             software, modernize cloud infrastructure, and drive measurable digital
             transformation — backed by enterprise-grade expertise.
@@ -77,7 +77,7 @@ export default function Hero() {
               { value: "24/7", label: "Support" },
             ].map((stat) => (
               <div key={stat.label} className="text-center lg:text-left">
-                <div className="text-2xl font-bold text-white">{stat.value}</div>
+                <div className="text-2xl font-bold text-theme-heading">{stat.value}</div>
                 <div className="text-sm text-slate-500">{stat.label}</div>
               </div>
             ))}
@@ -108,8 +108,8 @@ export default function Hero() {
             <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent-emerald">
               <Sparkles className="h-7 w-7 text-white" />
             </div>
-            <h3 className="font-bold text-white">Ranburg LLP</h3>
-            <p className="mt-1 text-xs text-slate-400">Digital Excellence</p>
+            <h3 className="font-bold text-theme-heading">Ranburg LLP</h3>
+            <p className="mt-1 text-xs text-theme-muted">Digital Excellence</p>
           </motion.div>
 
           {floatingCards.map((card, i) => {

@@ -34,7 +34,7 @@ export default function LTVCACCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-6 p-8">
-        <h2 className="text-xl font-bold text-white">Business Metrics</h2>
+        <h2 className="text-xl font-bold text-theme-heading">Business Metrics</h2>
         <CalculatorSlider label="Monthly ARPU" value={arpu} min={100} max={100000} step={100} prefix="₹" onChange={setArpu} />
         <CalculatorSlider label="Gross Margin" value={grossMargin} min={10} max={100} step={1} unit="%" onChange={setGrossMargin} />
         <CalculatorSlider label="Monthly Churn Rate" value={churnRate} min={0.5} max={20} step={0.5} unit="%" onChange={setChurnRate} />

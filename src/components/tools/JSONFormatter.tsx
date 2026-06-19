@@ -51,7 +51,7 @@ export default function JSONFormatter() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="glass-card p-6">
-          <label className="mb-2 block text-sm font-medium text-slate-300">Input JSON</label>
+          <label className="mb-2 block text-sm font-medium text-theme-body">Input JSON</label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -62,7 +62,7 @@ export default function JSONFormatter() {
         </div>
         <div className="glass-card p-6">
           <div className="mb-2 flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-300">Output</label>
+            <label className="text-sm font-medium text-theme-body">Output</label>
             <CopyButton text={output} />
           </div>
           <textarea
@@ -80,10 +80,10 @@ export default function JSONFormatter() {
       )}
 
       <div className="flex flex-wrap gap-3">
-        <button type="button" onClick={() => process("format")} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white hover:bg-accent/90">
+        <button type="button" onClick={() => process("format")} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-theme-heading hover:bg-accent/90">
           Format
         </button>
-        <button type="button" onClick={() => process("minify")} className="rounded-xl border border-white/20 px-6 py-2.5 text-sm font-semibold text-white hover:bg-white/5">
+        <button type="button" onClick={() => process("minify")} className="rounded-xl border border-white/20 px-6 py-2.5 text-sm font-semibold text-theme-heading hover:bg-white/5">
           Minify
         </button>
         <button type="button" onClick={() => { setError(""); try { JSON.parse(lenient ? stripComments(input) : input); setError(""); setOutput("✓ Valid JSON"); } catch (e) { setError(e instanceof Error ? e.message : "Invalid"); } }} className="rounded-xl border border-accent-emerald/30 px-6 py-2.5 text-sm font-semibold text-accent-emerald hover:bg-accent-emerald/10">
@@ -94,22 +94,22 @@ export default function JSONFormatter() {
       <div className="glass-card p-6">
         <AdvancedOptions>
           <div className="flex gap-4">
-            <label className="flex items-center gap-2 text-sm text-slate-400">
+            <label className="flex items-center gap-2 text-sm text-theme-muted">
               <input type="radio" checked={indent === 2} onChange={() => setIndent(2)} className="accent-accent" /> 2 spaces
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-400">
+            <label className="flex items-center gap-2 text-sm text-theme-muted">
               <input type="radio" checked={indent === 4} onChange={() => setIndent(4)} className="accent-accent" /> 4 spaces
             </label>
           </div>
-          <label className="flex items-center gap-3 text-sm text-slate-400">
+          <label className="flex items-center gap-3 text-sm text-theme-muted">
             <input type="checkbox" checked={sortKeys} onChange={(e) => setSortKeys(e.target.checked)} className="accent-accent" />
             Sort object keys alphabetically
           </label>
-          <label className="flex items-center gap-3 text-sm text-slate-400">
+          <label className="flex items-center gap-3 text-sm text-theme-muted">
             <input type="checkbox" checked={lenient} onChange={(e) => setLenient(e.target.checked)} className="accent-accent" />
             Lenient mode (strip comments)
           </label>
-          <label className="flex items-center gap-3 text-sm text-slate-400">
+          <label className="flex items-center gap-3 text-sm text-theme-muted">
             <input type="checkbox" checked={minify} onChange={(e) => setMinify(e.target.checked)} className="accent-accent" />
             Default to minify on format
           </label>

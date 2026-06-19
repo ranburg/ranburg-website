@@ -26,7 +26,7 @@ export default function CalculatorSlider({
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <label className="text-sm font-medium text-slate-300">{label}</label>
+        <label className="text-sm font-medium text-theme-body">{label}</label>
         <span className="rounded-lg bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">
           {prefix}
           {formatNumber(value)}

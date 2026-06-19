@@ -14,11 +14,11 @@ export default function AdvancedOptions({ children, className }: AdvancedOptions
   const [open, setOpen] = useState(false);
 
   return (
-    <div className={cn("border-t border-white/[0.06] pt-6", className)}>
+    <div className={cn("border-t border-theme-subtle pt-6", className)}>
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between rounded-xl bg-white/[0.03] px-4 py-3 text-sm font-medium text-slate-300 transition-colors hover:bg-white/[0.06] hover:text-white"
+        className="flex w-full items-center justify-between rounded-xl bg-theme-surface px-4 py-3 text-sm font-medium text-theme-body transition-colors hover:bg-theme-hover hover:text-slate-900 dark:hover:text-slate-900 dark:hover:text-white"
       >
         <span className="flex items-center gap-2">
           <Settings2 className="h-4 w-4 text-accent" />

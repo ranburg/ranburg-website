@@ -69,10 +69,10 @@ export default function ServicesPreview() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="text-3xl font-bold text-theme-heading sm:text-4xl">
             What We <span className="text-gradient-accent">Deliver</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-slate-400">
+          <p className="mx-auto mt-4 max-w-2xl text-theme-muted">
             End-to-end IT services designed to accelerate your digital journey
             from concept to production.
           </p>
@@ -96,8 +96,8 @@ export default function ServicesPreview() {
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 transition-colors group-hover:bg-accent/20">
                   <Icon className="h-6 w-6 text-accent transition-transform group-hover:scale-110" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">{service.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                <h3 className="text-lg font-semibold text-theme-heading">{service.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-theme-muted">
                   {service.description}
                 </p>
               </motion.div>
@@ -127,10 +127,10 @@ export function CTASection() {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-accent-emerald/5" />
           <div className="relative">
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+            <h2 className="text-3xl font-bold text-theme-heading sm:text-4xl">
               Ready to Transform Your Business?
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-slate-400">
+            <p className="mx-auto mt-4 max-w-xl text-theme-muted">
               Let&apos;s discuss how Ranburg LLP can architect the technology
               foundation for your next chapter of growth.
             </p>

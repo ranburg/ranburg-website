@@ -86,7 +86,7 @@ export default function EMICalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-8 p-8">
-        <h2 className="text-xl font-bold text-white">Adjust Parameters</h2>
+        <h2 className="text-xl font-bold text-theme-heading">Adjust Parameters</h2>
         <CalculatorSlider
           label="Loan Amount"
           value={loanAmount}
@@ -108,8 +108,8 @@ export default function EMICalculator() {
 
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-300">Loan Tenure</label>
-            <div className="flex rounded-lg border border-white/10 p-0.5">
+            <label className="text-sm font-medium text-theme-body">Loan Tenure</label>
+            <div className="flex rounded-lg border border-theme p-0.5">
               {(["years", "months"] as const).map((unit) => (
                 <button
                   key={unit}
@@ -122,7 +122,7 @@ export default function EMICalculator() {
                     "rounded-md px-3 py-1 text-xs font-medium capitalize transition-all",
                     tenureUnit === unit
                       ? "bg-accent text-white"
-                      : "text-slate-400 hover:text-white"
+                      : "text-theme-muted hover:text-slate-900 dark:hover:text-white"
                   )}
                 >
                   {unit}
@@ -173,7 +173,7 @@ export default function EMICalculator() {
         />
 
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-sm font-semibold text-slate-300">
+          <h3 className="mb-4 text-sm font-semibold text-theme-body">
             Payment Breakdown
           </h3>
           <div className="flex items-center gap-6">
@@ -209,8 +209,8 @@ export default function EMICalculator() {
                     className="h-3 w-3 rounded-full"
                     style={{ background: COLORS[i] }}
                   />
-                  <span className="text-sm text-slate-400">{item.name}</span>
-                  <span className="text-sm font-semibold text-white">
+                  <span className="text-sm text-theme-muted">{item.name}</span>
+                  <span className="text-sm font-semibold text-theme-heading">
                     {formatCurrency(item.value)}
                   </span>
                 </div>
@@ -220,7 +220,7 @@ export default function EMICalculator() {
         </div>
 
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-sm font-semibold text-slate-300">
+          <h3 className="mb-4 text-sm font-semibold text-theme-body">
             Yearly Principal vs Interest
           </h3>
           <ResponsiveContainer width="100%" height={200}>

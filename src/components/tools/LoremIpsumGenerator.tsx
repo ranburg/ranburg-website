@@ -61,7 +61,7 @@ export default function LoremIpsumGenerator() {
               type="button"
               onClick={() => setMode(m)}
               className={`rounded-lg px-4 py-2 text-sm font-medium capitalize transition-all ${
-                mode === m ? "bg-accent text-white" : "bg-white/[0.05] text-slate-400 hover:text-white"
+                mode === m ? "bg-accent text-white" : "bg-theme-surface text-theme-muted hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               {m}
@@ -70,12 +70,12 @@ export default function LoremIpsumGenerator() {
         </div>
         <CalculatorSlider label={`Number of ${mode}`} value={count} min={1} max={mode === "words" ? 200 : 20} step={1} onChange={setCount} />
         <AdvancedOptions>
-          <label className="flex items-center gap-3 text-sm text-slate-400">
+          <label className="flex items-center gap-3 text-sm text-theme-muted">
             <input type="checkbox" checked={htmlOutput} onChange={(e) => setHtmlOutput(e.target.checked)} className="accent-accent" />
             HTML output (wrap paragraphs in &lt;p&gt; tags)
           </label>
         </AdvancedOptions>
-        <button type="button" onClick={generate} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white">
+        <button type="button" onClick={generate} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-theme-heading">
           Generate Lorem Ipsum
         </button>
       </div>
@@ -83,7 +83,7 @@ export default function LoremIpsumGenerator() {
       {output && (
         <div className="glass-card p-6">
           <div className="mb-3 flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-300">Generated Text</label>
+            <label className="text-sm font-medium text-theme-body">Generated Text</label>
             <CopyButton text={output} />
           </div>
           <textarea value={output} readOnly rows={10} className="input-field text-sm leading-relaxed" />

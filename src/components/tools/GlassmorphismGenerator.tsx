@@ -40,7 +40,7 @@ export default function GlassmorphismGenerator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-6 p-6">
-        <h2 className="text-lg font-bold text-white">Customize Effect</h2>
+        <h2 className="text-lg font-bold text-theme-heading">Customize Effect</h2>
         <CalculatorSlider label="Blur Amount" value={blur} min={0} max={40} step={1} unit="px" onChange={setBlur} />
         <CalculatorSlider label="Background Opacity" value={opacity} min={0} max={50} step={1} unit="%" onChange={setOpacity} />
         <CalculatorSlider label="Border Opacity" value={borderOpacity} min={0} max={50} step={1} unit="%" onChange={setBorderOpacity} />
@@ -59,13 +59,13 @@ export default function GlassmorphismGenerator() {
           style={{ background: "linear-gradient(135deg, #3b82f6 0%, #10b981 50%, #8b5cf6 100%)" }}
         >
           <div className="px-8 py-6 text-center" style={previewStyle}>
-            <p className="font-semibold text-white">Glass Preview</p>
-            <p className="mt-1 text-sm text-slate-300">Frosted glass effect</p>
+            <p className="font-semibold text-theme-heading">Glass Preview</p>
+            <p className="mt-1 text-sm text-theme-body">Frosted glass effect</p>
           </div>
         </div>
         <div className="glass-card p-6">
           <div className="mb-3 flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-300">Generated CSS</label>
+            <label className="text-sm font-medium text-theme-body">Generated CSS</label>
             <CopyButton text={css} />
           </div>
           <pre className="overflow-x-auto rounded-lg bg-slate-950/50 p-4 font-mono text-xs text-accent-emerald">{css}</pre>

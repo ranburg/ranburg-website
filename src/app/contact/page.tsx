@@ -27,10 +27,10 @@ export default function ContactPage() {
             <p className="text-sm font-semibold uppercase tracking-wider text-accent">
               Contact Us
             </p>
-            <h1 className="mt-4 text-4xl font-extrabold text-white sm:text-5xl">
+            <h1 className="mt-4 text-4xl font-extrabold text-theme-heading sm:text-5xl">
               Let&apos;s Build Something <span className="text-gradient-accent">Great</span>
             </h1>
-            <p className="mt-6 text-lg text-slate-400">
+            <p className="mt-6 text-lg text-theme-muted">
               Have a project in mind? We&apos;d love to hear from you. Reach out and
               let&apos;s discuss how we can help transform your business.
             </p>
@@ -51,7 +51,7 @@ export default function ContactPage() {
                       <p className="text-xs font-medium uppercase tracking-wider text-slate-500">
                         {item.label}
                       </p>
-                      <p className="mt-1 text-sm font-medium text-white">{item.value}</p>
+                      <p className="mt-1 text-sm font-medium text-theme-heading">{item.value}</p>
                     </div>
                   );
                   return item.href ? (
@@ -79,7 +79,7 @@ export default function ContactPage() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <MapPin className="mx-auto mb-3 h-10 w-10 text-accent transition-transform group-hover:scale-110" />
-                    <p className="font-semibold text-white">Ranburg LLP Office</p>
+                    <p className="font-semibold text-theme-heading">Ranburg LLP Office</p>
                     <p className="mt-1 text-sm text-accent">Find us on Google Maps →</p>
                   </div>
                 </div>

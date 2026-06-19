@@ -25,7 +25,7 @@ export default function CaseConverter() {
   return (
     <div className="space-y-6">
       <div className="glass-card p-6">
-        <label className="mb-2 block text-sm font-medium text-slate-300">Input Text</label>
+        <label className="mb-2 block text-sm font-medium text-theme-body">Input Text</label>
         <textarea value={input} onChange={(e) => setInput(e.target.value)} rows={3} className="input-field" />
       </div>
 
@@ -36,7 +36,7 @@ export default function CaseConverter() {
               <span className="text-xs font-semibold uppercase tracking-wider text-accent">{item.label}</span>
               <CopyButton text={item.result} label="Copy" className="!px-2 !py-1 text-xs" />
             </div>
-            <p className="break-all font-mono text-sm text-slate-300">{item.result}</p>
+            <p className="break-all font-mono text-sm text-theme-body">{item.result}</p>
           </div>
         ))}
       </div>

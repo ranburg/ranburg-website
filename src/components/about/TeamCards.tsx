@@ -38,27 +38,27 @@ export default function TeamCards() {
 
           <div className="relative flex flex-col items-center text-center sm:flex-row sm:items-start sm:text-left">
             <div
-              className={`mb-4 flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${partner.gradient} text-2xl font-bold text-white shadow-glow sm:mb-0 sm:mr-6`}
+              className={`mb-4 flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${partner.gradient} text-2xl font-bold text-theme-heading shadow-glow sm:mb-0 sm:mr-6`}
             >
               {partner.initials}
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white">{partner.name}</h3>
+              <h3 className="text-xl font-bold text-theme-heading">{partner.name}</h3>
               <p className="mt-1 text-sm font-medium text-accent">{partner.role}</p>
-              <p className="mt-3 text-sm leading-relaxed text-slate-400">
+              <p className="mt-3 text-sm leading-relaxed text-theme-muted">
                 {partner.bio}
               </p>
               <div className="mt-4 flex justify-center gap-3 sm:justify-start">
                 <button
                   type="button"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-slate-400 transition-all hover:border-accent/30 hover:text-accent"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-theme text-theme-muted transition-all hover:border-accent/30 hover:text-accent"
                   aria-label={`Email ${partner.name}`}
                 >
                   <Mail className="h-4 w-4" />
                 </button>
                 <button
                   type="button"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-slate-400 transition-all hover:border-accent/30 hover:text-accent"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-theme text-theme-muted transition-all hover:border-accent/30 hover:text-accent"
                   aria-label={`LinkedIn ${partner.name}`}
                 >
                   <Linkedin className="h-4 w-4" />

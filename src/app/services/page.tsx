@@ -18,10 +18,10 @@ export default function ServicesPage() {
             <p className="text-sm font-semibold uppercase tracking-wider text-accent">
               What We Offer
             </p>
-            <h1 className="mt-4 text-4xl font-extrabold text-white sm:text-5xl">
+            <h1 className="mt-4 text-4xl font-extrabold text-theme-heading sm:text-5xl">
               Comprehensive <span className="text-gradient-accent">IT Services</span>
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-slate-400">
+            <p className="mt-6 text-lg leading-relaxed text-theme-muted">
               From strategy to deployment, we provide end-to-end technology solutions
               that drive growth, efficiency, and competitive advantage.
             </p>

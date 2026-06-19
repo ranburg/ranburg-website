@@ -24,7 +24,7 @@ export default function ToolsSidebar({
           "w-full rounded-xl px-4 py-3 text-left text-sm font-medium transition-all",
           activeCategory === "all"
             ? "bg-accent/10 text-accent"
-            : "text-slate-400 hover:bg-white/[0.04] hover:text-white"
+            : "text-theme-muted hover:bg-theme-surface hover:text-slate-900 dark:hover:text-white"
         )}
       >
         All Tools
@@ -38,7 +38,7 @@ export default function ToolsSidebar({
             "w-full rounded-xl px-4 py-3 text-left transition-all",
             activeCategory === cat.id
               ? "bg-accent/10 text-accent"
-              : "text-slate-400 hover:bg-white/[0.04] hover:text-white"
+              : "text-theme-muted hover:bg-theme-surface hover:text-slate-900 dark:hover:text-white"
           )}
         >
           <p className="text-sm font-medium">{cat.label}</p>

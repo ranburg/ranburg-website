@@ -26,7 +26,7 @@ export default function PurchasingPowerCard({
       <p className="text-xs font-medium uppercase tracking-wider text-slate-500">
         {label}
       </p>
-      <p className="mt-2 text-2xl font-bold text-white">
+      <p className="mt-2 text-2xl font-bold text-theme-heading">
         {formatCurrency(nominalValue)}
       </p>
       <p className="mt-1 text-sm text-accent-emerald">

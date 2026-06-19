@@ -38,7 +38,7 @@ export default function TwitchSubCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-6 p-8">
-        <h2 className="text-xl font-bold text-white">Channel Metrics</h2>
+        <h2 className="text-xl font-bold text-theme-heading">Channel Metrics</h2>
         <CalculatorSlider label="Tier 1 Subscribers" value={tier1} min={0} max={10000} step={10} onChange={setTier1} />
         <CalculatorSlider label="Tier 2 Subscribers" value={tier2} min={0} max={2000} step={5} onChange={setTier2} />
         <CalculatorSlider label="Tier 3 Subscribers" value={tier3} min={0} max={500} step={1} onChange={setTier3} />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Providers from "@/components/theme/Providers";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -32,11 +33,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={plusJakarta.variable}>
+    <html lang="en" className={plusJakarta.variable} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('ranburg-theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d);}catch(e){document.documentElement.classList.add('dark');}})();`,
+          }}
+        />
+      </head>
       <body className="min-h-screen font-sans">
-        <Navbar />
-        <main className="pt-[73px]">{children}</main>
-        <Footer />
+        <Providers>
+          <Navbar />
+          <main className="pt-[73px]">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
