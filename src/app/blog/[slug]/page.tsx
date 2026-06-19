@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Calendar, Clock } from "lucide-react";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { BLOG_POSTS, getBlogBySlug } from "@/lib/blogConfig";
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { SITE } from "@/lib/siteConfig";
-import { articleJsonLd, faqJsonLd, buildMetadata } from "@/lib/seo";
+import { articleJsonLd, faqJsonLd, breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Button from "@/components/ui/Button";
 import BlogFaq from "@/components/blog/BlogFaq";
 
@@ -41,13 +42,27 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      <JsonLd data={[articleJsonLd(post.title, post.excerpt, url, post.date), faqJsonLd(post.faq)]} />
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", url: SITE.url },
+            { name: "Blog", url: `${SITE.url}/blog` },
+            { name: post.title, url },
+          ]),
+          articleJsonLd(post.title, post.excerpt, url, post.date),
+          faqJsonLd(post.faq),
+        ]}
+      />
       <div className="pb-24">
         <article className="py-12">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <Link href="/blog" className="mb-6 inline-flex items-center gap-2 text-sm text-theme-muted hover:text-accent">
-              <ArrowLeft className="h-4 w-4" /> All Articles
-            </Link>
+            <Breadcrumbs
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Blog", href: "/blog" },
+                { label: post.title },
+              ]}
+            />
             <h1 className="text-3xl font-extrabold text-theme-heading sm:text-4xl">{post.title}</h1>
             <div className="mt-4 flex items-center gap-4 text-sm text-theme-subtle">
               <span className="flex items-center gap-1"><Calendar className="h-4 w-4" />{post.date}</span>

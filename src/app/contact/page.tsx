@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import ContactForm from "@/components/contact/ContactForm";
+import { SITE } from "@/lib/siteConfig";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 
 export const metadata: Metadata = buildMetadata({
@@ -14,8 +15,8 @@ export const metadata: Metadata = buildMetadata({
 const MAPS_URL = "https://maps.app.goo.gl/Cm1m7Qv2vF5cS7vr7";
 
 const contactInfo = [
-  { icon: Mail, label: "Email", value: "admin@ranburg.com", href: "mailto:admin@ranburg.com" },
-  { icon: Phone, label: "Phone", value: "+91 98765 43210", href: "tel:+919876543210" },
+  { icon: Mail, label: "Email", value: SITE.email, href: `mailto:${SITE.email}` },
+  { icon: Phone, label: "Phone", value: SITE.phone, href: `tel:${SITE.phoneTel}` },
   { icon: MapPin, label: "Location", value: "View on Google Maps", href: MAPS_URL },
   { icon: Clock, label: "Business Hours", value: "Mon–Fri, 9 AM – 6 PM IST" },
 ];

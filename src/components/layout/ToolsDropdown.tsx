@@ -66,7 +66,7 @@ export default function ToolsDropdown() {
             >
               <div className="dropdown-panel max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-2xl shadow-2xl">
                 <div className="sticky top-0 z-10 border-b border-theme-subtle bg-[var(--dropdown-bg)] p-4">
-                  <ToolSearch onResultClick={() => setOpen(false)} maxResults={6} />
+                  <ToolSearch onResultClick={() => setOpen(false)} maxResults={6} compact placeholder="Search tools…" />
                 </div>
 
                 <div className="grid lg:grid-cols-[180px_1fr]">
@@ -115,8 +115,11 @@ export default function ToolsDropdown() {
                                       pathname === `/tools/${tool.slug}` ? "bg-accent/10 text-accent" : "hover:bg-theme-surface"
                                     )}
                                   >
-                                    <Icon className="h-3.5 w-3.5 shrink-0" />
-                                    <span className="truncate text-sm font-medium text-theme-heading group-hover:text-accent">{tool.title}</span>
+                                    <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                                    <div className="min-w-0">
+                                      <span className="block truncate text-sm font-medium text-theme-heading group-hover:text-accent">{tool.title}</span>
+                                      <span className="block truncate text-xs text-theme-subtle">{tool.shortDescription}</span>
+                                    </div>
                                   </Link>
                                 </li>
                               );

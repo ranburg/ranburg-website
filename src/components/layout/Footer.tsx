@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Zap, Mail, MapPin, Linkedin, Twitter, Github } from "lucide-react";
+import { Zap, Mail, MapPin, Phone, Linkedin, Twitter } from "lucide-react";
+import { SITE } from "@/lib/siteConfig";
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 
@@ -7,6 +8,7 @@ const footerLinks = {
   company: [
     { href: "/about", label: "About Us" },
     { href: "/services", label: "Services" },
+    { href: "/case-studies", label: "Case Studies" },
     { href: "/blog", label: "Blog" },
     { href: "/tools", label: "Tools" },
     { href: "/contact", label: "Contact" },
@@ -42,16 +44,12 @@ export default function Footer() {
               Industries Cloud, LWC, integrations, and free developer tools.
             </p>
             <div className="flex gap-3">
-              {[Linkedin, Twitter, Github].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-theme bg-theme-surface text-theme-muted transition-all hover:border-accent/30 hover:text-accent"
-                  aria-label="Social link"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
+              <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-lg border border-theme bg-theme-surface text-theme-muted transition-all hover:border-accent/30 hover:text-accent" aria-label="LinkedIn">
+                <Linkedin className="h-4 w-4" />
+              </a>
+              <a href={SITE.social.twitter} target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-lg border border-theme bg-theme-surface text-theme-muted transition-all hover:border-accent/30 hover:text-accent" aria-label="Twitter">
+                <Twitter className="h-4 w-4" />
+              </a>
             </div>
           </div>
 
@@ -97,9 +95,13 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-theme-subtle pt-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap gap-4 text-sm text-slate-500">
-            <a href="mailto:admin@ranburg.com" className="flex items-center gap-1.5 transition-colors hover:text-accent">
+            <a href={`mailto:${SITE.email}`} className="flex items-center gap-1.5 transition-colors hover:text-accent">
               <Mail className="h-4 w-4" />
-              admin@ranburg.com
+              {SITE.email}
+            </a>
+            <a href={`tel:${SITE.phoneTel}`} className="flex items-center gap-1.5 transition-colors hover:text-accent">
+              <Phone className="h-4 w-4" />
+              {SITE.phone}
             </a>
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 transition-colors hover:text-accent">
               <MapPin className="h-4 w-4" />

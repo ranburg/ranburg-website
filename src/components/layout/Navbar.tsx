@@ -17,6 +17,7 @@ import ToolSearch from "@/components/tools/ToolSearch";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/case-studies", label: "Case Studies" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
@@ -72,6 +73,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden items-center gap-3 md:flex">
+            <kbd className="hidden rounded border border-theme-subtle px-2 py-1 text-xs text-theme-subtle lg:inline">⌘K</kbd>
             <ThemeToggle />
             <Link
               href="/contact"

@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Providers from "@/components/theme/Providers";
+import CommandPaletteProvider from "@/components/search/CommandPaletteProvider";
 import JsonLd from "@/components/seo/JsonLd";
 import { organizationJsonLd, localBusinessJsonLd, buildMetadata } from "@/lib/seo";
 import { SITE } from "@/lib/siteConfig";
@@ -53,9 +54,11 @@ export default function RootLayout({
       <body className="min-h-screen font-sans">
         <JsonLd data={[organizationJsonLd(), localBusinessJsonLd()]} />
         <Providers>
-          <Navbar />
-          <main className="pt-[73px]">{children}</main>
-          <Footer />
+          <CommandPaletteProvider>
+            <Navbar />
+            <main className="pt-[73px]">{children}</main>
+            <Footer />
+          </CommandPaletteProvider>
         </Providers>
         <Analytics />
       </body>

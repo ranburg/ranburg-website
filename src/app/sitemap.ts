@@ -3,6 +3,8 @@ import { SITE } from "@/lib/siteConfig";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { BLOG_POSTS } from "@/lib/blogConfig";
+import { CASE_STUDIES } from "@/lib/caseStudiesConfig";
+import { COMING_SOON_TOOLS } from "@/lib/toolComingSoonConfig";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;
@@ -14,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/tools`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${base}/tools/salesforce`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
     { url: `${base}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${base}/case-studies`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
@@ -41,5 +44,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...servicePages, ...toolPages, ...blogPages];
+  const comingSoonPages = COMING_SOON_TOOLS.map((t) => ({
+    url: `${base}/tools/${t.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  const caseStudyPages = CASE_STUDIES.map((c) => ({
+    url: `${base}/case-studies/${c.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...servicePages, ...toolPages, ...comingSoonPages, ...blogPages, ...caseStudyPages];
 }

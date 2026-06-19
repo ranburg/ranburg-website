@@ -5,6 +5,7 @@ import TrustTicker from "@/components/home/TrustTicker";
 import SalesforceExpertise from "@/components/home/SalesforceExpertise";
 import ServicesPreview from "@/components/home/ServicesPreview";
 import { CTASection } from "@/components/home/ServicesPreview";
+import CaseStudiesPreview from "@/components/home/CaseStudiesPreview";
 import ToolsPromo from "@/components/home/ToolsPromo";
 
 export const metadata: Metadata = buildMetadata({
@@ -28,6 +29,7 @@ export default function HomePage() {
       <TrustTicker />
       <SalesforceExpertise />
       <ServicesPreview />
+      <CaseStudiesPreview />
       <ToolsPromo />
       <CTASection />
     </>

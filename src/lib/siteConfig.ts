@@ -3,7 +3,8 @@ export const SITE = {
   brand: "Ranburg",
   url: "https://www.ranburg.com",
   email: "admin@ranburg.com",
-  phone: "+91-9876543210",
+  phone: "+1 412 547 944",
+  phoneTel: "+1412547944",
   locale: "en_IN",
   defaultOgImage: "/opengraph-image",
   address: {

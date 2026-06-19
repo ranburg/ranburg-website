@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getServiceBySlug, SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { getServiceIcon } from "@/lib/serviceIcons";
 import { SITE } from "@/lib/siteConfig";
-import { serviceJsonLd, faqJsonLd, buildMetadata } from "@/lib/seo";
+import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Button from "@/components/ui/Button";
 import ServiceFaq from "@/components/services/ServiceFaq";
 
@@ -23,14 +24,28 @@ export default function ServicePageShell({ slug }: ServicePageShellProps) {
 
   return (
     <>
-      <JsonLd data={[serviceJsonLd(service.title, service.shortDescription, url), faqJsonLd(service.faq)]} />
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", url: SITE.url },
+            { name: "Services", url: `${SITE.url}/services` },
+            { name: service.title, url },
+          ]),
+          serviceJsonLd(service.title, service.shortDescription, url),
+          faqJsonLd(service.faq),
+        ]}
+      />
 
       <div className="pb-24">
         <section className="py-12">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <Link href="/services" className="mb-6 inline-flex items-center gap-2 text-sm text-theme-muted hover:text-accent">
-              <ArrowLeft className="h-4 w-4" /> All Services
-            </Link>
+            <Breadcrumbs
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Services", href: "/services" },
+                { label: service.title },
+              ]}
+            />
             <div className="flex items-start gap-4">
               <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${service.gradient}`}>
                 <Icon className="h-7 w-7 text-white" />
@@ -89,7 +104,8 @@ export default function ServicePageShell({ slug }: ServicePageShellProps) {
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Button href="/contact" size="lg" icon>Get a Free Consultation</Button>
-                <Link href="/tools" className="text-sm font-medium text-accent hover:underline">Explore Free Salesforce Tools →</Link>
+                <Link href="/tools/salesforce" className="text-sm font-medium text-accent hover:underline">Explore Free Salesforce Tools →</Link>
+                <Link href="/case-studies" className="text-sm font-medium text-accent hover:underline">View Case Studies →</Link>
               </div>
             </div>
           </div>
