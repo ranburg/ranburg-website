@@ -60,7 +60,7 @@ export default function PDFTools() {
       }
 
       const pdfBytes = await out.save();
-      const blob = new Blob([pdfBytes], { type: "application/pdf" });
+      const blob = new Blob([Uint8Array.from(pdfBytes)], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
