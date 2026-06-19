@@ -13,8 +13,10 @@ import {
   Tooltip,
 } from "recharts";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
+import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import ResultCard from "@/components/tools/ResultCard";
-import { formatCurrency } from "@/lib/utils";
+import PurchasingPowerCard from "@/components/tools/PurchasingPowerCard";
+import { formatCurrency, presentValue } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 const COLORS = ["#3b82f6", "#f59e0b"];
@@ -24,6 +26,7 @@ export default function EMICalculator() {
   const [interestRate, setInterestRate] = useState(8.5);
   const [tenure, setTenure] = useState(20);
   const [tenureUnit, setTenureUnit] = useState<"years" | "months">("years");
+  const [inflationRate, setInflationRate] = useState(6);
 
   const results = useMemo(() => {
     const months = tenureUnit === "years" ? tenure * 12 : tenure;
@@ -40,6 +43,8 @@ export default function EMICalculator() {
 
     const totalPayment = emi * months;
     const totalInterest = totalPayment - loanAmount;
+    const tenureYears = tenureUnit === "years" ? tenure : tenure / 12;
+    const totalPaymentPV = presentValue(totalPayment, inflationRate, tenureYears);
 
     const yearlyBreakdown = [];
     let remainingPrincipal = loanAmount;
@@ -67,13 +72,14 @@ export default function EMICalculator() {
       emi,
       totalInterest,
       totalPayment,
+      totalPaymentPV,
       pieData: [
         { name: "Principal", value: loanAmount },
         { name: "Interest", value: totalInterest },
       ],
       yearlyBreakdown,
     };
-  }, [loanAmount, interestRate, tenure, tenureUnit]);
+  }, [loanAmount, interestRate, tenure, tenureUnit, inflationRate]);
 
   const tenureMax = tenureUnit === "years" ? 30 : 360;
 
@@ -134,6 +140,18 @@ export default function EMICalculator() {
             onChange={setTenure}
           />
         </div>
+
+        <AdvancedOptions>
+          <CalculatorSlider
+            label="Inflation Rate (for PV adjustment)"
+            value={inflationRate}
+            min={1}
+            max={15}
+            step={0.5}
+            unit="%"
+            onChange={setInflationRate}
+          />
+        </AdvancedOptions>
       </div>
 
       <div className="space-y-6">
@@ -146,6 +164,13 @@ export default function EMICalculator() {
           />
           <ResultCard label="Total Payment" value={results.totalPayment} />
         </div>
+
+        <PurchasingPowerCard
+          label="Total Payment"
+          nominalValue={results.totalPayment}
+          presentValue={results.totalPaymentPV}
+          highlight
+        />
 
         <div className="glass-card p-6">
           <h3 className="mb-4 text-sm font-semibold text-slate-300">

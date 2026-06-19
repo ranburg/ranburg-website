@@ -18,3 +18,19 @@ export function formatNumber(value: number): string {
     maximumFractionDigits: 0,
   }).format(value);
 }
+
+/** Present value: PV = FV / (1 + r)^n */
+export function presentValue(
+  futureValue: number,
+  inflationRatePercent: number,
+  years: number
+): number {
+  if (years <= 0) return futureValue;
+  const r = inflationRatePercent / 100;
+  if (r === 0) return futureValue;
+  return futureValue / Math.pow(1 + r, years);
+}
+
+export function formatPercent(value: number, decimals = 1): string {
+  return `${value.toFixed(decimals)}%`;
+}

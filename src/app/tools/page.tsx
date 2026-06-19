@@ -2,9 +2,16 @@ import type { Metadata } from "next";
 import ToolsHub from "@/components/tools/ToolsHub";
 
 export const metadata: Metadata = {
-  title: "Financial Tools",
+  title: "Free Online Tools — Calculators, Formatters & Utilities | Ranburg.com",
   description:
-    "Free SIP, SWP, and EMI calculators by Ranburg.com. Plan investments, withdrawals, and loans with interactive charts.",
+    "Browse 14+ free online tools: financial calculators, JSON/SQL formatters, case converters, glassmorphism CSS generator, and more. Fast, client-side, no signup.",
+  keywords: [
+    "online tools",
+    "financial calculators",
+    "JSON formatter",
+    "developer utilities",
+    "free web tools",
+  ],
 };
 
 export default function ToolsPage() {
@@ -15,16 +22,15 @@ export default function ToolsPage() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-wider text-accent">
-              Financial Tools Hub
+              Tools Directory
             </p>
             <h1 className="mt-4 text-4xl font-extrabold text-white sm:text-5xl">
-              Smart <span className="text-gradient-accent">Calculators</span> for
-              Smarter Decisions
+              Professional <span className="text-gradient-accent">Utilities</span> for
+              Every Workflow
             </h1>
             <p className="mt-6 text-lg text-slate-400">
-              Free, interactive financial planning tools with real-time charts and
-              instant results. Plan your investments, retirement income, and loan
-              repayments with confidence.
+              Financial calculators, developer formatters, text wizards, and design tools —
+              all free, instant, and processed entirely in your browser.
             </p>
           </div>
         </div>

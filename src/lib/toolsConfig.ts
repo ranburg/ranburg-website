@@ -1,0 +1,458 @@
+export type ToolCategoryId = "financial" | "developer" | "text" | "design";
+
+export interface ToolCategory {
+  id: ToolCategoryId;
+  label: string;
+  description: string;
+}
+
+export interface ToolFaq {
+  question: string;
+  answer: string;
+}
+
+export interface ToolConfig {
+  slug: string;
+  title: string;
+  shortDescription: string;
+  category: ToolCategoryId;
+  icon: string;
+  gradient: string;
+  badge: string;
+  popular?: boolean;
+  seo: {
+    title: string;
+    description: string;
+    keywords: string[];
+  };
+  howToUse: string[];
+  formula: string;
+  faq: ToolFaq[];
+}
+
+export const TOOL_CATEGORIES: ToolCategory[] = [
+  {
+    id: "financial",
+    label: "Financial Calculators",
+    description: "Investment, revenue, and loan planning tools with inflation-adjusted insights.",
+  },
+  {
+    id: "developer",
+    label: "Developer & Data Utilities",
+    description: "Format, validate, and optimize code and structured data instantly.",
+  },
+  {
+    id: "text",
+    label: "Text & Formatting Wizards",
+    description: "Transform, preview, and generate text for professional content.",
+  },
+  {
+    id: "design",
+    label: "Design & Media Tools",
+    description: "Generate CSS effects and convert images for modern web workflows.",
+  },
+];
+
+export const TOOLS_CONFIG: ToolConfig[] = [
+  {
+    slug: "sip",
+    title: "SIP Calculator",
+    shortDescription: "Calculate returns on monthly mutual fund investments over time.",
+    category: "financial",
+    icon: "TrendingUp",
+    gradient: "from-blue-500 to-cyan-500",
+    badge: "Wealth Builder",
+    popular: true,
+    seo: {
+      title: "SIP Calculator — Systematic Investment Plan Returns | Ranburg.com",
+      description:
+        "Free SIP calculator with charts. Estimate total investment, returns, and maturity value for monthly mutual fund SIPs with inflation-adjusted purchasing power.",
+      keywords: ["SIP calculator", "systematic investment plan", "mutual fund returns", "SIP returns India"],
+    },
+    howToUse: [
+      "Set your monthly investment amount using the slider.",
+      "Adjust the expected annual return rate based on your fund category.",
+      "Choose the investment time period in years.",
+      "Review total investment, estimated returns, and maturity value instantly.",
+      "Enable Advanced Options to model inflation and see today's purchasing power.",
+    ],
+    formula:
+      "Future Value (FV) = P × [(1 + r)^n − 1] / r × (1 + r), where P is monthly investment, r is monthly return rate, and n is number of months. Present Value adjusts for inflation: PV = FV / (1 + i)^t.",
+    faq: [
+      { question: "What is a SIP?", answer: "A Systematic Investment Plan (SIP) is a method of investing a fixed sum regularly in mutual funds, leveraging rupee-cost averaging and compound growth." },
+      { question: "What return rate should I use?", answer: "Equity funds historically average 10–12% annually, debt funds 6–8%. Past performance does not guarantee future results." },
+      { question: "Does this include taxes?", answer: "No. Results are pre-tax estimates. Capital gains tax may apply on redemption based on holding period and fund type." },
+    ],
+  },
+  {
+    slug: "swp",
+    title: "SWP Calculator",
+    shortDescription: "Model systematic withdrawals with inflation-adjusted purchasing power.",
+    category: "financial",
+    icon: "Wallet",
+    gradient: "from-emerald-500 to-teal-500",
+    badge: "Retirement Income",
+    popular: true,
+    seo: {
+      title: "Advanced SWP Calculator with Inflation Adjustment | Ranburg.com",
+      description:
+        "Calculate SWP corpus depletion, total withdrawals, and present value purchasing power. Advanced SWP calculator with inflation rate adjustment for retirement planning.",
+      keywords: ["SWP calculator", "systematic withdrawal plan", "retirement income", "inflation adjusted SWP"],
+    },
+    howToUse: [
+      "Enter your total investment corpus and desired monthly withdrawal.",
+      "Set the expected annual return rate on remaining balance.",
+      "Choose the withdrawal period in years.",
+      "View nominal balance and today's purchasing power side by side.",
+      "Open Advanced Options to set a custom inflation rate for PV calculations.",
+    ],
+    formula:
+      "Each month: Balance = Balance × (1 + r) − Withdrawal. Present Value of a future amount: PV = FV / (1 + i)^n, where i is the annual inflation rate and n is years from today.",
+    faq: [
+      { question: "What is an SWP?", answer: "A Systematic Withdrawal Plan lets you withdraw a fixed amount regularly from your mutual fund investments while the remainder continues to grow." },
+      { question: "Why show purchasing power?", answer: "Nominal rupee values in future years buy less due to inflation. Present value shows what those amounts are worth in today's terms." },
+      { question: "What if my corpus runs out?", answer: "If withdrawals exceed growth, the balance reaches zero. Reduce withdrawal amount or extend the return assumption to sustain income longer." },
+    ],
+  },
+  {
+    slug: "emi",
+    title: "Loan EMI Calculator",
+    shortDescription: "Calculate monthly EMI, total interest, and payment breakdown.",
+    category: "financial",
+    icon: "Calculator",
+    gradient: "from-amber-500 to-orange-500",
+    badge: "Loan Planner",
+    popular: true,
+    seo: {
+      title: "Loan EMI Calculator — Home, Car & Personal Loans | Ranburg.com",
+      description:
+        "Calculate monthly EMI, total interest payable, and yearly principal vs interest breakdown for any loan amount, rate, and tenure.",
+      keywords: ["EMI calculator", "loan EMI", "home loan calculator", "car loan EMI"],
+    },
+    howToUse: [
+      "Enter the loan principal amount.",
+      "Set the annual interest rate offered by your lender.",
+      "Choose tenure in years or months.",
+      "View monthly EMI, total interest, and total payment.",
+      "Use Advanced Options for inflation-adjusted total payment value.",
+    ],
+    formula:
+      "EMI = P × r × (1 + r)^n / [(1 + r)^n − 1], where P is principal, r is monthly interest rate, and n is tenure in months.",
+    faq: [
+      { question: "What is EMI?", answer: "Equated Monthly Installment (EMI) is a fixed payment comprising principal and interest, spread evenly across the loan tenure." },
+      { question: "Does EMI change over time?", answer: "The EMI amount stays fixed, but the principal-to-interest ratio shifts — early payments are interest-heavy." },
+      { question: "Can I prepay my loan?", answer: "Most lenders allow prepayment. Reducing principal early lowers total interest, though prepayment charges may apply." },
+    ],
+  },
+  {
+    slug: "ltv-cac",
+    title: "LTV / CAC Calculator",
+    shortDescription: "Measure customer lifetime value against acquisition cost.",
+    category: "financial",
+    icon: "BarChart3",
+    gradient: "from-violet-500 to-purple-500",
+    badge: "SaaS Metrics",
+    popular: true,
+    seo: {
+      title: "LTV CAC Ratio Calculator with Inflation Adjustment | Ranburg.com",
+      description:
+        "Calculate customer lifetime value, acquisition cost, LTV:CAC ratio, and inflation-adjusted future revenue for SaaS and subscription businesses.",
+      keywords: ["LTV CAC calculator", "customer lifetime value", "CAC ratio", "SaaS metrics"],
+    },
+    howToUse: [
+      "Enter average revenue per customer per month and gross margin percentage.",
+      "Set average customer lifespan in months and monthly churn rate.",
+      "Input total marketing spend and new customers acquired.",
+      "Review LTV, CAC, ratio, and inflation-adjusted projections.",
+    ],
+    formula:
+      "LTV = (ARPU × Gross Margin) / Churn Rate. CAC = Marketing Spend / New Customers. LTV:CAC Ratio = LTV / CAC. PV = FV / (1 + i)^n for inflation adjustment.",
+    faq: [
+      { question: "What is a good LTV:CAC ratio?", answer: "A ratio of 3:1 or higher is generally considered healthy for SaaS businesses, meaning each customer generates 3× their acquisition cost." },
+      { question: "How does churn affect LTV?", answer: "Higher churn reduces customer lifespan, directly lowering lifetime value. Even small churn improvements significantly boost LTV." },
+      { question: "Should I include sales salaries in CAC?", answer: "Yes. Fully-loaded CAC includes all sales and marketing costs divided by new customers acquired in the same period." },
+    ],
+  },
+  {
+    slug: "twitch-sub-revenue",
+    title: "Twitch Sub Revenue Calculator",
+    shortDescription: "Estimate Twitch subscription and ad revenue with growth projections.",
+    category: "financial",
+    icon: "Tv",
+    gradient: "from-purple-500 to-pink-500",
+    badge: "Creator Economy",
+    seo: {
+      title: "Twitch Sub Revenue Calculator with Inflation Projection | Ranburg.com",
+      description:
+        "Calculate Twitch Tier 1/2/3 sub revenue, ad income, and partner splits. Project creator earnings with inflation-adjusted purchasing power.",
+      keywords: ["Twitch revenue calculator", "Twitch sub income", "streamer earnings", "Twitch partner revenue"],
+    },
+    howToUse: [
+      "Enter subscriber counts for Tier 1, Tier 2, and Tier 3.",
+      "Set your partner revenue share percentage (typically 50%).",
+      "Add estimated monthly ad revenue and projected growth rate.",
+      "View monthly and annual revenue with today's purchasing power equivalent.",
+    ],
+    formula:
+      "Sub Revenue = Σ(Tier Count × Tier Price × Revenue Share). Annual = Monthly × 12 × (1 + growth)^years. PV = FV / (1 + inflation)^years.",
+    faq: [
+      { question: "How much does Twitch pay per sub?", answer: "Partners typically earn 50% of the subscription price: ~$2.50 for Tier 1 ($4.99), ~$5 for Tier 2 ($9.99), and ~$12.50 for Tier 3 ($24.99) in the US." },
+      { question: "Do Prime subs count?", answer: "Prime Gaming subs are Tier 1 equivalents. They count toward sub count but may have different payout structures." },
+      { question: "What about bits and donations?", answer: "This calculator focuses on sub and ad revenue. Bits pay $0.01 per bit to partners; donations via third-party platforms vary." },
+    ],
+  },
+  {
+    slug: "json-formatter",
+    title: "JSON Formatter & Validator",
+    shortDescription: "Format, validate, and beautify JSON with advanced options.",
+    category: "developer",
+    icon: "Braces",
+    gradient: "from-cyan-500 to-blue-500",
+    badge: "Data Utility",
+    popular: true,
+    seo: {
+      title: "JSON Formatter & Validator — Beautify JSON Online | Ranburg.com",
+      description:
+        "Free online JSON formatter and validator. Beautify, minify, sort keys, and validate JSON with custom indentation and one-click copy.",
+      keywords: ["JSON formatter", "JSON validator", "JSON beautifier", "format JSON online"],
+    },
+    howToUse: [
+      "Paste your JSON into the input panel.",
+      "Click Format to beautify or Validate to check syntax.",
+      "Open Advanced Options for indent size, key sorting, and minify mode.",
+      "Copy the result with one click and get instant success feedback.",
+    ],
+    formula:
+      "Parsing uses JSON.parse() for validation. Formatting applies JSON.stringify(value, replacer, space) where space controls indentation depth.",
+    faq: [
+      { question: "Can I format invalid JSON?", answer: "No. The validator will highlight the syntax error location. Fix errors before formatting." },
+      { question: "Does it support JSON with comments?", answer: "Standard JSON does not support comments. Enable 'Lenient Mode' in Advanced Options to strip // and /* */ comments before parsing." },
+      { question: "Is my data sent to a server?", answer: "No. All processing happens client-side in your browser. Your data never leaves your device." },
+    ],
+  },
+  {
+    slug: "sql-formatter",
+    title: "SQL Query Formatter",
+    shortDescription: "Beautify and structure SQL queries for readability.",
+    category: "developer",
+    icon: "Database",
+    gradient: "from-indigo-500 to-blue-500",
+    badge: "Query Tool",
+    seo: {
+      title: "SQL Formatter — Beautify SQL Queries Online | Ranburg.com",
+      description:
+        "Format SQL queries with keyword capitalization, line breaks, and custom indentation. Free online SQL beautifier for developers.",
+      keywords: ["SQL formatter", "SQL beautifier", "format SQL online", "SQL pretty print"],
+    },
+    howToUse: [
+      "Paste your SQL query into the input area.",
+      "Click Format to apply keyword casing and indentation.",
+      "Use Advanced Options to choose uppercase/lowercase keywords and indent width.",
+      "Copy the formatted query with one-click feedback.",
+    ],
+    formula:
+      "Tokenizes SQL by keywords (SELECT, FROM, WHERE, JOIN, etc.), applies casing rules, and inserts line breaks before major clauses with configurable indentation.",
+    faq: [
+      { question: "Which SQL dialects are supported?", answer: "The formatter handles standard ANSI SQL keywords. Dialect-specific syntax (T-SQL, PL/pgSQL) is supported for basic formatting." },
+      { question: "Will it change my query logic?", answer: "No. Formatting only adjusts whitespace and keyword casing. Query semantics remain identical." },
+      { question: "Can I minify SQL?", answer: "Yes. Enable Minify Mode in Advanced Options to collapse whitespace for compact storage." },
+    ],
+  },
+  {
+    slug: "minifier",
+    title: "HTML / CSS / JS Minifier",
+    shortDescription: "Minify HTML, CSS, and JavaScript for production.",
+    category: "developer",
+    icon: "FileCode",
+    gradient: "from-orange-500 to-red-500",
+    badge: "Performance",
+    seo: {
+      title: "HTML CSS JS Minifier — Compress Code Online | Ranburg.com",
+      description:
+        "Minify HTML, CSS, and JavaScript online. Reduce file size, preserve comments optionally, and copy minified output instantly.",
+      keywords: ["HTML minifier", "CSS minifier", "JS minifier", "code compression"],
+    },
+    howToUse: [
+      "Select the code type: HTML, CSS, or JavaScript.",
+      "Paste your source code into the input panel.",
+      "Toggle Advanced Options for comment preservation and compression level.",
+      "Copy minified output and see size reduction percentage.",
+    ],
+    formula:
+      "Minification removes non-essential whitespace, line breaks, and optionally comments while preserving code functionality and string literals.",
+    faq: [
+      { question: "Is minification safe?", answer: "Yes for production code. Always keep an unminified source copy for development and debugging." },
+      { question: "How much size reduction can I expect?", answer: "Typically 20–60% depending on code style, comment density, and whitespace usage." },
+      { question: "Does it obfuscate variable names?", answer: "This tool performs whitespace and comment removal only. It does not rename variables or obfuscate logic." },
+    ],
+  },
+  {
+    slug: "linkedin-formatter",
+    title: "LinkedIn Formatting & Hook Previewer",
+    shortDescription: "Preview LinkedIn posts with hook analysis and formatting.",
+    category: "text",
+    icon: "Linkedin",
+    gradient: "from-blue-600 to-blue-400",
+    badge: "Social Copy",
+    seo: {
+      title: "LinkedIn Post Formatter & Hook Previewer | Ranburg.com",
+      description:
+        "Format LinkedIn posts with bold Unicode, preview hooks, analyze character count, and optimize your professional content for engagement.",
+      keywords: ["LinkedIn formatter", "LinkedIn hook preview", "LinkedIn post tool", "LinkedIn bold text"],
+    },
+    howToUse: [
+      "Write or paste your LinkedIn post in the editor.",
+      "See a live preview with hook line highlighted.",
+      "Check character count against LinkedIn's 3,000 character limit.",
+      "Use formatting shortcuts for bold, italic, and line breaks.",
+    ],
+    formula:
+      "Hook score = f(first-line length, question presence, number usage, line breaks before fold). Character count uses Unicode-aware length for LinkedIn limits.",
+    faq: [
+      { question: "What makes a good LinkedIn hook?", answer: "Strong hooks are under 150 characters, create curiosity, and appear before the 'see more' fold. Questions and specific numbers boost engagement." },
+      { question: "Can I use bold text on LinkedIn?", answer: "LinkedIn doesn't support HTML bold. This tool generates Unicode mathematical bold characters that render as visually bold on LinkedIn." },
+      { question: "What is the ideal post length?", answer: "Posts between 1,200–1,900 characters tend to perform well. Hooks should capture attention within the first 2 lines." },
+    ],
+  },
+  {
+    slug: "case-converter",
+    title: "Case Converter",
+    shortDescription: "Convert text between camelCase, snake_case, Title Case, and more.",
+    category: "text",
+    icon: "Type",
+    gradient: "from-teal-500 to-green-500",
+    badge: "Text Utility",
+    seo: {
+      title: "Case Converter — camelCase, snake_case, Title Case | Ranburg.com",
+      description:
+        "Convert text between uppercase, lowercase, Title Case, camelCase, snake_case, kebab-case, and PascalCase instantly.",
+      keywords: ["case converter", "camelCase converter", "snake_case", "title case converter"],
+    },
+    howToUse: [
+      "Paste or type your text in the input field.",
+      "Click any case style button to convert instantly.",
+      "View all case variations simultaneously in the output grid.",
+      "Copy any result with one-click feedback.",
+    ],
+    formula:
+      "Case transforms apply Unicode-aware rules: word splitting on spaces/underscores/hyphens, then recombination per target convention (camel, snake, kebab, Pascal, title).",
+    faq: [
+      { question: "What is camelCase?", answer: "camelCase joins words without spaces, lowercase first word, capitalizing subsequent words: myVariableName." },
+      { question: "When should I use snake_case?", answer: "snake_case is common in Python, Ruby, and database column names: my_variable_name." },
+      { question: "Does it handle special characters?", answer: "Non-alphanumeric characters are treated as word separators. Accented characters are preserved." },
+    ],
+  },
+  {
+    slug: "lorem-ipsum",
+    title: "Lorem Ipsum Generator",
+    shortDescription: "Generate placeholder paragraphs, sentences, or words.",
+    category: "text",
+    icon: "AlignLeft",
+    gradient: "from-slate-500 to-slate-400",
+    badge: "Placeholder",
+    seo: {
+      title: "Lorem Ipsum Generator — Placeholder Text | Ranburg.com",
+      description:
+        "Generate Lorem Ipsum placeholder text by paragraphs, sentences, or words. Copy instantly for design mockups and development.",
+      keywords: ["lorem ipsum generator", "placeholder text", "dummy text", "lipsum"],
+    },
+    howToUse: [
+      "Choose output type: paragraphs, sentences, or words.",
+      "Set the quantity using the slider.",
+      "Click Generate to create fresh placeholder text.",
+      "Copy the output with one-click feedback.",
+    ],
+    formula:
+      "Randomized selection from classic Lorem Ipsum word pool with configurable count. Sentences end with periods; paragraphs separated by double line breaks.",
+    faq: [
+      { question: "What is Lorem Ipsum?", answer: "Lorem Ipsum is standard placeholder text used in design and publishing since the 1500s to demonstrate layout without meaningful content." },
+      { question: "Can I generate HTML paragraphs?", answer: "Enable 'HTML Output' in Advanced Options to wrap each paragraph in <p> tags." },
+      { question: "Is the text random each time?", answer: "Yes. Each generation produces a unique combination from the Lorem Ipsum word corpus." },
+    ],
+  },
+  {
+    slug: "glassmorphism-generator",
+    title: "CSS Glassmorphism Generator",
+    shortDescription: "Generate glassmorphism CSS with live preview.",
+    category: "design",
+    icon: "Sparkles",
+    gradient: "from-sky-500 to-indigo-500",
+    badge: "CSS Tool",
+    seo: {
+      title: "CSS Glassmorphism Generator — Live Preview | Ranburg.com",
+      description:
+        "Generate glassmorphism CSS code with adjustable blur, opacity, border, and shadow. Live preview and one-click copy for modern UI design.",
+      keywords: ["glassmorphism generator", "CSS glass effect", "frosted glass CSS", "backdrop filter generator"],
+    },
+    howToUse: [
+      "Adjust blur, background opacity, border opacity, and border radius sliders.",
+      "See the glass effect update in the live preview panel.",
+      "Copy the generated CSS with one click.",
+      "Use Advanced Options for custom background color and shadow intensity.",
+    ],
+    formula:
+      "Glassmorphism CSS: backdrop-filter: blur(Npx); background: rgba(R,G,B,opacity); border: 1px solid rgba(255,255,255,borderOpacity); box-shadow for depth.",
+    faq: [
+      { question: "What is glassmorphism?", answer: "Glassmorphism is a UI trend using frosted-glass effects via backdrop-filter blur, semi-transparent backgrounds, and subtle borders." },
+      { question: "Which browsers support backdrop-filter?", answer: "All modern browsers support backdrop-filter. Safari requires -webkit-backdrop-filter prefix, included in generated code." },
+      { question: "Can I use this in Tailwind?", answer: "Copy the raw CSS values into your Tailwind config or use arbitrary values: backdrop-blur-[12px] bg-white/10." },
+    ],
+  },
+  {
+    slug: "image-converter",
+    title: "Image to WebP / Base64 Converter",
+    shortDescription: "Convert images to WebP or Base64 data URIs client-side.",
+    category: "design",
+    icon: "Image",
+    gradient: "from-rose-500 to-pink-500",
+    badge: "Media Tool",
+    seo: {
+      title: "Image to WebP & Base64 Converter Online | Ranburg.com",
+      description:
+        "Convert images to WebP format or Base64 data URIs in your browser. Adjust quality, preview results, and copy output instantly. No upload to server.",
+      keywords: ["image to webp", "base64 image converter", "image to base64", "webp converter online"],
+    },
+    howToUse: [
+      "Upload an image file (PNG, JPG, GIF, WebP).",
+      "Choose output format: WebP download or Base64 string.",
+      "Adjust quality and max width in Advanced Options.",
+      "Preview the result and copy or download instantly.",
+    ],
+    formula:
+      "Canvas API draws the image at target dimensions. toDataURL('image/webp', quality) produces Base64; blob conversion enables WebP file download.",
+    faq: [
+      { question: "Are my images uploaded to a server?", answer: "No. All conversion happens locally in your browser using the Canvas API. Your images never leave your device." },
+      { question: "Why use WebP?", answer: "WebP offers 25–35% smaller file sizes than JPEG/PNG at similar quality, improving page load speed and Core Web Vitals." },
+      { question: "What is a Base64 data URI?", answer: "A Base64 data URI embeds image data directly in HTML/CSS as a string, eliminating separate HTTP requests for small images." },
+    ],
+  },
+];
+
+export function getToolBySlug(slug: string): ToolConfig | undefined {
+  return TOOLS_CONFIG.find((t) => t.slug === slug);
+}
+
+export function getToolsByCategory(category: ToolCategoryId): ToolConfig[] {
+  return TOOLS_CONFIG.filter((t) => t.category === category);
+}
+
+export function getCategoryById(id: ToolCategoryId): ToolCategory | undefined {
+  return TOOL_CATEGORIES.find((c) => c.id === id);
+}
+
+export function getRecommendedTools(currentSlug: string, limit = 3): ToolConfig[] {
+  const current = getToolBySlug(currentSlug);
+  if (!current) return TOOLS_CONFIG.filter((t) => t.popular).slice(0, limit);
+
+  const sameCategory = TOOLS_CONFIG.filter(
+    (t) => t.category === current.category && t.slug !== currentSlug
+  );
+
+  if (sameCategory.length >= limit) return sameCategory.slice(0, limit);
+
+  const popular = TOOLS_CONFIG.filter(
+    (t) => t.slug !== currentSlug && t.popular && t.category !== current.category
+  );
+
+  return [...sameCategory, ...popular].slice(0, limit);
+}

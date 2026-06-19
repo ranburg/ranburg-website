@@ -13,8 +13,10 @@ import {
   Tooltip,
 } from "recharts";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
+import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import ResultCard from "@/components/tools/ResultCard";
-import { formatCurrency } from "@/lib/utils";
+import PurchasingPowerCard from "@/components/tools/PurchasingPowerCard";
+import { formatCurrency, presentValue } from "@/lib/utils";
 
 const COLORS = ["#3b82f6", "#10b981"];
 
@@ -22,6 +24,8 @@ export default function SIPCalculator() {
   const [monthlyInvestment, setMonthlyInvestment] = useState(10000);
   const [returnRate, setReturnRate] = useState(12);
   const [years, setYears] = useState(10);
+  const [inflationRate, setInflationRate] = useState(6);
+  const [stepUpPercent, setStepUpPercent] = useState(0);
 
   const results = useMemo(() => {
     const monthlyRate = returnRate / 12 / 100;
@@ -39,6 +43,7 @@ export default function SIPCalculator() {
     }
 
     const estimatedReturns = futureValue - totalInvestment;
+    const futureValuePV = presentValue(futureValue, inflationRate, years);
 
     const chartData = [];
     let balance = 0;
@@ -56,6 +61,7 @@ export default function SIPCalculator() {
         year: `Y${y}`,
         invested: monthlyInvestment * m,
         value: Math.round(balance),
+        valuePV: Math.round(presentValue(balance, inflationRate, y)),
       });
     }
 
@@ -63,17 +69,18 @@ export default function SIPCalculator() {
       totalInvestment,
       estimatedReturns,
       totalValue: futureValue,
+      totalValuePV: futureValuePV,
       pieData: [
         { name: "Invested", value: totalInvestment },
         { name: "Returns", value: Math.max(estimatedReturns, 0) },
       ],
       chartData,
     };
-  }, [monthlyInvestment, returnRate, years]);
+  }, [monthlyInvestment, returnRate, years, inflationRate, stepUpPercent]);
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      <div className="glass-card space-y-8 p-8">
+      <div className="glass-card space-y-6 p-8">
         <h2 className="text-xl font-bold text-white">Adjust Parameters</h2>
         <CalculatorSlider
           label="Monthly Investment"
@@ -102,6 +109,27 @@ export default function SIPCalculator() {
           unit=" yrs"
           onChange={setYears}
         />
+
+        <AdvancedOptions>
+          <CalculatorSlider
+            label="Inflation Rate"
+            value={inflationRate}
+            min={1}
+            max={15}
+            step={0.5}
+            unit="%"
+            onChange={setInflationRate}
+          />
+          <CalculatorSlider
+            label="Annual SIP Step-Up"
+            value={stepUpPercent}
+            min={0}
+            max={25}
+            step={1}
+            unit="%"
+            onChange={setStepUpPercent}
+          />
+        </AdvancedOptions>
       </div>
 
       <div className="space-y-6">
@@ -119,6 +147,13 @@ export default function SIPCalculator() {
             variant="blue"
           />
         </div>
+
+        <PurchasingPowerCard
+          label="Maturity Value (Today's Purchasing Power)"
+          nominalValue={results.totalValue}
+          presentValue={results.totalValuePV}
+          highlight
+        />
 
         <div className="glass-card p-6">
           <h3 className="mb-4 text-sm font-semibold text-slate-300">
