@@ -12,6 +12,16 @@ import CaseConverter from "./CaseConverter";
 import LoremIpsumGenerator from "./LoremIpsumGenerator";
 import GlassmorphismGenerator from "./GlassmorphismGenerator";
 import ImageConverter from "./ImageConverter";
+import RegexTester from "./RegexTester";
+import UUIDGenerator from "./UUIDGenerator";
+import PasswordGenerator from "./PasswordGenerator";
+import Base64Encoder from "./Base64Encoder";
+import PDFTools from "./PDFTools";
+import QRGenerator from "./QRGenerator";
+import UnitConverter from "./UnitConverter";
+import AgeCalculator from "./AgeCalculator";
+import CurrencyConverter from "./CurrencyConverter";
+import GSTCalculator from "./GSTCalculator";
 import CronGenerator from "./salesforce/CronGenerator";
 import FormulaGenerator from "./salesforce/FormulaGenerator";
 import SOQLBuilder from "./salesforce/SOQLBuilder";
@@ -37,6 +47,16 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "lorem-ipsum": LoremIpsumGenerator,
   "glassmorphism-generator": GlassmorphismGenerator,
   "image-converter": ImageConverter,
+  "regex-tester": RegexTester,
+  "uuid-generator": UUIDGenerator,
+  "password-generator": PasswordGenerator,
+  "base64-encoder": Base64Encoder,
+  "pdf-tools": PDFTools,
+  "qr-generator": QRGenerator,
+  "unit-converter": UnitConverter,
+  "age-calculator": AgeCalculator,
+  "currency-converter": CurrencyConverter,
+  "gst-calculator": GSTCalculator,
   "cron-generator": CronGenerator,
   "formula-generator": FormulaGenerator,
   "soql-builder": SOQLBuilder,

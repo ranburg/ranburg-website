@@ -1,11 +1,11 @@
 /** Curated tool discovery — featured, popular, and recent slugs for /tools hub */
 export const FEATURED_TOOL_SLUGS = [
   "formula-generator",
-  "soql-builder",
-  "cron-generator",
-  "sip",
-  "json-formatter",
-  "revenue-cloud-pricing-calculator",
+  "regex-tester",
+  "password-generator",
+  "qr-generator",
+  "currency-converter",
+  "gst-calculator",
 ];
 
 export const POPULAR_TOOL_SLUGS = [
@@ -14,34 +14,47 @@ export const POPULAR_TOOL_SLUGS = [
   "sip",
   "swp",
   "emi",
-  "apex-test-generator",
-  "validation-rule-generator",
+  "regex-tester",
+  "password-generator",
+  "uuid-generator",
+  "base64-encoder",
+  "qr-generator",
+  "currency-converter",
+  "gst-calculator",
   "json-formatter",
 ];
 
 export const RECENT_TOOL_SLUGS = [
-  "omnistudio-expression-builder",
-  "revenue-cloud-pricing-calculator",
-  "governor-limits-calculator",
-  "flow-formula-builder",
-  "date-formula-helper",
-  "apex-trigger-generator",
+  "regex-tester",
+  "uuid-generator",
+  "password-generator",
+  "base64-encoder",
+  "pdf-tools",
+  "qr-generator",
+  "unit-converter",
+  "age-calculator",
+  "currency-converter",
+  "gst-calculator",
 ];
 
 export const SEARCH_SUGGESTIONS = [
-  "Salesforce",
-  "Formula",
-  "SOQL",
-  "Apex",
-  "Calculator",
   "JSON",
+  "Regex",
+  "Password",
+  "QR Code",
+  "GST",
+  "Currency",
+  "PDF",
+  "Calculator",
 ];
 
 export const SEARCH_TAGS = [
-  { label: "Salesforce", query: "salesforce" },
-  { label: "Formula", query: "formula" },
-  { label: "SOQL", query: "soql" },
-  { label: "Apex", query: "apex" },
   { label: "Calculator", query: "calculator" },
   { label: "JSON", query: "json" },
+  { label: "Regex", query: "regex" },
+  { label: "Password", query: "password" },
+  { label: "QR Code", query: "qr" },
+  { label: "GST", query: "gst" },
+  { label: "PDF", query: "pdf" },
+  { label: "Salesforce", query: "salesforce" },
 ];

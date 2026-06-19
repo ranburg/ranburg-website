@@ -23,6 +23,16 @@ import {
   DollarSign,
   Code2,
   Wrench,
+  Regex,
+  Fingerprint,
+  KeyRound,
+  Binary,
+  FileText,
+  QrCode,
+  Ruler,
+  Cake,
+  CircleDollarSign,
+  Percent,
   type LucideIcon,
 } from "lucide-react";
 
@@ -50,6 +60,16 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Layers,
   DollarSign,
   Code2,
+  Regex,
+  Fingerprint,
+  KeyRound,
+  Binary,
+  FileText,
+  QrCode,
+  Ruler,
+  Cake,
+  CircleDollarSign,
+  Percent,
 };
 
 export function getToolIcon(name: string): LucideIcon {

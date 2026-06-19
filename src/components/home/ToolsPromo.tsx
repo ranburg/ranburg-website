@@ -1,27 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight, Wrench } from "lucide-react";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
+import ToolSearch from "@/components/tools/ToolSearch";
 
 export default function ToolsPromo() {
-  const salesforceTools = TOOLS_CONFIG.filter((t) => t.category === "salesforce").slice(0, 6);
+  const featuredTools = TOOLS_CONFIG.filter((t) => t.popular).slice(0, 6);
 
   return (
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold text-theme-heading sm:text-4xl">
-            Free <span className="text-gradient-accent">Salesforce Tools</span>
+            Free <span className="text-gradient-accent">Online Tools</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-theme-muted">
-            Developer utilities that rank in Google and showcase our Salesforce expertise — formula generators, SOQL builder, cron scheduler, and more.
+            Calculators, converters, formatters, and Salesforce utilities — fast, free, and SEO-friendly tools for developers and businesses.
           </p>
         </div>
+
+        <div className="mx-auto mb-10 max-w-2xl">
+          <ToolSearch showSuggestions showTags maxResults={6} placeholder="Search 30+ free tools…" />
+        </div>
+
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {salesforceTools.map((tool) => {
+          {featuredTools.map((tool) => {
             const Icon = getToolIcon(tool.icon);
             return (
               <Link key={tool.slug} href={`/tools/${tool.slug}`} className="glass-card group flex items-center gap-4 p-5 hover:border-accent/30">
