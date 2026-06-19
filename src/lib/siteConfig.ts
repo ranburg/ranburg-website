@@ -20,4 +20,5 @@ export const SITE = {
   },
   description:
     "Certified Salesforce consultants in India specializing in OmniStudio, Revenue Cloud, Industries Cloud, LWC, integrations, and managed services.",
+  gaMeasurementId: "G-EBRQ9D5R3Q",
 } as const;

@@ -1,29 +1,7 @@
-export interface BlogSection {
-  type: "h2" | "h3" | "p";
-  text: string;
-}
+import { AI_BLOG_POSTS } from "./blogConfigAi";
+import type { BlogPost } from "./blogTypes";
 
-export interface BlogFaq {
-  question: string;
-  answer: string;
-}
-
-export interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  seo: {
-    title: string;
-    description: string;
-    keywords: string[];
-  };
-  sections: BlogSection[];
-  faq: BlogFaq[];
-  relatedServices: string[];
-  relatedTools: string[];
-}
+export type { BlogPost, BlogSection, BlogFaq } from "./blogTypes";
 
 export const BLOG_POSTS: BlogPost[] = [
   {
@@ -1036,6 +1014,7 @@ export const BLOG_POSTS: BlogPost[] = [
     relatedServices: ["salesforce-industries", "experience-cloud", "revenue-cloud"],
     relatedTools: ["soql-builder", "flow-formula-builder"],
   },
+  ...AI_BLOG_POSTS,
 ];
 
 export function getBlogBySlug(slug: string): BlogPost | undefined {

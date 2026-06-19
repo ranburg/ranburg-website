@@ -3,9 +3,9 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Providers from "@/components/theme/Providers";
-import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import JsonLd from "@/components/seo/JsonLd";
 import { organizationJsonLd, localBusinessJsonLd, buildMetadata } from "@/lib/seo";
+import { SITE } from "@/lib/siteConfig";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -37,6 +37,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} dark`} suppressHydrationWarning>
       <head>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaMeasurementId}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${SITE.gaMeasurementId}');`,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('ranburg-theme');var d=t?(t==='dark'):true;document.documentElement.classList.toggle('dark',d);}catch(e){document.documentElement.classList.add('dark');}})();`,
@@ -45,7 +51,6 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen font-sans">
         <JsonLd data={[organizationJsonLd(), localBusinessJsonLd()]} />
-        <GoogleAnalytics />
         <Providers>
           <Navbar />
           <main className="pt-[73px]">{children}</main>

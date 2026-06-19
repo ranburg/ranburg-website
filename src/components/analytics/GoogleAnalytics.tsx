@@ -1,12 +1,15 @@
+/**
+ * Legacy component — GA is installed in src/app/layout.tsx <head> via siteConfig.gaMeasurementId.
+ * Kept for optional client-side pageview tracking if needed later.
+ */
 "use client";
 
 import Script from "next/script";
+import { SITE } from "@/lib/siteConfig";
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? SITE.gaMeasurementId;
 
 export default function GoogleAnalytics() {
-  if (!GA_ID) return null;
-
   return (
     <>
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
@@ -15,7 +18,7 @@ export default function GoogleAnalytics() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+          gtag('config', '${GA_ID}');
         `}
       </Script>
     </>
