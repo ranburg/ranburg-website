@@ -14,6 +14,7 @@ export interface BlogPost {
   excerpt: string;
   date: string;
   readTime: string;
+  category?: "seo" | "development" | "business-productivity" | "ai-tools" | "salesforce";
   seo: {
     title: string;
     description: string;

@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { BLOG_POSTS, getBlogBySlug } from "@/lib/blogConfig";
+import { getRelatedBlogPosts } from "@/lib/blogCategories";
+import { inferBlogCategory, BLOG_CATEGORIES } from "@/lib/blogCategories";
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { SITE } from "@/lib/siteConfig";
@@ -39,6 +41,8 @@ export default async function BlogPostPage({ params }: PageProps) {
   const url = `${SITE.url}/blog/${slug}`;
   const relatedServices = SERVICES_CONFIG.filter((s) => post.relatedServices.includes(s.slug));
   const relatedTools = TOOLS_CONFIG.filter((t) => post.relatedTools.includes(t.slug));
+  const relatedPosts = getRelatedBlogPosts(slug, 3);
+  const categoryLabel = BLOG_CATEGORIES.find((c) => c.id === inferBlogCategory(post))?.label;
 
   return (
     <>
@@ -64,6 +68,11 @@ export default async function BlogPostPage({ params }: PageProps) {
               ]}
             />
             <h1 className="text-3xl font-extrabold text-theme-heading sm:text-4xl">{post.title}</h1>
+            {categoryLabel && (
+              <span className="mt-3 inline-block rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
+                {categoryLabel}
+              </span>
+            )}
             <div className="mt-4 flex items-center gap-4 text-sm text-theme-subtle">
               <span className="flex items-center gap-1"><Calendar className="h-4 w-4" />{post.date}</span>
               <span className="flex items-center gap-1"><Clock className="h-4 w-4" />{post.readTime} read</span>
@@ -105,9 +114,22 @@ export default async function BlogPostPage({ params }: PageProps) {
                 )}
               </div>
             )}
+            {relatedPosts.length > 0 && (
+              <div className="mt-16 border-t border-theme-subtle pt-12">
+                <h2 className="text-xl font-bold text-theme-heading">Related Articles</h2>
+                <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                  {relatedPosts.map((rp) => (
+                    <Link key={rp.slug} href={`/blog/${rp.slug}`} className="glass-card block p-4 hover:border-accent/30">
+                      <p className="font-medium text-theme-heading hover:text-accent">{rp.title}</p>
+                      <p className="mt-1 text-xs text-theme-subtle">{rp.readTime}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="glass-card mt-16 p-8 text-center">
-              <h2 className="text-xl font-bold text-theme-heading">Need Salesforce Expertise?</h2>
-              <p className="mt-3 text-theme-muted">Our certified consultants in Jaipur help with OmniStudio, Revenue Cloud, and enterprise integrations.</p>
+              <h2 className="text-xl font-bold text-theme-heading">Need custom software or Salesforce consulting?</h2>
+              <p className="mt-3 text-theme-muted">Ranburg LLP helps teams build production Salesforce and web solutions.</p>
               <div className="mt-6"><Button href="/contact" icon>Talk to a Consultant</Button></div>
             </div>
           </div>

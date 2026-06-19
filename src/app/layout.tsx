@@ -17,16 +17,16 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = buildMetadata({
-  title: "Salesforce Consulting, Revenue Cloud & Software Development Services | Ranburg LLP",
+  title: "Free Online Tools — Calculators, Converters & Developer Utilities | Ranburg LLP",
   description:
-    "Certified Salesforce consultants in India. OmniStudio, Revenue Cloud, Industries Cloud, LWC, integrations & free developer tools.",
+    "Free online tools for developers, businesses, and SEO professionals. Calculators, formatters, generators, and Salesforce utilities by Ranburg LLP.",
   path: "/",
   keywords: [
-    "Salesforce consulting India",
-    "Salesforce developer Jaipur",
-    "OmniStudio consultant",
-    "Revenue Cloud implementation",
-    "Salesforce Industries",
+    "free online tools",
+    "developer tools",
+    "SEO tools",
+    "calculators online",
+    "Salesforce tools",
     "Ranburg LLP",
   ],
 });

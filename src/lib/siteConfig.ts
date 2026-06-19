@@ -3,8 +3,8 @@ export const SITE = {
   brand: "Ranburg",
   url: "https://www.ranburg.com",
   email: "admin@ranburg.com",
-  phone: "2547944",
-  phoneTel: "2547944",
+  phone: "+1 412 547 9444",
+  phoneTel: "+14125479444",
   locale: "en_IN",
   defaultOgImage: "/opengraph-image",
   address: {
@@ -20,6 +20,6 @@ export const SITE = {
     twitter: "https://twitter.com/ranburg",
   },
   description:
-    "Certified Salesforce consultants in India specializing in OmniStudio, Revenue Cloud, Industries Cloud, LWC, integrations, and managed services.",
+    "Free online tools for developers, businesses, and SEO professionals — calculators, converters, formatters, and Salesforce utilities by Ranburg LLP.",
   gaMeasurementId: "G-EBRQ9D5R3Q",
 } as const;

@@ -6,11 +6,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Wrench, Cloud, ArrowRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { TOOL_CATEGORIES, TOOLS_CONFIG } from "@/lib/toolsConfig";
+import { SEO_CATEGORY_HUBS } from "@/lib/toolSeoCategories";
 import { getToolIcon } from "@/lib/toolIcons";
 import ToolSearch from "@/components/tools/ToolSearch";
 import { cn } from "@/lib/utils";
 
 const MEGA_CATEGORY_ORDER = ["financial", "developer", "salesforce", "design", "productivity"] as const;
+
+const CATEGORY_HUB_LINKS: Record<string, string> = {
+  financial: "/tools/calculators",
+  developer: "/tools/developer",
+  salesforce: "/tools/salesforce",
+  design: "/tools/seo",
+  productivity: "/tools/business",
+};
 
 export default function ToolsDropdown() {
   const [open, setOpen] = useState(false);
@@ -76,7 +85,17 @@ export default function ToolsDropdown() {
 
               <div className="grid lg:grid-cols-[180px_1fr]">
                 <div className="border-b border-theme-subtle bg-accent/5 p-4 lg:border-b-0 lg:border-r">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-accent">Featured</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-accent">Browse</p>
+                  {SEO_CATEGORY_HUBS.slice(0, 4).map((cat) => (
+                    <Link
+                      key={cat.slug}
+                      href={`/tools/${cat.slug}`}
+                      onClick={close}
+                      className="mt-2 block rounded-lg px-2 py-1.5 text-sm text-theme-muted hover:bg-theme-surface hover:text-accent"
+                    >
+                      {cat.label}
+                    </Link>
+                  ))}
                   <Link
                     href="/tools/salesforce"
                     onClick={close}
@@ -131,9 +150,9 @@ export default function ToolsDropdown() {
                           })}
                         </ul>
                         {tools.length > featured.length && (
-                          <Link
-                            href={category.id === "salesforce" ? "/tools/salesforce" : "/tools"}
-                            onClick={close}
+                            <Link
+                              href={CATEGORY_HUB_LINKS[category.id] ?? "/tools"}
+                              onClick={close}
                             className="mt-1.5 flex items-center gap-1 px-2 text-xs font-medium text-accent hover:underline"
                           >
                             +{tools.length - featured.length} more <ArrowRight className="h-3 w-3" />

@@ -725,20 +725,3 @@ export function getToolsByCategory(category: ToolCategoryId): ToolConfig[] {
 export function getCategoryById(id: ToolCategoryId): ToolCategory | undefined {
   return TOOL_CATEGORIES.find((c) => c.id === id);
 }
-
-export function getRecommendedTools(currentSlug: string, limit = 3): ToolConfig[] {
-  const current = getToolBySlug(currentSlug);
-  if (!current) return TOOLS_CONFIG.filter((t) => t.popular).slice(0, limit);
-
-  const sameCategory = TOOLS_CONFIG.filter(
-    (t) => t.category === current.category && t.slug !== currentSlug
-  );
-
-  if (sameCategory.length >= limit) return sameCategory.slice(0, limit);
-
-  const popular = TOOLS_CONFIG.filter(
-    (t) => t.slug !== currentSlug && t.popular && t.category !== current.category
-  );
-
-  return [...sameCategory, ...popular].slice(0, limit);
-}

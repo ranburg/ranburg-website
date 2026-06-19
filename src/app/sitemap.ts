@@ -4,6 +4,7 @@ import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { BLOG_POSTS } from "@/lib/blogConfig";
 import { CASE_STUDIES } from "@/lib/caseStudiesConfig";
+import { SEO_CATEGORY_HUBS } from "@/lib/toolSeoCategories";
 import { COMING_SOON_TOOLS } from "@/lib/toolComingSoonConfig";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -21,7 +22,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${base}/disclaimer`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
+
+  const seoCategoryPages = SEO_CATEGORY_HUBS.map((c) => ({
+    url: `${base}/tools/${c.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.88,
+  }));
 
   const servicePages = SERVICES_CONFIG.map((s) => ({
     url: `${base}/services/${s.slug}`,
@@ -58,5 +67,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...servicePages, ...toolPages, ...comingSoonPages, ...blogPages, ...caseStudyPages];
+  return [...staticPages, ...seoCategoryPages, ...servicePages, ...toolPages, ...comingSoonPages, ...blogPages, ...caseStudyPages];
 }

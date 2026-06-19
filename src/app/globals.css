@@ -199,4 +199,9 @@
     background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
   }
+
+  .ad-placeholder {
+    contain: layout style;
+    min-height: 90px;
+  }
 }
