@@ -14,6 +14,7 @@ export interface SeoBlogTopic {
   angle3: string;
   angle4: string;
   faqAccuracy: string;
+  faq?: { question: string; answer: string }[];
 }
 
 type RawTopic = [string, string, string, string[], BlogCategoryId, string];
