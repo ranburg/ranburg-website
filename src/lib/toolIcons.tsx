@@ -33,6 +33,8 @@ import {
   Cake,
   CircleDollarSign,
   Percent,
+  Youtube,
+  Instagram,
   type LucideIcon,
 } from "lucide-react";
 
@@ -70,6 +72,8 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Cake,
   CircleDollarSign,
   Percent,
+  Youtube,
+  Instagram,
 };
 
 export function getToolIcon(name: string): LucideIcon {

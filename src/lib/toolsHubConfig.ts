@@ -21,10 +21,14 @@ export const POPULAR_TOOL_SLUGS = [
   "qr-generator",
   "currency-converter",
   "gst-calculator",
+  "youtube-channel-insights",
+  "instagram-profile-insights",
   "json-formatter",
 ];
 
 export const RECENT_TOOL_SLUGS = [
+  "youtube-channel-insights",
+  "instagram-profile-insights",
   "regex-tester",
   "uuid-generator",
   "password-generator",
@@ -46,6 +50,9 @@ export const SEARCH_SUGGESTIONS = [
   "Currency",
   "PDF",
   "Calculator",
+  "Instagram",
+  "YouTube",
+  "Social",
 ];
 
 export const SEARCH_TAGS = [
@@ -56,5 +63,8 @@ export const SEARCH_TAGS = [
   { label: "QR Code", query: "qr" },
   { label: "GST", query: "gst" },
   { label: "PDF", query: "pdf" },
+  { label: "Instagram", query: "instagram" },
+  { label: "YouTube", query: "youtube" },
+  { label: "Social", query: "social" },
   { label: "Salesforce", query: "salesforce" },
 ];

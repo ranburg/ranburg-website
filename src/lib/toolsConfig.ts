@@ -56,7 +56,7 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
   {
     id: "productivity",
     label: "Productivity Tools",
-    description: "QR codes, PDF tools, unit converter, and professional helpers.",
+    description: "Social analytics, QR codes, PDF tools, and professional helpers.",
   },
 ];
 
@@ -709,6 +709,69 @@ export const TOOLS_CONFIG: ToolConfig[] = [
       { question: "What GST rates are supported?", answer: "Standard India GST slabs: 5%, 12%, 18%, and 28%." },
       { question: "What is CGST and SGST?", answer: "For intra-state sales, GST splits equally into CGST (central) and SGST (state), each half the total GST." },
       { question: "Is IGST included?", answer: "For inter-state transactions, the full GST amount equals IGST. Toggle the split view in Advanced Options." },
+    ],
+  },
+  },
+  {
+    slug: "youtube-channel-insights",
+    title: "YouTube Channel Analytics",
+    shortDescription: "Analyze any public YouTube channel — subscribers, views, videos, and growth tips.",
+    category: "productivity",
+    icon: "Youtube",
+    gradient: "from-red-600 to-red-500",
+    badge: "Social Analytics",
+    popular: true,
+    seo: {
+      title: "YouTube Channel Analytics — Free Channel Stats Checker | Ranburg.com",
+      description:
+        "Free YouTube channel analytics tool. Enter a channel handle or URL to see subscribers, total views, video count, average views, and personalized growth recommendations.",
+      keywords: ["YouTube channel analytics", "YouTube stats checker", "YouTube subscriber count", "channel analyzer"],
+    },
+    howToUse: [
+      "Enter a YouTube @handle, channel name, or full channel URL.",
+      "Click Analyze Channel to fetch public statistics.",
+      "Review subscriber count, views, video count, and average views on recent uploads.",
+      "Read personalized growth recommendations based on channel tier and engagement.",
+    ],
+    formula:
+      "Stats from YouTube Data API v3 (channels.list, playlistItems, videos). Recommendations derived from subscriber tier, views-per-video ratio, and content library size.",
+    faq: [
+      { question: "Do I need to log in?", answer: "No. Enter any public YouTube channel handle or URL." },
+      { question: "Why does it say API not configured?", answer: "The site admin must add a YouTube Data API key (YOUTUBE_API_KEY) in Vercel environment variables." },
+      { question: "Can I analyze private channels?", answer: "No. Only public channel statistics are available via the YouTube API." },
+      { question: "How often is data updated?", answer: "YouTube updates statistics periodically. Results are cached for up to 1 hour." },
+      { question: "Are recommendations guaranteed?", answer: "Recommendations are general best-practice tips based on public metrics, not guaranteed growth outcomes." },
+    ],
+  },
+  {
+    slug: "instagram-profile-insights",
+    title: "Instagram Profile Analytics",
+    shortDescription: "Check public Instagram follower, post counts, and get content growth recommendations.",
+    category: "productivity",
+    icon: "Instagram",
+    gradient: "from-purple-600 via-pink-500 to-orange-400",
+    badge: "Social Analytics",
+    popular: true,
+    seo: {
+      title: "Instagram Profile Analytics — Free Instagram Stats Checker | Ranburg.com",
+      description:
+        "Free Instagram profile analyzer. Enter a username to see followers, following, posts, and actionable content strategy recommendations.",
+      keywords: ["Instagram analytics", "Instagram stats checker", "Instagram follower count", "profile analyzer"],
+    },
+    howToUse: [
+      "Enter an Instagram @username or profile URL.",
+      "Click Analyze Profile to fetch public profile statistics.",
+      "Review followers, following, posts, and follow ratio.",
+      "Read tailored recommendations for Reels, posting cadence, and bio optimization.",
+    ],
+    formula:
+      "Public stats parsed from Instagram profile metadata. Recommendations based on creator tier (nano/micro/mid/macro), follow ratio, and posting volume.",
+    faq: [
+      { question: "Does this work for private accounts?", answer: "No. Only public Instagram profiles with visible stats can be analyzed." },
+      { question: "Why did analysis fail?", answer: "Instagram may block automated requests, or the username may be incorrect. Private and restricted accounts are not supported." },
+      { question: "Is login required?", answer: "No login needed. Enter any public username." },
+      { question: "How accurate are the stats?", answer: "Stats reflect publicly visible follower and post counts at the time of the request." },
+      { question: "Do you store usernames?", answer: "No. Queries are processed on demand and not stored on our servers." },
     ],
   },
   ...SALESFORCE_TOOLS,

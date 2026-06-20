@@ -22,6 +22,8 @@ import UnitConverter from "./UnitConverter";
 import AgeCalculator from "./AgeCalculator";
 import CurrencyConverter from "./CurrencyConverter";
 import GSTCalculator from "./GSTCalculator";
+import YouTubeChannelInsights from "./YouTubeChannelInsights";
+import InstagramProfileInsights from "./InstagramProfileInsights";
 import CronGenerator from "./salesforce/CronGenerator";
 import FormulaGenerator from "./salesforce/FormulaGenerator";
 import SOQLBuilder from "./salesforce/SOQLBuilder";
@@ -57,6 +59,8 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "age-calculator": AgeCalculator,
   "currency-converter": CurrencyConverter,
   "gst-calculator": GSTCalculator,
+  "youtube-channel-insights": YouTubeChannelInsights,
+  "instagram-profile-insights": InstagramProfileInsights,
   "cron-generator": CronGenerator,
   "formula-generator": FormulaGenerator,
   "soql-builder": SOQLBuilder,
