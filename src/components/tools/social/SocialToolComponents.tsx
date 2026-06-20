@@ -89,7 +89,7 @@ export function InstagramEngagementTool() {
   const [followers, setFollowers] = useState(10000);
   const [likes, setLikes] = useState(500);
   const [comments, setComments] = useState(25);
-  const rate = followers > 0 ? (((likes + comments) / followers) * 100).toFixed(2) : "0";
+  const rate = followers > 0 ? ((likes + comments) / followers) * 100 : 0;
   return <EngagementCalc followers={followers} setFollowers={setFollowers} likes={likes} setLikes={setLikes} comments={comments} setComments={setComments} rate={rate} label="Instagram" />;
 }
 
@@ -98,7 +98,7 @@ export function TiktokEngagementTool() {
   const [likes, setLikes] = useState(5000);
   const [comments, setComments] = useState(200);
   const [shares, setShares] = useState(100);
-  const rate = views > 0 ? (((likes + comments + shares) / views) * 100).toFixed(2) : "0";
+  const rate = views > 0 ? ((likes + comments + shares) / views) * 100 : 0;
   return (
     <div className="space-y-6">
       <div className="grid gap-4 sm:grid-cols-2">
@@ -107,7 +107,7 @@ export function TiktokEngagementTool() {
         <NumInput label="Comments" value={comments} onChange={setComments} />
         <NumInput label="Shares" value={shares} onChange={setShares} />
       </div>
-      <ResultCard label="Engagement rate" value={`${rate}%`} />
+      <ResultCard label="Engagement rate" value={rate} format="percent" />
     </div>
   );
 }
@@ -115,12 +115,12 @@ export function TiktokEngagementTool() {
 export function TiktokEarningsTool() {
   const [views, setViews] = useState(1000000);
   const [rpm, setRpm] = useState(0.03);
-  const earnings = ((views / 1000) * rpm).toFixed(2);
+  const earnings = (views / 1000) * rpm;
   return (
     <div className="space-y-6">
       <NumInput label="Monthly views" value={views} onChange={setViews} />
       <NumInput label="RPM ($)" value={rpm} onChange={setRpm} step={0.01} />
-      <ResultCard label="Estimated earnings" value={`$${earnings}`} />
+      <ResultCard label="Estimated earnings" value={earnings} />
       <p className="text-xs text-theme-subtle">Estimates only. Actual TikTok payouts vary by region and program.</p>
     </div>
   );
@@ -140,14 +140,14 @@ function EngagementCalc({ followers, setFollowers, likes, setLikes, comments, se
   followers: number; setFollowers: (n: number) => void;
   likes: number; setLikes: (n: number) => void;
   comments: number; setComments: (n: number) => void;
-  rate: string; label: string;
+  rate: number; label: string;
 }) {
   return (
     <div className="space-y-6">
       <NumInput label="Followers" value={followers} onChange={setFollowers} />
       <NumInput label="Likes (avg post)" value={likes} onChange={setLikes} />
       <NumInput label="Comments (avg post)" value={comments} onChange={setComments} />
-      <ResultCard label={`${label} engagement rate`} value={`${rate}%`} />
+      <ResultCard label={`${label} engagement rate`} value={rate} format="percent" />
       <p className="text-xs text-theme-subtle">Benchmark: 1–3% is average; 6%+ is strong for most niches.</p>
     </div>
   );

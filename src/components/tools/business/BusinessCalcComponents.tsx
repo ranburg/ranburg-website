@@ -8,16 +8,16 @@ export function ProfitMarginTool() {
   const [revenue, setRevenue] = useState(100000);
   const [cogs, setCogs] = useState(40000);
   const [opex, setOpex] = useState(30000);
-  const gross = revenue > 0 ? (((revenue - cogs) / revenue) * 100).toFixed(1) : "0";
-  const net = revenue > 0 ? (((revenue - cogs - opex) / revenue) * 100).toFixed(1) : "0";
+  const gross = revenue > 0 ? ((revenue - cogs) / revenue) * 100 : 0;
+  const net = revenue > 0 ? ((revenue - cogs - opex) / revenue) * 100 : 0;
   return (
     <CalcLayout>
       <CalculatorSlider label="Revenue" value={revenue} min={0} max={1000000} step={1000} unit="$" onChange={setRevenue} />
       <CalculatorSlider label="Cost of goods" value={cogs} min={0} max={revenue} step={500} unit="$" onChange={setCogs} />
       <CalculatorSlider label="Operating expenses" value={opex} min={0} max={revenue} step={500} unit="$" onChange={setOpex} />
       <div className="grid gap-4 sm:grid-cols-2">
-        <ResultCard label="Gross margin" value={`${gross}%`} />
-        <ResultCard label="Net margin" value={`${net}%`} />
+        <ResultCard label="Gross margin" value={gross} format="percent" />
+        <ResultCard label="Net margin" value={net} format="percent" />
       </div>
     </CalcLayout>
   );
@@ -26,15 +26,15 @@ export function ProfitMarginTool() {
 export function RoiCalculatorTool() {
   const [cost, setCost] = useState(1000);
   const [gain, setGain] = useState(1500);
-  const roi = useMemo(() => (cost > 0 ? (((gain - cost) / cost) * 100).toFixed(1) : "0"), [cost, gain]);
+  const roi = useMemo(() => (cost > 0 ? ((gain - cost) / cost) * 100 : 0), [cost, gain]);
   const profit = gain - cost;
   return (
     <CalcLayout>
       <CalculatorSlider label="Investment cost" value={cost} min={0} max={100000} step={100} unit="$" onChange={setCost} />
       <CalculatorSlider label="Return value" value={gain} min={0} max={200000} step={100} unit="$" onChange={setGain} />
       <div className="grid gap-4 sm:grid-cols-2">
-        <ResultCard label="ROI" value={`${roi}%`} />
-        <ResultCard label="Net gain" value={`$${profit.toLocaleString()}`} />
+        <ResultCard label="ROI" value={roi} format="percent" />
+        <ResultCard label="Net gain" value={profit} />
       </div>
     </CalcLayout>
   );
@@ -52,8 +52,8 @@ export function BreakEvenTool() {
       <CalculatorSlider label="Variable cost / unit" value={variable} min={0} max={price} step={1} unit="$" onChange={setVariable} />
       <CalculatorSlider label="Price / unit" value={price} min={1} max={500} step={1} unit="$" onChange={setPrice} />
       <div className="grid gap-4 sm:grid-cols-2">
-        <ResultCard label="Break-even units" value={units.toLocaleString()} />
-        <ResultCard label="Break-even revenue" value={`$${revenue.toLocaleString()}`} />
+        <ResultCard label="Break-even units" value={units} format="plain" />
+        <ResultCard label="Break-even revenue" value={revenue} />
       </div>
     </CalcLayout>
   );

@@ -8,6 +8,7 @@ interface ResultCardProps {
   value: number;
   highlight?: boolean;
   variant?: "default" | "emerald" | "blue";
+  format?: "currency" | "percent" | "plain";
 }
 
 const variants = {
@@ -16,11 +17,18 @@ const variants = {
   blue: "text-accent",
 };
 
+function formatValue(value: number, format: ResultCardProps["format"] = "currency"): string {
+  if (format === "percent") return `${value.toLocaleString(undefined, { maximumFractionDigits: 2 })}%`;
+  if (format === "plain") return value.toLocaleString();
+  return formatCurrency(value);
+}
+
 export default function ResultCard({
   label,
   value,
   highlight,
   variant = "default",
+  format = "currency",
 }: ResultCardProps) {
   return (
     <div
@@ -33,7 +41,7 @@ export default function ResultCard({
         {label}
       </p>
       <p className={cn("mt-2 font-bold", variants[variant], highlight ? "text-xl sm:text-2xl" : "text-lg sm:text-2xl")}>
-        {formatCurrency(value)}
+        {formatValue(value, format)}
       </p>
     </div>
   );
