@@ -6,16 +6,14 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Zap, ChevronDown, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
-import ToolsDropdown from "@/components/layout/ToolsDropdown";
-import CategoriesDropdown from "@/components/layout/CategoriesDropdown";
 import ServicesDropdown from "@/components/layout/ServicesDropdown";
+import ToolsSubNav from "@/components/layout/ToolsSubNav";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import { useCommandPaletteOptional } from "@/components/search/CommandPaletteProvider";
-import { SEO_CATEGORY_HUBS, PRIMARY_CATEGORY_SLUGS } from "@/lib/toolSeoCategories";
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { getServiceIcon } from "@/lib/serviceIcons";
 
-const navLinksAfterTools = [
+const navLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/case-studies", label: "Case Studies" },
 ];
@@ -32,14 +30,11 @@ export default function Navbar() {
   const pathname = usePathname();
   const palette = useCommandPaletteOptional();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileToolsOpen, setMobileToolsOpen] = useState(false);
-  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const isToolsActive = pathname.startsWith("/tools");
   const isServicesActive = pathname.startsWith("/services");
-  const isCategoriesActive = SEO_CATEGORY_HUBS.some((c) => pathname === `/tools/${c.slug}`);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -57,6 +52,8 @@ export default function Navbar() {
     palette?.setOpen(true);
   };
 
+  const closeMobile = () => setMobileOpen(false);
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <nav
@@ -73,7 +70,7 @@ export default function Navbar() {
               <Zap className="h-5 w-5 text-white" />
             </div>
             <span className="truncate text-lg font-bold tracking-tight text-theme-heading sm:text-xl">
-              Ranburg<span className="text-accent">.com</span>
+              Ranburg
             </span>
           </Link>
 
@@ -81,9 +78,10 @@ export default function Navbar() {
             <Link href="/" className={navLinkClass(pathname === "/")}>
               Home
             </Link>
-            <ToolsDropdown />
-            <CategoriesDropdown />
-            {navLinksAfterTools.map((link) => (
+            <Link href="/tools" className={navLinkClass(isToolsActive)}>
+              Tools
+            </Link>
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -106,19 +104,10 @@ export default function Navbar() {
               aria-label="Search tools and blogs"
             >
               <Search className="h-4 w-4 shrink-0" />
-              <span className="hidden xl:inline">Search tools & blogs</span>
+              <span className="hidden xl:inline">Search</span>
               <kbd className="ml-1 hidden rounded border border-theme-subtle px-1.5 py-0.5 text-xs xl:inline">⌘K</kbd>
             </button>
-          </div>
-
-          <div className="hidden items-center gap-3 md:flex">
             <ThemeToggle />
-            <Link
-              href="/tools"
-              className="hidden rounded-xl border border-theme px-4 py-2 text-sm font-semibold text-theme-heading hover:border-accent/40 hover:text-accent sm:inline-flex"
-            >
-              All Tools
-            </Link>
           </div>
 
           <div className="flex items-center gap-1 sm:gap-2 lg:hidden">
@@ -143,6 +132,10 @@ export default function Navbar() {
           </div>
         </div>
 
+        <div className="hidden lg:block">
+          <ToolsSubNav />
+        </div>
+
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -163,67 +156,28 @@ export default function Navbar() {
               </div>
               <div className="max-h-[65vh] overflow-y-auto overscroll-contain">
                 <div className="flex flex-col gap-1 px-4 pb-4">
-                  <Link href="/" onClick={() => setMobileOpen(false)} className="rounded-lg px-4 py-3 text-sm font-medium text-theme-muted hover:bg-theme-surface">
+                  <Link href="/" onClick={closeMobile} className="rounded-lg px-4 py-3 text-sm font-medium text-theme-muted hover:bg-theme-surface">
                     Home
                   </Link>
-
-                  <button
-                    type="button"
-                    onClick={() => setMobileToolsOpen(!mobileToolsOpen)}
+                  <Link
+                    href="/tools"
+                    onClick={closeMobile}
                     className={cn(
-                      "flex w-full items-center justify-between rounded-lg px-4 py-3 text-sm font-medium",
-                      isToolsActive && !isCategoriesActive ? "bg-theme-hover text-theme-heading" : "text-theme-muted"
+                      "rounded-lg px-4 py-3 text-sm font-medium",
+                      isToolsActive ? "bg-theme-hover text-theme-heading" : "text-theme-muted"
                     )}
                   >
                     Tools
-                    <ChevronDown className={cn("h-4 w-4 transition-transform", mobileToolsOpen && "rotate-180")} />
-                  </button>
-                  {mobileToolsOpen && (
-                    <div className="ml-2 space-y-2 border-l border-theme-subtle pl-4">
-                      <Link href="/tools" onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-accent">
-                        All Tools →
-                      </Link>
-                      <Link href="/tools/salesforce" onClick={() => setMobileOpen(false)} className="block text-sm text-theme-muted">
-                        Salesforce Hub
-                      </Link>
-                    </div>
-                  )}
+                  </Link>
 
-                  <button
-                    type="button"
-                    onClick={() => setMobileCategoriesOpen(!mobileCategoriesOpen)}
-                    className={cn(
-                      "flex w-full items-center justify-between rounded-lg px-4 py-3 text-sm font-medium",
-                      isCategoriesActive ? "bg-theme-hover text-theme-heading" : "text-theme-muted"
-                    )}
-                  >
-                    Categories
-                    <ChevronDown className={cn("h-4 w-4 transition-transform", mobileCategoriesOpen && "rotate-180")} />
-                  </button>
-                  {mobileCategoriesOpen && (
-                    <div className="ml-2 space-y-1 border-l border-theme-subtle pl-4">
-                      {PRIMARY_CATEGORY_SLUGS.map((slug) => {
-                        const cat = SEO_CATEGORY_HUBS.find((c) => c.slug === slug);
-                        if (!cat) return null;
-                        return (
-                          <Link
-                            key={cat.slug}
-                            href={`/tools/${cat.slug}`}
-                            onClick={() => setMobileOpen(false)}
-                            className="block rounded-lg px-3 py-2.5 text-sm text-theme-muted hover:text-theme-heading"
-                          >
-                            {cat.label}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  )}
+                  <p className="px-4 pt-2 text-xs font-semibold uppercase tracking-wider text-accent">Tool categories</p>
+                  <ToolsSubNav variant="stack" onNavigate={closeMobile} className="px-1" />
 
-                  {navLinksAfterTools.map((link) => (
+                  {navLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
-                      onClick={() => setMobileOpen(false)}
+                      onClick={closeMobile}
                       className="rounded-lg px-4 py-3 text-sm font-medium text-theme-muted hover:bg-theme-surface"
                     >
                       {link.label}
@@ -249,7 +203,7 @@ export default function Navbar() {
                           <Link
                             key={service.slug}
                             href={`/services/${service.slug}`}
-                            onClick={() => setMobileOpen(false)}
+                            onClick={closeMobile}
                             className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-theme-muted"
                           >
                             <Icon className="h-3.5 w-3.5 shrink-0" />
@@ -260,11 +214,8 @@ export default function Navbar() {
                     </div>
                   )}
 
-                  <Link href="/contact" onClick={() => setMobileOpen(false)} className="rounded-lg px-4 py-3 text-sm font-medium text-theme-muted">
+                  <Link href="/contact" onClick={closeMobile} className="rounded-lg px-4 py-3 text-sm font-medium text-theme-muted">
                     Contact
-                  </Link>
-                  <Link href="/tools" onClick={() => setMobileOpen(false)} className="mt-2 rounded-xl bg-accent px-4 py-3 text-center text-sm font-semibold text-white">
-                    Browse All Tools
                   </Link>
                 </div>
               </div>

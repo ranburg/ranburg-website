@@ -212,4 +212,23 @@
     contain: layout style;
     min-height: 90px;
   }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --nav-height: 6.25rem;
+  }
+
+  .dark {
+    --nav-height: 6.25rem;
+  }
 }
