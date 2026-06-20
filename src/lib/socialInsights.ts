@@ -433,6 +433,79 @@ export function getInstagramRecommendations(stats: {
   return tips;
 }
 
+export interface InstagramProfileData {
+  displayName: string;
+  username: string;
+  bio: string;
+  followers: number;
+  following: number;
+  posts: number;
+  avatarUrl: string;
+  isPrivate: boolean;
+}
+
+const IG_WEB_APP_ID = "936619743392459";
+
+const IG_FETCH_HEADERS = {
+  "User-Agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+  Accept: "*/*",
+  "Accept-Language": "en-US,en;q=0.9",
+  "X-IG-App-ID": IG_WEB_APP_ID,
+  "X-Requested-With": "XMLHttpRequest",
+};
+
+export function parseInstagramWebProfile(json: unknown, fallbackUsername: string): InstagramProfileData | null {
+  const user = (json as { data?: { user?: Record<string, unknown> } })?.data?.user;
+  if (!user) return null;
+
+  const isPrivate = Boolean(user.is_private);
+  const followers = (user.edge_followed_by as { count?: number })?.count ?? 0;
+  const following = (user.edge_follow as { count?: number })?.count ?? 0;
+  const posts = (user.edge_owner_to_timeline_media as { count?: number })?.count ?? 0;
+
+  return {
+    displayName: (user.full_name as string) || fallbackUsername,
+    username: (user.username as string) || fallbackUsername,
+    bio: (user.biography as string) || "",
+    followers,
+    following,
+    posts,
+    avatarUrl:
+      (user.profile_pic_url_hd as string) || (user.profile_pic_url as string) || "",
+    isPrivate,
+  };
+}
+
+export async function fetchInstagramWebProfile(username: string): Promise<InstagramProfileData | null> {
+  const res = await fetch(
+    `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`,
+    {
+      headers: {
+        ...IG_FETCH_HEADERS,
+        Referer: `https://www.instagram.com/${username}/`,
+      },
+      cache: "no-store",
+    }
+  );
+  if (!res.ok) return null;
+  const json = await res.json();
+  return parseInstagramWebProfile(json, username);
+}
+
+export async function fetchInstagramHtmlProfile(username: string): Promise<string | null> {
+  const res = await fetch(`https://www.instagram.com/${username}/`, {
+    headers: {
+      "User-Agent": IG_FETCH_HEADERS["User-Agent"],
+      Accept: "text/html,application/xhtml+xml",
+      "Accept-Language": "en-US,en;q=0.9",
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) return null;
+  return res.text();
+}
+
 export function parseInstagramOgMeta(html: string): {
   displayName: string;
   username: string;

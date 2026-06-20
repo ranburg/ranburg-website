@@ -11,6 +11,7 @@ import { searchTools } from "@/lib/toolSearch";
 import ToolSearch from "@/components/tools/ToolSearch";
 import ToolCard from "@/components/tools/ToolCard";
 import AllToolsNav from "@/components/tools/AllToolsNav";
+import SocialHeroTools from "@/components/tools/SocialHeroTools";
 
 function ToolSection({ title, description, slugs }: { title: string; description?: string; slugs: string[] }) {
   const tools = slugs.map(getToolBySlug).filter(Boolean);
@@ -75,6 +76,8 @@ export default function ToolsHub() {
         </section>
       ) : (
         <>
+          <SocialHeroTools />
+
           <section>
             <h2 className="text-2xl font-bold text-theme-heading">Browse by Category</h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

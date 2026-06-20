@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 import Button from "@/components/ui/Button";
 import ToolSearch from "@/components/tools/ToolSearch";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
-import { ArrowRight, Sparkles, Wrench, Calculator, Code2, Search } from "lucide-react";
+import { ArrowRight, Sparkles, Wrench, Calculator, Youtube, Instagram } from "lucide-react";
 
 const highlights = [
-  { icon: Code2, label: "Developer Tools" },
-  { icon: Calculator, label: "Calculators" },
-  { icon: Search, label: "SEO Utilities" },
-  { icon: Wrench, label: "30+ Free Tools" },
+  { icon: Youtube, label: "YouTube Analytics" },
+  { icon: Instagram, label: "Instagram Analytics" },
+  { icon: Calculator, label: "Revenue Calculators" },
+  { icon: Wrench, label: "38+ Free Tools" },
 ];
 
 export default function Hero() {
@@ -39,7 +39,7 @@ export default function Hero() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-theme-muted">
-            Explore free productivity, developer, SEO, calculator, and business tools designed to help you work faster and smarter.
+            Analyze YouTube channels and Instagram profiles, estimate creator revenue, and explore free developer, SEO, and business tools.
           </p>
 
           <div className="mx-auto mt-10 max-w-2xl">
@@ -47,17 +47,22 @@ export default function Hero() {
               showSuggestions
               showTags
               maxResults={8}
-              placeholder="Search 30+ free tools — JSON, regex, GST, QR code…"
+              placeholder="Search tools — YouTube, Instagram, JSON, GST, QR code…"
             />
           </div>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button href="/tools" size="lg" icon>
-              Browse All Tools
+            <Button href="/tools/youtube-channel-insights" size="lg" icon>
+              YouTube Analytics
             </Button>
-            <Button href="/tools/developer" variant="outline" size="lg">
-              Developer Tools
+            <Button href="/tools/instagram-profile-insights" variant="outline" size="lg">
+              Instagram Analytics
               <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
+          <div className="mt-4">
+            <Button href="/tools" variant="outline" size="sm">
+              Browse All Tools
             </Button>
           </div>
 

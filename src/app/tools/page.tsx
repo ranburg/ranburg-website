@@ -31,7 +31,7 @@ export default function ToolsPage() {
               Free <span className="text-gradient-accent">Online Tools</span>
             </h1>
             <p className="mt-6 text-lg text-theme-muted">
-              Calculators, converters, formatters, generators, and Salesforce utilities —
+              YouTube & Instagram analytics, revenue calculators, formatters, and Salesforce utilities —
               all free, instant, and processed in your browser.
             </p>
           </div>
@@ -42,7 +42,7 @@ export default function ToolsPage() {
 
       <section className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[220px_1fr]">
+          <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
             <AllToolsNav />
             <ToolsHub />
           </div>

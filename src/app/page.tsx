@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import Hero from "@/components/home/Hero";
 import PopularTools from "@/components/home/PopularTools";
+import SocialHeroTools from "@/components/tools/SocialHeroTools";
 import RecentlyAddedTools from "@/components/home/RecentlyAddedTools";
 import ToolCategoryCards from "@/components/home/ToolCategoryCards";
 import CaseStudiesPreview from "@/components/home/CaseStudiesPreview";
@@ -28,6 +29,11 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <section className="py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SocialHeroTools />
+        </div>
+      </section>
       <PopularTools />
       <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
       <RecentlyAddedTools />

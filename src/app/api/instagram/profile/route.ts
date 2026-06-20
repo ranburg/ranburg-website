@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import {
   buildInstagramGrowthSeries,
   estimateInstagramRevenue,
+  fetchInstagramHtmlProfile,
+  fetchInstagramWebProfile,
   getCreatorTier,
   getInstagramRecommendations,
   normalizeInstagramUsername,
@@ -20,69 +22,86 @@ export async function GET(request: Request) {
   }
 
   try {
-    const res = await fetch(`https://www.instagram.com/${username}/`, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        Accept: "text/html,application/xhtml+xml",
-        "Accept-Language": "en-US,en;q=0.9",
-      },
-      next: { revalidate: 1800 },
-    });
+    let profile = await fetchInstagramWebProfile(username);
 
-    if (!res.ok) {
+    if (!profile) {
+      const html = await fetchInstagramHtmlProfile(username);
+      if (html) {
+        const parsed = parseInstagramOgMeta(html);
+        if (parsed) {
+          profile = {
+            displayName: parsed.displayName || username,
+            username: parsed.username || username,
+            bio: parsed.bio,
+            followers: parsed.followers,
+            following: parsed.following,
+            posts: parsed.posts,
+            avatarUrl: parsed.avatarUrl,
+            isPrivate: false,
+          };
+        }
+      }
+    }
+
+    if (!profile) {
       return NextResponse.json(
         { error: "Could not fetch profile. The account may be private or unavailable." },
         { status: 404 }
       );
     }
 
-    const html = await res.text();
-    const parsed = parseInstagramOgMeta(html);
+    if (profile.isPrivate) {
+      return NextResponse.json(
+        { error: "This is a private account. Only public profiles can be analyzed." },
+        { status: 403 }
+      );
+    }
 
-    if (!parsed || (parsed.followers === 0 && parsed.posts === 0)) {
+    if (profile.followers === 0 && profile.posts === 0) {
       return NextResponse.json(
         {
           error:
-            "Public stats unavailable. The profile may be private, restricted, or Instagram blocked the request. Try again later.",
+            "Public stats unavailable. Instagram may have temporarily blocked the request — try again in a few minutes.",
         },
         { status: 422 }
       );
     }
 
     const recommendations = getInstagramRecommendations({
-      followers: parsed.followers,
-      following: parsed.following,
-      posts: parsed.posts,
+      followers: profile.followers,
+      following: profile.following,
+      posts: profile.posts,
     });
 
-    const tier = getCreatorTier(parsed.followers);
+    const tier = getCreatorTier(profile.followers);
     const followRatio =
-      parsed.following > 0 ? Math.round((parsed.followers / parsed.following) * 100) / 100 : parsed.followers;
-    const postsPerMonth = parsed.posts > 0 ? Math.max(0.5, parsed.posts / 24) : 1;
+      profile.following > 0
+        ? Math.round((profile.followers / profile.following) * 100) / 100
+        : profile.followers;
+    const postsPerMonth = profile.posts > 0 ? Math.max(0.5, profile.posts / 24) : 1;
     const engagementRate = tier === "mega" ? 1.5 : tier === "macro" ? 2 : tier === "mid" ? 3 : 4;
 
     const revenue = estimateInstagramRevenue({
-      followers: parsed.followers,
-      posts: parsed.posts,
+      followers: profile.followers,
+      posts: profile.posts,
       engagementRate,
     });
 
     const growthSeries = buildInstagramGrowthSeries({
-      followers: parsed.followers,
-      posts: parsed.posts,
+      followers: profile.followers,
+      posts: profile.posts,
     });
 
     return NextResponse.json({
       platform: "instagram",
-      username: parsed.username || username,
-      displayName: parsed.displayName || username,
-      bio: parsed.bio,
-      avatarUrl: parsed.avatarUrl || null,
-      followers: parsed.followers,
-      following: parsed.following,
-      posts: parsed.posts,
-      profileUrl: `https://www.instagram.com/${parsed.username || username}/`,
+      username: profile.username,
+      displayName: profile.displayName,
+      bio: profile.bio,
+      avatarUrl: profile.avatarUrl || null,
+      followers: profile.followers,
+      following: profile.following,
+      posts: profile.posts,
+      profileUrl: `https://www.instagram.com/${profile.username}/`,
       tier,
       followRatio,
       postsPerMonth: Math.round(postsPerMonth * 10) / 10,

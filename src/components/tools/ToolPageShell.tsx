@@ -96,13 +96,12 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
       <section className="py-4">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AllToolsNav activeSlug={slug} variant="compact" className="mb-6" />
-          <div className="grid gap-8 lg:grid-cols-[220px_1fr_280px]">
+          <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
             <AllToolsNav activeSlug={slug} />
-            <div>
+            <div className="min-w-0">
               <ToolComponent />
               <AdPlaceholder placement="after-tool-mobile" />
               <AdPlaceholder placement="between-content" className="hidden md:block" />
-              <ToolRecommendations currentSlug={slug} layout="grid" limit={8} />
               <ToolSeoContent tool={tool} />
               <AdPlaceholder placement="between-content" className="hidden md:block" />
               <ConsultingCTA className="mt-12" />
@@ -117,12 +116,7 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
                   </Link>
                 </div>
               )}
-            </div>
-            <div className="hidden lg:block lg:sticky lg:top-24 lg:self-start">
-              <div className="space-y-6">
-                <ToolRecommendations currentSlug={slug} limit={6} />
-                <AdPlaceholder placement="sidebar" />
-              </div>
+              <ToolRecommendations currentSlug={slug} layout="grid" limit={8} />
             </div>
           </div>
         </div>

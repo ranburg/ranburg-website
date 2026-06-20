@@ -1,5 +1,11 @@
 import ToolCard from "@/components/tools/ToolCard";
 import { POPULAR_TOOL_SLUGS } from "@/lib/toolsHubConfig";
+import { HERO_TOOL_SLUGS } from "@/lib/toolPopularity";
+
+const displaySlugs = [
+  ...HERO_TOOL_SLUGS,
+  ...POPULAR_TOOL_SLUGS.filter((s) => !HERO_TOOL_SLUGS.includes(s)),
+].slice(0, 6);
 
 export default function PopularTools() {
   return (
@@ -10,11 +16,11 @@ export default function PopularTools() {
             Popular <span className="text-gradient-accent">Tools</span>
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-theme-muted">
-            Most-used free utilities — calculators, formatters, and generators trusted by thousands.
+            YouTube & Instagram analytics lead the pack — plus calculators, formatters, and generators.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {POPULAR_TOOL_SLUGS.slice(0, 6).map((slug) => (
+          {displaySlugs.map((slug) => (
             <ToolCard key={slug} slug={slug} />
           ))}
         </div>

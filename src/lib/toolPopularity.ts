@@ -1,5 +1,13 @@
 import { TOOLS_CONFIG } from "./toolsConfig";
 
+/** Hero social analytics tools — pinned in nav and featured on hub/homepage */
+export const HERO_TOOL_SLUGS = [
+  "youtube-channel-insights",
+  "instagram-profile-insights",
+  "youtube-revenue-calculator",
+  "instagram-revenue-calculator",
+];
+
 /**
  * Tools ordered by expected organic traffic (highest first).
  * High-volume searches: passwords, QR, JSON, social/revenue calculators, GST, EMI, currency.
