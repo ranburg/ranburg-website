@@ -8,13 +8,26 @@ export interface BlogFaq {
   answer: string;
 }
 
+export type BlogCategoryId =
+  | "seo"
+  | "development"
+  | "business-productivity"
+  | "ai-tools"
+  | "salesforce"
+  | "creators"
+  | "monetization"
+  | "calculators"
+  | "generators"
+  | "digital-marketing"
+  | "small-business";
+
 export interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
   date: string;
   readTime: string;
-  category?: "seo" | "development" | "business-productivity" | "ai-tools" | "salesforce";
+  category?: BlogCategoryId;
   seo: {
     title: string;
     description: string;

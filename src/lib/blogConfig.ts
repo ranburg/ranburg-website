@@ -1,5 +1,6 @@
 import { AI_BLOG_POSTS } from "./blogConfigAi";
 import { EXTRA_SALESFORCE_BLOG_POSTS } from "./blogConfigSalesforceExtra";
+import { SEO_CLUSTER_BLOG_POSTS } from "./blogConfigSeoClusters";
 import type { BlogPost } from "./blogTypes";
 
 export type { BlogPost, BlogSection, BlogFaq } from "./blogTypes";
@@ -1017,6 +1018,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   ...EXTRA_SALESFORCE_BLOG_POSTS,
   ...AI_BLOG_POSTS,
+  ...SEO_CLUSTER_BLOG_POSTS,
 ];
 
 export function getBlogBySlug(slug: string): BlogPost | undefined {
