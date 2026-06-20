@@ -53,6 +53,7 @@ function RelatedToolCard({ tool, compact }: { tool: ToolConfig; compact?: boolea
   return (
     <Link
       href={`/tools/${tool.slug}`}
+      prefetch
       className="glass-card group flex items-center gap-4 p-4 transition-all hover:border-accent/30"
     >
       <div className={`flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${tool.gradient} ${compact ? "h-10 w-10" : "h-11 w-11"}`}>

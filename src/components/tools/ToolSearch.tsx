@@ -1,11 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Search, X } from "lucide-react";
-import { searchTools } from "@/lib/toolSearch";
+import { searchToolsDetailed } from "@/lib/toolSearch";
 import { getToolIcon } from "@/lib/toolIcons";
 import { SEARCH_SUGGESTIONS, SEARCH_TAGS } from "@/lib/toolsHubConfig";
+import { getRecentSearches, getPopularSearches, trackSearch } from "@/lib/toolAnalytics";
+import { TOOL_CATEGORIES, type ToolCategoryId } from "@/lib/toolsConfig";
 import { cn } from "@/lib/utils";
 
 interface ToolSearchProps {
@@ -19,6 +21,27 @@ interface ToolSearchProps {
   showSuggestions?: boolean;
   showTags?: boolean;
   compact?: boolean;
+  enableKeyboardNav?: boolean;
+  trackSearches?: boolean;
+  showCategoryFilter?: boolean;
+}
+
+function HighlightText({ text, query }: { text: string; query: string }) {
+  if (!query.trim()) return <>{text}</>;
+  const parts = text.split(new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi"));
+  return (
+    <>
+      {parts.map((part, i) =>
+        part.toLowerCase() === query.toLowerCase() ? (
+          <mark key={i} className="rounded bg-accent/20 px-0.5 text-accent">
+            {part}
+          </mark>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  );
 }
 
 export default function ToolSearch({
@@ -32,18 +55,93 @@ export default function ToolSearch({
   showSuggestions = false,
   showTags = false,
   compact = false,
+  enableKeyboardNav = false,
+  trackSearches = false,
+  showCategoryFilter = false,
 }: ToolSearchProps) {
   const [internalQuery, setInternalQuery] = useState("");
+  const [category, setCategory] = useState<ToolCategoryId | "all">("all");
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [popularSearches, setPopularSearches] = useState<string[]>([]);
+  const listRef = useRef<HTMLUListElement>(null);
+
   const query = value !== undefined ? value : internalQuery;
   const setQuery = (q: string) => {
     if (onQueryChange) onQueryChange(q);
     else setInternalQuery(q);
+    setActiveIndex(0);
   };
-  const results = useMemo(() => searchTools(query).slice(0, maxResults), [query, maxResults]);
+
+  useEffect(() => {
+    setRecentSearches(getRecentSearches(5));
+    setPopularSearches(getPopularSearches());
+  }, [query]);
+
+  const results = useMemo(
+    () => searchToolsDetailed(query, category).slice(0, maxResults),
+    [query, category, maxResults]
+  );
   const hasQuery = query.trim().length > 0;
+
+  const selectResult = useCallback(
+    (href: string) => {
+      if (trackSearches && query.trim()) trackSearch(query);
+      setQuery("");
+      onResultClick?.();
+    },
+    [query, trackSearches, onResultClick]
+  );
+
+  useEffect(() => {
+    if (!enableKeyboardNav || !hasQuery) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setActiveIndex((i) => Math.min(i + 1, results.length - 1));
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(i - 1, 0));
+      } else if (e.key === "Enter" && results[activeIndex]) {
+        e.preventDefault();
+        window.location.href = `/tools/${results[activeIndex].tool.slug}`;
+        selectResult(`/tools/${results[activeIndex].tool.slug}`);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [enableKeyboardNav, hasQuery, results, activeIndex, selectResult]);
 
   return (
     <div className={cn("relative", className)}>
+      {showCategoryFilter && (
+        <div className="mb-2 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setCategory("all")}
+            className={cn(
+              "rounded-full px-3 py-1 text-xs font-medium transition-colors",
+              category === "all" ? "bg-accent text-white" : "border border-theme-subtle text-theme-muted hover:text-accent"
+            )}
+          >
+            All
+          </button>
+          {TOOL_CATEGORIES.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => setCategory(cat.id)}
+              className={cn(
+                "rounded-full px-3 py-1 text-xs font-medium transition-colors",
+                category === cat.id ? "bg-accent text-white" : "border border-theme-subtle text-theme-muted hover:text-accent"
+              )}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {showTags && !hasQuery && (
         <div className="mb-3 flex flex-wrap gap-2">
           {SEARCH_TAGS.map((tag) => (
@@ -71,6 +169,9 @@ export default function ToolSearch({
             compact ? "py-2 pl-9 pr-9" : "py-2.5 pl-10 pr-10"
           )}
           aria-label="Search tools"
+          aria-autocomplete="list"
+          role="combobox"
+          aria-expanded={showResults && hasQuery}
         />
         {hasQuery && (
           <button
@@ -84,35 +185,54 @@ export default function ToolSearch({
         )}
       </div>
 
+      {!hasQuery && recentSearches.length > 0 && (
+        <p className="mt-2 text-xs text-theme-subtle">
+          Recent:{" "}
+          {recentSearches.map((s, i) => (
+            <button key={s} type="button" onClick={() => setQuery(s)} className="text-theme-muted hover:text-accent">
+              {s}{i < recentSearches.length - 1 ? " · " : ""}
+            </button>
+          ))}
+        </p>
+      )}
+
       {showSuggestions && !hasQuery && (
         <p className="mt-2 text-xs text-theme-subtle">
-          Try: {SEARCH_SUGGESTIONS.join(" · ")}
+          Popular: {popularSearches.slice(0, 6).join(" · ")}
         </p>
       )}
 
       {showResults && hasQuery && (
-        <ul className="absolute left-0 right-0 top-full z-50 mt-2 max-h-72 overflow-y-auto rounded-xl border border-theme-subtle bg-[var(--dropdown-bg)] p-2 shadow-xl">
+        <ul ref={listRef} className="absolute left-0 right-0 top-full z-50 mt-2 max-h-72 overflow-y-auto rounded-xl border border-theme-subtle bg-[var(--dropdown-bg)] p-2 shadow-xl" role="listbox">
           {results.length === 0 ? (
             <li className="px-3 py-4 text-center text-sm text-theme-muted">No tools found. Try another keyword.</li>
           ) : (
-            results.map((tool) => {
+            results.map(({ tool }, i) => {
               const Icon = getToolIcon(tool.icon);
               return (
-                <li key={tool.slug}>
+                <li key={tool.slug} role="option" aria-selected={i === activeIndex}>
                   <Link
                     href={`/tools/${tool.slug}`}
                     onClick={() => {
+                      if (trackSearches) trackSearch(query);
                       setQuery("");
                       onResultClick?.();
                     }}
-                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-theme-surface"
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors",
+                      i === activeIndex ? "bg-accent/10" : "hover:bg-theme-surface"
+                    )}
                   >
                     <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.gradient}`}>
                       <Icon className="h-4 w-4 text-white" />
                     </div>
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-medium text-theme-heading">{tool.title}</p>
-                      <p className="truncate text-xs text-theme-subtle">{tool.shortDescription}</p>
+                      <p className="truncate text-sm font-medium text-theme-heading">
+                        <HighlightText text={tool.title} query={query} />
+                      </p>
+                      <p className="truncate text-xs text-theme-subtle">
+                        <HighlightText text={tool.shortDescription} query={query} />
+                      </p>
                     </div>
                   </Link>
                 </li>

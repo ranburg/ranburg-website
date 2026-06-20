@@ -13,6 +13,9 @@ import ConsultingCTA from "@/components/ui/ConsultingCTA";
 import ToolRecommendations from "@/components/tools/ToolRecommendations";
 import ToolSeoContent from "@/components/tools/ToolSeoContent";
 import AllToolsNav from "@/components/tools/AllToolsNav";
+import ToolViewTracker from "@/components/tools/ToolViewTracker";
+import RecentlyViewed from "@/components/tools/RecentlyViewed";
+import ToolInternalLinks from "@/components/tools/ToolInternalLinks";
 import { TOOL_COMPONENTS } from "@/components/tools/registry";
 
 const SALESFORCE_SERVICE_LINKS: Record<string, { href: string; label: string }> = {
@@ -68,6 +71,7 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
 
   return (
     <div className="pb-24">
+      <ToolViewTracker slug={slug} />
       <JsonLd data={schema} />
       <section className="py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -78,7 +82,7 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
             </div>
             <div>
               {category && (
-                <Link href={hubCrumb.href} className="text-xs font-semibold uppercase tracking-wider text-accent hover:underline">
+                <Link href={hubCrumb.href} prefetch className="text-xs font-semibold uppercase tracking-wider text-accent hover:underline">
                   {seoCategory?.label ?? category.label}
                 </Link>
               )}
@@ -97,7 +101,12 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AllToolsNav activeSlug={slug} variant="compact" className="mb-6" />
           <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
-            <AllToolsNav activeSlug={slug} />
+            <div className="hidden lg:block">
+              <AllToolsNav activeSlug={slug} />
+              <div className="mt-6">
+                <AdPlaceholder placement="sidebar" />
+              </div>
+            </div>
             <div className="min-w-0">
               <ToolComponent />
               <AdPlaceholder placement="after-tool-mobile" />
@@ -111,12 +120,14 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
                   <p className="mt-2 text-sm text-theme-muted">
                     Ranburg LLP consultants build production OmniStudio, Revenue Cloud, and LWC solutions.
                   </p>
-                  <Link href={serviceLink.href} className="mt-4 inline-flex text-sm font-medium text-accent hover:underline">
+                  <Link href={serviceLink.href} prefetch className="mt-4 inline-flex text-sm font-medium text-accent hover:underline">
                     {serviceLink.label} →
                   </Link>
                 </div>
               )}
+              <ToolInternalLinks slug={slug} />
               <ToolRecommendations currentSlug={slug} layout="grid" limit={8} />
+              <RecentlyViewed excludeSlug={slug} />
             </div>
           </div>
         </div>

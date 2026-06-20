@@ -23,6 +23,8 @@ export const TOOL_POPULARITY_ORDER: string[] = [
   "adsense-revenue-calculator",
   "currency-converter",
   "gst-calculator",
+  "invoice-generator",
+  "loan-foreclosure-calculator",
   "emi",
   "sip",
   "regex-tester",

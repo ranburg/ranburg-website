@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { TOOL_SLUG_REDIRECTS } from "./src/lib/salesforceToolsHub";
+import { getCategoryAliasRedirects } from "./src/lib/categoryAliases";
 
 const toolRedirects = Object.entries(TOOL_SLUG_REDIRECTS).map(([source, destination]) => ({
   source: `/tools/${source}`,
@@ -17,7 +18,7 @@ const nextConfig: NextConfig = {
   },
   poweredByHeader: false,
   async redirects() {
-    return toolRedirects;
+    return [...toolRedirects, ...getCategoryAliasRedirects()];
   },
 };
 

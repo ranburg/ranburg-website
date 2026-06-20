@@ -22,6 +22,8 @@ import UnitConverter from "./UnitConverter";
 import AgeCalculator from "./AgeCalculator";
 import CurrencyConverter from "./CurrencyConverter";
 import GSTCalculator from "./GSTCalculator";
+import InvoiceGenerator from "./InvoiceGenerator";
+import LoanForeclosureCalculator from "./LoanForeclosureCalculator";
 import YouTubeChannelInsights from "./YouTubeChannelInsights";
 import InstagramProfileInsights from "./InstagramProfileInsights";
 import YouTubeRevenueCalculator from "./YouTubeRevenueCalculator";
@@ -62,6 +64,8 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "age-calculator": AgeCalculator,
   "currency-converter": CurrencyConverter,
   "gst-calculator": GSTCalculator,
+  "invoice-generator": InvoiceGenerator,
+  "loan-foreclosure-calculator": LoanForeclosureCalculator,
   "youtube-channel-insights": YouTubeChannelInsights,
   "instagram-profile-insights": InstagramProfileInsights,
   "youtube-revenue-calculator": YouTubeRevenueCalculator,

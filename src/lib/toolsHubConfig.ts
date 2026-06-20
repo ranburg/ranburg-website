@@ -3,9 +3,9 @@ export const FEATURED_TOOL_SLUGS = [
   "youtube-revenue-calculator",
   "password-generator",
   "qr-generator",
-  "adsense-revenue-calculator",
-  "currency-converter",
+  "invoice-generator",
   "gst-calculator",
+  "currency-converter",
 ];
 
 export const POPULAR_TOOL_SLUGS = [
@@ -19,6 +19,8 @@ export const POPULAR_TOOL_SLUGS = [
   "adsense-revenue-calculator",
   "currency-converter",
   "gst-calculator",
+  "invoice-generator",
+  "loan-foreclosure-calculator",
   "emi",
   "sip",
   "regex-tester",
@@ -27,6 +29,8 @@ export const POPULAR_TOOL_SLUGS = [
 ];
 
 export const RECENT_TOOL_SLUGS = [
+  "invoice-generator",
+  "loan-foreclosure-calculator",
   "youtube-revenue-calculator",
   "instagram-revenue-calculator",
   "adsense-revenue-calculator",
@@ -51,7 +55,9 @@ export const SEARCH_SUGGESTIONS = [
   "Password",
   "QR Code",
   "GST",
-  "Currency",
+  "Invoice",
+  "Foreclosure",
+  "EMI",
   "Calculator",
   "PDF",
   "Social",

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import type { ToolConfig } from "@/lib/toolsConfig";
 import { generateToolSeoSections } from "@/lib/toolSeoGenerator";
+import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 interface ToolSeoContentProps {
   tool: ToolConfig;
@@ -40,6 +41,17 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold text-theme-heading">Examples</h2>
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-theme-muted">
+          {seo.examples.map((ex) => (
+            <li key={ex} className="leading-relaxed">
+              {ex}
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section>
@@ -113,6 +125,8 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
           ))}
         </div>
       </section>
+
+      <AdPlaceholder placement="after-faq" />
     </article>
   );
 }

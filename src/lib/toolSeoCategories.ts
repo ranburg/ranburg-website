@@ -50,6 +50,8 @@ export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {
   "age-calculator": ["calculators"],
   "currency-converter": ["calculators", "business"],
   "gst-calculator": ["calculators", "business"],
+  "invoice-generator": ["calculators", "business"],
+  "loan-foreclosure-calculator": ["calculators", "business"],
   "youtube-channel-insights": ["business", "seo"],
   "instagram-profile-insights": ["business", "seo"],
   "youtube-revenue-calculator": ["calculators", "business", "seo"],

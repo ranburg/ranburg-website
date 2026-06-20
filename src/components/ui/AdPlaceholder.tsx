@@ -5,7 +5,8 @@ type AdPlacement =
   | "sidebar"
   | "between-content"
   | "after-tool-mobile"
-  | "between-sections";
+  | "between-sections"
+  | "after-faq";
 
 interface AdPlaceholderProps {
   placement: AdPlacement;
@@ -18,6 +19,7 @@ const LABELS: Record<AdPlacement, string> = {
   "between-content": "Advertisement",
   "after-tool-mobile": "Advertisement",
   "between-sections": "Advertisement",
+  "after-faq": "Advertisement",
 };
 
 export default function AdPlaceholder({ placement, className }: AdPlaceholderProps) {
@@ -33,6 +35,7 @@ export default function AdPlaceholder({ placement, className }: AdPlaceholderPro
         placement === "between-content" && "min-h-[120px] w-full my-8",
         placement === "after-tool-mobile" && "min-h-[100px] w-full lg:hidden my-8",
         placement === "between-sections" && "min-h-[90px] w-full my-12",
+        placement === "after-faq" && "min-h-[120px] w-full my-8",
         className
       )}
     >
