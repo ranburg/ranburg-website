@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import Hero from "@/components/home/Hero";
+import SocialToolsSpotlight from "@/components/home/SocialToolsSpotlight";
 import PopularTools from "@/components/home/PopularTools";
-import SocialHeroTools from "@/components/tools/SocialHeroTools";
 import RecentlyAddedTools from "@/components/home/RecentlyAddedTools";
 import ToolCategoryCards from "@/components/home/ToolCategoryCards";
 import CaseStudiesPreview from "@/components/home/CaseStudiesPreview";
@@ -11,17 +11,17 @@ import ConsultingCTA from "@/components/ui/ConsultingCTA";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Free Online Tools — Developers, SEO, Calculators & Business | Ranburg.com",
+  title: "Free YouTube & Instagram Analytics — Channel Stats & Revenue Tools | Ranburg.com",
   description:
-    "Free online tools for developers, businesses, and SEO professionals. Calculators, converters, formatters, generators, and Salesforce utilities — fast, free, no signup.",
+    "Free YouTube channel analytics and Instagram profile analyzer. Check subscribers, followers, revenue estimates, monetization status, and growth tips. Plus 38+ developer and business tools.",
   path: "/",
   keywords: [
+    "YouTube channel analytics",
+    "Instagram profile analyzer",
+    "YouTube revenue calculator",
+    "Instagram earnings estimator",
     "free online tools",
-    "developer tools",
-    "SEO tools",
-    "calculator online",
-    "business tools",
-    "free utilities",
+    "creator tools",
   ],
 });
 
@@ -29,13 +29,9 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <section className="py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SocialHeroTools />
-        </div>
-      </section>
-      <PopularTools />
+      <SocialToolsSpotlight />
       <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
+      <PopularTools />
       <RecentlyAddedTools />
       <ToolCategoryCards />
       <CaseStudiesPreview />
