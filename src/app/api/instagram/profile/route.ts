@@ -2,15 +2,13 @@ import { NextResponse } from "next/server";
 import {
   buildInstagramGrowthSeries,
   estimateInstagramRevenue,
-  fetchInstagramHtmlProfile,
-  fetchInstagramWebProfile,
   getCreatorTier,
   getInstagramRecommendations,
   normalizeInstagramUsername,
-  parseInstagramEmbeddedJson,
-  parseInstagramOgMeta,
 } from "@/lib/socialInsights";
+import { resolveInstagramProfile } from "@/lib/instagramProfileFetch";
 
+export const runtime = "nodejs";
 export const maxDuration = 30;
 
 export async function GET(request: Request) {
@@ -25,35 +23,13 @@ export async function GET(request: Request) {
   }
 
   try {
-    let profile = await fetchInstagramWebProfile(username);
-
-    if (!profile) {
-      const html = await fetchInstagramHtmlProfile(username);
-      if (html) {
-        profile =
-          parseInstagramEmbeddedJson(html, username) ??
-          (() => {
-            const parsed = parseInstagramOgMeta(html);
-            if (!parsed) return null;
-            return {
-              displayName: parsed.displayName || username,
-              username: parsed.username || username,
-              bio: parsed.bio,
-              followers: parsed.followers,
-              following: parsed.following,
-              posts: parsed.posts,
-              avatarUrl: parsed.avatarUrl,
-              isPrivate: false,
-            };
-          })();
-      }
-    }
+    const profile = await resolveInstagramProfile(username);
 
     if (!profile) {
       return NextResponse.json(
         {
           error:
-            "Could not fetch profile. Instagram may be blocking this request — try again in a minute, or verify the username is correct and public.",
+            "Could not fetch profile. Instagram is blocking server requests — try again shortly, or verify the username is public.",
         },
         { status: 404 }
       );

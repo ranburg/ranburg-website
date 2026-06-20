@@ -444,105 +444,26 @@ export interface InstagramProfileData {
   isPrivate: boolean;
 }
 
-const IG_WEB_APP_ID = "936619743392459";
-
-const IG_USER_AGENT =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
-
-function parseSetCookieHeaders(headers: Headers): Record<string, string> {
-  const cookies: Record<string, string> = {};
-  const setCookies =
-    typeof headers.getSetCookie === "function"
-      ? headers.getSetCookie()
-      : (headers.get("set-cookie")?.split(/,(?=\s*\w+=)/) ?? []);
-
-  for (const entry of setCookies) {
-    const [pair] = entry.split(";");
-    const eq = pair.indexOf("=");
-    if (eq > 0) {
-      cookies[pair.slice(0, eq).trim()] = pair.slice(eq + 1).trim();
-    }
-  }
-  return cookies;
-}
-
-function mergeCookies(...maps: Record<string, string>[]): string {
-  const merged: Record<string, string> = {};
-  for (const map of maps) Object.assign(merged, map);
-  return Object.entries(merged)
-    .map(([k, v]) => `${k}=${v}`)
-    .join("; ");
-}
-
-async function bootstrapInstagramSession(username: string): Promise<{
-  cookieHeader: string;
-  csrfToken: string;
-}> {
-  const baseHeaders = {
-    "User-Agent": IG_USER_AGENT,
-    Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "none",
-    "Sec-Fetch-User": "?1",
-    "Upgrade-Insecure-Requests": "1",
-  };
-
-  const homeRes = await fetch("https://www.instagram.com/", {
-    headers: baseHeaders,
-    cache: "no-store",
-    redirect: "follow",
-  });
-  const homeCookies = parseSetCookieHeaders(homeRes.headers);
-
-  const profileRes = await fetch(`https://www.instagram.com/${username}/`, {
-    headers: {
-      ...baseHeaders,
-      Referer: "https://www.instagram.com/",
-      Cookie: mergeCookies(homeCookies),
-      "Sec-Fetch-Site": "same-origin",
-    },
-    cache: "no-store",
-    redirect: "follow",
-  });
-  const profileCookies = parseSetCookieHeaders(profileRes.headers);
-  const allCookies = { ...homeCookies, ...profileCookies };
-  const csrfToken = allCookies.csrftoken ?? "";
-
-  return {
-    cookieHeader: mergeCookies(allCookies),
-    csrfToken,
-  };
-}
-
-function apiHeaders(username: string, cookieHeader: string, csrfToken: string): HeadersInit {
-  return {
-    "User-Agent": IG_USER_AGENT,
-    Accept: "*/*",
-    "Accept-Language": "en-US,en;q=0.9",
-    "X-IG-App-ID": IG_WEB_APP_ID,
-    "X-Requested-With": "XMLHttpRequest",
-    "X-ASBD-ID": "129477",
-    "X-IG-WWW-Claim": "0",
-    Referer: `https://www.instagram.com/${username}/`,
-    Origin: "https://www.instagram.com",
-    "Sec-Fetch-Dest": "empty",
-    "Sec-Fetch-Mode": "cors",
-    "Sec-Fetch-Site": "same-origin",
-    ...(cookieHeader ? { Cookie: cookieHeader } : {}),
-    ...(csrfToken ? { "X-CSRFToken": csrfToken } : {}),
-  };
-}
-
 export function parseInstagramWebProfile(json: unknown, fallbackUsername: string): InstagramProfileData | null {
-  const user = (json as { data?: { user?: Record<string, unknown> } })?.data?.user;
+  const root = json as { status?: string; data?: { user?: Record<string, unknown> } };
+  if (root.status === "fail") return null;
+
+  const user = root.data?.user;
   if (!user) return null;
 
   const isPrivate = Boolean(user.is_private);
-  const followers = (user.edge_followed_by as { count?: number })?.count ?? 0;
-  const following = (user.edge_follow as { count?: number })?.count ?? 0;
-  const posts = (user.edge_owner_to_timeline_media as { count?: number })?.count ?? 0;
+  const followers =
+    (user.edge_followed_by as { count?: number })?.count ??
+    (user.follower_count as number) ??
+    0;
+  const following =
+    (user.edge_follow as { count?: number })?.count ??
+    (user.following_count as number) ??
+    0;
+  const posts =
+    (user.edge_owner_to_timeline_media as { count?: number })?.count ??
+    (user.media_count as number) ??
+    0;
 
   return {
     displayName: (user.full_name as string) || fallbackUsername,
@@ -627,61 +548,6 @@ export function parseInstagramEmbeddedJson(
   }
 
   return null;
-}
-
-async function requestInstagramApi(
-  username: string,
-  cookieHeader: string,
-  csrfToken: string
-): Promise<InstagramProfileData | null> {
-  const urls = [
-    `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`,
-    `https://i.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`,
-  ];
-
-  for (const url of urls) {
-    const res = await fetch(url, {
-      headers: apiHeaders(username, cookieHeader, csrfToken),
-      cache: "no-store",
-    });
-    if (!res.ok) continue;
-    try {
-      const json = await res.json();
-      const profile = parseInstagramWebProfile(json, username);
-      if (profile) return profile;
-    } catch {
-      continue;
-    }
-  }
-  return null;
-}
-
-export async function fetchInstagramWebProfile(username: string): Promise<InstagramProfileData | null> {
-  const session = await bootstrapInstagramSession(username);
-  const withSession = await requestInstagramApi(username, session.cookieHeader, session.csrfToken);
-  if (withSession) return withSession;
-
-  // Retry without session for environments where bare requests still work
-  return requestInstagramApi(username, "", "");
-}
-
-export async function fetchInstagramHtmlProfile(username: string): Promise<string | null> {
-  const session = await bootstrapInstagramSession(username);
-  const res = await fetch(`https://www.instagram.com/${username}/`, {
-    headers: {
-      "User-Agent": IG_USER_AGENT,
-      Accept: "text/html,application/xhtml+xml",
-      "Accept-Language": "en-US,en;q=0.9",
-      Referer: "https://www.instagram.com/",
-      Cookie: session.cookieHeader,
-      "Sec-Fetch-Dest": "document",
-      "Sec-Fetch-Mode": "navigate",
-      "Sec-Fetch-Site": "same-origin",
-    },
-    cache: "no-store",
-  });
-  if (!res.ok) return null;
-  return res.text();
 }
 
 export function parseInstagramOgMeta(html: string): {

@@ -10,6 +10,7 @@ const toolRedirects = Object.entries(TOOL_SLUG_REDIRECTS).map(([source, destinat
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
+  serverExternalPackages: ["got-scraping"],
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30,

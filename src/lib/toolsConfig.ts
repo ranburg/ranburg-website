@@ -768,7 +768,7 @@ export const TOOLS_CONFIG: ToolConfig[] = [
       "Public stats parsed from Instagram profile metadata. Revenue estimates based on creator tier, follower count, and typical sponsorship rates.",
     faq: [
       { question: "Does this work for private accounts?", answer: "No. Only public Instagram profiles with visible stats can be analyzed." },
-      { question: "Why did analysis fail?", answer: "Instagram may block automated requests, or the username may be incorrect. Private and restricted accounts are not supported." },
+      { question: "Why did analysis fail?", answer: "Instagram aggressively blocks datacenter IPs. We use browser-impersonated requests; if it still fails, wait a minute and retry. Private accounts are not supported." },
       { question: "Can I estimate Instagram earnings?", answer: "Yes. The tool shows sponsorship and affiliate revenue ranges based on follower tier and posting frequency." },
       { question: "How accurate are the stats?", answer: "Stats reflect publicly visible follower and post counts at the time of the request." },
       { question: "Do you store usernames?", answer: "No. Queries are processed on demand and not stored on our servers." },
