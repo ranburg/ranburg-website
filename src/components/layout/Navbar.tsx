@@ -58,7 +58,7 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50">
       <nav
         className={cn(
-          "border-b transition-all duration-300",
+          "overflow-visible border-b transition-all duration-300",
           scrolled
             ? "border-theme-subtle bg-[var(--background)]/95 shadow-lg shadow-black/5 backdrop-blur-md"
             : "glass border-theme-subtle"
