@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
-import { BLOG_POSTS, getBlogBySlug } from "@/lib/blogConfig";
+import { BLOG_POSTS, getBlogBySlug, getFeaturedToolSlug } from "@/lib/blogConfig";
 import { getRelatedBlogPosts } from "@/lib/blogCategories";
 import { inferBlogCategory, BLOG_CATEGORIES } from "@/lib/blogCategories";
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
@@ -12,6 +12,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Button from "@/components/ui/Button";
 import BlogFaq from "@/components/blog/BlogFaq";
+import BlogFeaturedTool from "@/components/blog/BlogFeaturedTool";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -41,6 +42,8 @@ export default async function BlogPostPage({ params }: PageProps) {
   const url = `${SITE.url}/blog/${slug}`;
   const relatedServices = SERVICES_CONFIG.filter((s) => post.relatedServices.includes(s.slug));
   const relatedTools = TOOLS_CONFIG.filter((t) => post.relatedTools.includes(t.slug));
+  const featuredToolSlug = getFeaturedToolSlug(post);
+  const featuredTool = featuredToolSlug ? TOOLS_CONFIG.find((t) => t.slug === featuredToolSlug) : undefined;
   const relatedPosts = getRelatedBlogPosts(slug, 3);
   const categoryLabel = BLOG_CATEGORIES.find((c) => c.id === inferBlogCategory(post))?.label;
 
@@ -77,6 +80,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               <span className="flex items-center gap-1"><Calendar className="h-4 w-4" />{post.date}</span>
               <span className="flex items-center gap-1"><Clock className="h-4 w-4" />{post.readTime} read</span>
             </div>
+            {featuredTool && <BlogFeaturedTool tool={featuredTool} />}
             <div className="mt-10 space-y-4">
               {post.sections.map((section, i) => {
                 if (section.type === "h2") return <h2 key={i} className="pt-6 text-2xl font-bold text-theme-heading">{section.text}</h2>;

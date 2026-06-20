@@ -2,6 +2,7 @@ import { TOOL_SEO_CATEGORY_MAP } from "./toolSeoCategories";
 import { TOOLS_CONFIG, getToolBySlug, type ToolConfig } from "./toolsConfig";
 import { getToolsByMetric } from "./toolAnalytics";
 import { TOOL_POPULARITY_ORDER } from "./toolPopularity";
+import { getExplicitRelatedSlugs } from "./toolRelatedLinks";
 
 function keywordOverlap(a: ToolConfig, b: ToolConfig): number {
   const kwA = new Set([...a.title.toLowerCase().split(/\s+/), ...(a.seo.keywords ?? []).map((k) => k.toLowerCase())]);
@@ -28,6 +29,15 @@ export function getRecommendedTools(currentSlug: string, limit = 8): ToolConfig[
 
   const result: ToolConfig[] = [];
   const seen = new Set<string>([currentSlug]);
+
+  for (const slug of getExplicitRelatedSlugs(currentSlug)) {
+    if (result.length >= limit) break;
+    const t = getToolBySlug(slug);
+    if (t && !seen.has(slug)) {
+      result.push(t);
+      seen.add(slug);
+    }
+  }
 
   const sameCategory = TOOLS_CONFIG.filter(
     (t) => t.category === current.category && !seen.has(t.slug)

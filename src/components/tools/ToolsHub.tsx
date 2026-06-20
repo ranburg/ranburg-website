@@ -5,7 +5,7 @@ import { useState } from "react";
 import { TOOLS_CONFIG, getToolBySlug } from "@/lib/toolsConfig";
 import { COMING_SOON_TOOLS } from "@/lib/toolComingSoonConfig";
 import { FEATURED_TOOL_SLUGS, POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
-import { SEO_CATEGORY_HUBS } from "@/lib/toolSeoCategories";
+import { SEO_CATEGORY_HUBS, PRIMARY_CATEGORY_SLUGS, getToolsForSeoCategory } from "@/lib/toolSeoCategories";
 import { getToolIcon } from "@/lib/toolIcons";
 import { searchTools } from "@/lib/toolSearch";
 import ToolSearch from "@/components/tools/ToolSearch";
@@ -80,8 +80,11 @@ export default function ToolsHub() {
 
           <section>
             <h2 className="text-2xl font-bold text-theme-heading">Browse by Category</h2>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {SEO_CATEGORY_HUBS.map((cat) => {
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {PRIMARY_CATEGORY_SLUGS.map((slug) => {
+                const cat = SEO_CATEGORY_HUBS.find((c) => c.slug === slug);
+                if (!cat) return null;
+                const count = getToolsForSeoCategory(slug).length;
                 const Icon = getToolIcon(cat.icon);
                 return (
                   <Link
@@ -94,7 +97,7 @@ export default function ToolsHub() {
                     </div>
                     <div>
                       <p className="font-semibold text-theme-heading">{cat.label}</p>
-                      <p className="text-xs text-theme-subtle line-clamp-1">{cat.description}</p>
+                      <p className="text-xs text-theme-subtle">{count} tools</p>
                     </div>
                   </Link>
                 );

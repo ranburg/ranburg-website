@@ -10,9 +10,8 @@ import ToolsDropdown from "@/components/layout/ToolsDropdown";
 import CategoriesDropdown from "@/components/layout/CategoriesDropdown";
 import ServicesDropdown from "@/components/layout/ServicesDropdown";
 import ThemeToggle from "@/components/theme/ThemeToggle";
-import ToolSearch from "@/components/tools/ToolSearch";
 import { useCommandPaletteOptional } from "@/components/search/CommandPaletteProvider";
-import { SEO_CATEGORY_HUBS } from "@/lib/toolSeoCategories";
+import { SEO_CATEGORY_HUBS, PRIMARY_CATEGORY_SLUGS } from "@/lib/toolSeoCategories";
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { getServiceIcon } from "@/lib/serviceIcons";
 
@@ -99,8 +98,20 @@ export default function Navbar() {
             </Link>
           </div>
 
+          <div className="hidden items-center gap-2 lg:flex">
+            <button
+              type="button"
+              onClick={() => palette?.setOpen(true)}
+              className="flex items-center gap-2 rounded-xl border border-theme-subtle bg-theme-surface/50 px-3 py-2 text-sm text-theme-subtle transition-colors hover:border-accent/30 hover:text-theme-heading"
+              aria-label="Search tools and blogs"
+            >
+              <Search className="h-4 w-4 shrink-0" />
+              <span className="hidden xl:inline">Search tools & blogs</span>
+              <kbd className="ml-1 hidden rounded border border-theme-subtle px-1.5 py-0.5 text-xs xl:inline">⌘K</kbd>
+            </button>
+          </div>
+
           <div className="hidden items-center gap-3 md:flex">
-            <kbd className="hidden rounded border border-theme-subtle px-2 py-1 text-xs text-theme-subtle lg:inline">⌘K</kbd>
             <ThemeToggle />
             <Link
               href="/tools"
@@ -115,7 +126,7 @@ export default function Navbar() {
               type="button"
               onClick={openSearch}
               className="flex h-11 w-11 items-center justify-center rounded-lg text-theme-muted hover:bg-theme-surface hover:text-theme-heading"
-              aria-label="Search tools"
+              aria-label="Search tools and blogs"
             >
               <Search className="h-5 w-5" />
             </button>
@@ -141,12 +152,14 @@ export default function Navbar() {
               className="border-t border-theme-subtle bg-[var(--dropdown-bg)] lg:hidden"
             >
               <div className="px-4 py-3">
-                <ToolSearch
-                  compact
-                  onResultClick={() => setMobileOpen(false)}
-                  maxResults={6}
-                  trackSearches
-                />
+                <button
+                  type="button"
+                  onClick={openSearch}
+                  className="flex w-full items-center gap-3 rounded-xl border border-theme-subtle bg-theme-surface/50 px-4 py-3 text-left text-sm text-theme-subtle hover:border-accent/30 hover:text-theme-heading"
+                >
+                  <Search className="h-4 w-4 shrink-0" />
+                  Search tools & blogs…
+                </button>
               </div>
               <div className="max-h-[65vh] overflow-y-auto overscroll-contain">
                 <div className="flex flex-col gap-1 px-4 pb-4">
@@ -189,16 +202,20 @@ export default function Navbar() {
                   </button>
                   {mobileCategoriesOpen && (
                     <div className="ml-2 space-y-1 border-l border-theme-subtle pl-4">
-                      {SEO_CATEGORY_HUBS.map((cat) => (
-                        <Link
-                          key={cat.slug}
-                          href={`/tools/${cat.slug}`}
-                          onClick={() => setMobileOpen(false)}
-                          className="block rounded-lg px-3 py-2.5 text-sm text-theme-muted hover:text-theme-heading"
-                        >
-                          {cat.label}
-                        </Link>
-                      ))}
+                      {PRIMARY_CATEGORY_SLUGS.map((slug) => {
+                        const cat = SEO_CATEGORY_HUBS.find((c) => c.slug === slug);
+                        if (!cat) return null;
+                        return (
+                          <Link
+                            key={cat.slug}
+                            href={`/tools/${cat.slug}`}
+                            onClick={() => setMobileOpen(false)}
+                            className="block rounded-lg px-3 py-2.5 text-sm text-theme-muted hover:text-theme-heading"
+                          >
+                            {cat.label}
+                          </Link>
+                        );
+                      })}
                     </div>
                   )}
 

@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { BookOpen } from "lucide-react";
 import { getToolBySlug, getCategoryById } from "@/lib/toolsConfig";
+import { getBlogForTool } from "@/lib/blogConfig";
 import { getToolIcon } from "@/lib/toolIcons";
 import { getPrimarySeoCategoryForTool } from "@/lib/toolSeoCategories";
 import { generateToolSeoSections } from "@/lib/toolSeoGenerator";
@@ -16,7 +18,7 @@ import AllToolsNav from "@/components/tools/AllToolsNav";
 import ToolViewTracker from "@/components/tools/ToolViewTracker";
 import RecentlyViewed from "@/components/tools/RecentlyViewed";
 import ToolInternalLinks from "@/components/tools/ToolInternalLinks";
-import { TOOL_COMPONENTS } from "@/components/tools/registry";
+import ToolRenderer from "@/components/tools/ToolRenderer";
 
 const SALESFORCE_SERVICE_LINKS: Record<string, { href: string; label: string }> = {
   salesforce: { href: "/services/salesforce-development", label: "Salesforce Development Services" },
@@ -29,9 +31,6 @@ interface ToolPageProps {
 export default function ToolPageShell({ slug }: ToolPageProps) {
   const tool = getToolBySlug(slug);
   if (!tool) notFound();
-
-  const ToolComponent = TOOL_COMPONENTS[slug];
-  if (!ToolComponent) notFound();
 
   const Icon = getToolIcon(tool.icon);
   const category = getCategoryById(tool.category);
@@ -69,6 +68,8 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
       ? SALESFORCE_SERVICE_LINKS.salesforce
       : null;
 
+  const guideBlog = getBlogForTool(slug);
+
   return (
     <div className="pb-24">
       <ToolViewTracker slug={slug} />
@@ -88,6 +89,16 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
               )}
               <h1 className="mt-1 break-words text-2xl font-extrabold text-theme-heading sm:text-3xl lg:text-4xl">{tool.title}</h1>
               <p className="mt-3 max-w-2xl text-sm text-theme-muted sm:text-base">{tool.shortDescription}</p>
+              {guideBlog && (
+                <Link
+                  href={`/blog/${guideBlog.slug}`}
+                  prefetch
+                  className="mt-4 inline-flex items-center gap-2 rounded-lg border border-accent/25 bg-accent/5 px-3 py-2 text-sm font-medium text-accent hover:border-accent/40 hover:bg-accent/10"
+                >
+                  <BookOpen className="h-4 w-4 shrink-0" />
+                  Read the guide: {guideBlog.title}
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -108,7 +119,7 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
               </div>
             </div>
             <div className="min-w-0">
-              <ToolComponent />
+              <ToolRenderer slug={slug} />
               <AdPlaceholder placement="after-tool-mobile" />
               <AdPlaceholder placement="between-content" className="hidden md:block" />
               <ToolSeoContent tool={tool} />

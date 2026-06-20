@@ -9,6 +9,7 @@ import { getToolIcon } from "@/lib/toolIcons";
 import { SEARCH_SUGGESTIONS, SEARCH_TAGS } from "@/lib/toolsHubConfig";
 import { getRecentSearches, getPopularSearches, trackSearch } from "@/lib/toolAnalytics";
 import { TOOL_CATEGORIES, type ToolCategoryId } from "@/lib/toolsConfig";
+import type { SeoCategorySlug } from "@/lib/toolSeoCategories";
 import { cn } from "@/lib/utils";
 
 interface ToolSearchProps {
@@ -25,6 +26,7 @@ interface ToolSearchProps {
   enableKeyboardNav?: boolean;
   trackSearches?: boolean;
   showCategoryFilter?: boolean;
+  seoCategoryFilter?: SeoCategorySlug;
 }
 
 function HighlightText({ text, query }: { text: string; query: string }) {
@@ -59,6 +61,7 @@ export default function ToolSearch({
   enableKeyboardNav = false,
   trackSearches = false,
   showCategoryFilter = false,
+  seoCategoryFilter,
 }: ToolSearchProps) {
   const [internalQuery, setInternalQuery] = useState("");
   const [category, setCategory] = useState<ToolCategoryId | "all">("all");
@@ -83,8 +86,8 @@ export default function ToolSearch({
   }, [query]);
 
   const results = useMemo(
-    () => searchToolsDetailed(query, category).slice(0, maxResults),
-    [query, category, maxResults]
+    () => searchToolsDetailed(query, category, seoCategoryFilter).slice(0, maxResults),
+    [query, category, maxResults, seoCategoryFilter]
   );
   const hasQuery = query.trim().length > 0;
 

@@ -1,4 +1,5 @@
 import { SALESFORCE_TOOLS } from "./salesforceToolsData";
+import { EXTENDED_TOOLS } from "./extendedTools";
 
 export type ToolCategoryId = "financial" | "developer" | "productivity" | "design" | "salesforce";
 
@@ -927,6 +928,7 @@ export const TOOLS_CONFIG: ToolConfig[] = [
       { question: "Is the calculator free?", answer: "Yes. No signup required." },
     ],
   },
+  ...EXTENDED_TOOLS,
   ...SALESFORCE_TOOLS,
 ];
 

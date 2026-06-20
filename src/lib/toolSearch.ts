@@ -1,5 +1,5 @@
 import { TOOL_CATEGORIES, TOOLS_CONFIG, type ToolConfig, type ToolCategoryId } from "./toolsConfig";
-import { SEO_CATEGORY_HUBS, TOOL_SEO_CATEGORY_MAP } from "./toolSeoCategories";
+import { SEO_CATEGORY_HUBS, TOOL_SEO_CATEGORY_MAP, type SeoCategorySlug } from "./toolSeoCategories";
 
 export interface SearchMatch {
   tool: ToolConfig;
@@ -11,18 +11,25 @@ function tokenize(text: string): string[] {
   return text.toLowerCase().split(/\s+/).filter(Boolean);
 }
 
-export function searchTools(query: string, categoryFilter?: ToolCategoryId | "all"): ToolConfig[] {
-  return searchToolsDetailed(query, categoryFilter).map((m) => m.tool);
+export function searchTools(
+  query: string,
+  categoryFilter?: ToolCategoryId | "all",
+  seoCategoryFilter?: SeoCategorySlug
+): ToolConfig[] {
+  return searchToolsDetailed(query, categoryFilter, seoCategoryFilter).map((m) => m.tool);
 }
 
 export function searchToolsDetailed(
   query: string,
-  categoryFilter?: ToolCategoryId | "all"
+  categoryFilter?: ToolCategoryId | "all",
+  seoCategoryFilter?: SeoCategorySlug
 ): SearchMatch[] {
   const q = query.trim().toLowerCase();
   let pool = TOOLS_CONFIG;
 
-  if (categoryFilter && categoryFilter !== "all") {
+  if (seoCategoryFilter) {
+    pool = pool.filter((t) => TOOL_SEO_CATEGORY_MAP[t.slug]?.includes(seoCategoryFilter));
+  } else if (categoryFilter && categoryFilter !== "all") {
     pool = pool.filter((t) => t.category === categoryFilter);
   }
 

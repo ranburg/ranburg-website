@@ -37,4 +37,6 @@ export interface BlogPost {
   faq: BlogFaq[];
   relatedServices: string[];
   relatedTools: string[];
+  /** Primary tool this article promotes — shown as featured CTA */
+  featuredToolSlug?: string;
 }

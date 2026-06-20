@@ -40,7 +40,7 @@ import GovernorLimitsCalculator from "./salesforce/GovernorLimitsCalculator";
 import OmniStudioExpressionBuilder from "./salesforce/OmniStudioExpressionBuilder";
 import RevenueCloudPricingCalculator from "./salesforce/RevenueCloudPricingCalculator";
 
-export const TOOL_COMPONENTS: Record<string, ComponentType> = {
+export const BASE_TOOL_COMPONENTS: Record<string, ComponentType> = {
   sip: SIPCalculator,
   swp: SWPCalculator,
   emi: EMICalculator,
@@ -82,3 +82,6 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "omnistudio-expression-builder": OmniStudioExpressionBuilder,
   "revenue-cloud-pricing-calculator": RevenueCloudPricingCalculator,
 };
+
+/** @deprecated Use ToolRenderer for full catalog including lazy-loaded tools */
+export const TOOL_COMPONENTS = BASE_TOOL_COMPONENTS;

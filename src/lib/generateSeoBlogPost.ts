@@ -1,5 +1,6 @@
 import type { BlogPost, BlogSection, BlogFaq } from "./blogTypes";
 import type { SeoBlogTopic } from "./seoBlogTopics";
+import { getToolBySlug } from "./toolsConfig";
 
 function wordCount(text: string): number {
   return text.split(/\s+/).filter(Boolean).length;
@@ -17,11 +18,18 @@ function toolLabel(slug: string): string {
 
 export function generateSeoBlogPost(topic: SeoBlogTopic, dateIndex: number): BlogPost {
   const primaryTool = topic.tools[0];
+  const tool = getToolBySlug(primaryTool);
+  const toolTitle = tool?.title ?? toolLabel(primaryTool);
   const toolPath = `/tools/${primaryTool}`;
   const secondaryTools = topic.tools.slice(1);
   const toolNames = topic.tools.map(toolLabel).join(", ");
 
   const sections: BlogSection[] = [
+    { type: "h2", text: `Try the Free ${toolTitle}` },
+    {
+      type: "p",
+      text: `This article is built around Ranburg's ${toolTitle} — a free online tool at ranburg.com/tools/${primaryTool}. ${topic.excerpt} Jump to the tool anytime using the highlighted card at the top of this page.`,
+    },
     { type: "h2", text: `Understanding ${topic.keyword}` },
     {
       type: "p",
@@ -110,6 +118,7 @@ export function generateSeoBlogPost(topic: SeoBlogTopic, dateIndex: number): Blo
     date,
     readTime: readTimeFromSections(sections),
     category: topic.category,
+    featuredToolSlug: primaryTool,
     seo: {
       title: `${topic.title} | Ranburg.com`,
       description: topic.excerpt,

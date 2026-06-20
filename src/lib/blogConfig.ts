@@ -1,6 +1,7 @@
 import { AI_BLOG_POSTS } from "./blogConfigAi";
 import { EXTRA_SALESFORCE_BLOG_POSTS } from "./blogConfigSalesforceExtra";
 import { SEO_CLUSTER_BLOG_POSTS } from "./blogConfigSeoClusters";
+import { TOOL_GUIDE_BLOG_POSTS, buildToolToBlogMap } from "./blogConfigToolGuides";
 import type { BlogPost } from "./blogTypes";
 
 export type { BlogPost, BlogSection, BlogFaq } from "./blogTypes";
@@ -1019,7 +1020,20 @@ export const BLOG_POSTS: BlogPost[] = [
   ...EXTRA_SALESFORCE_BLOG_POSTS,
   ...AI_BLOG_POSTS,
   ...SEO_CLUSTER_BLOG_POSTS,
+  ...TOOL_GUIDE_BLOG_POSTS,
 ];
+
+const TOOL_TO_BLOG_MAP = buildToolToBlogMap(BLOG_POSTS);
+
+export function getBlogForTool(toolSlug: string): BlogPost | undefined {
+  const blogSlug = TOOL_TO_BLOG_MAP.get(toolSlug);
+  if (!blogSlug) return undefined;
+  return BLOG_POSTS.find((p) => p.slug === blogSlug);
+}
+
+export function getFeaturedToolSlug(post: BlogPost): string | undefined {
+  return post.featuredToolSlug ?? post.relatedTools[0];
+}
 
 export function getBlogBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((p) => p.slug === slug);

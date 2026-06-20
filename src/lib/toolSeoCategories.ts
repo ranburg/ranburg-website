@@ -3,9 +3,12 @@ import { TOOLS_CONFIG } from "./toolsConfig";
 
 export const SEO_CATEGORY_SLUGS = [
   "seo",
+  "image",
+  "pdf",
+  "social-media",
   "developer",
-  "text",
   "business",
+  "text",
   "calculators",
   "generators",
 ] as const;
@@ -25,8 +28,68 @@ export interface SeoCategoryHub {
   faq: { question: string; answer: string }[];
 }
 
+/** Primary nav category order (8 hubs) */
+export const PRIMARY_CATEGORY_SLUGS: SeoCategorySlug[] = [
+  "seo",
+  "image",
+  "pdf",
+  "social-media",
+  "developer",
+  "business",
+  "text",
+  "calculators",
+];
+
 /** Maps each tool slug to one or more SEO category hubs */
 export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {
+  "jpg-to-png": ["image"],
+  "png-to-jpg": ["image"],
+  "webp-to-png": ["image"],
+  "png-to-webp": ["image"],
+  "image-compressor": ["image"],
+  "image-resizer": ["image"],
+  "crop-image": ["image"],
+  "image-to-base64": ["image", "developer"],
+  "base64-to-image": ["image", "developer"],
+  "remove-exif": ["image"],
+  "heic-to-jpg": ["image"],
+  "svg-to-png": ["image"],
+  "image-converter": ["image", "developer"],
+
+  "pdf-merge": ["pdf", "business"],
+  "pdf-split": ["pdf", "business"],
+  "pdf-compressor": ["pdf", "business"],
+  "pdf-to-jpg": ["pdf", "image"],
+  "jpg-to-pdf": ["pdf", "image"],
+  "word-to-pdf": ["pdf", "business"],
+  "pdf-page-extractor": ["pdf", "business"],
+  "pdf-page-remover": ["pdf", "business"],
+  "pdf-tools": ["pdf", "business"],
+
+  "keyword-density-checker": ["seo", "text"],
+  "meta-tag-generator": ["seo"],
+  "robots-txt-generator": ["seo", "developer"],
+  "xml-sitemap-generator": ["seo", "developer"],
+  "open-graph-generator": ["seo", "social-media"],
+  "schema-markup-generator": ["seo", "developer"],
+  "url-encoder-decoder": ["seo", "developer", "text"],
+  "word-counter": ["seo", "text"],
+  "slug-generator": ["seo", "text"],
+
+  "youtube-tags-generator": ["social-media", "seo"],
+  "youtube-description-generator": ["social-media", "seo"],
+  "youtube-hashtag-generator": ["social-media", "seo"],
+  "instagram-hashtag-generator": ["social-media", "seo"],
+  "instagram-engagement-calculator": ["social-media", "calculators"],
+  "tiktok-engagement-calculator": ["social-media", "calculators"],
+  "tiktok-earnings-calculator": ["social-media", "calculators"],
+  "social-media-character-counter": ["social-media", "text"],
+
+  "profit-margin-calculator": ["business", "calculators"],
+  "roi-calculator": ["business", "calculators"],
+  "break-even-calculator": ["business", "calculators"],
+
+  "qr-code-generator": ["generators", "business"],
   "linkedin-formatter": ["seo", "text", "business"],
   "lorem-ipsum": ["seo", "text", "generators"],
   "case-converter": ["seo", "text"],
@@ -38,8 +101,6 @@ export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {
   "uuid-generator": ["developer", "generators"],
   "password-generator": ["developer", "generators"],
   "base64-encoder": ["developer", "text"],
-  "image-converter": ["developer"],
-  "pdf-tools": ["business"],
   "qr-generator": ["generators", "business"],
   "unit-converter": ["business", "calculators"],
   sip: ["calculators", "business"],
@@ -86,13 +147,82 @@ Bookmark your favorites and explore related developer and text tools to complete
     icon: "Search",
     gradient: "from-emerald-500 to-teal-500",
     keywords: ["SEO tools", "free SEO tools", "content optimization", "on-page SEO"],
-    relatedSlugs: ["text", "developer", "generators"],
+    relatedSlugs: ["text", "image", "social-media"],
     faq: [
       { question: "Are Ranburg SEO tools free?", answer: "Yes. All SEO tools on Ranburg.com are free with no account required." },
       { question: "Is my content sent to a server?", answer: "Most tools process data locally in your browser. Your text never leaves your device unless a tool explicitly fetches external data." },
       { question: "Can I use these tools for client work?", answer: "Yes. You may use outputs freely for personal and commercial projects." },
       { question: "Do these tools replace Ahrefs or Semrush?", answer: "No. They complement keyword and analytics platforms by handling formatting, text, and utility tasks." },
       { question: "How often are new SEO tools added?", answer: "We publish new utilities based on search trends and user requests. Check the Recently Added section on the tools hub." },
+    ],
+  },
+  {
+    slug: "image",
+    label: "Image Tools",
+    headline: "Free Online Image Tools",
+    description:
+      "Convert JPG, PNG, WebP, HEIC, and SVG — compress, resize, crop, and encode images in your browser.",
+    intro: `Ranburg image tools help designers, developers, and marketers convert, optimize, and prepare images without Photoshop or cloud uploads. Convert JPG to PNG, PNG to WebP, compress photos for faster websites, resize for social banners, crop screenshots, strip EXIF metadata, or encode images to Base64 — all processed locally in your browser.
+
+Privacy is built in: your photos never leave your device. This makes our image utilities safe for client assets, product photography, and internal documents. Each tool includes SEO documentation, FAQs, and links to related converters so you can complete full image workflows in one session.
+
+Whether you are optimizing a blog hero image, preparing app assets, or converting iPhone HEIC photos to JPG, Ranburg image tools deliver instant results with drag-and-drop upload and mobile-friendly interfaces.`,
+    icon: "Image",
+    gradient: "from-orange-500 to-rose-500",
+    keywords: ["image tools", "jpg to png", "image compressor", "webp converter"],
+    relatedSlugs: ["pdf", "seo", "developer"],
+    faq: [
+      { question: "Are images uploaded to Ranburg?", answer: "No. All image tools process files locally in your browser." },
+      { question: "What formats are supported?", answer: "PNG, JPG, WebP, GIF, SVG, and HEIC (where browser supports)." },
+      { question: "Are image tools free?", answer: "Yes. No signup or watermarks." },
+      { question: "Can I compress images for web?", answer: "Yes. Use the Image Compressor to reduce file size with quality control." },
+      { question: "Is batch processing supported?", answer: "Some tools support multiple files. Check each tool page for details." },
+    ],
+  },
+  {
+    slug: "pdf",
+    label: "PDF Tools",
+    headline: "Free Online PDF Tools",
+    description:
+      "Merge, split, compress, and convert PDFs — client-side PDF utilities with drag-and-drop.",
+    intro: `Ranburg PDF tools let you merge contracts, split reports, compress large files, extract pages, remove unwanted pages, and convert between PDF and JPG — without Adobe Acrobat or cloud uploads. Every operation runs in your browser using pdf-lib and PDF.js, keeping sensitive documents on your machine.
+
+Freelancers, students, and business teams use our PDF toolkit for invoices, proposals, scans, and marketing collateral. Drag-and-drop multiple files, reorder merges, specify page ranges for extraction, and download results instantly.
+
+Explore related image and business tools for JPG-to-PDF workflows, invoice generation, and document preparation.`,
+    icon: "FileText",
+    gradient: "from-red-500 to-orange-500",
+    keywords: ["pdf tools", "merge pdf", "split pdf", "pdf compressor"],
+    relatedSlugs: ["image", "business", "generators"],
+    faq: [
+      { question: "Are PDFs uploaded to a server?", answer: "No. PDF processing is client-side in your browser." },
+      { question: "Is there a file size limit?", answer: "Browser memory limits apply; most files under 50MB work well." },
+      { question: "Can I merge multiple PDFs?", answer: "Yes. Use PDF Merge to combine files in order." },
+      { question: "Can I convert PDF to JPG?", answer: "Yes. PDF to JPG renders each page as a downloadable image." },
+      { question: "Are PDF tools free?", answer: "Yes. All PDF utilities on Ranburg.com are free." },
+    ],
+  },
+  {
+    slug: "social-media",
+    label: "Social Media Tools",
+    headline: "Free Social Media Tools for Creators",
+    description:
+      "YouTube tags, Instagram hashtags, engagement calculators, and character counters — grow your creator workflow.",
+    intro: `Ranburg social media tools help YouTube, Instagram, and TikTok creators optimize content, estimate earnings, and craft platform-perfect copy. Generate video tags and descriptions, build hashtag sets, calculate engagement rates, estimate TikTok earnings, and count characters against each platform's limits.
+
+These utilities complement Ranburg's YouTube and Instagram analytics calculators. Use them together to plan content, benchmark performance, and ship posts faster. All tools are free, mobile-friendly, and process data locally where possible.
+
+Bookmark your favorites and explore revenue calculators in the Business and Calculators categories for full creator monetization planning.`,
+    icon: "Share2",
+    gradient: "from-pink-500 to-violet-500",
+    keywords: ["social media tools", "youtube tags generator", "instagram hashtag", "tiktok calculator"],
+    relatedSlugs: ["seo", "calculators", "business"],
+    faq: [
+      { question: "Are social media tools free?", answer: "Yes. All creator utilities on Ranburg.com are free." },
+      { question: "Do you store my content?", answer: "No. Inputs are processed in your browser." },
+      { question: "Can I use generated tags commercially?", answer: "Yes. Outputs are yours to use on any channel." },
+      { question: "Are engagement rates accurate?", answer: "Calculators use standard formulas; actual platform analytics may differ slightly." },
+      { question: "Which platforms are supported?", answer: "YouTube, Instagram, TikTok, Twitter/X, and LinkedIn character limits." },
     ],
   },
   {

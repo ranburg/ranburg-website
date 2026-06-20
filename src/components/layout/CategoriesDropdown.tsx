@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Grid3X3 } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { SEO_CATEGORY_HUBS } from "@/lib/toolSeoCategories";
+import { SEO_CATEGORY_HUBS, PRIMARY_CATEGORY_SLUGS } from "@/lib/toolSeoCategories";
 import { getToolIcon } from "@/lib/toolIcons";
 import { cn } from "@/lib/utils";
 
@@ -64,7 +64,9 @@ export default function CategoriesDropdown() {
                 <Grid3X3 className="h-3.5 w-3.5" /> Browse by category
               </p>
               <div className="grid gap-2 sm:grid-cols-2">
-                {SEO_CATEGORY_HUBS.map((cat) => {
+                {PRIMARY_CATEGORY_SLUGS.map((slug) => {
+                  const cat = SEO_CATEGORY_HUBS.find((c) => c.slug === slug);
+                  if (!cat) return null;
                   const Icon = getToolIcon(cat.icon);
                   return (
                     <Link

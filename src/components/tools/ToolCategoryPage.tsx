@@ -13,6 +13,9 @@ import {
   SEO_CATEGORY_HUBS,
   type SeoCategorySlug,
 } from "@/lib/toolSeoCategories";
+import { POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
+import { getToolBySlug } from "@/lib/toolsConfig";
+import { TOOL_SEO_CATEGORY_MAP } from "@/lib/toolSeoCategories";
 import { getToolIcon } from "@/lib/toolIcons";
 import type { Metadata } from "next";
 
@@ -39,6 +42,12 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
   if (!hub) return null;
 
   const tools = getToolsForSeoCategory(categorySlug);
+  const popularInCategory = POPULAR_TOOL_SLUGS.filter(
+    (s) => TOOL_SEO_CATEGORY_MAP[s]?.includes(categorySlug) && getToolBySlug(s)
+  ).slice(0, 6);
+  const recentInCategory = RECENT_TOOL_SLUGS.filter(
+    (s) => TOOL_SEO_CATEGORY_MAP[s]?.includes(categorySlug) && getToolBySlug(s)
+  ).slice(0, 6);
   const related = hub.relatedSlugs
     .map((s) => getSeoCategoryHub(s))
     .filter(Boolean);
@@ -91,16 +100,29 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
 
       <section className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl">
-            <ToolSearch
-              placeholder={`Search ${hub.label.toLowerCase()}…`}
-              showSuggestions
-              showTags
-              maxResults={8}
-            />
-          </div>
+          <ToolSearch
+            placeholder={`Search ${hub.label.toLowerCase()}…`}
+            showSuggestions
+            showTags
+            maxResults={8}
+            showCategoryFilter
+            seoCategoryFilter={categorySlug}
+          />
         </div>
       </section>
+
+      {popularInCategory.length > 0 && (
+        <section className="py-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-xl font-bold text-theme-heading">Popular in {hub.label}</h2>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+              {popularInCategory.map((slug) => (
+                <ToolCard key={slug} slug={slug} showCategory={false} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -114,6 +136,19 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
           </div>
         </div>
       </section>
+
+      {recentInCategory.length > 0 && (
+        <section className="py-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-xl font-bold text-theme-heading">Recently Added</h2>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+              {recentInCategory.map((slug) => (
+                <ToolCard key={slug} slug={slug} showCategory={false} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
 
