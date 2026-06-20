@@ -711,7 +711,6 @@ export const TOOLS_CONFIG: ToolConfig[] = [
       { question: "Is IGST included?", answer: "For inter-state transactions, the full GST amount equals IGST. Toggle the split view in Advanced Options." },
     ],
   },
-  },
   {
     slug: "youtube-channel-insights",
     title: "YouTube Channel Analytics",
