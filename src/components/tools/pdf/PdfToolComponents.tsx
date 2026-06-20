@@ -275,7 +275,9 @@ export function PdfToJpgTool() {
         const canvas = document.createElement("canvas");
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-        await page.render({ canvasContext: canvas.getContext("2d")!, viewport, canvas }).promise;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) throw new Error("Canvas not supported");
+        await page.render({ canvasContext: ctx, viewport }).promise;
         canvas.toBlob((blob) => blob && downloadBlob(blob, `page-${i}.jpg`), "image/jpeg", 0.92);
       }
       setStatus(`Converted ${pdf.numPages} page(s).`);
