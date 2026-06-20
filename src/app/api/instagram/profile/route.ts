@@ -7,8 +7,11 @@ import {
   getCreatorTier,
   getInstagramRecommendations,
   normalizeInstagramUsername,
+  parseInstagramEmbeddedJson,
   parseInstagramOgMeta,
 } from "@/lib/socialInsights";
+
+export const maxDuration = 30;
 
 export async function GET(request: Request) {
   const q = new URL(request.url).searchParams.get("q");
@@ -27,25 +30,31 @@ export async function GET(request: Request) {
     if (!profile) {
       const html = await fetchInstagramHtmlProfile(username);
       if (html) {
-        const parsed = parseInstagramOgMeta(html);
-        if (parsed) {
-          profile = {
-            displayName: parsed.displayName || username,
-            username: parsed.username || username,
-            bio: parsed.bio,
-            followers: parsed.followers,
-            following: parsed.following,
-            posts: parsed.posts,
-            avatarUrl: parsed.avatarUrl,
-            isPrivate: false,
-          };
-        }
+        profile =
+          parseInstagramEmbeddedJson(html, username) ??
+          (() => {
+            const parsed = parseInstagramOgMeta(html);
+            if (!parsed) return null;
+            return {
+              displayName: parsed.displayName || username,
+              username: parsed.username || username,
+              bio: parsed.bio,
+              followers: parsed.followers,
+              following: parsed.following,
+              posts: parsed.posts,
+              avatarUrl: parsed.avatarUrl,
+              isPrivate: false,
+            };
+          })();
       }
     }
 
     if (!profile) {
       return NextResponse.json(
-        { error: "Could not fetch profile. The account may be private or unavailable." },
+        {
+          error:
+            "Could not fetch profile. Instagram may be blocking this request — try again in a minute, or verify the username is correct and public.",
+        },
         { status: 404 }
       );
     }
@@ -61,7 +70,7 @@ export async function GET(request: Request) {
       return NextResponse.json(
         {
           error:
-            "Public stats unavailable. Instagram may have temporarily blocked the request — try again in a few minutes.",
+            "Public stats unavailable. Instagram may have temporarily blocked the request — try again later.",
         },
         { status: 422 }
       );

@@ -446,14 +446,94 @@ export interface InstagramProfileData {
 
 const IG_WEB_APP_ID = "936619743392459";
 
-const IG_FETCH_HEADERS = {
-  "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-  Accept: "*/*",
-  "Accept-Language": "en-US,en;q=0.9",
-  "X-IG-App-ID": IG_WEB_APP_ID,
-  "X-Requested-With": "XMLHttpRequest",
-};
+const IG_USER_AGENT =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
+
+function parseSetCookieHeaders(headers: Headers): Record<string, string> {
+  const cookies: Record<string, string> = {};
+  const setCookies =
+    typeof headers.getSetCookie === "function"
+      ? headers.getSetCookie()
+      : (headers.get("set-cookie")?.split(/,(?=\s*\w+=)/) ?? []);
+
+  for (const entry of setCookies) {
+    const [pair] = entry.split(";");
+    const eq = pair.indexOf("=");
+    if (eq > 0) {
+      cookies[pair.slice(0, eq).trim()] = pair.slice(eq + 1).trim();
+    }
+  }
+  return cookies;
+}
+
+function mergeCookies(...maps: Record<string, string>[]): string {
+  const merged: Record<string, string> = {};
+  for (const map of maps) Object.assign(merged, map);
+  return Object.entries(merged)
+    .map(([k, v]) => `${k}=${v}`)
+    .join("; ");
+}
+
+async function bootstrapInstagramSession(username: string): Promise<{
+  cookieHeader: string;
+  csrfToken: string;
+}> {
+  const baseHeaders = {
+    "User-Agent": IG_USER_AGENT,
+    Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Upgrade-Insecure-Requests": "1",
+  };
+
+  const homeRes = await fetch("https://www.instagram.com/", {
+    headers: baseHeaders,
+    cache: "no-store",
+    redirect: "follow",
+  });
+  const homeCookies = parseSetCookieHeaders(homeRes.headers);
+
+  const profileRes = await fetch(`https://www.instagram.com/${username}/`, {
+    headers: {
+      ...baseHeaders,
+      Referer: "https://www.instagram.com/",
+      Cookie: mergeCookies(homeCookies),
+      "Sec-Fetch-Site": "same-origin",
+    },
+    cache: "no-store",
+    redirect: "follow",
+  });
+  const profileCookies = parseSetCookieHeaders(profileRes.headers);
+  const allCookies = { ...homeCookies, ...profileCookies };
+  const csrfToken = allCookies.csrftoken ?? "";
+
+  return {
+    cookieHeader: mergeCookies(allCookies),
+    csrfToken,
+  };
+}
+
+function apiHeaders(username: string, cookieHeader: string, csrfToken: string): HeadersInit {
+  return {
+    "User-Agent": IG_USER_AGENT,
+    Accept: "*/*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "X-IG-App-ID": IG_WEB_APP_ID,
+    "X-Requested-With": "XMLHttpRequest",
+    "X-ASBD-ID": "129477",
+    "X-IG-WWW-Claim": "0",
+    Referer: `https://www.instagram.com/${username}/`,
+    Origin: "https://www.instagram.com",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-origin",
+    ...(cookieHeader ? { Cookie: cookieHeader } : {}),
+    ...(csrfToken ? { "X-CSRFToken": csrfToken } : {}),
+  };
+}
 
 export function parseInstagramWebProfile(json: unknown, fallbackUsername: string): InstagramProfileData | null {
   const user = (json as { data?: { user?: Record<string, unknown> } })?.data?.user;
@@ -477,28 +557,126 @@ export function parseInstagramWebProfile(json: unknown, fallbackUsername: string
   };
 }
 
-export async function fetchInstagramWebProfile(username: string): Promise<InstagramProfileData | null> {
-  const res = await fetch(
-    `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`,
-    {
-      headers: {
-        ...IG_FETCH_HEADERS,
-        Referer: `https://www.instagram.com/${username}/`,
-      },
-      cache: "no-store",
+function extractUserFromJsonNode(node: unknown, fallbackUsername: string): InstagramProfileData | null {
+  if (!node || typeof node !== "object") return null;
+  const obj = node as Record<string, unknown>;
+
+  const followedBy = obj.edge_followed_by as { count?: number } | undefined;
+  const follow = obj.edge_follow as { count?: number } | undefined;
+  if (followedBy?.count != null || follow?.count != null) {
+    const media = obj.edge_owner_to_timeline_media as { count?: number } | undefined;
+    return {
+      displayName: (obj.full_name as string) || fallbackUsername,
+      username: (obj.username as string) || fallbackUsername,
+      bio: (obj.biography as string) || "",
+      followers: followedBy?.count ?? 0,
+      following: follow?.count ?? 0,
+      posts: media?.count ?? 0,
+      avatarUrl:
+        (obj.profile_pic_url_hd as string) || (obj.profile_pic_url as string) || "",
+      isPrivate: Boolean(obj.is_private),
+    };
+  }
+
+  if (Array.isArray(node)) {
+    for (const item of node) {
+      const found = extractUserFromJsonNode(item, fallbackUsername);
+      if (found) return found;
     }
-  );
-  if (!res.ok) return null;
-  const json = await res.json();
-  return parseInstagramWebProfile(json, username);
+    return null;
+  }
+
+  for (const value of Object.values(obj)) {
+    const found = extractUserFromJsonNode(value, fallbackUsername);
+    if (found) return found;
+  }
+  return null;
+}
+
+export function parseInstagramEmbeddedJson(
+  html: string,
+  fallbackUsername: string
+): InstagramProfileData | null {
+  const scripts = html.matchAll(/<script type="application\/json"[^>]*>([\s\S]*?)<\/script>/gi);
+  for (const match of scripts) {
+    try {
+      const data = JSON.parse(match[1]);
+      const user = extractUserFromJsonNode(data, fallbackUsername);
+      if (user && (user.followers > 0 || user.posts > 0)) return user;
+    } catch {
+      /* skip invalid JSON blocks */
+    }
+  }
+
+  const legacy = html.match(/"edge_followed_by":\{"count":(\d+)\}/);
+  if (legacy) {
+    const followingJson = html.match(/"edge_follow":\{"count":(\d+)\}/);
+    const mediaJson = html.match(/"edge_owner_to_timeline_media":\{"count":(\d+)/);
+    const usernameMatch = html.match(/"username":"([^"]+)"/);
+    const fullNameMatch = html.match(/"full_name":"([^"]*)"/);
+    return {
+      displayName: fullNameMatch?.[1] || fallbackUsername,
+      username: usernameMatch?.[1] || fallbackUsername,
+      bio: "",
+      followers: parseInt(legacy[1], 10),
+      following: followingJson ? parseInt(followingJson[1], 10) : 0,
+      posts: mediaJson ? parseInt(mediaJson[1], 10) : 0,
+      avatarUrl: "",
+      isPrivate: false,
+    };
+  }
+
+  return null;
+}
+
+async function requestInstagramApi(
+  username: string,
+  cookieHeader: string,
+  csrfToken: string
+): Promise<InstagramProfileData | null> {
+  const urls = [
+    `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`,
+    `https://i.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`,
+  ];
+
+  for (const url of urls) {
+    const res = await fetch(url, {
+      headers: apiHeaders(username, cookieHeader, csrfToken),
+      cache: "no-store",
+    });
+    if (!res.ok) continue;
+    try {
+      const json = await res.json();
+      const profile = parseInstagramWebProfile(json, username);
+      if (profile) return profile;
+    } catch {
+      continue;
+    }
+  }
+  return null;
+}
+
+export async function fetchInstagramWebProfile(username: string): Promise<InstagramProfileData | null> {
+  const session = await bootstrapInstagramSession(username);
+  const withSession = await requestInstagramApi(username, session.cookieHeader, session.csrfToken);
+  if (withSession) return withSession;
+
+  // Retry without session for environments where bare requests still work
+  return requestInstagramApi(username, "", "");
 }
 
 export async function fetchInstagramHtmlProfile(username: string): Promise<string | null> {
+  const session = await bootstrapInstagramSession(username);
   const res = await fetch(`https://www.instagram.com/${username}/`, {
     headers: {
-      "User-Agent": IG_FETCH_HEADERS["User-Agent"],
+      "User-Agent": IG_USER_AGENT,
       Accept: "text/html,application/xhtml+xml",
       "Accept-Language": "en-US,en;q=0.9",
+      Referer: "https://www.instagram.com/",
+      Cookie: session.cookieHeader,
+      "Sec-Fetch-Dest": "document",
+      "Sec-Fetch-Mode": "navigate",
+      "Sec-Fetch-Site": "same-origin",
     },
     cache: "no-store",
   });
