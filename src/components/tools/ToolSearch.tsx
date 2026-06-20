@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Search, X } from "lucide-react";
 import { searchToolsDetailed } from "@/lib/toolSearch";
@@ -64,6 +65,9 @@ export default function ToolSearch({
   const [activeIndex, setActiveIndex] = useState(0);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [popularSearches, setPopularSearches] = useState<string[]>([]);
+  const [dropdownTop, setDropdownTop] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const inputWrapRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
   const query = value !== undefined ? value : internalQuery;
@@ -83,6 +87,34 @@ export default function ToolSearch({
     [query, category, maxResults]
   );
   const hasQuery = query.trim().length > 0;
+
+  const updateDropdownPosition = useCallback(() => {
+    if (!inputWrapRef.current || !isMobile) {
+      setDropdownTop(null);
+      return;
+    }
+    const rect = inputWrapRef.current.getBoundingClientRect();
+    setDropdownTop(rect.bottom + 8);
+  }, [isMobile]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (!hasQuery || !isMobile) return;
+    updateDropdownPosition();
+    window.addEventListener("resize", updateDropdownPosition);
+    window.addEventListener("scroll", updateDropdownPosition, true);
+    return () => {
+      window.removeEventListener("resize", updateDropdownPosition);
+      window.removeEventListener("scroll", updateDropdownPosition, true);
+    };
+  }, [hasQuery, isMobile, updateDropdownPosition, query]);
 
   const selectResult = useCallback(
     (href: string) => {
@@ -157,16 +189,17 @@ export default function ToolSearch({
         </div>
       )}
 
-      <div className="relative">
+      <div className="relative" ref={inputWrapRef}>
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-theme-subtle" />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onFocus={updateDropdownPosition}
           placeholder={placeholder}
           className={cn(
-            "w-full rounded-xl border border-theme bg-theme-surface text-sm text-theme-heading placeholder:text-theme-subtle focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/30",
-            compact ? "py-2 pl-9 pr-9" : "py-2.5 pl-10 pr-10"
+            "w-full rounded-xl border border-theme bg-theme-surface text-base text-theme-heading placeholder:text-theme-subtle focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/30 sm:text-sm",
+            compact ? "py-2.5 pl-9 pr-9" : "py-3 pl-10 pr-10 sm:py-2.5"
           )}
           aria-label="Search tools"
           aria-autocomplete="list"
@@ -202,45 +235,60 @@ export default function ToolSearch({
         </p>
       )}
 
-      {showResults && hasQuery && (
-        <ul ref={listRef} className="absolute left-0 right-0 top-full z-50 mt-2 max-h-72 overflow-y-auto rounded-xl border border-theme-subtle bg-[var(--dropdown-bg)] p-2 shadow-xl" role="listbox">
-          {results.length === 0 ? (
-            <li className="px-3 py-4 text-center text-sm text-theme-muted">No tools found. Try another keyword.</li>
-          ) : (
-            results.map(({ tool }, i) => {
-              const Icon = getToolIcon(tool.icon);
-              return (
-                <li key={tool.slug} role="option" aria-selected={i === activeIndex}>
-                  <Link
-                    href={`/tools/${tool.slug}`}
-                    onClick={() => {
-                      if (trackSearches) trackSearch(query);
-                      setQuery("");
-                      onResultClick?.();
-                    }}
-                    className={cn(
-                      "flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors",
-                      i === activeIndex ? "bg-accent/10" : "hover:bg-theme-surface"
-                    )}
-                  >
-                    <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.gradient}`}>
-                      <Icon className="h-4 w-4 text-white" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-medium text-theme-heading">
-                        <HighlightText text={tool.title} query={query} />
-                      </p>
-                      <p className="truncate text-xs text-theme-subtle">
-                        <HighlightText text={tool.shortDescription} query={query} />
-                      </p>
-                    </div>
-                  </Link>
-                </li>
-              );
-            })
-          )}
-        </ul>
-      )}
+      {showResults && hasQuery && (() => {
+        const dropdown = (
+          <ul
+            ref={listRef}
+            className={cn(
+              "z-[200] max-h-[min(50dvh,18rem)] overflow-y-auto overscroll-contain rounded-xl border border-theme-subtle bg-[var(--dropdown-bg)] p-2 shadow-xl",
+              isMobile && dropdownTop !== null
+                ? "fixed left-4 right-4"
+                : "absolute left-0 right-0 top-full mt-2"
+            )}
+            style={isMobile && dropdownTop !== null ? { top: dropdownTop } : undefined}
+            role="listbox"
+          >
+            {results.length === 0 ? (
+              <li className="px-3 py-4 text-center text-sm text-theme-muted">No tools found. Try another keyword.</li>
+            ) : (
+              results.map(({ tool }, i) => {
+                const Icon = getToolIcon(tool.icon);
+                return (
+                  <li key={tool.slug} role="option" aria-selected={i === activeIndex}>
+                    <Link
+                      href={`/tools/${tool.slug}`}
+                      onClick={() => {
+                        if (trackSearches) trackSearch(query);
+                        setQuery("");
+                        onResultClick?.();
+                      }}
+                      className={cn(
+                        "flex items-center gap-3 rounded-lg px-3 py-3 transition-colors sm:py-2.5",
+                        i === activeIndex ? "bg-accent/10" : "hover:bg-theme-surface active:bg-theme-surface"
+                      )}
+                    >
+                      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.gradient}`}>
+                        <Icon className="h-4 w-4 text-white" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium text-theme-heading">
+                          <HighlightText text={tool.title} query={query} />
+                        </p>
+                        <p className="truncate text-xs text-theme-subtle">
+                          <HighlightText text={tool.shortDescription} query={query} />
+                        </p>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })
+            )}
+          </ul>
+        );
+        return isMobile && typeof document !== "undefined"
+          ? createPortal(dropdown, document.body)
+          : dropdown;
+      })()}
     </div>
   );
 }

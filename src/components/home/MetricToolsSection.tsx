@@ -79,7 +79,7 @@ export default function MetricToolsSection({ metric }: { metric: MetricType }) {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="font-semibold text-theme-heading group-hover:text-accent">{tool.title}</p>
+                    <p className="min-w-0 flex-1 truncate font-semibold text-theme-heading group-hover:text-accent">{tool.title}</p>
                     {views > 0 && (
                       <span className="shrink-0 rounded-full bg-theme-surface px-2 py-0.5 text-xs text-theme-subtle">
                         {views} views

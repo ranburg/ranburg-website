@@ -45,8 +45,8 @@ export default function UUIDGenerator() {
 
         <div className="mt-6 space-y-2">
           {uuids.map((id, i) => (
-            <div key={i} className="flex items-center justify-between gap-4 rounded-xl bg-theme-surface px-4 py-3">
-              <code className="font-mono text-lg text-accent">{format(id)}</code>
+            <div key={i} className="flex flex-col gap-2 rounded-xl bg-theme-surface px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <code className="min-w-0 break-all font-mono text-sm text-accent sm:text-lg">{format(id)}</code>
               <CopyButton text={format(id)} label="Copy" />
             </div>
           ))}

@@ -48,7 +48,7 @@ export default function ToolsHub() {
   return (
     <div className="space-y-16">
       <AllToolsNav variant="compact" className="lg:hidden" />
-      <div className="sticky top-[4.5rem] z-30 -mx-4 border-b border-theme-subtle bg-[var(--background)]/95 px-4 py-4 backdrop-blur-md sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div className="sticky top-[var(--nav-height)] z-30 -mx-4 border-b border-theme-subtle bg-[var(--background)]/95 px-4 py-4 backdrop-blur-md sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <ToolSearch
           placeholder="Search tools, calculators, Salesforce utilities…"
           showResults={false}

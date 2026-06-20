@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Navbar from "@/components/layout/Navbar";
@@ -31,6 +31,16 @@ export const metadata: Metadata = buildMetadata({
   ],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0f1a" },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -51,12 +61,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen font-sans">
+      <body className="min-h-screen overflow-x-hidden font-sans antialiased">
         <JsonLd data={[organizationJsonLd(), localBusinessJsonLd()]} />
         <Providers>
           <CommandPaletteProvider>
             <Navbar />
-            <main className="pt-[73px]">{children}</main>
+            <main className="pt-[var(--nav-height)]">{children}</main>
             <Footer />
           </CommandPaletteProvider>
         </Providers>

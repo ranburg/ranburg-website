@@ -159,8 +159,9 @@ export default function SIPCalculator() {
           <h3 className="mb-4 text-sm font-semibold text-theme-body">
             Investment Breakdown
           </h3>
-          <div className="flex items-center gap-6">
-            <ResponsiveContainer width="50%" height={180}>
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <div className="h-[180px] w-full sm:w-1/2">
+              <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={results.pieData}
@@ -184,8 +185,9 @@ export default function SIPCalculator() {
                   }}
                 />
               </PieChart>
-            </ResponsiveContainer>
-            <div className="space-y-3">
+              </ResponsiveContainer>
+            </div>
+            <div className="w-full space-y-3 sm:w-1/2">
               {results.pieData.map((item, i) => (
                 <div key={item.name} className="flex items-center gap-2">
                   <div

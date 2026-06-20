@@ -96,9 +96,12 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-start justify-center bg-black/50 p-4 pt-[12vh] backdrop-blur-sm" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-[100] flex items-end justify-center bg-black/50 p-0 sm:items-start sm:p-4 sm:pt-[10vh]"
+      onClick={onClose}
+    >
       <div
-        className="dropdown-panel w-full max-w-xl overflow-hidden rounded-2xl shadow-2xl"
+        className="dropdown-panel flex max-h-[90dvh] w-full flex-col overflow-hidden rounded-t-2xl shadow-2xl sm:max-h-[85dvh] sm:max-w-xl sm:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3 border-b border-theme-subtle px-4">
@@ -149,6 +152,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
           </div>
         </div>
 
+        <div className="min-h-0 flex-1 overflow-y-auto">
         {!hasQuery && (
           <div className="border-b border-theme-subtle px-4 py-3 space-y-3">
             {recentSearches.length > 0 && (
@@ -201,7 +205,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
           </div>
         )}
 
-        <ul className="max-h-80 overflow-y-auto p-2" role="listbox">
+        <ul className="p-2" role="listbox">
           {hasQuery && results.length === 0 && (
             <li className="px-3 py-8 text-center text-sm text-theme-muted">No tools found. Try another keyword.</li>
           )}
@@ -235,29 +239,13 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
             );
           })}
         </ul>
+        </div>
 
-        <div className="flex items-center gap-2 border-t border-theme-subtle px-4 py-2 text-xs text-theme-subtle">
+        <div className="hidden items-center gap-2 border-t border-theme-subtle px-4 py-2 text-xs text-theme-subtle sm:flex">
           <Command className="h-3 w-3" />
           <span>Ctrl+K or ⌘+K · ↑↓ navigate · Enter select</span>
         </div>
       </div>
     </div>
   );
-}
-
-export function useCommandPalette() {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        setOpen((v) => !v);
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  return { open, setOpen, close: () => setOpen(false) };
 }

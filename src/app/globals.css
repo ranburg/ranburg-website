@@ -6,6 +6,7 @@
   :root {
     --background: #f8fafc;
     --foreground: #0f172a;
+    --nav-height: 3.75rem;
     --accent: #3b82f6;
     --accent-emerald: #10b981;
     --glass-bg: #ffffff;
@@ -37,10 +38,12 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply antialiased;
+    overflow-x: hidden;
     color: var(--foreground);
     background-color: var(--background);
     background-image: radial-gradient(
@@ -53,7 +56,12 @@
         rgba(16, 185, 129, 0.04),
         transparent
       );
-    background-attachment: fixed;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      background-attachment: fixed;
+    }
   }
 
   .dark body {

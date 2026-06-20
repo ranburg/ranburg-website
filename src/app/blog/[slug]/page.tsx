@@ -67,13 +67,13 @@ export default async function BlogPostPage({ params }: PageProps) {
                 { label: post.title },
               ]}
             />
-            <h1 className="text-3xl font-extrabold text-theme-heading sm:text-4xl">{post.title}</h1>
+            <h1 className="break-words text-2xl font-extrabold text-theme-heading sm:text-3xl lg:text-4xl">{post.title}</h1>
             {categoryLabel && (
               <span className="mt-3 inline-block rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
                 {categoryLabel}
               </span>
             )}
-            <div className="mt-4 flex items-center gap-4 text-sm text-theme-subtle">
+            <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-theme-subtle">
               <span className="flex items-center gap-1"><Calendar className="h-4 w-4" />{post.date}</span>
               <span className="flex items-center gap-1"><Clock className="h-4 w-4" />{post.readTime} read</span>
             </div>
@@ -117,7 +117,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {relatedPosts.length > 0 && (
               <div className="mt-16 border-t border-theme-subtle pt-12">
                 <h2 className="text-xl font-bold text-theme-heading">Related Articles</h2>
-                <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {relatedPosts.map((rp) => (
                     <Link key={rp.slug} href={`/blog/${rp.slug}`} className="glass-card block p-4 hover:border-accent/30">
                       <p className="font-medium text-theme-heading hover:text-accent">{rp.title}</p>

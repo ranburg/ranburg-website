@@ -15,10 +15,12 @@ const highlights = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[80vh] overflow-hidden">
-      <div className="absolute inset-0 bg-grid opacity-40" />
-      <div className="absolute inset-0 bg-hero-gradient" />
-      <div className="pointer-events-none absolute left-1/4 top-1/4 h-96 w-96 animate-pulse-glow rounded-full bg-accent/10 blur-3xl" />
+    <section className="relative min-h-[80vh] overflow-x-hidden">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-grid opacity-40" />
+        <div className="absolute inset-0 bg-hero-gradient" />
+        <div className="absolute left-1/4 top-1/4 h-96 w-96 animate-pulse-glow rounded-full bg-accent/10 blur-3xl" />
+      </div>
 
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
         <motion.div
@@ -32,7 +34,7 @@ export default function Hero() {
             100% Free · No Signup · Browser-Based
           </div>
 
-          <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-theme-heading sm:text-5xl lg:text-6xl">
+          <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-theme-heading sm:text-5xl lg:text-6xl">
             Free Online Tools for{" "}
             <span className="text-gradient-accent">Developers, Businesses</span>
             {" "}and Professionals
@@ -47,7 +49,7 @@ export default function Hero() {
             <ToolSearch showSuggestions showTags showCategoryFilter maxResults={8} enableKeyboardNav trackSearches />
           </div>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
             <Button href="/tools" size="lg" icon>
               Browse All Tools
             </Button>

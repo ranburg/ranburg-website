@@ -155,7 +155,7 @@ export default function EMICalculator() {
       </div>
 
       <div className="space-y-6">
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <ResultCard label="Monthly EMI" value={results.emi} highlight variant="blue" />
           <ResultCard
             label="Total Interest"
@@ -176,8 +176,9 @@ export default function EMICalculator() {
           <h3 className="mb-4 text-sm font-semibold text-theme-body">
             Payment Breakdown
           </h3>
-          <div className="flex items-center gap-6">
-            <ResponsiveContainer width="50%" height={180}>
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <div className="h-[180px] w-full sm:w-1/2">
+              <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={results.pieData}
@@ -201,8 +202,9 @@ export default function EMICalculator() {
                   }}
                 />
               </PieChart>
-            </ResponsiveContainer>
-            <div className="space-y-3">
+              </ResponsiveContainer>
+            </div>
+            <div className="w-full space-y-3 sm:w-1/2">
               {results.pieData.map((item, i) => (
                 <div key={item.name} className="flex items-center gap-2">
                   <div

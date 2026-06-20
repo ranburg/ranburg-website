@@ -217,7 +217,8 @@ export default function InvoiceGenerator() {
           </div>
         </div>
 
-        <table className="mt-8 w-full text-sm">
+        <div className="overflow-x-auto">
+        <table className="mt-8 w-full min-w-[480px] text-sm">
           <thead>
             <tr className="border-b border-theme-subtle text-left text-xs uppercase text-theme-subtle">
               <th className="pb-2">Description</th>
@@ -239,8 +240,9 @@ export default function InvoiceGenerator() {
             ))}
           </tbody>
         </table>
+        </div>
 
-        <div className="mt-6 ml-auto max-w-xs space-y-1 text-sm">
+        <div className="mt-6 ml-auto max-w-full space-y-1 text-sm sm:max-w-xs">
           <div className="flex justify-between"><span className="text-theme-muted">Subtotal</span><span>{formatCurrency(totals.subtotal)}</span></div>
           {taxType === "intra" ? (
             <>

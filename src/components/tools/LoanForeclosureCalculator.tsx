@@ -161,7 +161,7 @@ export default function LoanForeclosureCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      <div className="glass-card space-y-6 p-6">
+      <div className="glass-card space-y-6 p-4 sm:p-6">
         <h2 className="text-xl font-bold text-theme-heading">Loan Details</h2>
         <CalculatorSlider label="Loan Amount" value={loanAmount} min={100000} max={50000000} step={50000} prefix="₹" onChange={setLoanAmount} />
         <CalculatorSlider label="Interest Rate" value={interestRate} min={5} max={18} step={0.1} unit="%" onChange={setInterestRate} />
@@ -213,7 +213,7 @@ export default function LoanForeclosureCalculator() {
       </div>
 
       <div className="space-y-6">
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <ResultCard label="Current EMI" value={results.emi} highlight />
           <ResultCard label="Outstanding Principal" value={results.outstanding} variant="emerald" />
           <ResultCard label="Remaining Interest (if continue)" value={results.remainingInterest} />

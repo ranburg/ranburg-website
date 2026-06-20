@@ -1,16 +1,20 @@
 "use client";
 
-import CommandPalette, { useCommandPalette } from "@/components/search/CommandPalette";
+import CommandPalette from "@/components/search/CommandPalette";
+import { CommandPaletteProvider, useCommandPaletteContext } from "@/components/search/CommandPaletteContext";
 
-export default function CommandPaletteProvider({ children }: { children: React.ReactNode }) {
-  const { open, setOpen, close } = useCommandPalette();
+function CommandPalettePortal() {
+  const { open, close } = useCommandPaletteContext();
+  return <CommandPalette open={open} onClose={close} />;
+}
 
+export default function CommandPaletteProviderWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <CommandPaletteProvider>
       {children}
-      <CommandPalette open={open} onClose={close} />
-      {/* Expose open for optional nav button — palette listens globally */}
-      <span className="hidden" data-cmdk-open={open} onClick={() => setOpen(true)} />
-    </>
+      <CommandPalettePortal />
+    </CommandPaletteProvider>
   );
 }
+
+export { useCommandPaletteContext, useCommandPaletteOptional } from "@/components/search/CommandPaletteContext";

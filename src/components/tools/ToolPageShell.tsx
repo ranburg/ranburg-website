@@ -86,8 +86,8 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
                   {seoCategory?.label ?? category.label}
                 </Link>
               )}
-              <h1 className="mt-1 text-3xl font-extrabold text-theme-heading sm:text-4xl">{tool.title}</h1>
-              <p className="mt-3 max-w-2xl text-theme-muted">{tool.shortDescription}</p>
+              <h1 className="mt-1 break-words text-2xl font-extrabold text-theme-heading sm:text-3xl lg:text-4xl">{tool.title}</h1>
+              <p className="mt-3 max-w-2xl text-sm text-theme-muted sm:text-base">{tool.shortDescription}</p>
             </div>
           </div>
         </div>

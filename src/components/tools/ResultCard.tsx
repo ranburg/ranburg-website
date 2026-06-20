@@ -32,7 +32,7 @@ export default function ResultCard({
       <p className="text-xs font-medium uppercase tracking-wider text-slate-500">
         {label}
       </p>
-      <p className={cn("mt-2 text-2xl font-bold", variants[variant])}>
+      <p className={cn("mt-2 font-bold", variants[variant], highlight ? "text-xl sm:text-2xl" : "text-lg sm:text-2xl")}>
         {formatCurrency(value)}
       </p>
     </div>

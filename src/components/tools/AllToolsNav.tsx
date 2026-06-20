@@ -148,7 +148,7 @@ export default function AllToolsNav({
 
   return (
     <aside className={cn("hidden lg:block", className)}>
-      <div className="sticky top-24 max-h-[calc(100vh-7rem)] overflow-hidden rounded-xl border border-theme-subtle bg-theme-surface/50">
+      <div className="sticky top-[var(--nav-height)] max-h-[calc(100dvh-var(--nav-height)-1rem)] overflow-hidden rounded-xl border border-theme-subtle bg-theme-surface/50">
         <div className="border-b border-theme-subtle p-4">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
             <Wrench className="h-3.5 w-3.5" />
