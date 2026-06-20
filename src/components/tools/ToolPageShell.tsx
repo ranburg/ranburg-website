@@ -12,6 +12,7 @@ import AdPlaceholder from "@/components/ui/AdPlaceholder";
 import ConsultingCTA from "@/components/ui/ConsultingCTA";
 import ToolRecommendations from "@/components/tools/ToolRecommendations";
 import ToolSeoContent from "@/components/tools/ToolSeoContent";
+import AllToolsNav from "@/components/tools/AllToolsNav";
 import { TOOL_COMPONENTS } from "@/components/tools/registry";
 
 const SALESFORCE_SERVICE_LINKS: Record<string, { href: string; label: string }> = {
@@ -94,7 +95,9 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
 
       <section className="py-4">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-[1fr_280px]">
+          <AllToolsNav activeSlug={slug} variant="compact" className="mb-6" />
+          <div className="grid gap-8 lg:grid-cols-[220px_1fr_280px]">
+            <AllToolsNav activeSlug={slug} />
             <div>
               <ToolComponent />
               <AdPlaceholder placement="after-tool-mobile" />

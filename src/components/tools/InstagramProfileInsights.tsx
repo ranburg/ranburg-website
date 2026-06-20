@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Loader2 } from "lucide-react";
+import { Search, Loader2, Calendar, BarChart3 } from "lucide-react";
 import SocialInsightResults, { formatSocialCount, Users, Eye, TrendingUp } from "./SocialInsightResults";
-import type { SocialRecommendation } from "@/lib/socialInsights";
+import type { GrowthDataPoint, RevenueEstimate, SocialRecommendation } from "@/lib/socialInsights";
 import { Image as ImageIcon, UserPlus } from "lucide-react";
 
 interface InstagramData {
@@ -15,6 +15,12 @@ interface InstagramData {
   following: number;
   posts: number;
   profileUrl: string;
+  tier: string;
+  followRatio: number;
+  postsPerMonth: number;
+  engagementRate: number;
+  revenue: RevenueEstimate;
+  growthSeries: GrowthDataPoint[];
   recommendations: SocialRecommendation[];
 }
 
@@ -67,7 +73,7 @@ export default function InstagramProfileInsights() {
           </button>
         </div>
         <p className="mt-2 text-xs text-theme-subtle">
-          Fetches public profile stats only. Private accounts cannot be analyzed.
+          Fetches public profile stats, sponsorship revenue estimates, and growth projections.
         </p>
       </div>
 
@@ -100,13 +106,29 @@ export default function InstagramProfileInsights() {
             },
             {
               label: "Follow Ratio",
-              value:
-                data.following > 0
-                  ? (data.followers / data.following).toFixed(2)
-                  : formatSocialCount(data.followers),
+              value: data.following > 0 ? data.followRatio.toFixed(2) : "—",
               icon: <TrendingUp className="h-4 w-4" />,
             },
           ]}
+          extraStats={[
+            {
+              label: "Creator Tier",
+              value: data.tier.charAt(0).toUpperCase() + data.tier.slice(1),
+              icon: <BarChart3 className="h-4 w-4" />,
+            },
+            {
+              label: "Posts / Month",
+              value: data.postsPerMonth.toFixed(1),
+              icon: <Calendar className="h-4 w-4" />,
+            },
+            {
+              label: "Est. Engagement",
+              value: `${data.engagementRate}%`,
+              icon: <Eye className="h-4 w-4" />,
+            },
+          ]}
+          revenue={data.revenue}
+          growthSeries={data.growthSeries}
           recommendations={data.recommendations}
         />
       )}

@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import {
+  buildYouTubeGrowthSeries,
+  estimateYouTubeRevenue,
+  getChannelAgeMonths,
+  getYouTubeMonetizationStatus,
   getYouTubeRecommendations,
   normalizeYouTubeQuery,
+  type RecentVideoStats,
 } from "@/lib/socialInsights";
 
 interface YtChannel {
@@ -11,6 +16,7 @@ interface YtChannel {
     description: string;
     customUrl?: string;
     publishedAt: string;
+    country?: string;
     thumbnails: { high?: { url: string }; medium?: { url: string } };
   };
   statistics: {
@@ -60,21 +66,51 @@ async function resolveChannel(query: string, apiKey: string): Promise<YtChannel 
   return data?.items?.[0] ?? null;
 }
 
-async function getAvgViews(uploadsPlaylistId: string, apiKey: string): Promise<number | undefined> {
+async function getRecentVideos(
+  uploadsPlaylistId: string,
+  apiKey: string
+): Promise<{ avgViews: number | undefined; videos: RecentVideoStats[]; totalLikes: number; totalComments: number }> {
   const playlist = await ytFetch(
-    `playlistItems?part=contentDetails&playlistId=${uploadsPlaylistId}&maxResults=10`,
+    `playlistItems?part=contentDetails,snippet&playlistId=${uploadsPlaylistId}&maxResults=10`,
     apiKey
   );
-  const videoIds = playlist?.items?.map((i: { contentDetails: { videoId: string } }) => i.contentDetails.videoId).filter(Boolean);
-  if (!videoIds?.length) return undefined;
+  const items = playlist?.items ?? [];
+  const videoIds = items
+    .map((i: { contentDetails: { videoId: string } }) => i.contentDetails.videoId)
+    .filter(Boolean);
+  if (!videoIds?.length) {
+    return { avgViews: undefined, videos: [], totalLikes: 0, totalComments: 0 };
+  }
 
-  const videos = await ytFetch(
-    `videos?part=statistics&id=${videoIds.join(",")}`,
+  const videosData = await ytFetch(
+    `videos?part=statistics,snippet&id=${videoIds.join(",")}`,
     apiKey
   );
-  const views = videos?.items?.map((v: { statistics: { viewCount: string } }) => parseInt(v.statistics.viewCount, 10)) ?? [];
-  if (!views.length) return undefined;
-  return Math.round(views.reduce((a: number, b: number) => a + b, 0) / views.length);
+  const videoItems = videosData?.items ?? [];
+
+  const videos: RecentVideoStats[] = videoItems.map(
+    (v: {
+      id: string;
+      snippet: { title: string; publishedAt: string };
+      statistics: { viewCount: string; likeCount?: string; commentCount?: string };
+    }) => ({
+      title: v.snippet.title,
+      videoId: v.id,
+      publishedAt: v.snippet.publishedAt,
+      views: parseInt(v.statistics.viewCount, 10) || 0,
+      likes: parseInt(v.statistics.likeCount ?? "0", 10) || 0,
+      comments: parseInt(v.statistics.commentCount ?? "0", 10) || 0,
+    })
+  );
+
+  const views = videos.map((v) => v.views);
+  const avgViews = views.length
+    ? Math.round(views.reduce((a, b) => a + b, 0) / views.length)
+    : undefined;
+  const totalLikes = videos.reduce((a, v) => a + v.likes, 0);
+  const totalComments = videos.reduce((a, v) => a + v.comments, 0);
+
+  return { avgViews, videos, totalLikes, totalComments };
 }
 
 export async function GET(request: Request) {
@@ -102,7 +138,43 @@ export async function GET(request: Request) {
   const totalViews = parseInt(channel.statistics.viewCount, 10) || 0;
   const videoCount = parseInt(channel.statistics.videoCount, 10) || 0;
   const uploadsId = channel.contentDetails?.relatedPlaylists?.uploads;
-  const avgViewsPerVideo = uploadsId ? await getAvgViews(uploadsId, apiKey) : undefined;
+
+  let avgViewsPerVideo: number | undefined;
+  let recentVideos: RecentVideoStats[] = [];
+  let totalLikes = 0;
+  let totalComments = 0;
+
+  if (uploadsId) {
+    const recent = await getRecentVideos(uploadsId, apiKey);
+    avgViewsPerVideo = recent.avgViews;
+    recentVideos = recent.videos;
+    totalLikes = recent.totalLikes;
+    totalComments = recent.totalComments;
+  }
+
+  const channelAgeMonths = getChannelAgeMonths(channel.snippet.publishedAt);
+  const uploadsPerMonth = videoCount > 0 ? videoCount / channelAgeMonths : 0;
+  const viewsPerSub = subscribers > 0 ? totalViews / subscribers : 0;
+  const engagementRate =
+    avgViewsPerVideo && subscribers > 0
+      ? Math.round((avgViewsPerVideo / subscribers) * 10000) / 100
+      : null;
+
+  const monetization = getYouTubeMonetizationStatus({ subscribers, totalViews, videoCount });
+  const revenue = estimateYouTubeRevenue({
+    subscribers,
+    totalViews,
+    videoCount,
+    avgViewsPerVideo,
+    uploadsPerMonth,
+    monetizationStatus: monetization.status,
+  });
+
+  const growthSeries = buildYouTubeGrowthSeries({
+    subscribers,
+    totalViews,
+    publishedAt: channel.snippet.publishedAt,
+  });
 
   const recommendations = getYouTubeRecommendations({
     subscribers,
@@ -120,11 +192,22 @@ export async function GET(request: Request) {
     avatarUrl:
       channel.snippet.thumbnails.high?.url ?? channel.snippet.thumbnails.medium?.url ?? null,
     publishedAt: channel.snippet.publishedAt,
+    country: channel.snippet.country ?? null,
     subscribers,
     hiddenSubscribers: channel.statistics.hiddenSubscriberCount ?? false,
     totalViews,
     videoCount,
     avgViewsPerVideo: avgViewsPerVideo ?? null,
+    channelAgeMonths,
+    uploadsPerMonth: Math.round(uploadsPerMonth * 10) / 10,
+    viewsPerSub: Math.round(viewsPerSub * 10) / 10,
+    engagementRate,
+    totalLikes,
+    totalComments,
+    recentVideos,
+    monetization,
+    revenue,
+    growthSeries,
     recommendations,
   });
 }

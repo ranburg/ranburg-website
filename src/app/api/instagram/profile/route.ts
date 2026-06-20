@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import {
+  buildInstagramGrowthSeries,
+  estimateInstagramRevenue,
+  getCreatorTier,
   getInstagramRecommendations,
   normalizeInstagramUsername,
   parseInstagramOgMeta,
@@ -53,6 +56,23 @@ export async function GET(request: Request) {
       posts: parsed.posts,
     });
 
+    const tier = getCreatorTier(parsed.followers);
+    const followRatio =
+      parsed.following > 0 ? Math.round((parsed.followers / parsed.following) * 100) / 100 : parsed.followers;
+    const postsPerMonth = parsed.posts > 0 ? Math.max(0.5, parsed.posts / 24) : 1;
+    const engagementRate = tier === "mega" ? 1.5 : tier === "macro" ? 2 : tier === "mid" ? 3 : 4;
+
+    const revenue = estimateInstagramRevenue({
+      followers: parsed.followers,
+      posts: parsed.posts,
+      engagementRate,
+    });
+
+    const growthSeries = buildInstagramGrowthSeries({
+      followers: parsed.followers,
+      posts: parsed.posts,
+    });
+
     return NextResponse.json({
       platform: "instagram",
       username: parsed.username || username,
@@ -63,6 +83,12 @@ export async function GET(request: Request) {
       following: parsed.following,
       posts: parsed.posts,
       profileUrl: `https://www.instagram.com/${parsed.username || username}/`,
+      tier,
+      followRatio,
+      postsPerMonth: Math.round(postsPerMonth * 10) / 10,
+      engagementRate,
+      revenue,
+      growthSeries,
       recommendations,
     });
   } catch {

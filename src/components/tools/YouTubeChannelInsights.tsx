@@ -1,9 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Loader2 } from "lucide-react";
+import { Search, Loader2, Calendar, Globe, ThumbsUp, MessageCircle } from "lucide-react";
 import SocialInsightResults, { formatSocialCount, Users, Eye, Video, TrendingUp } from "./SocialInsightResults";
-import type { SocialRecommendation } from "@/lib/socialInsights";
+import type {
+  GrowthDataPoint,
+  MonetizationStatus,
+  RecentVideoStats,
+  RevenueEstimate,
+  SocialRecommendation,
+} from "@/lib/socialInsights";
 
 interface YouTubeData {
   title: string;
@@ -15,6 +21,17 @@ interface YouTubeData {
   totalViews: number;
   videoCount: number;
   avgViewsPerVideo: number | null;
+  channelAgeMonths: number;
+  uploadsPerMonth: number;
+  viewsPerSub: number;
+  engagementRate: number | null;
+  totalLikes: number;
+  totalComments: number;
+  country: string | null;
+  recentVideos: RecentVideoStats[];
+  monetization: { status: MonetizationStatus; message: string };
+  revenue: RevenueEstimate;
+  growthSeries: GrowthDataPoint[];
   recommendations: SocialRecommendation[];
 }
 
@@ -67,7 +84,7 @@ export default function YouTubeChannelInsights() {
           </button>
         </div>
         <p className="mt-2 text-xs text-theme-subtle">
-          Uses YouTube Data API for public channel statistics. Private or restricted channels may not be available.
+          Uses YouTube Data API for public channel statistics, revenue estimates, and growth trends.
         </p>
       </div>
 
@@ -104,6 +121,42 @@ export default function YouTubeChannelInsights() {
               icon: <TrendingUp className="h-4 w-4" />,
             },
           ]}
+          extraStats={[
+            {
+              label: "Channel Age",
+              value: `${data.channelAgeMonths} mo`,
+              icon: <Calendar className="h-4 w-4" />,
+            },
+            {
+              label: "Uploads / Month",
+              value: data.uploadsPerMonth.toFixed(1),
+              icon: <Video className="h-4 w-4" />,
+            },
+            {
+              label: "Engagement Rate",
+              value: data.engagementRate != null ? `${data.engagementRate}%` : "—",
+              icon: <TrendingUp className="h-4 w-4" />,
+            },
+            {
+              label: "Country",
+              value: data.country ?? "—",
+              icon: <Globe className="h-4 w-4" />,
+            },
+            {
+              label: "Likes (last 10)",
+              value: formatSocialCount(data.totalLikes),
+              icon: <ThumbsUp className="h-4 w-4" />,
+            },
+            {
+              label: "Comments (last 10)",
+              value: formatSocialCount(data.totalComments),
+              icon: <MessageCircle className="h-4 w-4" />,
+            },
+          ]}
+          revenue={data.revenue}
+          monetization={data.monetization}
+          growthSeries={data.growthSeries}
+          recentVideos={data.recentVideos}
           recommendations={data.recommendations}
         />
       )}

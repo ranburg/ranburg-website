@@ -10,6 +10,7 @@ import { getToolIcon } from "@/lib/toolIcons";
 import { searchTools } from "@/lib/toolSearch";
 import ToolSearch from "@/components/tools/ToolSearch";
 import ToolCard from "@/components/tools/ToolCard";
+import AllToolsNav from "@/components/tools/AllToolsNav";
 
 function ToolSection({ title, description, slugs }: { title: string; description?: string; slugs: string[] }) {
   const tools = slugs.map(getToolBySlug).filter(Boolean);
@@ -34,9 +35,18 @@ export default function ToolsHub() {
   const salesforceSlugs = TOOLS_CONFIG.filter((t) => t.category === "salesforce").map((t) => t.slug);
   const financialSlugs = TOOLS_CONFIG.filter((t) => t.category === "financial").map((t) => t.slug);
   const developerSlugs = TOOLS_CONFIG.filter((t) => t.category === "developer").map((t) => t.slug);
+  const socialRevenueSlugs = [
+    "youtube-revenue-calculator",
+    "youtube-channel-insights",
+    "instagram-revenue-calculator",
+    "instagram-profile-insights",
+    "adsense-revenue-calculator",
+    "twitch-sub-revenue",
+  ];
 
   return (
     <div className="space-y-16">
+      <AllToolsNav variant="compact" className="lg:hidden" />
       <div className="sticky top-[4.5rem] z-30 -mx-4 border-b border-theme-subtle bg-[var(--background)]/95 px-4 py-4 backdrop-blur-md sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <ToolSearch
           placeholder="Search tools, calculators, Salesforce utilities…"
@@ -91,6 +101,7 @@ export default function ToolsHub() {
 
           <ToolSection title="Featured Tools" description="Our most useful calculators and utilities." slugs={FEATURED_TOOL_SLUGS} />
           <ToolSection title="Popular Tools" slugs={POPULAR_TOOL_SLUGS} />
+          <ToolSection title="Social & Revenue Tools" description="YouTube, Instagram, AdSense, and creator income calculators." slugs={socialRevenueSlugs} />
           <ToolSection title="Recently Added" slugs={RECENT_TOOL_SLUGS.filter((s) => getToolBySlug(s))} />
           <ToolSection title="Salesforce Tools" description="Free generators for admins and developers." slugs={salesforceSlugs} />
           <ToolSection title="Financial Calculators" slugs={financialSlugs} />

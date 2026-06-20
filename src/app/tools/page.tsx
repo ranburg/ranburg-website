@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import ToolsHub from "@/components/tools/ToolsHub";
+import AllToolsNav from "@/components/tools/AllToolsNav";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 export const metadata: Metadata = buildMetadata({
   title: "Free Online Tools — Calculators, Converters & Developer Utilities | Ranburg",
-  description:
-    "Browse 30+ free online tools: SEO utilities, developer formatters, calculators, generators, and Salesforce tools. Search, filter by category, instant results.",
+    description:
+    "Browse 38+ free online tools: revenue calculators, SEO utilities, developer formatters, social analytics, and Salesforce tools. Search, filter by category, instant results.",
   path: "/tools",
   keywords: [
     "free online tools",
@@ -41,7 +42,10 @@ export default function ToolsPage() {
 
       <section className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ToolsHub />
+          <div className="grid gap-8 lg:grid-cols-[220px_1fr]">
+            <AllToolsNav />
+            <ToolsHub />
+          </div>
         </div>
       </section>
     </div>

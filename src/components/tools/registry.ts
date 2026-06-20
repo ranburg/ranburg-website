@@ -24,6 +24,9 @@ import CurrencyConverter from "./CurrencyConverter";
 import GSTCalculator from "./GSTCalculator";
 import YouTubeChannelInsights from "./YouTubeChannelInsights";
 import InstagramProfileInsights from "./InstagramProfileInsights";
+import YouTubeRevenueCalculator from "./YouTubeRevenueCalculator";
+import InstagramRevenueCalculator from "./InstagramRevenueCalculator";
+import AdSenseRevenueCalculator from "./AdSenseRevenueCalculator";
 import CronGenerator from "./salesforce/CronGenerator";
 import FormulaGenerator from "./salesforce/FormulaGenerator";
 import SOQLBuilder from "./salesforce/SOQLBuilder";
@@ -61,6 +64,9 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "gst-calculator": GSTCalculator,
   "youtube-channel-insights": YouTubeChannelInsights,
   "instagram-profile-insights": InstagramProfileInsights,
+  "youtube-revenue-calculator": YouTubeRevenueCalculator,
+  "instagram-revenue-calculator": InstagramRevenueCalculator,
+  "adsense-revenue-calculator": AdSenseRevenueCalculator,
   "cron-generator": CronGenerator,
   "formula-generator": FormulaGenerator,
   "soql-builder": SOQLBuilder,
