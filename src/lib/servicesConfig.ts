@@ -111,103 +111,7 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
           "Absolutely. Ranburg LLP serves clients across time zones with structured communication, overlap hours, and documentation standards suitable for enterprise procurement and security reviews.",
       },
     ],
-    relatedSlugs: ["salesforce-development", "managed-services", "staff-augmentation"],
-  },
-  {
-    slug: "salesforce-development",
-    title: "Salesforce Development",
-    shortDescription:
-      "Custom Apex, Flow, LWC, and API development from a Salesforce development company in India.",
-    icon: "Code2",
-    gradient: "from-sky-500 to-blue-600",
-    badge: "Custom Build",
-    seo: {
-      title: "Salesforce Development Company India | Ranburg",
-      description:
-        "Salesforce development company in Jaipur, India. Apex, Flow, LWC, integrations, and scalable custom apps built by certified developers.",
-      keywords: [
-        "Salesforce development company India",
-        "Salesforce developers Jaipur",
-        "Apex development",
-        "Salesforce custom development",
-        "Ranburg LLP",
-      ],
-    },
-    sections: [
-      {
-        heading: "Enterprise Salesforce Development From a Trusted India Team",
-        paragraphs: [
-          "Ranburg LLP is a Salesforce development company headquartered in Jaipur, Rajasthan, India, building production-grade solutions on the Salesforce Platform. Our developers deliver custom Apex, record-triggered and autolaunched Flows, Lightning Web Components, Visualforce modernization, and REST/SOAP integrations that respect governor limits and long-term maintainability. We serve ISVs, enterprises, and agencies that need reliable offshore development without compromising code quality.",
-          "Custom development on Salesforce requires more than copying snippets from forums. Triggers must be bulkified, queries selective, and asynchronous processing used judiciously. Ranburg developers follow internal coding standards derived from Salesforce best practices: one trigger per object, service layer separation, comprehensive test coverage, and static analysis before every pull request. We document APIs, error handling, and retry logic so your operations team can support releases confidently.",
-          "Our development practice spans greenfield apps on Experience Cloud, extensions to standard objects, and packaged solutions for AppExchange. Whether you need a CPQ customization, a custom lead routing engine, or an event-driven architecture using Platform Events, Ranburg assigns developers with relevant certifications and domain context.",
-          "Clients choose Ranburg for predictable velocity: sprint commitments, transparent burndown, and demo-ready increments every two weeks. We integrate with your Git repositories, run Apex tests in CI, and support sandbox-to-production promotion aligned with your change advisory board.",
-        ],
-      },
-      {
-        heading: "Salesforce Development Capabilities",
-        paragraphs: [
-          "Apex development remains central to complex Salesforce programs. Ranburg builds invocable actions, batch and queueable jobs, schedulable classes, and REST endpoints with OAuth and named credential security. We implement platform events and Change Data Capture subscribers for event-driven architectures that decouple Salesforce from ERP, billing, and data warehouse systems.",
-          "Declarative automation through Flow has matured into an enterprise tool. Our developers design fault-tolerant flows with subflows, orchestration, and proper error paths—reducing legacy Process Builder and Workflow Rule debt. When Flow is insufficient, we extend with Apex invocable methods, maintaining a clear boundary between declarative and programmatic layers.",
-          "Lightning Web Component development is a core strength. Ranburg builds reusable LWC libraries with Jest unit tests, Lightning Message Service, and wire adapters to Apex controllers. We optimize for mobile field users, accessibility, and SLDS consistency. Legacy Visualforce and Aura components are migrated incrementally to LWC without disrupting user workflows.",
-          "Integration development connects Salesforce to SAP, Oracle, Microsoft Dynamics, payment gateways, and marketing platforms. We implement callouts with timeout handling, circuit breakers, and idempotent upserts. For high-volume sync, we recommend Bulk API 2.0, composite requests, and external objects where appropriate.",
-        ],
-      },
-      {
-        heading: "Quality, Security, and DevOps for Salesforce Code",
-        paragraphs: [
-          "Ranburg enforces minimum 85% Apex test coverage with meaningful assertions—not vanity tests. We use PMD, ESLint for LWC, and peer review checklists covering CRUD/FLS, SOQL injection, and sharing violations. Security review preparation for AppExchange ISVs is available as a specialized workstream.",
-          "Our Jaipur development center adopts DevOps tooling: unlocked or managed packages, scratch orgs, and automated deployments via Copado, Gearset, or Salesforce CLI scripts. Feature branches map to user stories; hotfix branches follow your incident process. We maintain environment parity and seed data strategies for realistic UAT.",
-          "Performance is validated early. Developers analyze query plans, avoid SOQL in loops, and batch DML appropriately. We profile Experience Cloud pages and optimize LWC rendering for large data sets with virtualization and lazy loading patterns.",
-          "Documentation accompanies every release: solution design summaries, class diagrams for complex domains, and runbooks for batch jobs and integration schedules. Ranburg believes maintainable Salesforce development means the next developer—internal or external—can onboard quickly.",
-        ],
-      },
-      {
-        heading: "Partner With Ranburg for Salesforce Development in India",
-        paragraphs: [
-          "Engagement models include fixed-price modules, dedicated development pods, and staff augmentation with Ranburg developers embedded in your standups. We scale teams up or down based on release calendars and funding cycles.",
-          "Our developers collaborate with functional consultants on Revenue Cloud, Industries, and OmniStudio programs—ensuring custom code complements declarative industry models rather than fighting them. Cross-training reduces silos and accelerates defect resolution.",
-          "Start with a technical discovery session: share your architecture diagram, integration list, and pain points. Ranburg will propose a backlog, estimate story points, and identify risks such as technical debt in triggers or unmanaged packages.",
-          "Contact Ranburg LLP today to hire Salesforce developers in India who deliver secure, tested, and well-documented code aligned to your enterprise standards.",
-        ],
-      },
-      {
-        heading: "Ranburg Delivery Standards for Offshore Salesforce Development",
-        paragraphs: [
-          "Offshore Salesforce development succeeds when communication rhythms and definition of done are explicit from sprint zero. Ranburg LLP assigns a technical lead in Jaipur who joins your refinement sessions, challenges vague user stories, and translates acceptance criteria into testable Apex and LWC deliverables. Daily standups, demo recordings, and Confluence or Notion documentation keep stakeholders aligned across continents without micromanagement.",
-          "We maintain a library of reusable patterns—trigger frameworks, integration adapters, LWC datatable shells, and Flow error-handling templates—that accelerate delivery while reducing bespoke risk. Patterns are adapted per client security policies, not copy-pasted blindly. This approach shortens time-to-first-release for new engagements without sacrificing uniqueness where your business requires differentiation.",
-          "Ranburg developers participate in your code review culture. Pull requests include description of governor limit impact, security notes, and rollback considerations. We welcome architect feedback and iterate quickly. For regulated clients, we provide evidence packages for change advisory boards: test results, deployment manifests, and data migration validation summaries.",
-          "Long-term partnerships matter. Many clients begin with a fixed-scope module, expand to a dedicated pod, and retain Ranburg for managed services after go-live. Continuity of team members reduces onboarding tax and preserves institutional knowledge of your org's quirks—undocumented automation, legacy integrations, and naming history that new hires would otherwise rediscover painfully.",
-        ],
-      },
-    ],
-    faq: [
-      {
-        question: "What technologies do Ranburg Salesforce developers use?",
-        answer:
-          "Our team works with Apex, Flow, LWC, Aura migration, Visualforce, SOQL/SOSL, Platform Events, REST/SOAP APIs, and standard Salesforce DevOps toolchains.",
-      },
-      {
-        question: "Can I hire dedicated Salesforce developers from Ranburg?",
-        answer:
-          "Yes. We offer dedicated developers and pods through our staff augmentation and managed development models, with overlap hours for US and EU clients.",
-      },
-      {
-        question: "Do you provide Apex code review services?",
-        answer:
-          "We perform standalone code reviews, PMD analysis, and remediation sprints for orgs with legacy trigger frameworks or failed security scans.",
-      },
-      {
-        question: "How do you ensure code quality offshore?",
-        answer:
-          "Peer reviews, automated tests, CI pipelines, coding standards, and regular architect oversight ensure Ranburg deliveries meet enterprise quality bars.",
-      },
-      {
-        question: "Where is Ranburg's development team located?",
-        answer:
-          "Our primary Salesforce development center is in Jaipur, Rajasthan, India, serving global clients with secure access and NDA-backed engagements.",
-      },
-    ],
-    relatedSlugs: ["lwc-development", "salesforce-integrations", "salesforce-consulting"],
+    relatedSlugs: ["lwc-development", "managed-services", "staff-augmentation"],
   },
   {
     slug: "omnistudio-development",
@@ -757,7 +661,7 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
           "Our LWC practice is based in Jaipur, Rajasthan, India, with overlap for US and European collaboration.",
       },
     ],
-    relatedSlugs: ["salesforce-development", "experience-cloud", "salesforce-integrations"],
+    relatedSlugs: ["salesforce-consulting", "experience-cloud", "salesforce-integrations"],
   },
   {
     slug: "salesforce-integrations",
@@ -871,7 +775,7 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
           "Yes. Our integration practice is based in Jaipur, Rajasthan, India, delivering for global enterprises.",
       },
     ],
-    relatedSlugs: ["salesforce-development", "revenue-cloud", "managed-services"],
+    relatedSlugs: ["lwc-development", "revenue-cloud", "managed-services"],
   },
   {
     slug: "managed-services",
@@ -984,7 +888,7 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
           "Our operations center is in Jaipur, Rajasthan, India, with certified admins and developers supporting global clients.",
       },
     ],
-    relatedSlugs: ["salesforce-consulting", "staff-augmentation", "salesforce-development"],
+    relatedSlugs: ["salesforce-consulting", "staff-augmentation", "lwc-development"],
   },
   {
     slug: "staff-augmentation",
@@ -1098,7 +1002,7 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
           "Resources are based in Jaipur, Rajasthan, India, with secure remote delivery for international clients.",
       },
     ],
-    relatedSlugs: ["salesforce-development", "managed-services", "salesforce-consulting"],
+    relatedSlugs: ["lwc-development", "managed-services", "salesforce-consulting"],
   },
 ];
 

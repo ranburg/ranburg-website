@@ -287,7 +287,7 @@ Our business toolkit emphasizes accuracy and transparency. Financial calculators
 
 Whether you are preparing investor updates, quoting international clients, or estimating creator revenue, these tools deliver fast answers you can screenshot, export, or discuss in meetings. Each page includes detailed SEO content, FAQs, and links to related calculators so you can explore the full Ranburg toolkit in one session.
 
-Ranburg also offers custom software and Salesforce consulting for teams that outgrow spreadsheets. Business tools remain free forever as part of our commitment to useful, discoverable web utilities.`,
+Ranburg publishes free business tools based on real search demand. Business tools remain free forever as part of our commitment to useful, discoverable web utilities.`,
     icon: "BarChart3",
     gradient: "from-amber-500 to-orange-500",
     keywords: ["business tools", "GST calculator", "currency converter", "PDF tools"],
@@ -297,7 +297,7 @@ Ranburg also offers custom software and Salesforce consulting for teams that out
       { question: "Is GST calculated for India only?", answer: "Yes. The GST calculator supports India CGST/SGST slabs at 5%, 12%, 18%, and 28%." },
       { question: "Are PDF files uploaded to Ranburg?", answer: "No. PDF merge and extract tools run entirely in your browser." },
       { question: "Can I use these for my company?", answer: "Yes. Commercial use of tool outputs is permitted." },
-      { question: "Do you offer custom business software?", answer: "Yes. Contact Ranburg for Salesforce consulting and custom development engagements." },
+      { question: "Are Ranburg business tools free?", answer: "Yes. All business tools on Ranburg are free to use with no signup required." },
     ],
   },
   {

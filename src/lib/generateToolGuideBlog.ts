@@ -71,7 +71,7 @@ export function generateToolGuideBlog(tool: ToolConfig, dateIndex: number): Blog
     },
     sections,
     faq: tool.faq.slice(0, 5),
-    relatedServices: tool.category === "salesforce" ? ["salesforce-development"] : [],
+    relatedServices: [],
     relatedTools: [tool.slug],
   };
 }

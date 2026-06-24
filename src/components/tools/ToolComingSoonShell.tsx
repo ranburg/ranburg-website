@@ -87,11 +87,11 @@ export default function ToolComingSoonShell({ tool }: ToolComingSoonShellProps) 
           </div>
 
           <p className="text-sm text-theme-subtle">
-            Need help now?{" "}
-            <Link href="/contact" className="text-accent hover:underline">
-              Contact Ranburg LLP
-            </Link>{" "}
-            for Salesforce consulting and development.
+            Explore other free tools in the{" "}
+            <Link href="/tools" className="text-accent hover:underline">
+              Ranburg tools library
+            </Link>
+            .
           </p>
         </div>
       </section>

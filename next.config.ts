@@ -18,7 +18,15 @@ const nextConfig: NextConfig = {
   },
   poweredByHeader: false,
   async redirects() {
-    return [...toolRedirects, ...getCategoryAliasRedirects()];
+    return [
+      {
+        source: "/services/salesforce-development",
+        destination: "/tools/salesforce",
+        permanent: true,
+      },
+      ...toolRedirects,
+      ...getCategoryAliasRedirects(),
+    ];
   },
 };
 

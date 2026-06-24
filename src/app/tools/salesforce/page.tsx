@@ -28,7 +28,7 @@ const SEO_SECTIONS = [
     heading: "Why Salesforce Professionals Need Dedicated Productivity Tools",
     paragraphs: [
       "Salesforce administrators and developers spend hours each week writing formulas, crafting SOQL queries, scheduling jobs, and validating automation. Generic text editors and spreadsheet scratchpads introduce syntax errors that surface only in sandbox testing — or worse, in production. Purpose-built Salesforce tools reduce rework, accelerate delivery, and help teams standardize patterns across orgs.",
-      "Ranburg LLP — a Salesforce consulting firm based in Jaipur, India — built this free Salesforce tool hub for the global community. Whether you configure Revenue Cloud CPQ, maintain OmniStudio Integration Procedures, or support Sales Cloud operations, these utilities run entirely in your browser with no data uploaded to our servers.",
+      "Ranburg built this free Salesforce tool hub for admins and developers worldwide. Whether you configure formulas, craft SOQL queries, or schedule jobs, these utilities run entirely in your browser with no data uploaded to our servers.",
     ],
   },
   {
@@ -48,8 +48,7 @@ const SEO_SECTIONS = [
   {
     heading: "Revenue Cloud and OmniStudio Utilities",
     paragraphs: [
-      "Quote-to-cash teams use the Revenue Cloud pricing calculator to model scenarios before CPQ configuration sessions. OmniStudio practitioners leverage expression builders for FlexCard and Integration Procedure development. Ranburg consultants use these same tools on client engagements across telecommunications, insurance, and B2B software verticals.",
-      "Explore our Revenue Cloud and OmniStudio consulting services when you need implementation partners — not just utilities.",
+      "Quote-to-cash teams use pricing calculators to model scenarios before configuration sessions. Explore the full tool library for more Salesforce admin and developer utilities.",
     ],
   },
 ];
@@ -65,12 +64,12 @@ export default function SalesforceToolsHubPage() {
             Free <span className="text-gradient-accent">Salesforce</span> Developer & Admin Tools
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-theme-muted">
-            Salesforce productivity tools for formula builders, query builders, Apex helpers, and admin utilities —
-            built by certified Ranburg consultants. No signup required.
+            Salesforce productivity tools for formula builders, query builders, Apex helpers, and admin utilities.
+            No signup required.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Button href="/contact" icon>Discuss Your Salesforce Project</Button>
-            <Button href="/services/salesforce-development" variant="outline">Salesforce Development Services</Button>
+            <Button href="/tools" icon>Browse All Tools</Button>
+            <Button href="/blog" variant="outline">Salesforce Guides</Button>
           </div>
         </div>
       </section>
@@ -145,13 +144,13 @@ export default function SalesforceToolsHubPage() {
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="glass-card p-10 text-center">
-            <h2 className="text-2xl font-bold text-theme-heading">Need Expert Salesforce Help?</h2>
+            <h2 className="text-2xl font-bold text-theme-heading">Explore More Free Tools</h2>
             <p className="mx-auto mt-4 max-w-xl text-theme-muted">
-              Ranburg LLP provides OmniStudio, Revenue Cloud, Industries Cloud, LWC, and integration services.
+              Calculators, PDF utilities, SEO tools, and more — all free and browser-based.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Button href="/contact" size="lg" icon>Schedule Consultation</Button>
-              <Button href="/case-studies" variant="outline" size="lg">View Case Studies</Button>
+              <Button href="/tools" size="lg" icon>Browse All Tools</Button>
+              <Button href="/blog" variant="outline" size="lg">Read Guides</Button>
             </div>
           </div>
         </div>

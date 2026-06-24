@@ -132,9 +132,12 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
             )}
             <div className="glass-card mt-16 p-8 text-center">
-              <h2 className="text-xl font-bold text-theme-heading">Need custom software or Salesforce consulting?</h2>
-              <p className="mt-3 text-theme-muted">Ranburg LLP helps teams build production Salesforce and web solutions.</p>
-              <div className="mt-6"><Button href="/contact" icon>Talk to a Consultant</Button></div>
+              <h2 className="text-xl font-bold text-theme-heading">Explore more free tools</h2>
+              <p className="mt-3 text-theme-muted">Browse calculators, formatters, SEO utilities, and Salesforce admin tools on Ranburg.</p>
+              <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Button href="/tools" icon>Browse Tools</Button>
+                <Button href="/blog" variant="outline">Read Guides</Button>
+              </div>
             </div>
           </div>
         </article>

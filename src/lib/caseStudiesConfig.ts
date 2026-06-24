@@ -123,7 +123,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Self-service service booking for owners",
       "Executive fleet and loyalty dashboards",
     ],
-    relatedServices: ["salesforce-industries", "experience-cloud", "salesforce-development"],
+    relatedServices: ["salesforce-industries", "experience-cloud", "lwc-development"],
     seo: {
       title: "Automotive Cloud Case Study | Ranburg LLP",
       description: "Automotive Cloud OEM and dealer community implementation by certified Ranburg consultants.",
@@ -151,7 +151,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "24/7 monitoring and alerting runbook",
       "Sandbox data masking for compliance",
     ],
-    relatedServices: ["salesforce-integrations", "salesforce-development", "managed-services"],
+    relatedServices: ["salesforce-integrations", "lwc-development", "managed-services"],
     seo: {
       title: "Enterprise Salesforce Integration Case Study | Ranburg",
       description: "Salesforce SAP and payment integration architecture — API-led connectivity by Ranburg LLP India.",

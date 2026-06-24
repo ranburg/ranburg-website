@@ -71,9 +71,7 @@ The ${tool.title} is particularly useful for ${catLabel.toLowerCase()} workflows
 
 Under the hood, ${tool.formula} Ranburg implements this logic with modern browser APIs and tested algorithms so results are consistent across devices and browsers. Advanced options are available when you need finer control over formatting, encoding, tax splits, or calculation parameters.
 
-For ${catLabel.toLowerCase()} workflows, the ${tool.title} integrates naturally with other Ranburg utilities in the ${hubLabel} category. Copy output with one click, paste into your CMS, IDE, spreadsheet, invoice, or Salesforce org, and continue your work. Related tools are suggested at the bottom of every page so you can discover complementary utilities without returning to the tools hub.
-
-If you need help beyond free tools, Ranburg LLP also offers custom software development and Salesforce consulting — contact us for production implementations, integrations, and enterprise support.`;
+For ${catLabel.toLowerCase()} workflows, the ${tool.title} integrates naturally with other Ranburg utilities in the ${hubLabel} category. Copy output with one click, paste into your CMS, IDE, spreadsheet, invoice, or Salesforce org, and continue your work. Related tools are suggested at the bottom of every page so you can discover complementary utilities without returning to the tools hub.`;
 
   const examples =
     EXAMPLE_TEMPLATES[tool.category] ?? EXAMPLE_TEMPLATES.default;

@@ -20,10 +20,6 @@ import RecentlyViewed from "@/components/tools/RecentlyViewed";
 import ToolInternalLinks from "@/components/tools/ToolInternalLinks";
 import ToolRenderer from "@/components/tools/ToolRenderer";
 
-const SALESFORCE_SERVICE_LINKS: Record<string, { href: string; label: string }> = {
-  salesforce: { href: "/services/salesforce-development", label: "Salesforce Development Services" },
-};
-
 interface ToolPageProps {
   slug: string;
 }
@@ -62,11 +58,6 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
     softwareApplicationJsonLd(tool.title, tool.seo.description, toolUrl, tool.badge),
     faqJsonLd(seoSections.faq),
   ];
-
-  const serviceLink =
-    tool.category === "salesforce"
-      ? SALESFORCE_SERVICE_LINKS.salesforce
-      : null;
 
   const guideBlog = getBlogForTool(slug);
 
@@ -125,17 +116,6 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
               <ToolSeoContent tool={tool} />
               <AdPlaceholder placement="between-content" className="hidden md:block" />
               <ConsultingCTA className="mt-12" />
-              {serviceLink && (
-                <div className="mt-8 rounded-xl border border-accent/20 bg-accent/5 p-6">
-                  <p className="font-semibold text-theme-heading">Need expert Salesforce help?</p>
-                  <p className="mt-2 text-sm text-theme-muted">
-                    Ranburg LLP consultants build production OmniStudio, Revenue Cloud, and LWC solutions.
-                  </p>
-                  <Link href={serviceLink.href} prefetch className="mt-4 inline-flex text-sm font-medium text-accent hover:underline">
-                    {serviceLink.label} →
-                  </Link>
-                </div>
-              )}
               <ToolInternalLinks slug={slug} />
               <ToolRecommendations currentSlug={slug} layout="grid" limit={8} />
               <RecentlyViewed excludeSlug={slug} />

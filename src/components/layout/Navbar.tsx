@@ -4,14 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap, ChevronDown, Search } from "lucide-react";
+import { Menu, X, Zap, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
-import ServicesDropdown from "@/components/layout/ServicesDropdown";
 import ToolsSubNav from "@/components/layout/ToolsSubNav";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import { useCommandPaletteOptional } from "@/components/search/CommandPaletteProvider";
-import { SERVICES_CONFIG } from "@/lib/servicesConfig";
-import { getServiceIcon } from "@/lib/serviceIcons";
 
 const navLinks = [
   { href: "/blog", label: "Blog" },
@@ -30,11 +27,9 @@ export default function Navbar() {
   const pathname = usePathname();
   const palette = useCommandPaletteOptional();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const isToolsActive = pathname.startsWith("/tools");
-  const isServicesActive = pathname.startsWith("/services");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -90,7 +85,6 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <ServicesDropdown />
             <Link href="/contact" className={navLinkClass(pathname === "/contact")}>
               Contact
             </Link>
@@ -183,36 +177,6 @@ export default function Navbar() {
                       {link.label}
                     </Link>
                   ))}
-
-                  <button
-                    type="button"
-                    onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                    className={cn(
-                      "flex w-full items-center justify-between rounded-lg px-4 py-3 text-sm font-medium",
-                      isServicesActive ? "bg-theme-hover text-theme-heading" : "text-theme-muted"
-                    )}
-                  >
-                    Services
-                    <ChevronDown className={cn("h-4 w-4 transition-transform", mobileServicesOpen && "rotate-180")} />
-                  </button>
-                  {mobileServicesOpen && (
-                    <div className="ml-2 space-y-1 border-l border-theme-subtle pl-4">
-                      {SERVICES_CONFIG.map((service) => {
-                        const Icon = getServiceIcon(service.icon);
-                        return (
-                          <Link
-                            key={service.slug}
-                            href={`/services/${service.slug}`}
-                            onClick={closeMobile}
-                            className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-theme-muted"
-                          >
-                            <Icon className="h-3.5 w-3.5 shrink-0" />
-                            <span className="min-w-0 truncate">{service.title}</span>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  )}
 
                   <Link href="/contact" onClick={closeMobile} className="rounded-lg px-4 py-3 text-sm font-medium text-theme-muted">
                     Contact

@@ -7,8 +7,6 @@ import RecentlyAddedTools from "@/components/home/RecentlyAddedTools";
 import MetricToolsSection from "@/components/home/MetricToolsSection";
 import ToolCategoryCards from "@/components/home/ToolCategoryCards";
 import CaseStudiesPreview from "@/components/home/CaseStudiesPreview";
-import ServicesPreview from "@/components/home/ServicesPreview";
-import ConsultingCTA from "@/components/ui/ConsultingCTA";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 export const metadata: Metadata = buildMetadata({
@@ -41,10 +39,6 @@ export default function HomePage() {
       <ToolCategoryCards />
       <CaseStudiesPreview />
       <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
-      <ServicesPreview />
-      <div className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-        <ConsultingCTA />
-      </div>
     </>
   );
 }

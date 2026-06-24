@@ -31,7 +31,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm leading-relaxed text-theme-muted">
-              Free online tools for developers, businesses, and SEO professionals — plus Salesforce consulting from Ranburg LLP, Jaipur, India.
+              Free online tools for developers, businesses, and SEO professionals — calculators, formatters, and utilities from Ranburg.
             </p>
             <div className="flex gap-3">
               <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-lg border border-theme bg-theme-surface text-theme-muted hover:border-accent/30 hover:text-accent" aria-label="LinkedIn">
@@ -82,7 +82,6 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 { href: "/about", label: "About" },
-                { href: "/services", label: "Services" },
                 { href: "/case-studies", label: "Case Studies" },
                 { href: "/contact", label: "Contact" },
               ].map((link) => (

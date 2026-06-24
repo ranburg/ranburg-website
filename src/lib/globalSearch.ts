@@ -1,6 +1,5 @@
 import { TOOLS_CONFIG } from "./toolsConfig";
 import { COMING_SOON_TOOLS } from "./toolComingSoonConfig";
-import { SERVICES_CONFIG } from "./servicesConfig";
 import { BLOG_POSTS } from "./blogConfig";
 import { CASE_STUDIES } from "./caseStudiesConfig";
 import { searchTools } from "./toolSearch";
@@ -63,19 +62,6 @@ export function globalSearch(
   }
 
   if (filter === "all") {
-    SERVICES_CONFIG.filter((s) => {
-      const hay = `${s.title} ${s.shortDescription} ${s.seo.keywords.join(" ")}`;
-      return matchesQuery(hay, q);
-    }).forEach((s) => {
-      results.push({
-        type: "service",
-        title: s.title,
-        description: s.shortDescription,
-        href: `/services/${s.slug}`,
-        badge: "Service",
-      });
-    });
-
     CASE_STUDIES.filter((c) => {
       const hay = `${c.title} ${c.excerpt} ${c.seo.keywords.join(" ")}`;
       return matchesQuery(hay, q);

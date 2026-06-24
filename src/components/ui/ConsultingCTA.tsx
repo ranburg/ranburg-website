@@ -11,9 +11,9 @@ export default function ConsultingCTA({ className, variant = "default" }: Consul
     return (
       <div className={className}>
         <p className="text-sm text-theme-muted">
-          Need custom software or Salesforce consulting?{" "}
-          <Link href="/contact" className="font-medium text-accent hover:underline">
-            Contact Ranburg →
+          Explore more free tools on Ranburg.{" "}
+          <Link href="/tools" className="font-medium text-accent hover:underline">
+            Browse all tools →
           </Link>
         </p>
       </div>
@@ -24,18 +24,18 @@ export default function ConsultingCTA({ className, variant = "default" }: Consul
     <section className={className}>
       <div className="rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/10 to-accent-emerald/5 p-8 text-center sm:p-10">
         <h2 className="text-2xl font-bold text-theme-heading sm:text-3xl">
-          Need custom software or Salesforce consulting?
+          More free tools to explore
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-theme-muted">
-          Ranburg LLP builds production Salesforce, OmniStudio, and web solutions for businesses worldwide.
-          Free tools are just the start — let&apos;s talk about your project.
+          Calculators, formatters, SEO utilities, PDF tools, and Salesforce admin helpers —
+          all free, browser-based, and ready to use.
         </p>
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button href="/contact" size="lg" icon>
-            Contact Ranburg
+          <Button href="/tools" size="lg" icon>
+            Browse All Tools
           </Button>
-          <Button href="/services" variant="outline" size="lg">
-            View Services
+          <Button href="/blog" variant="outline" size="lg">
+            Read Guides
           </Button>
         </div>
       </div>

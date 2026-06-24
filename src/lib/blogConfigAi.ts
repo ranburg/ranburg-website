@@ -108,7 +108,7 @@ export const AI_BLOG_POSTS: BlogPost[] = [
         answer: "Both can assist with Apex and architecture; Ranburg teams often use Claude for long-context analysis and Cursor's built-in models for in-editor coding.",
       },
     ],
-    relatedServices: ["salesforce-development", "salesforce-consulting"],
+    relatedServices: ["lwc-development", "salesforce-consulting"],
     relatedTools: ["apex-test-generator", "soql-builder"],
   },
   {
@@ -213,7 +213,7 @@ export const AI_BLOG_POSTS: BlogPost[] = [
         answer: "Check IT policy. Some organizations block AI editors or require Business plans with privacy guarantees.",
       },
     ],
-    relatedServices: ["salesforce-development", "lwc-development"],
+    relatedServices: ["lwc-development"],
     relatedTools: ["apex-test-generator", "validation-rule-generator"],
   },
   {
@@ -313,7 +313,7 @@ export const AI_BLOG_POSTS: BlogPost[] = [
         answer: "Use the latest Claude Sonnet or Opus tier available on your plan for complex Apex and integration work.",
       },
     ],
-    relatedServices: ["salesforce-development", "omnistudio-development", "salesforce-integrations"],
+    relatedServices: ["omnistudio-development", "salesforce-integrations", "lwc-development"],
     relatedTools: ["apex-test-generator", "formula-generator", "governor-limits-calculator"],
   },
   {
@@ -404,7 +404,7 @@ export const AI_BLOG_POSTS: BlogPost[] = [
         answer: "Use @-file references to real objects and enable strict .cursorrules requiring validation against schema.",
       },
     ],
-    relatedServices: ["lwc-development", "salesforce-development"],
+    relatedServices: ["lwc-development"],
     relatedTools: ["apex-test-generator", "soql-builder", "flow-formula-builder"],
   },
   {
@@ -510,7 +510,7 @@ export const AI_BLOG_POSTS: BlogPost[] = [
         answer: "Yes. Contact Ranburg LLP for consulting, staff aug, and developer enablement on AI-assisted Salesforce delivery.",
       },
     ],
-    relatedServices: ["salesforce-consulting", "salesforce-development", "staff-augmentation"],
+    relatedServices: ["salesforce-consulting", "staff-augmentation", "lwc-development"],
     relatedTools: ["formula-generator", "omnistudio-expression-builder", "apex-test-generator"],
   },
 ];

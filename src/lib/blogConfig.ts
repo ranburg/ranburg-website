@@ -542,7 +542,7 @@ export const BLOG_POSTS: BlogPost[] = [
           "Our LWC practice is headquartered in Jaipur, Rajasthan, India, serving global Salesforce customers.",
       },
     ],
-    relatedServices: ["lwc-development", "experience-cloud", "salesforce-development"],
+    relatedServices: ["lwc-development", "experience-cloud", "salesforce-consulting"],
     relatedTools: ["apex-test-generator", "governor-limits-calculator"],
   },
   {
@@ -701,7 +701,7 @@ export const BLOG_POSTS: BlogPost[] = [
           "Our integration practice is based in Jaipur, Rajasthan, India.",
       },
     ],
-    relatedServices: ["salesforce-integrations", "salesforce-development", "revenue-cloud"],
+    relatedServices: ["salesforce-integrations", "lwc-development", "revenue-cloud"],
     relatedTools: ["soql-builder", "cron-generator"],
   },
   {
