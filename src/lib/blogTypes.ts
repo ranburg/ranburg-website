@@ -39,4 +39,6 @@ export interface BlogPost {
   relatedTools: string[];
   /** Primary tool this article promotes — shown as featured CTA */
   featuredToolSlug?: string;
+  /** Optional custom cover image URL */
+  coverImage?: string;
 }

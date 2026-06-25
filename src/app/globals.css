@@ -199,6 +199,37 @@
   input[type="range"]::-moz-range-thumb {
     @apply slider-thumb border-0;
   }
+
+  .blog-prose {
+    @apply text-theme-muted;
+  }
+
+  .blog-prose > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .blog-prose h2 {
+    @apply pt-8 text-2xl font-bold tracking-tight text-theme-heading sm:text-3xl;
+    margin-top: 2.5rem;
+  }
+
+  .blog-prose h3 {
+    @apply pt-4 text-xl font-semibold text-theme-heading;
+    margin-top: 2rem;
+  }
+
+  .blog-prose p {
+    @apply text-base leading-[1.85] sm:text-lg;
+  }
+
+  .blog-prose p.lead {
+    @apply text-lg font-medium leading-relaxed text-theme-body sm:text-xl;
+  }
+
+  .blog-prose .blog-figure {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 @layer utilities {

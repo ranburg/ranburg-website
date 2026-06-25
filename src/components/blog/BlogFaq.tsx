@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 import type { BlogFaq as BlogFaqType } from "@/lib/blogConfig";
 
 export default function BlogFaq({ faq }: { faq: BlogFaqType[] }) {
@@ -10,18 +10,33 @@ export default function BlogFaq({ faq }: { faq: BlogFaqType[] }) {
 
   return (
     <section className="mt-16" itemScope itemType="https://schema.org/FAQPage">
-      <h2 className="text-2xl font-bold text-theme-heading">FAQ</h2>
+      <div className="flex items-center gap-2">
+        <HelpCircle className="h-5 w-5 text-accent" />
+        <h2 className="text-2xl font-bold text-theme-heading">Frequently asked questions</h2>
+      </div>
       <div className="mt-6 space-y-3">
         {faq.map((item, i) => (
-          <div key={i} className="glass-card overflow-hidden">
-            <button type="button" onClick={() => setOpen(open === i ? null : i)} className="flex w-full items-center justify-between px-5 py-4 text-left">
+          <div key={i} className="overflow-hidden rounded-xl border border-theme-subtle bg-[var(--glass-bg)]">
+            <button
+              type="button"
+              onClick={() => setOpen(open === i ? null : i)}
+              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+            >
               <span className="font-medium text-theme-heading">{item.question}</span>
-              <ChevronDown className={`h-4 w-4 transition-transform ${open === i ? "rotate-180" : ""}`} />
+              <ChevronDown className={`h-4 w-4 shrink-0 text-accent transition-transform ${open === i ? "rotate-180" : ""}`} />
             </button>
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
               {open === i && (
-                <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }}>
-                  <p className="border-t border-theme-subtle px-5 py-4 text-sm text-theme-muted">{item.answer}</p>
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="overflow-hidden"
+                >
+                  <p className="border-t border-theme-subtle px-5 py-4 text-sm leading-relaxed text-theme-muted sm:text-base">
+                    {item.answer}
+                  </p>
                 </motion.div>
               )}
             </AnimatePresence>
