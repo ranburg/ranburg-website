@@ -1,7 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import type { BlogPost } from "@/lib/blogTypes";
 import { inferBlogCategory } from "@/lib/blogCategories";
-import { getBlogCoverImage, getBlogCategoryGradient } from "@/lib/blogImages";
+import {
+  getBlogCoverImage,
+  getBlogCategoryGradient,
+  getBlogCategoryFallbackBg,
+} from "@/lib/blogImages";
 import { cn } from "@/lib/utils";
 
 interface BlogCoverImageProps {
@@ -24,17 +31,22 @@ export default function BlogCoverImage({
   const category = inferBlogCategory(post);
   const src = getBlogCoverImage(post);
   const gradient = getBlogCategoryGradient(category);
+  const fallbackBg = getBlogCategoryFallbackBg(category);
+  const [failed, setFailed] = useState(false);
 
   return (
-    <div className={cn("relative overflow-hidden bg-theme-surface", className)}>
-      <Image
-        src={src}
-        alt={post.title}
-        fill
-        priority={priority}
-        sizes={sizes}
-        className={cn("object-cover transition-transform duration-500 group-hover:scale-105", imageClassName)}
-      />
+    <div className={cn("relative overflow-hidden bg-theme-surface", failed && fallbackBg, className)}>
+      {!failed && (
+        <Image
+          src={src}
+          alt={post.title}
+          fill
+          priority={priority}
+          sizes={sizes}
+          className={cn("object-cover transition-transform duration-500 group-hover:scale-105", imageClassName)}
+          onError={() => setFailed(true)}
+        />
+      )}
       {overlay !== "none" && (
         <div
           className={cn(

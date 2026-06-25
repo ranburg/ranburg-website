@@ -1,73 +1,122 @@
 import type { BlogPost, BlogCategoryId } from "./blogTypes";
 import { inferBlogCategory } from "./blogCategories";
 
-/** Unsplash photo IDs — tech & topic-relevant stock imagery */
+/**
+ * Verified Unsplash photo IDs (HTTP 200 as of 2026).
+ * Format: images.unsplash.com/photo-{id}
+ */
+const VERIFIED_PHOTOS = {
+  workspace: "1504384308090-c894fdcc538d",
+  macbook: "1486312338219-ce68d2c6f44d",
+  laptopDesk: "1504868584819-f8e8b4b6d7e3",
+  laptopsRow: "1547658719-da2b51169166",
+  codeScreen: "1555066931-4365d14bab8c",
+  codeMatrix: "1526374965328-7f61d4dc18c5",
+  typing: "1516321318423-f06f85e504b3",
+  codeEditor: "1627398242454-45a1465c2479",
+  analytics: "1460925895917-afdab827c52f",
+  dashboard: "1551288049-bebda4e38f71",
+  teamLaptop: "1551434678-e076c223a692",
+  collaboration: "1522071820081-009f0129c71c",
+  meeting: "1600880292203-757bb62b4baf",
+  office: "1556761175-b413da4baf72",
+  officeWide: "1517245386807-bb43f82c33c4",
+  startup: "1553877522-43269d4ea984",
+  teamwork: "1552664730-d307ca884978",
+  group: "1529156069898-49953e39b3ac",
+  team: "1522202176988-66273c2fd55f",
+  socialPhone: "1563986768609-322da13575f3",
+  mobile: "1551650975-87deedd944c3",
+  portrait: "1507003211169-0a1dd7228f2d",
+  social: "1534528741775-53994a69daeb",
+  finance: "1554224154-26032ffc0d07",
+  payment: "1556742049-0cfed4f6a45d",
+  coins: "1554224155-6726b3ff858f",
+  design: "1504639725590-34d0984388bd",
+  aiAbstract: "1677442136019-21780ecad995",
+  aiBrain: "1620712943543-bcc4688e7485",
+  aiChip: "1633356122544-f134324a6cee",
+  cyber: "1550751827-4bd374c3f58b",
+  globeTech: "1451187580459-43490279c0fa",
+} as const;
+
 const CATEGORY_IMAGE_POOLS: Record<BlogCategoryId, string[]> = {
   creators: [
-    "1611162616475-24b65b0e751e",
-    "1529156069898-49953e39b3ac",
-    "1611162616305-c69b3fa7a2be",
-    "1557804506-669a77965ee3",
+    VERIFIED_PHOTOS.social,
+    VERIFIED_PHOTOS.group,
+    VERIFIED_PHOTOS.socialPhone,
+    VERIFIED_PHOTOS.mobile,
+    VERIFIED_PHOTOS.portrait,
   ],
   monetization: [
-    "1551288049-bebda4e38f71",
-    "1611974789855-9c2a4a4756a9",
-    "1460925895917-afdab827c52f",
-    "1554224154-26032ffc0d07",
+    VERIFIED_PHOTOS.dashboard,
+    VERIFIED_PHOTOS.analytics,
+    VERIFIED_PHOTOS.finance,
+    VERIFIED_PHOTOS.payment,
+    VERIFIED_PHOTOS.coins,
   ],
   calculators: [
-    "1554224155-6726b3ff858f",
-    "1579621970563-ebec756d7782",
-    "1556742049-0cfed4f6a45d",
-    "1611224923851-80b023f02d96",
+    VERIFIED_PHOTOS.coins,
+    VERIFIED_PHOTOS.finance,
+    VERIFIED_PHOTOS.payment,
+    VERIFIED_PHOTOS.dashboard,
+    VERIFIED_PHOTOS.analytics,
   ],
   generators: [
-    "1555066931-4365d14bab8c",
-    "1516321318423-f06f85e504b3",
-    "1526374965328-7f61d4dc18c5",
-    "1504639725590-34d0984388bd",
+    VERIFIED_PHOTOS.codeScreen,
+    VERIFIED_PHOTOS.typing,
+    VERIFIED_PHOTOS.codeMatrix,
+    VERIFIED_PHOTOS.design,
+    VERIFIED_PHOTOS.codeEditor,
   ],
   "digital-marketing": [
-    "1552664730-d307ca884978",
-    "1533750349088-2226f88b786d",
-    "1460925895917-afdab827c52f",
-    "1557804506-669a77965ee3",
+    VERIFIED_PHOTOS.teamwork,
+    VERIFIED_PHOTOS.startup,
+    VERIFIED_PHOTOS.analytics,
+    VERIFIED_PHOTOS.socialPhone,
+    VERIFIED_PHOTOS.dashboard,
   ],
   "small-business": [
-    "1556761175-b413da4baf72",
-    "1551434678-e076c223a692",
-    "1522071820081-009f0129c71c",
-    "1600880292203-757bb62b4baf",
+    VERIFIED_PHOTOS.office,
+    VERIFIED_PHOTOS.teamLaptop,
+    VERIFIED_PHOTOS.collaboration,
+    VERIFIED_PHOTOS.meeting,
+    VERIFIED_PHOTOS.officeWide,
   ],
   seo: [
-    "1432888498266-38ffec3eaf4a",
-    "1460925895917-afdab827c52f",
-    "1551288049-bebda4e38f71",
-    "1504868584819-f8e8b4b6d7e3",
+    VERIFIED_PHOTOS.analytics,
+    VERIFIED_PHOTOS.dashboard,
+    VERIFIED_PHOTOS.laptopDesk,
+    VERIFIED_PHOTOS.laptopsRow,
+    VERIFIED_PHOTOS.workspace,
   ],
   development: [
-    "1555066931-4365d14bab8c",
-    "1498050108023-c5249f4df850",
-    "1555949963-aa79dee941a8",
-    "1516321318423-f06f85e504b3",
+    VERIFIED_PHOTOS.codeScreen,
+    VERIFIED_PHOTOS.laptopsRow,
+    VERIFIED_PHOTOS.codeMatrix,
+    VERIFIED_PHOTOS.codeEditor,
+    VERIFIED_PHOTOS.typing,
   ],
   "business-productivity": [
-    "1486312338219-ce68d2c6f44d",
-    "1504384308090-c894fdcc538d",
-    "1522071820081-009f0129c71c",
-    "1556761175-b413da4baf72",
+    VERIFIED_PHOTOS.macbook,
+    VERIFIED_PHOTOS.workspace,
+    VERIFIED_PHOTOS.collaboration,
+    VERIFIED_PHOTOS.office,
+    VERIFIED_PHOTOS.team,
   ],
   "ai-tools": [
-    "1677442136019-21780ecad995",
-    "1620712943543-bcc4688e7485",
-    "1676297753962-41a8ae188a0b",
-    "1535378917042-45dd3dd0146d",
+    VERIFIED_PHOTOS.aiAbstract,
+    VERIFIED_PHOTOS.aiBrain,
+    VERIFIED_PHOTOS.aiChip,
+    VERIFIED_PHOTOS.cyber,
+    VERIFIED_PHOTOS.codeScreen,
   ],
   salesforce: [
-    "1451187580459-43490279c0fa",
-    "1551288049-bebda4e38f71",
-    "1550751827-4bd374c3f58b",
-    "1460925895917-afdab827c52f",
+    VERIFIED_PHOTOS.globeTech,
+    VERIFIED_PHOTOS.dashboard,
+    VERIFIED_PHOTOS.cyber,
+    VERIFIED_PHOTOS.analytics,
+    VERIFIED_PHOTOS.teamLaptop,
   ],
 };
 
@@ -97,6 +146,21 @@ const CATEGORY_ACCENT: Record<BlogCategoryId, string> = {
   "business-productivity": "from-indigo-500 to-blue-700",
   "ai-tools": "from-fuchsia-500 to-violet-600",
   salesforce: "from-blue-600 to-indigo-700",
+};
+
+/** Solid gradient fallback when an image fails to load */
+const CATEGORY_FALLBACK_BG: Record<BlogCategoryId, string> = {
+  creators: "bg-gradient-to-br from-rose-600 via-pink-600 to-orange-500",
+  monetization: "bg-gradient-to-br from-emerald-600 via-green-600 to-teal-500",
+  calculators: "bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-500",
+  generators: "bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-500",
+  "digital-marketing": "bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500",
+  "small-business": "bg-gradient-to-br from-slate-600 via-slate-700 to-slate-800",
+  seo: "bg-gradient-to-br from-cyan-600 via-teal-600 to-blue-600",
+  development: "bg-gradient-to-br from-sky-600 via-blue-600 to-indigo-700",
+  "business-productivity": "bg-gradient-to-br from-indigo-600 via-blue-700 to-violet-700",
+  "ai-tools": "bg-gradient-to-br from-fuchsia-600 via-violet-600 to-purple-700",
+  salesforce: "bg-gradient-to-br from-blue-700 via-indigo-700 to-slate-800",
 };
 
 function hashString(input: string): number {
@@ -136,6 +200,10 @@ export function getBlogCategoryGradient(category: BlogCategoryId): string {
 
 export function getBlogCategoryAccent(category: BlogCategoryId): string {
   return CATEGORY_ACCENT[category];
+}
+
+export function getBlogCategoryFallbackBg(category: BlogCategoryId): string {
+  return CATEGORY_FALLBACK_BG[category];
 }
 
 export function slugifyHeading(text: string): string {
