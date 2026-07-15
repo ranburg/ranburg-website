@@ -5,12 +5,12 @@ import { Download } from "lucide-react";
 import FileDropzone from "@/components/tools/shared/FileDropzone";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
+import { BeforeAfterBar } from "@/components/tools/viz";
 import {
   loadImageFromFile,
   drawToCanvas,
   canvasToBlob,
   downloadBlob,
-  formatBytes,
 } from "@/lib/imageProcessing";
 
 export function ImageCompressorTool() {
@@ -106,60 +106,109 @@ export function ImageResizerTool() {
 }
 
 export function CropImageTool() {
-  const [preview, setPreview] = useState<string | null>(null);
+  const [srcPreview, setSrcPreview] = useState<string | null>(null);
+  const [outPreview, setOutPreview] = useState<string | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);
-  const [crop, setCrop] = useState({ x: 0, y: 0, w: 200, h: 200 });
-  const imgRef = { current: null as HTMLImageElement | null };
+  const [natural, setNatural] = useState({ w: 0, h: 0 });
+  const [crop, setCrop] = useState({ x: 10, y: 10, w: 60, h: 60 }); // % of displayed box
+  const [imgEl, setImgEl] = useState<HTMLImageElement | null>(null);
   const [name, setName] = useState("cropped");
+  const [dragging, setDragging] = useState<"move" | "br" | null>(null);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0, crop: crop });
 
   const process = async (file: File) => {
     setName(file.name.replace(/\.[^.]+$/, ""));
+    setBlob(null);
+    setOutPreview(null);
     const img = await loadImageFromFile(file);
-    imgRef.current = img;
-    setCrop({ x: 0, y: 0, w: Math.min(200, img.width), h: Math.min(200, img.height) });
-    setPreview(img.src);
+    setImgEl(img);
+    setNatural({ w: img.width, h: img.height });
+    setSrcPreview(img.src);
+    setCrop({ x: 10, y: 10, w: 60, h: 60 });
+  };
+
+  const onPointerDown = (mode: "move" | "br", e: React.PointerEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragging(mode);
+    setDragStart({ x: e.clientX, y: e.clientY, crop: { ...crop } });
+    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragging) return;
+    const box = e.currentTarget.getBoundingClientRect();
+    const dx = ((e.clientX - dragStart.x) / box.width) * 100;
+    const dy = ((e.clientY - dragStart.y) / box.height) * 100;
+    if (dragging === "move") {
+      setCrop({
+        ...dragStart.crop,
+        x: Math.min(Math.max(dragStart.crop.x + dx, 0), 100 - dragStart.crop.w),
+        y: Math.min(Math.max(dragStart.crop.y + dy, 0), 100 - dragStart.crop.h),
+      });
+    } else {
+      setCrop({
+        ...dragStart.crop,
+        w: Math.min(Math.max(dragStart.crop.w + dx, 8), 100 - dragStart.crop.x),
+        h: Math.min(Math.max(dragStart.crop.h + dy, 8), 100 - dragStart.crop.y),
+      });
+    }
   };
 
   const applyCrop = async () => {
-    const img = imgRef.current;
-    if (!img) return;
+    if (!imgEl || !natural.w) return;
+    const sx = Math.round((crop.x / 100) * natural.w);
+    const sy = Math.round((crop.y / 100) * natural.h);
+    const sw = Math.round((crop.w / 100) * natural.w);
+    const sh = Math.round((crop.h / 100) * natural.h);
     const canvas = document.createElement("canvas");
-    canvas.width = crop.w;
-    canvas.height = crop.h;
+    canvas.width = Math.max(sw, 1);
+    canvas.height = Math.max(sh, 1);
     const ctx = canvas.getContext("2d")!;
-    ctx.drawImage(img, crop.x, crop.y, crop.w, crop.h, 0, 0, crop.w, crop.h);
+    ctx.drawImage(imgEl, sx, sy, sw, sh, 0, 0, sw, sh);
     const out = await canvasToBlob(canvas, "image/png");
     setBlob(out);
-    setPreview(URL.createObjectURL(out));
+    setOutPreview(URL.createObjectURL(out));
   };
 
   return (
     <div className="space-y-6">
       <FileDropzone accept="image/*" onFiles={(f) => f[0] && process(f[0])} />
-      {preview && (
+      {srcPreview && (
         <>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {(["x", "y", "w", "h"] as const).map((k) => (
-              <div key={k}>
-                <label className="text-xs uppercase text-theme-subtle">{k}</label>
-                <input
-                  type="number"
-                  min={0}
-                  value={crop[k]}
-                  onChange={(e) => setCrop((c) => ({ ...c, [k]: Number(e.target.value) }))}
-                  className="input-field mt-1"
-                />
-              </div>
-            ))}
+          <div
+            className="relative mx-auto max-w-xl select-none overflow-hidden rounded-xl border border-theme-subtle"
+            onPointerMove={onPointerMove}
+            onPointerUp={() => setDragging(null)}
+            onPointerLeave={() => setDragging(null)}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={srcPreview} alt="Source" className="block w-full" draggable={false} />
+            <div className="pointer-events-none absolute inset-0 bg-black/40" />
+            <div
+              className="absolute cursor-move border-2 border-accent bg-transparent shadow-[0_0_0_9999px_rgba(0,0,0,0.45)]"
+              style={{ left: `${crop.x}%`, top: `${crop.y}%`, width: `${crop.w}%`, height: `${crop.h}%`, pointerEvents: "auto" }}
+              onPointerDown={(e) => onPointerDown("move", e)}
+            >
+              <div
+                className="absolute -bottom-2 -right-2 h-4 w-4 cursor-se-resize rounded-sm bg-accent"
+                onPointerDown={(e) => onPointerDown("br", e)}
+              />
+            </div>
           </div>
+          <p className="text-center text-xs text-theme-subtle">Drag the frame to move · drag the corner to resize</p>
           <button type="button" onClick={applyCrop} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white">
             Apply crop
           </button>
-          {blob && (
-            <div className="glass-card p-6 text-center">
+          {blob && outPreview && (
+            <div className="rounded-xl border border-theme-subtle p-6 text-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={preview} alt="Cropped" className="mx-auto max-h-64 rounded-lg" />
-              <button type="button" onClick={() => downloadBlob(blob, `${name}.png`)} className="mt-4 rounded-xl bg-accent-emerald px-6 py-2.5 text-sm font-semibold text-white">
+              <img src={outPreview} alt="Cropped" className="mx-auto max-h-64 rounded-lg" />
+              <button
+                type="button"
+                onClick={() => downloadBlob(blob, `${name}.png`)}
+                className="mt-4 rounded-xl bg-accent-emerald px-6 py-2.5 text-sm font-semibold text-white"
+              >
                 Download PNG
               </button>
             </div>
@@ -239,7 +288,48 @@ export function Base64ToImageTool() {
 }
 
 export function RemoveExifTool() {
-  return <ImageCompressorTool />;
+  const [preview, setPreview] = useState<string | null>(null);
+  const [blob, setBlob] = useState<Blob | null>(null);
+  const [sizes, setSizes] = useState({ before: 0, after: 0 });
+  const [name, setName] = useState("clean");
+
+  const process = async (file: File) => {
+    setName(file.name.replace(/\.[^.]+$/, ""));
+    setSizes({ before: file.size, after: 0 });
+    // Re-encode via canvas — strips EXIF/ICC that browsers don't paint into the bitmap
+    const img = await loadImageFromFile(file);
+    const canvas = drawToCanvas(img, img.width, img.height);
+    const mime = file.type.includes("png") ? "image/png" : "image/jpeg";
+    const out = await canvasToBlob(canvas, mime, 0.92);
+    setBlob(out);
+    setSizes((s) => ({ ...s, after: out.size }));
+    setPreview(URL.createObjectURL(out));
+  };
+
+  return (
+    <div className="space-y-6">
+      <p className="rounded-xl border border-accent/20 bg-accent/5 px-4 py-3 text-sm text-theme-muted">
+        Re-encodes your photo in the browser to strip most EXIF / location metadata. Preview looks the same — the file is cleaned.
+      </p>
+      <FileDropzone accept="image/*" onFiles={(f) => f[0] && process(f[0])} />
+      {preview && blob && (
+        <div className="space-y-4">
+          <BeforeAfterBar before={sizes.before} after={sizes.after} />
+          <div className="rounded-xl border border-theme-subtle p-6 text-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={preview} alt="Cleaned" className="mx-auto max-h-64 rounded-lg" />
+            <button
+              type="button"
+              onClick={() => downloadBlob(blob, `${name}-clean.jpg`)}
+              className="mt-4 rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white"
+            >
+              Download cleaned image
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export function HeicToJpgTool() {
@@ -342,15 +432,11 @@ function ToolLayout({
       <FileDropzone accept="image/*" onFiles={(f) => f[0] && onFile(f[0])} />
       {extra}
       {preview && blob && (
-        <div className="glass-card p-6 text-center">
+        <div className="glass-card space-y-4 p-6 text-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={preview} alt="Output" className="mx-auto max-h-64 rounded-lg" />
-          {sizes.after > 0 && (
-            <p className="mt-2 text-xs text-theme-subtle">
-              {formatBytes(sizes.before)} → {formatBytes(sizes.after)} ({Math.round((1 - sizes.after / sizes.before) * 100)}% smaller)
-            </p>
-          )}
-          <button type="button" onClick={() => downloadBlob(blob, filename)} className="mt-4 rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white">
+          {sizes.after > 0 && <BeforeAfterBar before={sizes.before} after={sizes.after} />}
+          <button type="button" onClick={() => downloadBlob(blob, filename)} className="mt-2 rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white">
             <Download className="mr-2 inline h-4 w-4" />Download
           </button>
         </div>

@@ -15,9 +15,9 @@ const PLATFORMS = [
   },
   {
     platform: "Instagram",
-    gradient: "from-purple-600 via-pink-500 to-orange-400",
-    glow: "bg-pink-500/20",
-    border: "border-pink-500/25 hover:border-pink-500/50",
+    gradient: "from-rose-500 via-pink-500 to-orange-400",
+    glow: "bg-rose-500/20",
+    border: "border-rose-500/25 hover:border-rose-500/50",
     analytics: "instagram-profile-insights",
     revenue: "instagram-revenue-calculator",
     features: ["Follower & post counts", "Sponsorship estimates", "Engagement insights", "Growth projections"],

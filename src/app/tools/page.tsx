@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
+import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import ToolsHub from "@/components/tools/ToolsHub";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
+const TOOL_COUNT = TOOLS_CONFIG.length;
+
 export const metadata: Metadata = buildMetadata({
-  title: "Free Online Tools — Calculators, Converters & Developer Utilities | Ranburg",
-  description:
-    "Browse 38+ free online tools: revenue calculators, SEO utilities, developer formatters, social analytics, and Salesforce tools. Search, filter by category, instant results.",
+  title: `Free Online Tools — ${TOOL_COUNT}+ Calculators & Utilities | Ranburg`,
+  description: `Browse ${TOOL_COUNT}+ free online tools: revenue calculators, SEO utilities, developer formatters, social analytics, and Salesforce tools. Search, filter by category, instant results.`,
   path: "/tools",
   keywords: [
     "free online tools",

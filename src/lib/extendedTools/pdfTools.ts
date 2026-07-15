@@ -78,18 +78,22 @@ export const PDF_TOOLS: ToolConfig[] = [
   }),
   makeTool({
     slug: "word-to-pdf",
-    title: "Word to PDF Converter",
-    shortDescription: "Paste text or upload a .txt/.docx-free workflow — create PDF from text content.",
+    title: "Text to PDF Converter",
+    shortDescription: "Paste text or upload a .txt file and download a clean PDF — browser-based, no Word install.",
     category: "productivity",
     icon: "FileType",
     gradient: "from-indigo-500 to-blue-600",
     badge: "PDF Converter",
-    keywords: ["word to pdf", "text to pdf", "document to pdf"],
-    howToUse: ["Paste text or upload a plain text file.", "Set title and font size.", "Download PDF."],
+    keywords: ["text to pdf", "word to pdf", "document to pdf", "paste to pdf"],
+    howToUse: ["Paste text or upload a plain .txt file.", "Set a document title.", "Download your PDF."],
     formula: "pdf-lib drawText with line wrapping",
     faq: [
       ...pdfFaq,
-      { question: "Does this support .docx files?", answer: "Paste content from Word or upload plain text. Full .docx parsing requires desktop software; this tool creates PDF from text." },
+      {
+        question: "Does this convert .docx Word files?",
+        answer:
+          "Not directly. Paste text from Word or upload a .txt file. Full .docx parsing needs desktop software — this tool creates PDFs from text content honestly and instantly.",
+      },
     ],
   }),
   makeTool({

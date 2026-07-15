@@ -48,7 +48,7 @@ export function generateToolGuideBlog(tool: ToolConfig, dateIndex: number): Blog
     { type: "h2" as const, text: "Conclusion" },
     {
       type: "p" as const,
-      text: `The ${tool.title} is one of 40+ free tools on Ranburg.com. Use this guide as a reference, then head to /tools/${tool.slug} whenever you need ${tool.badge.toLowerCase()} workflows done fast.`,
+      text: `The ${tool.title} is part of Ranburg.com's free tools library. Use this guide as a reference, then head to /tools/${tool.slug} whenever you need ${tool.badge.toLowerCase()} workflows done fast.`,
     },
   ];
 

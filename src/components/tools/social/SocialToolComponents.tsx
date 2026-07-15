@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import CopyButton from "@/components/ui/CopyButton";
-import ResultCard from "@/components/tools/ResultCard";
+import { KPIStrip, BenchmarkGauge, CopyResultPanel } from "@/components/tools/viz";
 import type { HashtagItem, HashtagMix, HashtagPlatform, HashtagPreset } from "@/lib/hashtagGenerator";
 
 const PLATFORMS = [
@@ -35,26 +35,149 @@ export function SocialCharacterCounterTool() {
 export function YoutubeTagsTool() {
   const [topic, setTopic] = useState("");
   const [keyword, setKeyword] = useState("");
-  const tags = useMemo(() => {
-    if (!topic.trim()) return "";
-    const base = [topic, keyword, `${topic} tutorial`, `${topic} 2026`, `how to ${topic}`, `${keyword} tips`, `${topic} for beginners`].filter(Boolean);
-    return base.join(", ");
-  }, [topic, keyword]);
-  return <TagGenerator topic={topic} setTopic={setTopic} keyword={keyword} setKeyword={setKeyword} output={tags} label="tags" />;
+  const [niche, setNiche] = useState("");
+  const [count, setCount] = useState(12);
+  const [tags, setTags] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [deselected, setDeselected] = useState<Set<string>>(new Set());
+
+  const generate = async () => {
+    if (!topic.trim()) return;
+    setLoading(true);
+    setDeselected(new Set());
+    try {
+      const params = new URLSearchParams({
+        topic: topic.trim(),
+        platform: "youtube",
+        count: String(Math.min(count + 5, 30)),
+        mix: "balanced",
+        preset: "long-form",
+      });
+      if (niche.trim()) params.set("niche", niche.trim());
+      const res = await fetch(`/api/hashtags?${params}`);
+      const data = await res.json();
+      const fromApi = (data.hashtags as { tag: string }[] | undefined)?.map((h) =>
+        h.tag.replace(/^#/, "").replace(/([a-z])([A-Z])/g, "$1 $2").toLowerCase()
+      ) ?? [];
+      const local = [
+        topic,
+        keyword,
+        niche,
+        `${topic} tutorial`,
+        `how to ${topic}`,
+        `${keyword || topic} tips`,
+        `${topic} for beginners`,
+        `${topic} 2026`,
+        `${topic} explained`,
+        `${niche || topic} guide`,
+      ]
+        .filter(Boolean)
+        .map((t) => t.trim().toLowerCase());
+      const merged = [...new Set([...local, ...fromApi])].filter(Boolean).slice(0, count);
+      setTags(merged);
+    } catch {
+      const fallback = [topic, keyword, `${topic} tutorial`, `how to ${topic}`, `${topic} for beginners`]
+        .filter(Boolean)
+        .slice(0, count);
+      setTags(fallback);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const visible = tags.filter((t) => !deselected.has(t));
+  const joined = visible.join(", ");
+
+  return (
+    <div className="space-y-5">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <input value={topic} onChange={(e) => setTopic(e.target.value)} className="input-field sm:col-span-2" placeholder="Video topic" />
+        <input value={keyword} onChange={(e) => setKeyword(e.target.value)} className="input-field" placeholder="Main keyword" />
+        <input value={niche} onChange={(e) => setNiche(e.target.value)} className="input-field" placeholder="Niche (optional)" />
+      </div>
+      <div>
+        <label className="flex justify-between text-sm text-theme-muted">
+          <span>Tag count</span>
+          <span className="font-semibold text-accent">{count}</span>
+        </label>
+        <input type="range" min={5} max={25} value={count} onChange={(e) => setCount(Number(e.target.value))} className="mt-2 w-full" />
+      </div>
+      <button type="button" onClick={generate} disabled={loading} className="rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-60">
+        {loading ? "Generating…" : "Generate tags"}
+      </button>
+      {tags.length > 0 && (
+        <CopyResultPanel title="YouTube tags" text={joined} emptyHint="Generate tags to copy.">
+          <div className="mb-3 flex flex-wrap gap-2">
+            {tags.map((t) => {
+              const on = !deselected.has(t);
+              return (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() =>
+                    setDeselected((prev) => {
+                      const next = new Set(prev);
+                      if (next.has(t)) next.delete(t);
+                      else next.add(t);
+                      return next;
+                    })
+                  }
+                  className={`rounded-full border px-3 py-1 text-sm ${on ? "border-accent/40 bg-accent/10 text-accent" : "opacity-40 line-through"}`}
+                >
+                  {t}
+                </button>
+              );
+            })}
+          </div>
+        </CopyResultPanel>
+      )}
+    </div>
+  );
 }
 
 export function YoutubeDescriptionTool() {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
+  const [channelUrl, setChannelUrl] = useState("");
+  const [chapters, setChapters] = useState("0:00 Intro\n1:00 Main topic\n8:00 Wrap-up");
+  const [cta, setCta] = useState("Like & subscribe for more.");
+  const [hashtags, setHashtags] = useState("");
+
   const output = useMemo(() => {
-    if (!title) return "";
-    return `${summary}\n\n🔔 Subscribe for more: https://youtube.com/@channel\n\n📌 Chapters:\n0:00 Intro\n\n#${title.replace(/\s+/g, "")} #YouTube`;
-  }, [title, summary]);
+    if (!title.trim()) return "";
+    const lines = [
+      title.trim(),
+      "",
+      summary.trim(),
+      "",
+      cta.trim(),
+      channelUrl.trim() ? `🔔 Subscribe: ${channelUrl.trim()}` : "",
+      "",
+      "📌 Chapters:",
+      chapters.trim(),
+      "",
+      hashtags.trim() || `#${title.replace(/\s+/g, "")} #YouTube`,
+    ];
+    return lines.filter((l, i, arr) => !(l === "" && arr[i - 1] === "")).join("\n").trim();
+  }, [title, summary, channelUrl, chapters, cta, hashtags]);
+
   return (
     <div className="space-y-4">
       <input value={title} onChange={(e) => setTitle(e.target.value)} className="input-field" placeholder="Video title" />
-      <textarea value={summary} onChange={(e) => setSummary(e.target.value)} rows={6} className="input-field" placeholder="Video summary" />
-      {output && <Output output={output} />}
+      <textarea value={summary} onChange={(e) => setSummary(e.target.value)} rows={4} className="input-field" placeholder="Video summary / hook" />
+      <input value={channelUrl} onChange={(e) => setChannelUrl(e.target.value)} className="input-field" placeholder="Channel URL (e.g. https://youtube.com/@yourhandle)" />
+      <textarea value={chapters} onChange={(e) => setChapters(e.target.value)} rows={4} className="input-field font-mono text-sm" placeholder="Chapters (one per line)" />
+      <input value={cta} onChange={(e) => setCta(e.target.value)} className="input-field" placeholder="Call to action" />
+      <input value={hashtags} onChange={(e) => setHashtags(e.target.value)} className="input-field" placeholder="Hashtags (optional)" />
+      <CopyResultPanel title="Description" text={output} emptyHint="Enter a title to build your description." />
+      {output && (
+        <KPIStrip
+          items={[
+            { label: "Characters", value: String([...output].length), hint: "YouTube limit 5000" },
+            { label: "Chapters", value: String(chapters.split("\n").filter(Boolean).length) },
+          ]}
+        />
+      )}
     </div>
   );
 }
@@ -324,7 +447,29 @@ export function InstagramEngagementTool() {
   const [likes, setLikes] = useState(500);
   const [comments, setComments] = useState(25);
   const rate = followers > 0 ? ((likes + comments) / followers) * 100 : 0;
-  return <EngagementCalc followers={followers} setFollowers={setFollowers} likes={likes} setLikes={setLikes} comments={comments} setComments={setComments} rate={rate} label="Instagram" />;
+  const tip =
+    rate >= 6 ? "Excellent — strong niche fit or highly engaging creative." :
+    rate >= 3 ? "Above average — keep posting consistently." :
+    rate >= 1 ? "Average — test hooks and CTAs." :
+    "Low — try Reels and clearer calls-to-action.";
+  return (
+    <div className="space-y-6">
+      <div className="grid gap-4 sm:grid-cols-3">
+        <NumInput label="Followers" value={followers} onChange={setFollowers} />
+        <NumInput label="Likes (avg post)" value={likes} onChange={setLikes} />
+        <NumInput label="Comments (avg post)" value={comments} onChange={setComments} />
+      </div>
+      <KPIStrip
+        items={[
+          { label: "Engagement rate", value: `${rate.toFixed(2)}%`, highlight: true },
+          { label: "Interactions", value: (likes + comments).toLocaleString() },
+          { label: "Per 1k followers", value: followers > 0 ? (((likes + comments) / followers) * 1000).toFixed(1) : "0" },
+        ]}
+      />
+      <BenchmarkGauge value={rate} title="Instagram engagement vs typical" />
+      <p className="text-sm text-theme-muted">{tip}</p>
+    </div>
+  );
 }
 
 export function TiktokEngagementTool() {
@@ -341,7 +486,23 @@ export function TiktokEngagementTool() {
         <NumInput label="Comments" value={comments} onChange={setComments} />
         <NumInput label="Shares" value={shares} onChange={setShares} />
       </div>
-      <ResultCard label="Engagement rate" value={rate} format="percent" />
+      <KPIStrip
+        items={[
+          { label: "Engagement rate", value: `${rate.toFixed(2)}%`, highlight: true },
+          { label: "Total interactions", value: (likes + comments + shares).toLocaleString() },
+          { label: "Share rate", value: views > 0 ? `${((shares / views) * 100).toFixed(2)}%` : "0%" },
+        ]}
+      />
+      <BenchmarkGauge
+        value={rate}
+        title="TikTok engagement vs typical"
+        bands={[
+          { label: "Low", min: 0, max: 3, color: "bg-amber-500" },
+          { label: "Average", min: 3, max: 6, color: "bg-accent" },
+          { label: "Strong", min: 6, max: 10, color: "bg-accent-emerald" },
+          { label: "Viral-ish", min: 10, max: 100, color: "bg-emerald-400" },
+        ]}
+      />
     </div>
   );
 }
@@ -349,40 +510,30 @@ export function TiktokEngagementTool() {
 export function TiktokEarningsTool() {
   const [views, setViews] = useState(1000000);
   const [rpm, setRpm] = useState(0.03);
-  const earnings = (views / 1000) * rpm;
+  const low = (views / 1000) * (rpm * 0.5);
+  const mid = (views / 1000) * rpm;
+  const high = (views / 1000) * (rpm * 1.8);
   return (
     <div className="space-y-6">
-      <NumInput label="Monthly views" value={views} onChange={setViews} />
-      <NumInput label="RPM ($)" value={rpm} onChange={setRpm} step={0.01} />
-      <ResultCard label="Estimated earnings" value={earnings} />
-      <p className="text-xs text-theme-subtle">Estimates only. Actual TikTok payouts vary by region and program.</p>
-    </div>
-  );
-}
-
-function TagGenerator({ topic, setTopic, keyword, setKeyword, output }: { topic: string; setTopic: (v: string) => void; keyword?: string; setKeyword?: (v: string) => void; output: string; label: string }) {
-  return (
-    <div className="space-y-4">
-      <input value={topic} onChange={(e) => setTopic(e.target.value)} className="input-field" placeholder="Video topic" />
-      {setKeyword && <input value={keyword ?? ""} onChange={(e) => setKeyword(e.target.value)} className="input-field" placeholder="Main keyword" />}
-      {output && <Output output={output} />}
-    </div>
-  );
-}
-
-function EngagementCalc({ followers, setFollowers, likes, setLikes, comments, setComments, rate, label }: {
-  followers: number; setFollowers: (n: number) => void;
-  likes: number; setLikes: (n: number) => void;
-  comments: number; setComments: (n: number) => void;
-  rate: number; label: string;
-}) {
-  return (
-    <div className="space-y-6">
-      <NumInput label="Followers" value={followers} onChange={setFollowers} />
-      <NumInput label="Likes (avg post)" value={likes} onChange={setLikes} />
-      <NumInput label="Comments (avg post)" value={comments} onChange={setComments} />
-      <ResultCard label={`${label} engagement rate`} value={rate} format="percent" />
-      <p className="text-xs text-theme-subtle">Benchmark: 1–3% is average; 6%+ is strong for most niches.</p>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <NumInput label="Monthly views" value={views} onChange={setViews} />
+        <NumInput label="Assumed RPM ($)" value={rpm} onChange={setRpm} step={0.01} />
+      </div>
+      <KPIStrip
+        items={[
+          { label: "Conservative", value: `$${low.toFixed(2)}`, hint: "0.5× RPM" },
+          { label: "Likely", value: `$${mid.toFixed(2)}`, highlight: true, hint: "Your RPM" },
+          { label: "Optimistic", value: `$${high.toFixed(2)}`, hint: "1.8× RPM" },
+        ]}
+      />
+      <div className="rounded-xl border border-theme-subtle bg-theme-surface/40 p-4 text-sm text-theme-muted">
+        <p className="font-semibold text-theme-heading">Assumptions</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>Creator Rewards / ads vary heavily by country and niche.</li>
+          <li>RPM here means estimated earnings per 1,000 views.</li>
+          <li>Use the range for planning — not a payout guarantee.</li>
+        </ul>
+      </div>
     </div>
   );
 }
@@ -392,15 +543,6 @@ function NumInput({ label, value, onChange, step = 1 }: { label: string; value: 
     <div>
       <label className="text-sm text-theme-muted">{label}</label>
       <input type="number" value={value} step={step} onChange={(e) => onChange(Number(e.target.value))} className="input-field mt-1" />
-    </div>
-  );
-}
-
-function Output({ output }: { output: string }) {
-  return (
-    <div className="glass-card p-4">
-      <div className="mb-2 flex justify-end"><CopyButton text={output} /></div>
-      <p className="text-sm text-theme-muted">{output}</p>
     </div>
   );
 }

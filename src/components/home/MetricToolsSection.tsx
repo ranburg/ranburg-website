@@ -15,10 +15,10 @@ const CONFIG: Record<
   { title: string; highlight: string; icon: typeof TrendingUp; description: string }
 > = {
   trending: {
-    title: "Trending",
-    highlight: "Tools",
+    title: "Trending this",
+    highlight: "week",
     icon: TrendingUp,
-    description: "Tools gaining traction based on recent visits and popularity.",
+    description: "What people are opening right now — jump in and get results fast.",
   },
   most_used: {
     title: "Most Used",

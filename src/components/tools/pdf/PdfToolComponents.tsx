@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Download } from "lucide-react";
 import FileDropzone, { FileList } from "@/components/tools/shared/FileDropzone";
+import { BeforeAfterBar } from "@/components/tools/viz";
 import { downloadBlob } from "@/lib/imageProcessing";
 
 async function loadPdfLib() {
@@ -77,18 +78,26 @@ export function PdfCompressorTool() {
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sizes, setSizes] = useState<{ before: number; after: number } | null>(null);
 
   const compress = async () => {
     if (!files[0]) return;
     setLoading(true);
+    setSizes(null);
     try {
       const { PDFDocument } = await loadPdfLib();
-      const doc = await PDFDocument.load(await files[0].arrayBuffer(), { ignoreEncryption: true });
-      const bytes = await doc.save({ useObjectStreams: true });
       const before = files[0].size;
+      const doc = await PDFDocument.load(await files[0].arrayBuffer(), { ignoreEncryption: true });
+      const bytes = await doc.save({ useObjectStreams: true, addDefaultPage: false });
       const after = bytes.length;
-      downloadBlob(new Blob([Uint8Array.from(bytes)], { type: "application/pdf" }), "compressed.pdf");
-      setStatus(`Optimized: ${(before / 1024).toFixed(0)}KB → ${(after / 1024).toFixed(0)}KB`);
+      setSizes({ before, after });
+      downloadBlob(new Blob([Uint8Array.from(bytes)], { type: "application/pdf" }), "optimized.pdf");
+      const saved = before > 0 ? (((before - after) / before) * 100).toFixed(0) : "0";
+      setStatus(
+        Number(saved) > 1
+          ? `Repacked PDF — about ${saved}% smaller. Heavy image PDFs may need image compression separately.`
+          : `Repacked PDF (structure optimized). File size may stay similar when content is already compressed — try Image Compressor for photo-heavy PDFs.`
+      );
     } catch (e) {
       setStatus(e instanceof Error ? e.message : "Compression failed.");
     } finally {
@@ -96,7 +105,15 @@ export function PdfCompressorTool() {
     }
   };
 
-  return <PdfToolShell files={files} setFiles={setFiles} onRun={compress} loading={loading} status={status} label="Compress PDF" />;
+  return (
+    <div className="space-y-6">
+      <PdfToolShell files={files} setFiles={setFiles} onRun={compress} loading={loading} status={status} label="Optimize PDF" />
+      {sizes && <BeforeAfterBar before={sizes.before} after={sizes.after} beforeLabel="Original" afterLabel="Optimized" />}
+      <p className="text-xs text-theme-subtle">
+        This tool rewrites PDF object streams in your browser. It does not re-encode embedded photos — size savings vary.
+      </p>
+    </div>
+  );
 }
 
 export function PdfPageExtractorTool() {
@@ -207,6 +224,12 @@ export function WordToPdfTool() {
   const [title, setTitle] = useState("Document");
   const [status, setStatus] = useState("");
 
+  const onTxt = async (file: File) => {
+    const content = await file.text();
+    setText(content);
+    if (!title || title === "Document") setTitle(file.name.replace(/\.[^.]+$/, ""));
+  };
+
   const convert = async () => {
     if (!text.trim()) return;
     try {
@@ -248,9 +271,15 @@ export function WordToPdfTool() {
 
   return (
     <div className="space-y-6">
+      <p className="rounded-xl border border-accent/20 bg-accent/5 px-4 py-3 text-sm text-theme-muted">
+        Creates a PDF from <strong className="text-theme-heading">plain text</strong> (paste or .txt). Does not parse .docx — paste from Word instead.
+      </p>
+      <FileDropzone accept=".txt,text/plain" onFiles={(f) => f[0] && onTxt(f[0])} hint="Optional .txt upload" />
       <input value={title} onChange={(e) => setTitle(e.target.value)} className="input-field" placeholder="Document title" />
       <textarea value={text} onChange={(e) => setText(e.target.value)} rows={12} className="input-field" placeholder="Paste text from Word or any document…" />
-      <button type="button" onClick={convert} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white">Create PDF</button>
+      <button type="button" onClick={convert} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white">
+        Create PDF
+      </button>
       {status && <p className="text-sm text-theme-muted">{status}</p>}
     </div>
   );
