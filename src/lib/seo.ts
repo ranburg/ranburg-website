@@ -130,14 +130,40 @@ export function softwareApplicationJsonLd(
 ) {
   return {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": ["SoftwareApplication", "WebApplication"],
     name,
     description,
     applicationCategory: category,
-    operatingSystem: "Web Browser",
+    operatingSystem: "Any",
+    browserRequirements: "Requires JavaScript",
     offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+    isAccessibleForFree: true,
     url,
     provider: { "@type": "Organization", name: SITE.name, url: SITE.url },
+  };
+}
+
+export function howToJsonLd(
+  name: string,
+  description: string,
+  url: string,
+  steps: string[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: `How to use ${name}`,
+    description,
+    url,
+    totalTime: "PT2M",
+    tool: [{ "@type": "HowToTool", name }],
+    step: steps.map((text, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: `Step ${i + 1}`,
+      text,
+      url: `${url}#how-to-use`,
+    })),
   };
 }
 

@@ -4,6 +4,11 @@ import { TOOLS_CONFIG, getToolBySlug } from "@/lib/toolsConfig";
 import { COMING_SOON_TOOLS, getComingSoonTool } from "@/lib/toolComingSoonConfig";
 import { isSeoCategorySlug } from "@/lib/toolSeoCategories";
 import { buildMetadata } from "@/lib/seo";
+import {
+  buildToolPageDescription,
+  buildToolPageKeywords,
+  buildToolPageTitle,
+} from "@/lib/toolPageSeo";
 import ToolPageShell from "@/components/tools/ToolPageShell";
 import ToolComingSoonShell from "@/components/tools/ToolComingSoonShell";
 import ToolCategoryPage, {
@@ -29,10 +34,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const tool = getToolBySlug(slug);
   if (tool) {
     return buildMetadata({
-      title: tool.seo.title,
-      description: tool.seo.description,
+      title: buildToolPageTitle(tool),
+      description: buildToolPageDescription(tool),
       path: `/tools/${slug}`,
-      keywords: tool.seo.keywords,
+      keywords: buildToolPageKeywords(tool),
     });
   }
   const coming = getComingSoonTool(slug);

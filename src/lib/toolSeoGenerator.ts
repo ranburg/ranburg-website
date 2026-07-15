@@ -46,6 +46,16 @@ const EXAMPLE_TEMPLATES: Record<string, string[]> = {
     "Copy output directly into Setup, Developer Console, or VS Code for Apex and metadata work.",
     "Pair with other Salesforce tools on Ranburg for SOQL, validation rules, and test classes.",
   ],
+  productivity: [
+    "Enter your topic or channel details, generate outputs, then copy tags, captions, or metrics.",
+    "Adjust filters (count, niche, or mix) until the result matches your content style.",
+    "Use the same workflow for Shorts, Reels, or long-form posts and save time on every publish cycle.",
+  ],
+  design: [
+    "Upload or paste your asset, tweak conversion settings, then preview before downloading.",
+    "Batch everyday creative tasks — resize, compress, or convert — without desktop software.",
+    "Keep the page bookmarked for last-minute asset fixes before launches or client reviews.",
+  ],
   default: [
     "Open the tool, enter your input, and review instant results without creating an account.",
     "Try different inputs to understand how the tool behaves across edge cases.",
@@ -59,19 +69,19 @@ export function generateToolSeoSections(tool: ToolConfig): ToolSeoSections {
   const catLabel = category?.label ?? "Online Tools";
   const hubLabel = seoCat?.label ?? catLabel;
 
-  const whatIs = `The ${tool.title} is a free online ${hubLabel.toLowerCase().replace(/s$/, "")} utility published by Ranburg.com. ${tool.shortDescription} It is designed for professionals, students, freelancers, and teams who need fast, accurate results without installing desktop software or creating an account.
+  const whatIs = `The ${tool.title} is a free online ${hubLabel.toLowerCase().replace(/s$/, "")} utility on Ranburg.com. ${tool.shortDescription} Use it when you need fast, accurate results without installing software or creating an account.
 
-As part of Ranburg's growing library of 40+ free web tools, the ${tool.title} prioritizes speed, clarity, and privacy. ${tool.seo.description} Whether you use it once for a quick task or bookmark it for daily workflows, the interface stays lightweight and mobile-friendly across Chrome, Safari, Firefox, and Edge.
+${tool.seo.description} The ${tool.title} is built for ${catLabel.toLowerCase()} workflows — professionals, students, freelancers, and teams who want a clear interface and reliable output on desktop or mobile.
 
-Unlike many ad-heavy utility sites, Ranburg focuses on useful output and readable documentation. Below the tool you will find step-by-step instructions, worked examples, technical reference, benefits, real-world use cases, and answers to common questions — everything you need to use the ${tool.title} confidently and share it with colleagues.
+How to get started: ${tool.howToUse.slice(0, 2).join(" ")} Full step-by-step instructions appear above the tool and again in the How It Works section below.
 
-The ${tool.title} is particularly useful for ${catLabel.toLowerCase()} workflows where accuracy and speed matter. Ranburg publishes tools based on real search demand so you get utilities that solve everyday problems, not bloated apps with paywalls.`;
+Ranburg publishes free web tools based on real search demand. Bookmark the ${tool.title} for everyday ${hubLabel.toLowerCase()} tasks, share the link with teammates, and explore related utilities from the same category hub.`;
 
-  const howItWorks = `Using the ${tool.title} takes only a few steps. ${tool.howToUse.join(" ")} The tool updates results in real time as you adjust inputs, so you can experiment quickly without reloading the page.
+  const howItWorks = `Using the ${tool.title} is straightforward. Follow these steps on this page: ${tool.howToUse.join(" ")}
 
-Under the hood, ${tool.formula} Ranburg implements this logic with modern browser APIs and tested algorithms so results are consistent across devices and browsers. Advanced options are available when you need finer control over formatting, encoding, tax splits, or calculation parameters.
+Results update as you change inputs, so you can experiment without reloading. Technical basis: ${tool.formula}
 
-For ${catLabel.toLowerCase()} workflows, the ${tool.title} integrates naturally with other Ranburg utilities in the ${hubLabel} category. Copy output with one click, paste into your CMS, IDE, spreadsheet, invoice, or Salesforce org, and continue your work. Related tools are suggested at the bottom of every page so you can discover complementary utilities without returning to the tools hub.`;
+When you finish, copy or download the output and continue in your CMS, spreadsheet, IDE, or Salesforce org. Related ${hubLabel} tools on Ranburg.com sit below so you can chain workflows without hunting the tools directory.`;
 
   const examples =
     EXAMPLE_TEMPLATES[tool.category] ?? EXAMPLE_TEMPLATES.default;

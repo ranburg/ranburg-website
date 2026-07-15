@@ -6,14 +6,21 @@ import { getBlogForTool } from "@/lib/blogConfig";
 import { getToolIcon } from "@/lib/toolIcons";
 import { getPrimarySeoCategoryForTool } from "@/lib/toolSeoCategories";
 import { generateToolSeoSections } from "@/lib/toolSeoGenerator";
+import { getSoftwareApplicationCategory } from "@/lib/toolPageSeo";
 import { SITE } from "@/lib/siteConfig";
-import { softwareApplicationJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import {
+  softwareApplicationJsonLd,
+  faqJsonLd,
+  breadcrumbJsonLd,
+  howToJsonLd,
+} from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 import ConsultingCTA from "@/components/ui/ConsultingCTA";
 import ToolRecommendations from "@/components/tools/ToolRecommendations";
 import ToolSeoContent from "@/components/tools/ToolSeoContent";
+import ToolProcessFlow from "@/components/tools/ToolProcessFlow";
 import ToolViewTracker from "@/components/tools/ToolViewTracker";
 import RecentlyViewed from "@/components/tools/RecentlyViewed";
 import ToolInternalLinks from "@/components/tools/ToolInternalLinks";
@@ -54,7 +61,13 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
       { name: hubCrumb.label, url: `${SITE.url}${hubCrumb.href}` },
       { name: tool.title, url: toolUrl },
     ]),
-    softwareApplicationJsonLd(tool.title, tool.seo.description, toolUrl, tool.badge),
+    softwareApplicationJsonLd(
+      tool.title,
+      tool.seo.description,
+      toolUrl,
+      getSoftwareApplicationCategory(tool.category)
+    ),
+    howToJsonLd(tool.title, tool.shortDescription, toolUrl, tool.howToUse),
     faqJsonLd(seoSections.faq),
   ];
 
@@ -89,6 +102,9 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
               </div>
               <h1 className="mt-1 break-words text-2xl font-extrabold text-theme-heading sm:text-3xl">{tool.title}</h1>
               <p className="mt-2 max-w-2xl text-sm text-theme-muted sm:text-base">{tool.shortDescription}</p>
+              <p className="mt-2 text-xs text-theme-subtle sm:text-sm">
+                Free online tool · Works in your browser · No account required
+              </p>
               {guideBlog && (
                 <Link
                   href={`/blog/${guideBlog.slug}`}
@@ -96,7 +112,7 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
                   className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
                 >
                   <BookOpen className="h-4 w-4 shrink-0" />
-                  Read the guide
+                  Read the full guide
                 </Link>
               )}
             </div>
@@ -106,6 +122,8 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
 
       <section className="py-8">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <ToolProcessFlow tool={tool} />
+
           <div className="min-w-0">
             <ToolRenderer slug={slug} />
           </div>
