@@ -141,14 +141,14 @@ export async function fetchDatamuseRelated(topic: string, max = 40): Promise<Has
     const res = await fetch(url, { next: { revalidate: 3600 } });
     if (!res.ok) return [];
     const data = (await res.json()) as DatamuseWord[];
-    return data
-      .map((d, i) => {
-        const tag = toHashtag(d.word);
-        if (!tag) return null;
-        const bucket: HashtagItem["bucket"] = i < 8 ? "broad" : i < 24 ? "niche" : "branded";
-        return { tag, bucket, source: "datamuse" as const };
-      })
-      .filter((x): x is HashtagItem => Boolean(x));
+    const items: HashtagItem[] = [];
+    data.forEach((d, i) => {
+      const tag = toHashtag(d.word);
+      if (!tag) return;
+      const bucket: HashtagItem["bucket"] = i < 8 ? "broad" : i < 24 ? "niche" : "branded";
+      items.push({ tag, bucket, source: "datamuse" });
+    });
+    return items;
   } catch {
     return [];
   }
