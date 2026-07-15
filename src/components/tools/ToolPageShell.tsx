@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { BookOpen } from "lucide-react";
+import { BookOpen, LayoutGrid } from "lucide-react";
 import { getToolBySlug, getCategoryById } from "@/lib/toolsConfig";
 import { getBlogForTool } from "@/lib/blogConfig";
 import { getToolIcon } from "@/lib/toolIcons";
@@ -14,7 +14,6 @@ import AdPlaceholder from "@/components/ui/AdPlaceholder";
 import ConsultingCTA from "@/components/ui/ConsultingCTA";
 import ToolRecommendations from "@/components/tools/ToolRecommendations";
 import ToolSeoContent from "@/components/tools/ToolSeoContent";
-import AllToolsNav from "@/components/tools/AllToolsNav";
 import ToolViewTracker from "@/components/tools/ToolViewTracker";
 import RecentlyViewed from "@/components/tools/RecentlyViewed";
 import ToolInternalLinks from "@/components/tools/ToolInternalLinks";
@@ -65,29 +64,39 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
     <div className="pb-24">
       <ToolViewTracker slug={slug} />
       <JsonLd data={schema} />
-      <section className="py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <section className="border-b border-theme-subtle/60 pb-8 pt-10">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={breadcrumbs} />
-          <div className="flex items-start gap-4">
-            <div className={`hidden h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br sm:flex ${tool.gradient}`}>
-              <Icon className="h-7 w-7 text-white" />
+          <div className="mt-5 flex items-start gap-4">
+            <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br sm:h-14 sm:w-14 sm:rounded-2xl ${tool.gradient}`}>
+              <Icon className="h-6 w-6 text-white sm:h-7 sm:w-7" />
             </div>
-            <div>
-              {category && (
-                <Link href={hubCrumb.href} prefetch className="text-xs font-semibold uppercase tracking-wider text-accent hover:underline">
-                  {seoCategory?.label ?? category.label}
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                {category && (
+                  <Link href={hubCrumb.href} prefetch className="text-xs font-semibold uppercase tracking-wider text-accent hover:underline">
+                    {seoCategory?.label ?? category.label}
+                  </Link>
+                )}
+                <Link
+                  href="/tools"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-theme-subtle transition-colors hover:text-accent"
+                >
+                  <LayoutGrid className="h-3.5 w-3.5" />
+                  Browse all tools
                 </Link>
-              )}
-              <h1 className="mt-1 break-words text-2xl font-extrabold text-theme-heading sm:text-3xl lg:text-4xl">{tool.title}</h1>
-              <p className="mt-3 max-w-2xl text-sm text-theme-muted sm:text-base">{tool.shortDescription}</p>
+              </div>
+              <h1 className="mt-1 break-words text-2xl font-extrabold text-theme-heading sm:text-3xl">{tool.title}</h1>
+              <p className="mt-2 max-w-2xl text-sm text-theme-muted sm:text-base">{tool.shortDescription}</p>
               {guideBlog && (
                 <Link
                   href={`/blog/${guideBlog.slug}`}
                   prefetch
-                  className="mt-4 inline-flex items-center gap-2 rounded-lg border border-accent/25 bg-accent/5 px-3 py-2 text-sm font-medium text-accent hover:border-accent/40 hover:bg-accent/10"
+                  className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
                 >
                   <BookOpen className="h-4 w-4 shrink-0" />
-                  Read the guide: {guideBlog.title}
+                  Read the guide
                 </Link>
               )}
             </div>
@@ -95,32 +104,23 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <AdPlaceholder placement="below-hero" className="hidden md:flex" />
-      </div>
-
-      <section className="py-4">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AllToolsNav activeSlug={slug} variant="compact" className="mb-6" />
-          <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
-            <div className="hidden lg:block">
-              <AllToolsNav activeSlug={slug} />
-              <div className="mt-6">
-                <AdPlaceholder placement="sidebar" />
-              </div>
-            </div>
-            <div className="min-w-0">
-              <ToolRenderer slug={slug} />
-              <AdPlaceholder placement="after-tool-mobile" />
-              <AdPlaceholder placement="between-content" className="hidden md:block" />
-              <ToolSeoContent tool={tool} />
-              <AdPlaceholder placement="between-content" className="hidden md:block" />
-              <ConsultingCTA className="mt-12" />
-              <ToolInternalLinks slug={slug} />
-              <ToolRecommendations currentSlug={slug} layout="grid" limit={8} />
-              <RecentlyViewed excludeSlug={slug} />
-            </div>
+      <section className="py-8">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="min-w-0">
+            <ToolRenderer slug={slug} />
           </div>
+
+          <AdPlaceholder placement="after-tool-mobile" />
+          <AdPlaceholder placement="between-content" className="hidden lg:flex" />
+
+          <ToolRecommendations currentSlug={slug} layout="grid" limit={6} />
+          <RecentlyViewed excludeSlug={slug} />
+
+          <ConsultingCTA className="mt-12" />
+          <ToolInternalLinks slug={slug} />
+
+          <AdPlaceholder placement="between-content" className="hidden lg:flex" />
+          <ToolSeoContent tool={tool} />
         </div>
       </section>
     </div>

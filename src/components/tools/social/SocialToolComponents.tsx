@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import CopyButton from "@/components/ui/CopyButton";
 import ResultCard from "@/components/tools/ResultCard";
+import type { HashtagItem, HashtagMix, HashtagPlatform, HashtagPreset } from "@/lib/hashtagGenerator";
 
 const PLATFORMS = [
   { name: "Twitter/X", limit: 280 },
@@ -59,28 +60,261 @@ export function YoutubeDescriptionTool() {
 }
 
 export function YoutubeHashtagTool() {
-  const [topic, setTopic] = useState("");
-  const output = useMemo(() => {
-    if (!topic) return "";
-    const t = topic.replace(/\s+/g, "");
-    return [`#${t}`, `#${t}Tips`, `#YouTube`, `#Shorts`, `#Creator`].slice(0, 15).join(" ");
-  }, [topic]);
-  return <TagGenerator topic={topic} setTopic={setTopic} output={output} label="hashtags" />;
+  return (
+    <HashtagGeneratorPanel
+      platform="youtube"
+      defaultCount={12}
+      defaultPreset="shorts"
+      showNiche={false}
+      presets={[
+        { value: "shorts", label: "Shorts" },
+        { value: "long-form", label: "Long-form" },
+      ]}
+    />
+  );
 }
 
 export function InstagramHashtagTool() {
+  return (
+    <HashtagGeneratorPanel
+      platform="instagram"
+      defaultCount={20}
+      defaultPreset="reels"
+      showNiche
+      presets={[
+        { value: "reels", label: "Reels" },
+        { value: "feed", label: "Feed post" },
+      ]}
+    />
+  );
+}
+
+const MIX_OPTIONS: { value: HashtagMix; label: string; hint: string }[] = [
+  { value: "balanced", label: "Balanced", hint: "Broad + niche + branded" },
+  { value: "broad", label: "Broad", hint: "High-reach / trending" },
+  { value: "niche", label: "Niche", hint: "Targeted discovery" },
+  { value: "branded", label: "Branded", hint: "Topic-specific" },
+];
+
+function HashtagGeneratorPanel({
+  platform,
+  defaultCount,
+  defaultPreset,
+  showNiche,
+  presets,
+}: {
+  platform: HashtagPlatform;
+  defaultCount: number;
+  defaultPreset: HashtagPreset;
+  showNiche: boolean;
+  presets: { value: HashtagPreset; label: string }[];
+}) {
   const [topic, setTopic] = useState("");
   const [niche, setNiche] = useState("");
-  const output = useMemo(() => {
-    if (!topic) return "";
-    const tags = [topic, niche, `${topic}life`, `${topic}community`, `insta${topic}`, `${niche}gram`].filter(Boolean).map((t) => `#${t.replace(/\s+/g, "")}`);
-    return tags.slice(0, 30).join(" ");
-  }, [topic, niche]);
+  const [count, setCount] = useState(defaultCount);
+  const [mix, setMix] = useState<HashtagMix>("balanced");
+  const [preset, setPreset] = useState<HashtagPreset>(defaultPreset);
+  const [items, setItems] = useState<HashtagItem[]>([]);
+  const [joined, setJoined] = useState("");
+  const [source, setSource] = useState<"api" | "fallback" | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [deselected, setDeselected] = useState<Set<string>>(new Set());
+
+  const visibleJoined = useMemo(() => {
+    return items
+      .filter((i) => !deselected.has(i.tag))
+      .map((i) => i.tag)
+      .join(" ");
+  }, [items, deselected]);
+
+  const generate = useCallback(async () => {
+    if (!topic.trim() || topic.trim().length < 2) {
+      setError("Enter a topic (at least 2 characters).");
+      return;
+    }
+    setLoading(true);
+    setError(null);
+    setDeselected(new Set());
+
+    try {
+      const params = new URLSearchParams({
+        topic: topic.trim(),
+        platform,
+        count: String(count),
+        mix,
+        preset,
+      });
+      if (showNiche && niche.trim()) params.set("niche", niche.trim());
+
+      const res = await fetch(`/api/hashtags?${params.toString()}`);
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || "Failed to generate hashtags");
+      }
+      const data = await res.json();
+      setItems(data.hashtags ?? []);
+      setJoined(data.joined ?? "");
+      setSource(data.source ?? "fallback");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Something went wrong");
+      setItems([]);
+      setJoined("");
+      setSource(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [topic, niche, platform, count, mix, preset, showNiche]);
+
+  const toggleTag = (tag: string) => {
+    setDeselected((prev) => {
+      const next = new Set(prev);
+      if (next.has(tag)) next.delete(tag);
+      else next.add(tag);
+      return next;
+    });
+  };
+
   return (
-    <div className="space-y-4">
-      <input value={topic} onChange={(e) => setTopic(e.target.value)} className="input-field" placeholder="Post topic" />
-      <input value={niche} onChange={(e) => setNiche(e.target.value)} className="input-field" placeholder="Niche (optional)" />
-      {output && <Output output={output} />}
+    <div className="space-y-6">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="sm:col-span-2">
+          <label className="text-sm text-theme-muted">Topic</label>
+          <input
+            value={topic}
+            onChange={(e) => setTopic(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && generate()}
+            className="input-field mt-1"
+            placeholder={platform === "youtube" ? "e.g. home workout tips" : "e.g. morning skincare routine"}
+          />
+        </div>
+        {showNiche && (
+          <div className="sm:col-span-2">
+            <label className="text-sm text-theme-muted">Niche (optional)</label>
+            <input
+              value={niche}
+              onChange={(e) => setNiche(e.target.value)}
+              className="input-field mt-1"
+              placeholder="e.g. beauty, fitness, tech"
+            />
+          </div>
+        )}
+
+        <div>
+          <label className="flex items-center justify-between text-sm text-theme-muted">
+            <span>Number of tags</span>
+            <span className="font-semibold tabular-nums text-accent">{count}</span>
+          </label>
+          <input
+            type="range"
+            min={5}
+            max={30}
+            step={1}
+            value={count}
+            onChange={(e) => setCount(Number(e.target.value))}
+            className="mt-2 w-full"
+          />
+          <div className="mt-1 flex justify-between text-xs text-theme-subtle">
+            <span>5</span>
+            <span>30</span>
+          </div>
+        </div>
+
+        <div>
+          <label className="text-sm text-theme-muted">Format</label>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {presets.map((p) => (
+              <button
+                key={p.value}
+                type="button"
+                onClick={() => setPreset(p.value)}
+                className={`rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${
+                  preset === p.value
+                    ? "border-accent bg-accent/10 text-accent"
+                    : "border-theme-subtle text-theme-muted hover:border-accent/40"
+                }`}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label className="text-sm text-theme-muted">Hashtag mix</label>
+        <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          {MIX_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => setMix(opt.value)}
+              className={`rounded-xl border px-3 py-3 text-left transition-colors ${
+                mix === opt.value
+                  ? "border-accent bg-accent/10"
+                  : "border-theme-subtle hover:border-accent/30"
+              }`}
+            >
+              <p className="text-sm font-semibold text-theme-heading">{opt.label}</p>
+              <p className="mt-0.5 text-xs text-theme-subtle">{opt.hint}</p>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={generate}
+        disabled={loading}
+        className="inline-flex w-full items-center justify-center rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60 sm:w-auto"
+      >
+        {loading ? "Generating…" : "Generate hashtags"}
+      </button>
+
+      {error && <p className="text-sm text-red-500">{error}</p>}
+
+      {items.length > 0 && (
+        <div className="space-y-4 rounded-xl border border-theme-subtle bg-theme-surface/40 p-4 sm:p-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold text-theme-heading">
+                {items.filter((i) => !deselected.has(i.tag)).length} hashtags ready
+              </p>
+              {source && (
+                <p className="mt-0.5 text-xs text-theme-subtle">
+                  {source === "api"
+                    ? "Related terms via Datamuse + trend packs"
+                    : "Built from topic variants + trend packs"}
+                </p>
+              )}
+            </div>
+            <CopyButton text={visibleJoined || joined} />
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {items.map((item) => {
+              const on = !deselected.has(item.tag);
+              return (
+                <button
+                  key={item.tag}
+                  type="button"
+                  onClick={() => toggleTag(item.tag)}
+                  className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
+                    on
+                      ? "border-accent/40 bg-accent/10 text-accent"
+                      : "border-theme-subtle text-theme-subtle line-through opacity-50"
+                  }`}
+                  title={`${item.bucket} · ${item.source}`}
+                >
+                  {item.tag}
+                </button>
+              );
+            })}
+          </div>
+
+          <p className="break-all text-sm leading-relaxed text-theme-muted">{visibleJoined}</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -126,7 +360,7 @@ export function TiktokEarningsTool() {
   );
 }
 
-function TagGenerator({ topic, setTopic, keyword, setKeyword, output, label }: { topic: string; setTopic: (v: string) => void; keyword?: string; setKeyword?: (v: string) => void; output: string; label: string }) {
+function TagGenerator({ topic, setTopic, keyword, setKeyword, output }: { topic: string; setTopic: (v: string) => void; keyword?: string; setKeyword?: (v: string) => void; output: string; label: string }) {
   return (
     <div className="space-y-4">
       <input value={topic} onChange={(e) => setTopic(e.target.value)} className="input-field" placeholder="Video topic" />

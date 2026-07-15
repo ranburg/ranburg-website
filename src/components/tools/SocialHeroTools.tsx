@@ -30,13 +30,14 @@ export default function SocialHeroTools({ compact = false }: { compact?: boolean
   }
 
   return (
-    <section className="relative overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/5 via-transparent to-purple-500/5 p-6 sm:p-8">
+    <section className="relative overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/8 via-transparent to-emerald-500/8 p-6 sm:p-8">
       <div className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-accent/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-10 -left-6 h-32 w-32 rounded-full bg-accent-emerald/10 blur-3xl" />
       <div className="relative">
         <div className="flex flex-wrap items-center gap-2">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
             <Sparkles className="h-3.5 w-3.5" />
-            Hero Tools
+            Creator toolkit
           </span>
           <span className="text-sm text-theme-muted">YouTube & Instagram analytics + revenue</span>
         </div>
@@ -44,16 +45,16 @@ export default function SocialHeroTools({ compact = false }: { compact?: boolean
           Grow & monetize on <span className="text-gradient-accent">YouTube & Instagram</span>
         </h2>
         <p className="mt-2 max-w-2xl text-theme-muted">
-          Analyze any public channel or profile, estimate earnings, and get personalized growth recommendations — free, no login.
+          Analyze any public channel or profile, estimate earnings, and get growth recommendations — free, no login.
         </p>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {tools.map((tool) => {
             const Icon = getToolIcon(tool!.icon);
             return (
               <Link
                 key={tool!.slug}
                 href={`/tools/${tool!.slug}`}
-                className="glass-card group flex items-start gap-4 p-5 transition-all hover:border-accent/40 hover:shadow-glow"
+                className="group flex items-start gap-4 rounded-xl border border-theme-subtle bg-theme-surface/50 p-4 transition-all hover:border-accent/40 hover:bg-theme-surface/80"
               >
                 <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${tool!.gradient}`}>
                   <Icon className="h-6 w-6 text-white" />

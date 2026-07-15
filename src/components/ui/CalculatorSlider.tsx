@@ -1,6 +1,6 @@
 "use client";
 
-import { formatNumber } from "@/lib/utils";
+import { formatCompactNumber, formatNumber } from "@/lib/utils";
 
 interface CalculatorSliderProps {
   label: string;
@@ -23,14 +23,18 @@ export default function CalculatorSlider({
   prefix = "",
   onChange,
 }: CalculatorSliderProps) {
+  const display = `${prefix}${formatCompactNumber(value)}${unit}`;
+  const fullDisplay = `${prefix}${formatNumber(value)}${unit}`;
+
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <label className="text-sm font-medium text-theme-body">{label}</label>
-        <span className="rounded-lg bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">
-          {prefix}
-          {formatNumber(value)}
-          {unit}
+      <div className="flex items-center justify-between gap-3">
+        <label className="min-w-0 shrink text-sm font-medium text-theme-body">{label}</label>
+        <span
+          title={fullDisplay}
+          className="max-w-[55%] truncate rounded-lg bg-accent/10 px-2.5 py-1 text-sm font-semibold tabular-nums text-accent sm:max-w-[50%] sm:px-3"
+        >
+          {display}
         </span>
       </div>
       <input
@@ -42,15 +46,15 @@ export default function CalculatorSlider({
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-full"
       />
-      <div className="flex justify-between text-xs text-slate-500">
-        <span>
+      <div className="flex justify-between gap-2 text-xs text-slate-500">
+        <span className="truncate">
           {prefix}
-          {formatNumber(min)}
+          {formatCompactNumber(min)}
           {unit}
         </span>
-        <span>
+        <span className="truncate text-right">
           {prefix}
-          {formatNumber(max)}
+          {formatCompactNumber(max)}
           {unit}
         </span>
       </div>
