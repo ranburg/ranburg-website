@@ -1,6 +1,7 @@
 import type { ToolConfig, ToolFaq } from "./toolsConfig";
 import { getCategoryById } from "./toolsConfig";
 import { getPrimarySeoCategoryForTool } from "./toolSeoCategories";
+import { TOOL_WORKED_EXAMPLES } from "./seoGrowthConfig";
 
 export interface ToolSeoSections {
   whatIs: string;
@@ -84,7 +85,7 @@ Results update as you change inputs, so you can experiment without reloading. Te
 When you finish, copy or download the output and continue in your CMS, spreadsheet, IDE, or Salesforce org. Related ${hubLabel} tools on Ranburg.com sit below so you can chain workflows without hunting the tools directory.`;
 
   const examples =
-    EXAMPLE_TEMPLATES[tool.category] ?? EXAMPLE_TEMPLATES.default;
+    TOOL_WORKED_EXAMPLES[tool.slug] ?? EXAMPLE_TEMPLATES[tool.category] ?? EXAMPLE_TEMPLATES.default;
 
   const benefits = [
     `Free forever — no signup, subscription, or usage limits on Ranburg.com`,

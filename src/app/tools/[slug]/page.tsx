@@ -47,6 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: coming.seo.description,
       path: `/tools/${slug}`,
       keywords: coming.seo.keywords,
+      noIndex: true,
     });
   }
   return {};

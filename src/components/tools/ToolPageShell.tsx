@@ -25,6 +25,7 @@ import ToolViewTracker from "@/components/tools/ToolViewTracker";
 import RecentlyViewed from "@/components/tools/RecentlyViewed";
 import ToolInternalLinks from "@/components/tools/ToolInternalLinks";
 import ToolRenderer from "@/components/tools/ToolRenderer";
+import AffiliateCta from "@/components/ui/AffiliateCta";
 
 interface ToolPageProps {
   slug: string;
@@ -135,6 +136,17 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
           <RecentlyViewed excludeSlug={slug} />
 
           <ConsultingCTA className="mt-12" />
+          <AffiliateCta
+            context={
+              slug === "remove-exif"
+                ? "privacy"
+                : slug.includes("youtube") || slug.includes("instagram") || slug.includes("tiktok")
+                  ? "creator"
+                  : slug.includes("json") || slug.includes("regex") || tool.category === "developer"
+                    ? "developer"
+                    : "creator"
+            }
+          />
           <ToolInternalLinks slug={slug} />
 
           <AdPlaceholder placement="between-content" className="hidden lg:flex" />

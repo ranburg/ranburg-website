@@ -1,25 +1,23 @@
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
-import { COMING_SOON_TOOLS } from "@/lib/toolComingSoonConfig";
+import { PRIORITY_INDEX_TOOL_SLUGS } from "@/lib/seoGrowthConfig";
 import { buildSitemapXml, isoDate, SITEMAP_BASE } from "@/lib/sitemapXml";
 
+/** Live tools only — coming-soon pages are noindex and excluded. */
 export async function GET() {
   const lastmod = isoDate();
-  const urls = [
-    ...TOOLS_CONFIG.map((t) => ({
-      loc: `${SITEMAP_BASE}/tools/${t.slug}`,
-      lastmod,
-      changefreq: "monthly",
-      priority: t.category === "salesforce" ? 0.9 : 0.75,
-    })),
-    ...COMING_SOON_TOOLS.map((t) => ({
-      loc: `${SITEMAP_BASE}/tools/${t.slug}`,
-      lastmod,
-      changefreq: "monthly",
-      priority: 0.7,
-    })),
-  ];
+  const prioritySet = new Set(PRIORITY_INDEX_TOOL_SLUGS);
+
+  const urls = TOOLS_CONFIG.map((t) => ({
+    loc: `${SITEMAP_BASE}/tools/${t.slug}`,
+    lastmod,
+    changefreq: "weekly",
+    priority: prioritySet.has(t.slug) ? 0.95 : t.category === "salesforce" ? 0.8 : 0.75,
+  }));
 
   return new Response(buildSitemapXml(urls), {
-    headers: { "Content-Type": "application/xml; charset=utf-8" },
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+    },
   });
 }

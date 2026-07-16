@@ -3,20 +3,23 @@
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trackCopyOutput } from "@/lib/ga";
 
 interface CopyButtonProps {
   text: string;
   label?: string;
   className?: string;
+  toolSlug?: string;
 }
 
-export default function CopyButton({ text, label = "Copy", className }: CopyButtonProps) {
+export default function CopyButton({ text, label = "Copy", className, toolSlug }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
+      trackCopyOutput(toolSlug);
       setTimeout(() => setCopied(false), 2000);
     } catch {
       /* clipboard unavailable */

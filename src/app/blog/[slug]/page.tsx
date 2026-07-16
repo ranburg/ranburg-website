@@ -9,6 +9,7 @@ import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { SITE } from "@/lib/siteConfig";
 import { getBlogCategoryAccent } from "@/lib/blogImages";
 import { articleJsonLd, faqJsonLd, breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
+import { shouldNoIndexBlogPost } from "@/lib/seoGrowthConfig";
 import JsonLd from "@/components/seo/JsonLd";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Button from "@/components/ui/Button";
@@ -38,6 +39,8 @@ export async function generateMetadata({ params }: PageProps) {
     description: post.seo.description,
     path: `/blog/${slug}`,
     keywords: post.seo.keywords,
+    ogType: "article",
+    noIndex: shouldNoIndexBlogPost(post),
   });
 }
 

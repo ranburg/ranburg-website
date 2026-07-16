@@ -8,6 +8,7 @@ interface PageSeoInput {
   keywords?: string[];
   ogImage?: string;
   noIndex?: boolean;
+  ogType?: "website" | "article";
 }
 
 export function buildMetadata({
@@ -17,6 +18,7 @@ export function buildMetadata({
   keywords = [],
   ogImage,
   noIndex = false,
+  ogType = "website",
 }: PageSeoInput): Metadata {
   const url = `${SITE.url}${path}`;
   const image = ogImage ?? SITE.defaultOgImage;
@@ -33,7 +35,7 @@ export function buildMetadata({
       url,
       siteName: SITE.name,
       locale: SITE.locale,
-      type: "website",
+      type: ogType,
       images: [{ url: `${SITE.url}${image}`, width: 1200, height: 630, alt: title }],
     },
     twitter: {
