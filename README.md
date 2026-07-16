@@ -56,3 +56,7 @@ src/
 npm run build
 npm start
 ```
+
+## Growth & SEO
+
+See **[docs/SEO_GROWTH_PLAYBOOK.md](docs/SEO_GROWTH_PLAYBOOK.md)** for the rankings → traffic → AdSense playbook, top-20 tools, env vars, GSC checklist, and helper APIs.

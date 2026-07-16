@@ -5,7 +5,7 @@ import { buildSitemapXml, isoDate, SITEMAP_BASE } from "@/lib/sitemapXml";
 /** Live tools only — coming-soon pages are noindex and excluded. */
 export async function GET() {
   const lastmod = isoDate();
-  const prioritySet = new Set(PRIORITY_INDEX_TOOL_SLUGS);
+  const prioritySet = new Set<string>(PRIORITY_INDEX_TOOL_SLUGS);
 
   const urls = TOOLS_CONFIG.map((t) => ({
     loc: `${SITEMAP_BASE}/tools/${t.slug}`,
