@@ -3,11 +3,24 @@
 Reference for rankings → traffic → AdSense revenue. Engineering foundations shipped in commit `9101ad3` (production `main`). Do not chase head terms (e.g. “PDF merge”) before long-tail wins and indexation.
 
 **Live site:** https://www.ranburg.com/  
-**Money model:** Primary = Google AdSense on tool pages · Secondary = affiliates (later)
+**Money model:** Primary = Google AdSense on tool pages · Secondary = affiliates (later)  
+**Free marketing paste kit:** [FREE_MARKETING_KIT.md](./FREE_MARKETING_KIT.md)
 
-```
-Fix indexation → Rank long-tail tool queries → Raise dwell time → AdSense + affiliates
-```
+### Brand search: “ranburg” → “randburg”
+
+Google often shows **“These are results for randburg”** because Randburg (South Africa) is a strong place entity and Ranburg is still a weak brand entity. Code alone cannot flip that overnight.
+
+**On-site (shipped):** Organization + WebSite JSON-LD with `name` / `alternateName` / `brand` “Ranburg”; homepage title leads with Ranburg.
+
+**Off-site (required to actually fix):**
+1. Always click **Search instead for ranburg** when you see the banner (teaches Google).
+2. Prefer branded queries: `ranburg.com`, `Ranburg LLP`, `Ranburg tools`, `"ranburg"`.
+3. Keep LinkedIn / X / directories exact name **Ranburg** (sameAs already points there).
+4. Google Business Profile for Ranburg LLP (Jaipur) if eligible.
+5. Cheap brand PPC on exact match `ranburg` (often very low CPC) until organic brand volume exists.
+6. External mentions (IndieHackers, AlternativeTo, guest posts) using the exact spelling.
+
+Expect weeks–months after branded search volume grows — not a same-day GSC toggle.
 
 ---
 

@@ -60,13 +60,36 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   };
 }
 
+/** Stable @id so Organization / WebSite / LocalBusiness link as one brand entity. */
+export const ORGANIZATION_ID = `${SITE.url}/#organization`;
+export const WEBSITE_ID = `${SITE.url}/#website`;
+
+/**
+ * Brand entity for Knowledge Graph / spelling disambiguation.
+ * Helps Google treat "Ranburg" as a company (not a typo of "Randburg").
+ */
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": ORGANIZATION_ID,
     name: SITE.name,
+    legalName: "Ranburg LLP",
+    alternateName: ["Ranburg", "ranburg.com", "Ranburg Tools"],
+    brand: {
+      "@type": "Brand",
+      name: SITE.brand,
+      alternateName: ["Ranburg LLP", "ranburg.com"],
+    },
+    description: SITE.description,
     url: SITE.url,
-    logo: `${SITE.url}/opengraph-image`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE.url}/opengraph-image`,
+      width: 1200,
+      height: 630,
+    },
+    image: `${SITE.url}/opengraph-image`,
     email: SITE.email,
     telephone: SITE.phone,
     sameAs: [SITE.social.linkedin, SITE.social.twitter],
@@ -74,8 +97,34 @@ export function organizationJsonLd() {
       "@type": "PostalAddress",
       addressLocality: SITE.address.city,
       addressRegion: SITE.address.region,
+      postalCode: SITE.address.postalCode,
       addressCountry: SITE.address.country,
     },
+    areaServed: { "@type": "Country", name: "India" },
+    knowsAbout: [
+      "Free online tools",
+      "EMI calculator",
+      "SIP calculator",
+      "GST calculator",
+      "YouTube analytics",
+      "Salesforce consulting",
+    ],
+  };
+}
+
+/** Site-level entity — name "Ranburg" is intentional for brand queries. */
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    name: SITE.brand,
+    alternateName: [SITE.name, "ranburg.com", "Ranburg free tools"],
+    url: SITE.url,
+    description: SITE.description,
+    inLanguage: "en-IN",
+    publisher: { "@id": ORGANIZATION_ID },
+    about: { "@id": ORGANIZATION_ID },
   };
 }
 
@@ -83,12 +132,15 @@ export function localBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": `${SITE.url}/#localbusiness`,
     name: SITE.name,
+    alternateName: SITE.brand,
     image: `${SITE.url}/opengraph-image`,
     url: SITE.url,
     telephone: SITE.phone,
     email: SITE.email,
     priceRange: "$$",
+    parentOrganization: { "@id": ORGANIZATION_ID },
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE.address.street,
@@ -108,6 +160,7 @@ export function localBusinessJsonLd() {
       "Salesforce Development",
       "OmniStudio Development",
       "Revenue Cloud Implementation",
+      "Free Online Tools",
     ],
   };
 }

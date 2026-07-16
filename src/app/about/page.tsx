@@ -5,11 +5,17 @@ import ValuesGrid from "@/components/about/ValuesGrid";
 import { Building2, Target, Users } from "lucide-react";
 
 export const metadata: Metadata = buildMetadata({
-  title: "About Ranburg LLP | Salesforce Consultants in India",
+  title: "About Ranburg (Ranburg LLP) — Free Tools & Salesforce Consultants",
   description:
-    "Ranburg LLP is a Jaipur-based Salesforce consulting firm specializing in OmniStudio, Revenue Cloud, Industries Cloud, and enterprise integrations.",
+    "Ranburg is Ranburg LLP — Jaipur-based company behind ranburg.com free online tools and Salesforce consulting (OmniStudio, Revenue Cloud, Industries).",
   path: "/about",
-  keywords: ["Ranburg LLP", "Salesforce consultants India", "Jaipur Salesforce partner"],
+  keywords: [
+    "Ranburg",
+    "Ranburg LLP",
+    "ranburg.com",
+    "Salesforce consultants India",
+    "Jaipur Salesforce partner",
+  ],
 });
 
 const highlights = [
@@ -42,13 +48,17 @@ export default function AboutPage() {
               About Ranburg
             </p>
             <h1 className="mt-4 text-4xl font-extrabold text-theme-heading sm:text-5xl">
-              Pioneering <span className="text-gradient-accent">Digital Excellence</span>
+              Ranburg — free tools &amp; digital excellence
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-theme-muted">
-              Ranburg.com is a registered Limited Liability Partnership (LLP) dedicated
-              to delivering cutting-edge IT services and digital transformation. We combine
-              deep technical expertise with strategic business insight to help organizations
-              thrive in the digital age.
+              <strong className="font-semibold text-theme-heading">Ranburg</strong> (legal
+              name Ranburg LLP) runs{" "}
+              <a href="https://www.ranburg.com" className="text-accent underline-offset-2 hover:underline">
+                ranburg.com
+              </a>
+              : free browser tools for finance, creators, and developers, plus Salesforce
+              consulting from Jaipur, India. We combine deep technical expertise with
+              practical product experience so people and businesses get useful results fast.
             </p>
           </div>
         </div>

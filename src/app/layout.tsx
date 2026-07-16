@@ -6,7 +6,12 @@ import Footer from "@/components/layout/Footer";
 import Providers from "@/components/theme/Providers";
 import CommandPaletteProvider from "@/components/search/CommandPaletteProvider";
 import JsonLd from "@/components/seo/JsonLd";
-import { organizationJsonLd, localBusinessJsonLd, buildMetadata } from "@/lib/seo";
+import {
+  organizationJsonLd,
+  websiteJsonLd,
+  localBusinessJsonLd,
+  buildMetadata,
+} from "@/lib/seo";
 import { SITE } from "@/lib/siteConfig";
 import "./globals.css";
 
@@ -17,17 +22,20 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = buildMetadata({
-  title: "Free Online Tools — Calculators, Converters & Developer Utilities | Ranburg LLP",
+  title: "Ranburg — Free Online Tools, Calculators & Developer Utilities",
   description:
-    "Free online tools for developers, businesses, and SEO professionals. Calculators, formatters, generators, and Salesforce utilities by Ranburg LLP.",
+    "Ranburg (Ranburg LLP) — free online tools for finance, creators, and developers. EMI, SIP, GST calculators, YouTube & Instagram tools, PDF/image utilities. No signup.",
   path: "/",
   keywords: [
+    "Ranburg",
+    "Ranburg LLP",
+    "ranburg.com",
+    "Ranburg tools",
     "free online tools",
     "developer tools",
     "SEO tools",
     "calculators online",
     "Salesforce tools",
-    "Ranburg LLP",
   ],
 });
 
@@ -69,7 +77,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen overflow-x-hidden font-sans antialiased">
-        <JsonLd data={[organizationJsonLd(), localBusinessJsonLd()]} />
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd(), localBusinessJsonLd()]} />
         <Providers>
           <CommandPaletteProvider>
             <Navbar />
