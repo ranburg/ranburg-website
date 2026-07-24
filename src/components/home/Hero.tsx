@@ -28,17 +28,17 @@ export default function Hero() {
   return (
     <section className="relative min-h-[92vh] overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(59,130,246,0.22),transparent_55%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_90%_20%,rgba(16,185,129,0.14),transparent_50%)]" />
-        <div className="absolute inset-0 bg-grid opacity-30" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(15,118,110,0.18),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_90%_20%,rgba(245,158,11,0.1),transparent_50%)]" />
+        <div className="absolute inset-0 bg-grid opacity-40" />
         <motion.div
-          className="absolute left-[12%] top-[28%] h-72 w-72 rounded-full bg-accent/15 blur-3xl"
-          animate={{ opacity: [0.35, 0.7, 0.35], scale: [1, 1.08, 1] }}
+          className="absolute left-[12%] top-[28%] h-72 w-72 rounded-full bg-accent/20 blur-3xl"
+          animate={{ opacity: [0.35, 0.65, 0.35], scale: [1, 1.08, 1] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-[18%] right-[8%] h-64 w-64 rounded-full bg-accent-emerald/15 blur-3xl"
-          animate={{ opacity: [0.25, 0.55, 0.25], y: [0, -16, 0] }}
+          className="absolute bottom-[18%] right-[8%] h-64 w-64 rounded-full bg-amber-400/15 blur-3xl"
+          animate={{ opacity: [0.2, 0.45, 0.2], y: [0, -16, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
@@ -72,8 +72,8 @@ export default function Hero() {
             <Button href="/tools" size="lg" icon>
               Explore tools
             </Button>
-            <Button href="/tools/youtube-channel-insights" variant="outline" size="lg">
-              Try YouTube Insights
+            <Button href="/tools/credit-card-finder" variant="outline" size="lg">
+              Find your credit card
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
@@ -85,8 +85,8 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.12 }}
           className="relative"
         >
-          <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-accent/50 via-accent-emerald/30 to-transparent opacity-70 blur-[1px]" />
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[var(--background)]/80 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
+          <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-accent/40 via-amber-400/25 to-transparent opacity-80 blur-[1px]" />
+          <div className="relative overflow-hidden rounded-3xl border border-theme bg-[var(--surface-elevated)]/90 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-accent">Live demo</p>

@@ -55,6 +55,11 @@ import {
   Smartphone,
   Shield,
   Scale,
+  CreditCard,
+  Home,
+  Users,
+  Moon,
+  Palette,
   type LucideIcon,
 } from "lucide-react";
 
@@ -114,6 +119,11 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Smartphone,
   Shield,
   Scale,
+  CreditCard,
+  Home,
+  Users,
+  Moon,
+  Palette,
 };
 
 export function getToolIcon(name: string): LucideIcon {

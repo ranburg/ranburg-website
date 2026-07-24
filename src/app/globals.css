@@ -4,36 +4,44 @@
 
 @layer base {
   :root {
-    --background: #f8fafc;
-    --foreground: #0f172a;
+    --background: #f3f6f4;
+    --foreground: #0c1f1a;
     --nav-height: 3.75rem;
-    --accent: #3b82f6;
-    --accent-emerald: #10b981;
-    --glass-bg: #ffffff;
-    --glass-border: rgba(15, 23, 42, 0.1);
-    --card-hover: #f1f5f9;
-    --grid-color: rgba(59, 130, 246, 0.08);
-    --nav-bg: rgba(255, 255, 255, 0.95);
+    --accent: #0f766e;
+    --accent-soft: #14b8a6;
+    --accent-emerald: #059669;
+    --glass-bg: rgba(255, 255, 255, 0.88);
+    --glass-border: rgba(12, 31, 26, 0.08);
+    --card-hover: #ffffff;
+    --grid-color: rgba(15, 118, 110, 0.07);
+    --nav-bg: rgba(243, 246, 244, 0.92);
     --dropdown-bg: #ffffff;
-    --dropdown-border: #e2e8f0;
-    --input-bg: #f8fafc;
-    --input-border: #e2e8f0;
-    --range-track: #e2e8f0;
+    --dropdown-border: #d7e3de;
+    --input-bg: #ffffff;
+    --input-border: #cfdad5;
+    --range-track: #d7e3de;
+    --surface-elevated: #ffffff;
+    --ink-muted: #4a635c;
   }
 
   .dark {
-    --background: #0a0f1a;
-    --foreground: #f8fafc;
-    --glass-bg: rgba(15, 23, 42, 0.85);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --card-hover: rgba(15, 23, 42, 0.95);
-    --grid-color: rgba(59, 130, 246, 0.03);
-    --nav-bg: rgba(15, 23, 42, 0.9);
-    --dropdown-bg: #0f172a;
-    --dropdown-border: #1e293b;
-    --input-bg: rgba(15, 23, 42, 0.5);
-    --input-border: rgba(255, 255, 255, 0.1);
-    --range-track: #1e293b;
+    --background: #071411;
+    --foreground: #e8f5f1;
+    --accent: #2dd4bf;
+    --accent-soft: #5eead4;
+    --accent-emerald: #34d399;
+    --glass-bg: rgba(12, 28, 24, 0.92);
+    --glass-border: rgba(232, 245, 241, 0.1);
+    --card-hover: rgba(18, 40, 34, 0.98);
+    --grid-color: rgba(45, 212, 191, 0.06);
+    --nav-bg: rgba(7, 20, 17, 0.9);
+    --dropdown-bg: #0c1c18;
+    --dropdown-border: #1a332c;
+    --input-bg: rgba(10, 24, 20, 0.85);
+    --input-border: rgba(232, 245, 241, 0.12);
+    --range-track: #1a332c;
+    --surface-elevated: #0c1c18;
+    --ink-muted: #9cb5ad;
   }
 
   html {
@@ -46,16 +54,10 @@
     overflow-x: hidden;
     color: var(--foreground);
     background-color: var(--background);
-    background-image: radial-gradient(
-        ellipse 100% 80% at 50% -30%,
-        rgba(59, 130, 246, 0.08),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 60% 40% at 100% 0%,
-        rgba(16, 185, 129, 0.04),
-        transparent
-      );
+    background-image:
+      radial-gradient(ellipse 90% 70% at 10% -20%, rgba(15, 118, 110, 0.14), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(245, 158, 11, 0.08), transparent 45%),
+      linear-gradient(180deg, transparent 0%, var(--background) 70%);
   }
 
   @media (min-width: 768px) {
@@ -65,20 +67,15 @@
   }
 
   .dark body {
-    background-image: radial-gradient(
-        ellipse 100% 80% at 50% -30%,
-        rgba(59, 130, 246, 0.12),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 60% 40% at 100% 0%,
-        rgba(16, 185, 129, 0.06),
-        transparent
-      );
+    background-image:
+      radial-gradient(ellipse 90% 70% at 15% -25%, rgba(45, 212, 191, 0.16), transparent 55%),
+      radial-gradient(ellipse 45% 35% at 95% 5%, rgba(245, 158, 11, 0.08), transparent 45%),
+      linear-gradient(180deg, #06110e 0%, var(--background) 55%);
   }
 
   ::selection {
-    @apply bg-accent/30 text-slate-900 dark:text-white;
+    background: color-mix(in srgb, var(--accent) 35%, transparent);
+    color: var(--foreground);
   }
 }
 
@@ -86,101 +83,105 @@
   .glass {
     background: var(--nav-bg);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 4px 24px rgba(12, 31, 26, 0.05);
   }
 
   .dark .glass {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
   .glass-card {
     @apply rounded-2xl transition-all duration-300;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 6px 28px rgba(12, 31, 26, 0.05);
   }
 
   .dark .glass-card {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
   .glass-card:hover {
     background: var(--card-hover);
-    border-color: rgba(59, 130, 246, 0.25);
-    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.08);
+    border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    box-shadow: 0 12px 36px color-mix(in srgb, var(--accent) 12%, transparent);
+    transform: translateY(-1px);
   }
 
   .dropdown-panel {
     background: var(--dropdown-bg);
     border: 1px solid var(--dropdown-border);
-    box-shadow:
-      0 20px 50px rgba(0, 0, 0, 0.15),
-      0 0 0 1px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 20px 50px rgba(12, 31, 26, 0.12), 0 0 0 1px rgba(12, 31, 26, 0.03);
   }
 
   .dark .dropdown-panel {
-    box-shadow:
-      0 20px 50px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-slate-900 via-slate-700 to-slate-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-slate-900 via-teal-900 to-teal-700 bg-clip-text text-transparent;
   }
 
   .dark .text-gradient {
-    @apply from-white via-blue-100 to-blue-300;
+    @apply from-white via-teal-100 to-teal-300;
   }
 
   .text-gradient-accent {
-    @apply bg-gradient-to-r from-accent to-accent-emerald bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-teal-600 to-emerald-500 bg-clip-text text-transparent;
+  }
+
+  .dark .text-gradient-accent {
+    @apply from-teal-300 to-emerald-300;
   }
 
   .text-theme-heading {
-    @apply text-slate-900 dark:text-white;
+    @apply text-slate-900 dark:text-teal-50;
   }
 
   .text-theme-body {
-    @apply text-slate-700 dark:text-slate-300;
+    @apply text-slate-700 dark:text-teal-100/85;
   }
 
   .text-theme-muted {
-    @apply text-slate-600 dark:text-slate-400;
+    @apply text-slate-600 dark:text-teal-200/65;
   }
 
   .text-theme-subtle {
-    @apply text-slate-500 dark:text-slate-500;
+    @apply text-slate-500 dark:text-teal-300/45;
   }
 
   .border-theme {
-    @apply border-slate-200 dark:border-white/[0.08];
+    @apply border-slate-200/90 dark:border-teal-100/10;
   }
 
   .border-theme-subtle {
-    @apply border-slate-200 dark:border-white/[0.06];
+    @apply border-slate-200/70 dark:border-teal-100/8;
   }
 
   .bg-theme-hover {
-    @apply bg-slate-100 dark:bg-white/[0.06];
+    @apply bg-teal-50/80 dark:bg-teal-400/10;
   }
 
   .bg-theme-surface {
-    @apply bg-slate-50 dark:bg-white/[0.04];
+    @apply bg-white/70 dark:bg-teal-950/40;
   }
 
   .input-field {
     @apply w-full rounded-xl px-4 py-3 transition-all duration-200
-      text-slate-900 dark:text-slate-100
-      placeholder:text-slate-400 dark:placeholder:text-slate-500
-      focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20;
+      text-slate-900 dark:text-teal-50
+      placeholder:text-slate-400 dark:placeholder:text-teal-200/40
+      focus:outline-none focus:ring-2;
     background: var(--input-bg);
     border: 1px solid var(--input-border);
+  }
+
+  .input-field:focus {
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
   }
 
   .slider-thumb {
@@ -234,7 +235,7 @@
 
 @layer utilities {
   .bg-grid {
-    background-size: 60px 60px;
+    background-size: 56px 56px;
     background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
   }
@@ -255,10 +256,7 @@
 }
 
 @media (min-width: 1024px) {
-  :root {
-    --nav-height: 6.25rem;
-  }
-
+  :root,
   .dark {
     --nav-height: 6.25rem;
   }

@@ -60,3 +60,7 @@ npm start
 ## Growth & SEO
 
 See **[docs/SEO_GROWTH_PLAYBOOK.md](docs/SEO_GROWTH_PLAYBOOK.md)** for the rankings → traffic → AdSense playbook, top-20 tools, env vars, GSC checklist, and helper APIs.
+
+Paste-ready free marketing (Shorts, directories, Reddit): **[docs/FREE_MARKETING_KIT.md](docs/FREE_MARKETING_KIT.md)**.
+
+Reddit reply targets (100+ threads + copy): **[docs/REDDIT_OUTREACH_100.md](docs/REDDIT_OUTREACH_100.md)**.

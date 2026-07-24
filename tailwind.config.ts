@@ -11,12 +11,13 @@ const config: Config = {
     extend: {
       colors: {
         slate: {
-          950: "#0a0f1a",
+          950: "#071411",
         },
         accent: {
-          DEFAULT: "#3b82f6",
-          emerald: "#10b981",
-          glow: "#60a5fa",
+          DEFAULT: "var(--accent)",
+          emerald: "var(--accent-emerald)",
+          glow: "var(--accent-soft)",
+          soft: "var(--accent-soft)",
         },
       },
       fontFamily: {
@@ -24,9 +25,9 @@ const config: Config = {
       },
       backgroundImage: {
         "grid-pattern":
-          "linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px)",
+          "linear-gradient(rgba(15, 118, 110, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 118, 110, 0.05) 1px, transparent 1px)",
         "hero-gradient":
-          "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.25), transparent)",
+          "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(15, 118, 110, 0.22), transparent)",
       },
       animation: {
         ticker: "ticker 40s linear infinite",
@@ -48,9 +49,9 @@ const config: Config = {
         },
       },
       boxShadow: {
-        glass: "0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
-        glow: "0 0 40px rgba(59, 130, 246, 0.3)",
-        "glow-emerald": "0 0 40px rgba(16, 185, 129, 0.3)",
+        glass: "0 8px 32px rgba(7, 20, 17, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+        glow: "0 0 36px rgba(15, 118, 110, 0.28)",
+        "glow-emerald": "0 0 36px rgba(5, 150, 105, 0.28)",
       },
     },
   },

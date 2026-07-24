@@ -11,18 +11,18 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-  theme: "dark",
+  theme: "light",
   toggleTheme: () => {},
   mounted: false,
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("ranburg-theme") as Theme | null;
-    const initial: Theme = stored ?? "dark";
+    const initial: Theme = stored ?? "light";
     setTheme(initial);
     document.documentElement.classList.toggle("dark", initial === "dark");
     setMounted(true);

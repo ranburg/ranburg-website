@@ -44,8 +44,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0f1a" },
+    { media: "(prefers-color-scheme: light)", color: "#f3f6f4" },
+    { media: "(prefers-color-scheme: dark)", color: "#071411" },
   ],
 };
 
@@ -55,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakarta.variable} dark`} suppressHydrationWarning>
+    <html lang="en" className={plusJakarta.variable} suppressHydrationWarning>
       <head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaMeasurementId}`} />
         <script
@@ -72,7 +72,7 @@ export default function RootLayout({
         ) : null}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('ranburg-theme');var d=t?(t==='dark'):true;document.documentElement.classList.toggle('dark',d);}catch(e){document.documentElement.classList.add('dark');}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('ranburg-theme');var d=t==='dark';document.documentElement.classList.toggle('dark',d);}catch(e){}})();`,
           }}
         />
       </head>

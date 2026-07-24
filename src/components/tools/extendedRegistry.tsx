@@ -59,5 +59,13 @@ export const EXTENDED_TOOL_COMPONENTS: Record<string, ComponentType> = {
   "roi-calculator": lazy(() => import("./business/BusinessCalcComponents").then((m) => ({ default: m.RoiCalculatorTool }))),
   "break-even-calculator": lazy(() => import("./business/BusinessCalcComponents").then((m) => ({ default: m.BreakEvenTool }))),
 
+  "credit-card-finder": lazy(() => import("./finance/CreditCardFinderTool")),
+  "rent-vs-buy-calculator": lazy(() => import("./finance/CoolFinanceTools").then((m) => ({ default: m.RentVsBuyTool }))),
+  "bill-split-calculator": lazy(() => import("./finance/CoolFinanceTools").then((m) => ({ default: m.BillSplitTool }))),
+  "compound-interest-calculator": lazy(() => import("./finance/CoolFinanceTools").then((m) => ({ default: m.CompoundInterestTool }))),
+  "sleep-calculator": lazy(() => import("./finance/CoolFinanceTools").then((m) => ({ default: m.SleepCalculatorTool }))),
+  "salary-hike-calculator": lazy(() => import("./finance/CoolFinanceTools").then((m) => ({ default: m.SalaryHikeTool }))),
+  "color-contrast-checker": lazy(() => import("./finance/CoolFinanceTools").then((m) => ({ default: m.ColorContrastTool }))),
+
   "qr-code-generator": lazy(() => import("./QRGenerator")),
 };
