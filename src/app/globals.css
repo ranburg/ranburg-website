@@ -143,15 +143,15 @@
   }
 
   .text-theme-body {
-    @apply text-slate-700 dark:text-teal-100/85;
+    @apply text-slate-700 dark:text-teal-100/80;
   }
 
   .text-theme-muted {
-    @apply text-slate-600 dark:text-teal-200/65;
+    @apply text-slate-600 dark:text-teal-200/60;
   }
 
   .text-theme-subtle {
-    @apply text-slate-500 dark:text-teal-300/45;
+    @apply text-slate-500 dark:text-teal-300/40;
   }
 
   .border-theme {
@@ -159,7 +159,7 @@
   }
 
   .border-theme-subtle {
-    @apply border-slate-200/70 dark:border-teal-100/8;
+    @apply border-slate-200/70 dark:border-teal-100/5;
   }
 
   .bg-theme-hover {
