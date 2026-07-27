@@ -189,12 +189,27 @@ export function softwareApplicationJsonLd(
     name,
     description,
     applicationCategory: category,
+    applicationSubCategory: "WebApplication",
     operatingSystem: "Any",
-    browserRequirements: "Requires JavaScript",
-    offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+    browserRequirements: "Requires JavaScript. Works on Chrome, Edge, Firefox, Safari.",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+    },
     isAccessibleForFree: true,
     url,
+    image: `${SITE.url}/opengraph-image`,
+    author: { "@type": "Organization", name: SITE.name, url: SITE.url },
+    publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
     provider: { "@type": "Organization", name: SITE.name, url: SITE.url },
+    featureList: [
+      "Free to use",
+      "No account required",
+      "Works in the browser",
+      "Mobile friendly",
+    ],
   };
 }
 

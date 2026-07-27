@@ -104,7 +104,17 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
               <h1 className="mt-1 break-words text-2xl font-extrabold text-theme-heading sm:text-3xl">{tool.title}</h1>
               <p className="mt-2 max-w-2xl text-sm text-theme-muted sm:text-base">{tool.shortDescription}</p>
               <p className="mt-2 text-xs text-theme-subtle sm:text-sm">
-                Free online tool · Works in your browser · No account required
+                Free online tool · Works in your browser · No account required · Created by Ranburg
+              </p>
+              <p className="mt-1 text-xs text-theme-subtle">
+                Privacy-first where possible —{" "}
+                <Link href="/privacy" className="underline-offset-2 hover:text-accent hover:underline">
+                  Privacy Policy
+                </Link>
+                {" · "}
+                <Link href="/contact" className="underline-offset-2 hover:text-accent hover:underline">
+                  Contact
+                </Link>
               </p>
               {guideBlog && (
                 <Link

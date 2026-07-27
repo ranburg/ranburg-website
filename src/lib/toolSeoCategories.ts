@@ -159,24 +159,33 @@ Bookmark your favorites and explore related developer and text tools to complete
   {
     slug: "image",
     label: "Image Tools",
-    headline: "Free Online Image Tools",
+    headline: "Free Online Image Tools — Convert, Compress & Edit",
     description:
-      "Convert JPG, PNG, WebP, HEIC, and SVG — compress, resize, crop, and encode images in your browser.",
-    intro: `Ranburg image tools help designers, developers, and marketers convert, optimize, and prepare images without Photoshop or cloud uploads. Convert JPG to PNG, PNG to WebP, compress photos for faster websites, resize for social banners, crop screenshots, strip EXIF metadata, or encode images to Base64 — all processed locally in your browser.
+      "Convert HEIC to JPG, JPG to PNG, PNG to WebP, and more. Compress, resize, crop, and strip EXIF in your browser — free, secure, no signup.",
+    intro: `Ranburg image tools help designers, developers, marketers, and everyday iPhone users convert, optimize, and prepare images without Photoshop or risky cloud uploads. Convert HEIC to JPG for Windows and email, JPG to PNG for graphics, PNG to WebP for faster sites, compress photos for blogs, resize for social banners, crop screenshots, strip EXIF metadata, or encode images to Base64 — all processed locally in your browser whenever possible.
 
-Privacy is built in: your photos never leave your device. This makes our image utilities safe for client assets, product photography, and internal documents. Each tool includes SEO documentation, FAQs, and links to related converters so you can complete full image workflows in one session.
+Privacy is built in: your photos are not harvested into a random converter account. That makes these utilities safer for client assets, product photography, and personal albums. Each tool page includes deep guides, comparison tables, FAQs, HowTo schema, and links to related converters so Google and users can see a complete Image Tools topic cluster — not a thin standalone widget.
 
-Whether you are optimizing a blog hero image, preparing app assets, or converting iPhone HEIC photos to JPG, Ranburg image tools deliver instant results with drag-and-drop upload and mobile-friendly interfaces.`,
+Whether you are opening iPhone HEIC files on Windows, optimizing a blog hero, preparing app assets, or converting SVG logos to PNG, Ranburg image tools deliver instant results with clear steps and mobile-friendly interfaces. Start with HEIC to JPG, Image Compressor, or JPG to PNG, then chain related tools from this hub.`,
     icon: "Image",
     gradient: "from-orange-500 to-rose-500",
-    keywords: ["image tools", "jpg to png", "image compressor", "webp converter"],
+    keywords: [
+      "image tools",
+      "heic to jpg",
+      "jpg to png",
+      "image compressor",
+      "webp converter",
+      "free image converter",
+      "convert heic online",
+    ],
     relatedSlugs: ["pdf", "seo", "developer"],
     faq: [
-      { question: "Are images uploaded to Ranburg?", answer: "No. All image tools process files locally in your browser." },
-      { question: "What formats are supported?", answer: "PNG, JPG, WebP, GIF, SVG, and HEIC (where browser supports)." },
-      { question: "Are image tools free?", answer: "Yes. No signup or watermarks." },
+      { question: "Are images uploaded to Ranburg?", answer: "No. Image tools process files locally in your browser whenever possible." },
+      { question: "What formats are supported?", answer: "PNG, JPG, WebP, GIF, SVG, and HEIC (where the browser supports decoding)." },
+      { question: "Are image tools free?", answer: "Yes. No signup, no watermarks, no account required." },
+      { question: "Can I convert HEIC from iPhone?", answer: "Yes. Use the HEIC to JPG Converter to make photos compatible with Windows, email, and most websites." },
       { question: "Can I compress images for web?", answer: "Yes. Use the Image Compressor to reduce file size with quality control." },
-      { question: "Is batch processing supported?", answer: "Some tools support multiple files. Check each tool page for details." },
+      { question: "Is batch processing supported?", answer: "Convert files one after another on each tool page. Check the tool UI for multi-file options when available." },
     ],
   },
   {

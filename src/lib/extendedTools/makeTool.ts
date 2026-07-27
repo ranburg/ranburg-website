@@ -17,6 +17,10 @@ interface MakeToolOptions {
   seoDescription?: string;
 }
 
+function defaultSeoDescription(title: string, shortDescription: string): string {
+  return `${shortDescription} Use ${title} online for free — fast, secure, no software or signup required. Instant results in your browser.`;
+}
+
 export function makeTool(opts: MakeToolOptions): ToolConfig {
   return {
     slug: opts.slug,
@@ -28,8 +32,8 @@ export function makeTool(opts: MakeToolOptions): ToolConfig {
     badge: opts.badge,
     popular: opts.popular,
     seo: {
-      title: opts.seoTitle ?? `${opts.title} — Free Online Tool | Ranburg.com`,
-      description: opts.seoDescription ?? opts.shortDescription,
+      title: opts.seoTitle ?? `${opts.title} Online Free – Instant Results | Ranburg`,
+      description: opts.seoDescription ?? defaultSeoDescription(opts.title, opts.shortDescription),
       keywords: opts.keywords,
     },
     howToUse: opts.howToUse,
