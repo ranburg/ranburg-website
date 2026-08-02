@@ -56,8 +56,10 @@ Expect weeks–months after branded search volume grows — not a same-day GSC t
 
 | Endpoint | Use |
 |----------|-----|
-| https://www.ranburg.com/api/seo/priority-urls | JSON list of URLs to request indexing in GSC |
+| https://www.ranburg.com/api/seo/priority-urls | JSON list of URLs to request indexing in GSC / Bing |
 | https://www.ranburg.com/api/seo/growth-kit | Shorts scripts, directory copy, weekly checklist |
+| https://www.ranburg.com/api/seo/indexnow | IndexNow status + authenticated URL submit (Bing/Yandex) |
+| https://www.ranburg.com/indexnow-key.txt | Public IndexNow ownership key |
 
 ---
 
@@ -70,11 +72,58 @@ Expect weeks–months after branded search volume grows — not a same-day GSC t
 3. Request indexing for priority URLs from `/api/seo/priority-urls` (top 20 tools + hubs — not all 81 at once).
 4. Monitor Coverage: Indexed / Discovered / Crawled-not-indexed / Excluded.
 
+### Bing Webmaster Tools (do this next)
+
+Bing also powers Yahoo and feeds other engines. Same sitemap works.
+
+1. Open [Bing Webmaster Tools](https://www.bing.com/webmasters) → add `https://www.ranburg.com`.
+2. Fastest verify: **Import from Google Search Console** (if GSC is already verified).
+3. Submit sitemap: `https://www.ranburg.com/sitemap.xml`
+4. Use URL submission / inspection for priority tools (same list as GSC).
+5. Confirm ownership key file loads: `https://www.ranburg.com/indexnow-key.txt`
+
+### IndexNow (Bing, Yandex, Seznam, Naver — not Google)
+
+Shipped in code so deploys can notify Bing faster than waiting for crawl.
+
+| Piece | URL / env |
+|-------|-----------|
+| Status + instructions | `GET https://www.ranburg.com/api/seo/indexnow` |
+| Key file | `https://www.ranburg.com/indexnow-key.txt` |
+| Submit priority URLs | Authenticated `GET`/`POST` `/api/seo/indexnow` with `Authorization: Bearer $INDEXNOW_SUBMIT_SECRET` |
+| Optional key override | `INDEXNOW_KEY` (8–128 hex chars) |
+| Submit auth | `INDEXNOW_SUBMIT_SECRET` or reuse `CRON_SECRET` |
+
+**One-shot after deploy (PowerShell):**
+```powershell
+$secret = "<your INDEXNOW_SUBMIT_SECRET or CRON_SECRET>"
+Invoke-RestMethod -Method GET -Uri "https://www.ranburg.com/api/seo/indexnow" -Headers @{ Authorization = "Bearer $secret" }
+```
+
+Or POST a custom list:
+```powershell
+Invoke-RestMethod -Method POST -Uri "https://www.ranburg.com/api/seo/indexnow" `
+  -Headers @{ Authorization = "Bearer $secret"; "Content-Type" = "application/json" } `
+  -Body '{ "urls": ["https://www.ranburg.com/tools/heic-to-jpg", "https://www.ranburg.com/tools/emi"] }'
+```
+
+Vercel Cron (shipped in `vercel.json`) hits `/api/seo/indexnow` every Monday 06:00 UTC when `CRON_SECRET` is set in the project.
+
+### Other search engines
+
+| Engine | Action |
+|--------|--------|
+| Yahoo | Covered by Bing |
+| DuckDuckGo | No full webmaster console; benefits from Bing + links |
+| Yandex | Optional [Yandex Webmaster](https://webmaster.yandex.com) + same sitemap; IndexNow notifies Yandex too |
+| Brave / Ecosia / etc. | Mostly borrow Bing/Google indexes |
+
 ### Technical rules
 
 - Coming-soon / waitlist tools must stay **noindex** and out of the tools sitemap.
-- Every live tool needs unique title/description (spot-check duplicates in GSC).
+- Every live tool needs unique title/description (spot-check duplicates in GSC / Bing).
 - Ship `ads.txt` as soon as AdSense publisher ID exists.
+- Re-run IndexNow after major tool SEO deploys; Google still needs GSC URL Inspection / sitemap crawl.
 
 ---
 
