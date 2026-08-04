@@ -88,8 +88,11 @@ export const TOOLS_CONFIG: ToolConfig[] = [
       "Future Value (FV) = P × [(1 + r)^n − 1] / r × (1 + r), where P is monthly investment, r is monthly return rate, and n is number of months. Present Value adjusts for inflation: PV = FV / (1 + i)^t.",
     faq: [
       { question: "What is a SIP?", answer: "A Systematic Investment Plan (SIP) is a method of investing a fixed sum regularly in mutual funds, leveraging rupee-cost averaging and compound growth." },
+      { question: "How does a SIP calculator work?", answer: "It projects maturity value from your monthly amount, expected annual return, and tenure using the SIP future-value formula. Ranburg’s calculator also shows invested amount vs wealth gained and optional inflation-adjusted purchasing power." },
       { question: "What return rate should I use?", answer: "Equity funds historically average 10–12% annually, debt funds 6–8%. Past performance does not guarantee future results." },
+      { question: "Is ₹5,000 or ₹10,000 per month a good SIP?", answer: "Both work — consistency matters more than starting size. Use this SIP calculator to compare scenarios (e.g. ₹5k vs ₹10k for 10–15 years) before you increase contributions." },
       { question: "Does this include taxes?", answer: "No. Results are pre-tax estimates. Capital gains tax may apply on redemption based on holding period and fund type." },
+      { question: "Can I use this SIP calculator for India mutual funds?", answer: "Yes. Enter amounts in rupees and an expected return that matches your fund category. Pair it with the EMI calculator if you are balancing investments and loan EMIs." },
     ],
   },
   {
@@ -148,8 +151,11 @@ export const TOOLS_CONFIG: ToolConfig[] = [
       "EMI = P × r × (1 + r)^n / [(1 + r)^n − 1], where P is principal, r is monthly interest rate, and n is tenure in months.",
     faq: [
       { question: "What is EMI?", answer: "Equated Monthly Installment (EMI) is a fixed payment comprising principal and interest, spread evenly across the loan tenure." },
+      { question: "How is EMI calculated?", answer: "EMI = P × r × (1 + r)^n / [(1 + r)^n − 1], where P is principal, r is monthly interest rate, and n is tenure in months. This free EMI calculator updates the chart as you change loan amount, rate, or tenure." },
       { question: "Does EMI change over time?", answer: "The EMI amount stays fixed, but the principal-to-interest ratio shifts — early payments are interest-heavy." },
+      { question: "How can I reduce my home loan EMI?", answer: "Shorter tenure, lower rate, or a larger down payment all reduce EMI or total interest. Compare 15-year vs 20-year tenures here, then check the loan foreclosure calculator if you plan to prepay." },
       { question: "Can I prepay my loan?", answer: "Most lenders allow prepayment. Reducing principal early lowers total interest, though prepayment charges may apply." },
+      { question: "Is this EMI calculator free for India home and car loans?", answer: "Yes. Use it for home, car, or personal loans with amounts in ₹. No signup required — results stay in your browser session." },
     ],
   },
   {
@@ -709,10 +715,12 @@ export const TOOLS_CONFIG: ToolConfig[] = [
     formula: "Exclusive: GST = amount × rate/100. Inclusive: net = amount / (1 + rate/100). Multi-line: sum per item with CGST/SGST split or IGST.",
     faq: [
       { question: "What GST rates are supported?", answer: "Standard India GST slabs: 0%, 5%, 12%, 18%, and 28% per line item." },
+      { question: "How do I calculate GST inclusive vs exclusive price?", answer: "Exclusive: GST = amount × rate/100. Inclusive: net = amount / (1 + rate/100). Toggle Inclusive/Exclusive in this GST calculator to match how you quote clients." },
       { question: "What is CGST and SGST?", answer: "For intra-state sales, GST splits equally into CGST (central) and SGST (state), each half the total GST." },
       { question: "When do I use IGST?", answer: "For inter-state transactions, the full GST amount is IGST. Select Inter-state mode in the calculator." },
       { question: "Can I calculate multi-item invoices?", answer: "Yes. Switch to Multi-Line Invoice mode to add items with HSN codes, quantities, and per-line GST rates." },
       { question: "What is HSN/SAC?", answer: "Harmonized System of Nomenclature (goods) or Services Accounting Code — required for GST invoices and e-way bills." },
+      { question: "Is this GST calculator free for Indian businesses?", answer: "Yes. No signup. After you finish, try the invoice generator to turn the same amounts into a client-ready bill." },
     ],
   },
   {
@@ -802,9 +810,11 @@ export const TOOLS_CONFIG: ToolConfig[] = [
     formula: "Ad revenue = (monthly views ÷ 1,000) × RPM. Total = ad revenue + sponsorships + memberships.",
     faq: [
       { question: "What is YouTube RPM?", answer: "RPM (Revenue Per Mille) is estimated earnings per 1,000 views after YouTube's revenue share. Typical ranges: $1–$4 general, $4–$12 finance/tech." },
+      { question: "How much does YouTube pay per 1,000 views?", answer: "It varies widely by niche and country. Use this YouTube revenue calculator with a low/mid/high RPM (e.g. $1.50 / $3 / $6) to bracket realistic monthly ad income before you rely on a single number." },
       { question: "Is this accurate?", answer: "Results are estimates. Actual YouTube earnings vary by niche, geography, ad seasonality, and audience demographics." },
       { question: "Does this include Shorts revenue?", answer: "Enter your total monthly views including Shorts. Shorts typically have lower RPM than long-form content." },
       { question: "Can I add brand deals?", answer: "Yes. Set sponsored posts per month and average deal value to include sponsorship income." },
+      { question: "How do I estimate earnings for a public channel?", answer: "Paste the channel into YouTube Channel Insights for views/subscribers, then plug those numbers into this revenue calculator with a niche-appropriate RPM." },
       { question: "Is the calculator free?", answer: "Yes. No signup required." },
     ],
   },

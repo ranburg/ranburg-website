@@ -23,7 +23,9 @@ export default function ToolRecommendations({
     return (
       <section className="mt-16 border-t border-theme-subtle pt-16">
         <h2 className="text-2xl font-bold text-theme-heading">Related Tools</h2>
-        <p className="mt-2 text-theme-muted">Explore more free utilities in the same category</p>
+        <p className="mt-2 text-theme-muted">
+          Keep going — open another free tool to continue your workflow
+        </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {recommended.map((tool: ToolConfig) => (
             <RelatedToolCard key={tool.slug} tool={tool} />

@@ -3,6 +3,7 @@ import { ChevronDown } from "lucide-react";
 import type { ToolConfig } from "@/lib/toolsConfig";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { generateToolSeoSections } from "@/lib/toolSeoGenerator";
+import { TOOL_WORKED_EXAMPLES } from "@/lib/seoGrowthConfig";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 interface ToolSeoContentProps {
@@ -18,6 +19,7 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
   const relatedTools = seo.relatedSlugs
     .map((slug) => getToolBySlug(slug))
     .filter((t): t is ToolConfig => Boolean(t));
+  const hasUniqueExamples = Boolean(TOOL_WORKED_EXAMPLES[tool.slug]?.length);
 
   return (
     <article className="mt-14 space-y-3 border-t border-theme-subtle pt-10">
@@ -96,7 +98,7 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
         </SeoDetails>
       )}
 
-      <SeoDetails title="Examples">
+      <SeoDetails title="Examples" open={hasUniqueExamples}>
         <ul className="list-disc space-y-2 pl-5 text-theme-muted">
           {seo.examples.map((ex) => (
             <li key={ex} className="leading-relaxed">
@@ -158,7 +160,7 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
       </SeoDetails>
 
       {relatedTools.length > 0 && (
-        <SeoDetails title="Related tools" open>
+        <SeoDetails title="Related tools">
           <p className="mb-3 text-sm text-theme-muted">
             Continue your workflow with these free Ranburg tools (no signup):
           </p>

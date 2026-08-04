@@ -31,3 +31,19 @@ export function trackCopyOutput(slug?: string): void {
 export function trackDownload(slug?: string, label?: string): void {
   trackGaEvent("download", { tool_slug: slug ?? "unknown", label: label ?? "file" });
 }
+
+/** Fire when a user interacts with a tool (slider, input, file, copy). */
+export function trackToolEngage(slug: string, detail?: string): void {
+  trackGaEvent("tool_engage", { tool_slug: slug, detail: detail ?? "interaction" });
+}
+
+/** Dwell time when leaving a tool page (helps validate >8s engagement goal). */
+export function trackToolDwell(slug: string, dwellMs: number): void {
+  const seconds = Math.round(dwellMs / 1000);
+  trackGaEvent("tool_dwell", {
+    tool_slug: slug,
+    dwell_ms: dwellMs,
+    dwell_seconds: seconds,
+    engaged_8s: seconds >= 8,
+  });
+}

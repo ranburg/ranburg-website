@@ -19,6 +19,8 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 import ConsultingCTA from "@/components/ui/ConsultingCTA";
 import ToolRecommendations from "@/components/tools/ToolRecommendations";
+import ToolNextSteps from "@/components/tools/ToolNextSteps";
+import WorkedExampleBanner from "@/components/tools/WorkedExampleBanner";
 import ToolSeoContent from "@/components/tools/ToolSeoContent";
 import ToolProcessFlow from "@/components/tools/ToolProcessFlow";
 import ToolViewTracker from "@/components/tools/ToolViewTracker";
@@ -134,10 +136,13 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
       <section className="py-8">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <ToolProcessFlow tool={tool} />
+          <WorkedExampleBanner slug={slug} />
 
-          <div className="min-w-0">
+          <div className="min-w-0" data-tool-interactive>
             <ToolRenderer slug={slug} />
           </div>
+
+          <ToolNextSteps currentSlug={slug} limit={3} />
 
           <AdPlaceholder placement="after-tool-mobile" />
           <AdPlaceholder placement="between-content" className="hidden lg:flex" />

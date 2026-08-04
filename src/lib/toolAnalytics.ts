@@ -74,11 +74,16 @@ export function trackToolView(slug: string): void {
   }
 }
 
-export function trackPageExit(slug: string): void {
+export function trackPageExit(slug: string, dwellMs?: number): void {
   if (typeof navigator !== "undefined" && navigator.sendBeacon) {
     navigator.sendBeacon(
       "/api/analytics/event",
-      JSON.stringify({ type: "page_exit", slug, ts: Date.now() })
+      JSON.stringify({
+        type: "page_exit",
+        slug,
+        ts: Date.now(),
+        dwell_ms: typeof dwellMs === "number" ? Math.max(0, Math.round(dwellMs)) : undefined,
+      })
     );
   }
 }
