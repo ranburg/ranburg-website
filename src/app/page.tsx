@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import Hero from "@/components/home/Hero";
+import ToolsVideoBanner from "@/components/home/ToolsVideoBanner";
 import SocialToolsSpotlight from "@/components/home/SocialToolsSpotlight";
 import PopularTools from "@/components/home/PopularTools";
 import RecentlyAddedTools from "@/components/home/RecentlyAddedTools";
@@ -31,6 +32,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <ToolsVideoBanner />
       <SocialToolsSpotlight />
       <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
       <PopularTools />
