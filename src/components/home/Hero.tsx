@@ -10,6 +10,13 @@ import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 
 const TOOL_COUNT = TOOLS_CONFIG.length;
 
+const INTENT_CHIPS = [
+  { label: "Calculate", href: "/tools/calculators" },
+  { label: "Convert", href: "/tools/image" },
+  { label: "Create", href: "/tools/generators" },
+  { label: "Analyze", href: "/tools/social-media" },
+] as const;
+
 export default function Hero() {
   const [loan, setLoan] = useState(2500000);
   const [rate, setRate] = useState(8.5);
@@ -68,12 +75,24 @@ export default function Hero() {
             <ToolSearch showSuggestions showTags showCategoryFilter maxResults={6} enableKeyboardNav trackSearches />
           </div>
 
+          <div className="mt-5 flex flex-wrap gap-2">
+            {INTENT_CHIPS.map((chip) => (
+              <Link
+                key={chip.label}
+                href={chip.href}
+                className="rounded-full border border-theme bg-theme-surface/80 px-3.5 py-1.5 text-sm font-semibold text-theme-heading transition hover:border-accent/40 hover:bg-accent/10"
+              >
+                {chip.label}
+              </Link>
+            ))}
+          </div>
+
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Button href="/tools" size="lg" icon>
               Explore tools
             </Button>
-            <Button href="/tools/credit-card-finder" variant="outline" size="lg">
-              Find your credit card
+            <Button href="/tools/invoice-generator" variant="outline" size="lg">
+              Create an invoice
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
@@ -89,8 +108,8 @@ export default function Hero() {
           <div className="relative overflow-hidden rounded-3xl border border-theme bg-[var(--surface-elevated)]/90 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent">Live demo</p>
-                <p className="mt-1 text-lg font-bold text-theme-heading">EMI pulse</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent">Quick pulse</p>
+                <p className="mt-1 text-lg font-bold text-theme-heading">EMI preview</p>
               </div>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-1 text-xs font-medium text-accent-emerald">
                 <Zap className="h-3.5 w-3.5" />
@@ -98,19 +117,19 @@ export default function Hero() {
               </span>
             </div>
 
-            <div className="mt-6 space-y-4">
-              <DemoSlider label="Loan amount" value={loan} min={100000} max={10000000} step={50000} display={fmt(loan)} onChange={setLoan} />
-              <DemoSlider label="Interest rate" value={rate} min={5} max={18} step={0.1} display={`${rate.toFixed(1)}%`} onChange={setRate} />
-              <DemoSlider label="Tenure" value={years} min={1} max={30} step={1} display={`${years} yrs`} onChange={setYears} />
+            <div className="mt-5 space-y-3">
+              <DemoSlider label="Loan" value={loan} min={100000} max={10000000} step={50000} display={fmt(loan)} onChange={setLoan} />
+              <DemoSlider label="Rate" value={rate} min={5} max={18} step={0.1} display={`${rate.toFixed(1)}%`} onChange={setRate} />
+              <DemoSlider label="Years" value={years} min={1} max={30} step={1} display={`${years} yrs`} onChange={setYears} />
             </div>
 
-            <div className="mt-6 rounded-2xl border border-accent/25 bg-accent/5 p-5 text-center">
+            <div className="mt-5 rounded-2xl border border-accent/25 bg-accent/5 p-4 text-center">
               <p className="text-xs font-semibold uppercase tracking-wider text-theme-subtle">Monthly EMI</p>
               <motion.p
                 key={Math.round(emi)}
                 initial={{ opacity: 0.4, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="mt-1 text-3xl font-extrabold tabular-nums text-theme-heading sm:text-4xl"
+                className="mt-1 text-3xl font-extrabold tabular-nums text-theme-heading"
               >
                 {fmt(emi)}
               </motion.p>
@@ -118,11 +137,12 @@ export default function Hero() {
 
             <Link
               href="/tools/emi"
-              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
             >
               Open full EMI calculator
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
+            <p className="mt-3 text-xs text-theme-subtle">Want more live demos? Scroll to the playground below.</p>
           </div>
         </motion.div>
       </div>

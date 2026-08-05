@@ -60,6 +60,18 @@ import {
   Users,
   Moon,
   Palette,
+  List,
+  ImageDown,
+  ImageUp,
+  Music,
+  Table,
+  Sheet,
+  ScanFace,
+  Flame,
+  GitCompare,
+  Receipt,
+  Award,
+  Landmark,
   type LucideIcon,
 } from "lucide-react";
 
@@ -124,6 +136,18 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Users,
   Moon,
   Palette,
+  List,
+  ImageDown,
+  ImageUp,
+  Music,
+  Table,
+  Sheet,
+  ScanFace,
+  Flame,
+  GitCompare,
+  Receipt,
+  Award,
+  Landmark,
 };
 
 export function getToolIcon(name: string): LucideIcon {

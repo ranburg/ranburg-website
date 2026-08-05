@@ -266,6 +266,19 @@ const RAW_TOPICS: RawTopic[] = [
   ["sleep-before-big-decisions", "Sleep Before Big Money Decisions", "sleep before financial decisions", ["sleep-calculator", "credit-card-finder"], "creators", "Wellness & Focus"],
   ["accessible-forms-contrast", "Accessible Forms: Labels, Errors, and Contrast", "accessible form contrast", ["color-contrast-checker", "meta-tag-generator"], "development", "Design & Accessibility"],
   ["ranburg-new-tools-2026", "New Ranburg Tools in 2026: Cards, Housing, Sleep & More", "ranburg new tools", ["credit-card-finder", "rent-vs-buy-calculator", "sleep-calculator"], "small-business", "Tool Roundups"],
+  // New wave clusters
+  ["ctc-to-in-hand-salary-fy-2026-27", "CTC to In-Hand Salary Calculator India (FY 2026-27)", "ctc to in hand salary calculator", ["ctc-in-hand-calculator", "hra-exemption-calculator", "tds-calculator"], "small-business", "India Salary"],
+  ["hra-exemption-calculator-guide", "HRA Exemption Calculator: Metro vs Non-Metro Explained", "hra exemption calculator", ["hra-exemption-calculator", "ctc-in-hand-calculator"], "small-business", "India Salary"],
+  ["tds-rates-cheat-sheet-freelancers", "TDS Rates Cheat Sheet for Freelancers and SMEs", "tds calculator india", ["tds-calculator", "invoice-generator"], "small-business", "India Salary"],
+  ["gratuity-calculator-india-guide", "Gratuity Calculator India: Formula, Cap, and Tax Notes", "gratuity calculator india", ["gratuity-calculator", "ctc-in-hand-calculator"], "small-business", "India Salary"],
+  ["multi-country-invoice-generator-guide", "Free Multi-Country Invoice Generator with Logo and PDF", "invoice generator with logo", ["invoice-generator", "gst-calculator"], "small-business", "Business Invoices"],
+  ["youtube-thumbnail-requirements-2026", "YouTube Thumbnail Requirements 2026: Size, Safe Zone, 2MB Cap", "youtube thumbnail size", ["youtube-thumbnail-checker", "compress-to-exact-size"], "creators", "Creator Publish QA"],
+  ["reels-tiktok-shorts-safe-zones", "Reels, TikTok & Shorts Safe Zones: Stop UI Cropping Your Hook", "tiktok safe zone", ["safe-zone-checker", "social-image-size-checker"], "creators", "Creator Publish QA"],
+  ["compress-image-to-exact-kb", "How to Compress an Image to Exact KB for Uploads", "compress image to exact size", ["compress-to-exact-size", "image-compressor"], "creators", "Creator Publish QA"],
+  ["startup-burn-rate-runway-guide", "Startup Burn Rate and Runway Calculator: Default Alive Math", "burn rate runway calculator", ["burn-rate-runway-calculator", "break-even-calculator"], "small-business", "Startup Finance"],
+  ["freelancer-hourly-rate-formula", "Freelancer Hourly Rate Calculator: Tax, Benefits, Billable Hours", "freelancer hourly rate calculator", ["freelancer-hourly-rate-calculator", "invoice-generator"], "small-business", "Startup Finance"],
+  ["ai-crawler-robots-txt-guide", "AI Crawler robots.txt Checker: GPTBot, ClaudeBot, Perplexity", "ai crawler robots.txt", ["ai-crawler-robots-checker", "robots-txt-generator"], "seo", "GEO & AEO"],
+  ["whatsapp-opus-to-mp3-guide", "Convert WhatsApp Voice Notes (Opus) to MP3 Online Free", "opus to mp3", ["opus-to-mp3", "face-blur"], "creators", "Media Utilities"],
 ];
 
 export const SEO_BLOG_TOPICS: SeoBlogTopic[] = RAW_TOPICS.map(expand);

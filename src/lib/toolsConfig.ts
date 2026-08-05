@@ -881,30 +881,58 @@ export const TOOLS_CONFIG: ToolConfig[] = [
   {
     slug: "invoice-generator",
     title: "Invoice Generator",
-    shortDescription: "Create professional GST invoices with line items, tax splits, and print-ready PDF output.",
+    shortDescription:
+      "Create professional multi-country invoices with logo, custom colors, GST/VAT/sales-tax fields, and PDF download — India, US, UK, CA, AU, SG, UAE, and EU.",
     category: "financial",
     icon: "FileText",
     gradient: "from-sky-600 to-blue-500",
     badge: "Business",
     popular: true,
     seo: {
-      title: "Free Invoice Generator — GST Invoice Maker Online | Ranburg.com",
+      title: "Free Invoice Generator Online Free – Logo, GST & VAT PDF | Ranburg",
       description:
-        "Free online invoice generator with GST support, CGST/SGST/IGST splits, line items, and print-ready PDF. Create professional invoices in minutes — no signup.",
-      keywords: ["invoice generator", "free invoice maker", "GST invoice generator", "online invoice template", "create invoice PDF"],
+        "Free invoice generator with logo upload, custom colors, and country tax fields (GST India, US sales tax, UK/EU VAT, AU/SG GST). Download PDF in your browser — no signup.",
+      keywords: [
+        "invoice generator",
+        "free invoice maker",
+        "GST invoice generator",
+        "VAT invoice generator",
+        "invoice generator with logo",
+        "download invoice PDF",
+        "US invoice template",
+        "UK VAT invoice",
+      ],
     },
     howToUse: [
-      "Enter your business and client details including GSTIN if applicable.",
-      "Add line items with quantity, rate, and GST rate per item.",
-      "Choose CGST+SGST for intra-state or IGST for inter-state transactions.",
-      "Preview the invoice and click Print / Save PDF to download or print.",
+      "Choose your country to load the right tax labels and optional compliance fields.",
+      "Upload a logo, pick an accent color, and enter seller + client details (GSTIN, VAT ID, EIN, ABN, etc. as needed).",
+      "Add line items with quantity, rate, and tax rate. For India, choose CGST+SGST or IGST and optional HSN/SAC.",
+      "Preview the invoice, then Download PDF or Print. Nothing is uploaded to our servers.",
     ],
-    formula: "Line total = qty × rate. GST = taxable × rate%. Grand total = subtotal + CGST/SGST or IGST.",
+    formula: "Line total = qty × rate. Tax = taxable × rate% (0 if reverse charge / exempt). Grand total = subtotal + tax.",
     faq: [
-      { question: "Is this invoice legally valid?", answer: "This generates a professional invoice template. For GST compliance in India, ensure your GSTIN, HSN/SAC codes, and sequential invoice numbers meet your state's requirements." },
-      { question: "Can I add GST?", answer: "Yes. Set GST rate per line item and choose intra-state (CGST+SGST) or inter-state (IGST) tax split." },
-      { question: "Can I print or save as PDF?", answer: "Yes. Click Print / Save PDF to open a print dialog where you can save as PDF." },
-      { question: "Is my data stored?", answer: "No. All invoice data stays in your browser and is not sent to our servers." },
+      {
+        question: "Which countries are supported?",
+        answer:
+          "India, United States, United Kingdom, Canada, Australia, Singapore, UAE, Germany, France, and Netherlands — each with relevant optional tax IDs and currency defaults.",
+      },
+      {
+        question: "Can I add my logo and brand colors?",
+        answer: "Yes. Upload a logo (processed only in your browser) and pick a preset or custom accent color for the invoice header.",
+      },
+      {
+        question: "Does it support GST, VAT, and US sales tax?",
+        answer:
+          "Yes. India supports GSTIN, LUT, PAN, HSN/SAC, and CGST/SGST/IGST. US supports EIN and sales tax or tax-exempt. UK/EU/UAE use VAT; AU/SG/CA use GST/HST-style rates.",
+      },
+      {
+        question: "Can I download a PDF?",
+        answer: "Yes. Click Download PDF to save a client-side PDF, or use Print. Your invoice data never leaves the device.",
+      },
+      {
+        question: "Is UPI or payment collection included?",
+        answer: "No. This tool creates invoices only — it does not process payments or generate UPI payment QR codes.",
+      },
       { question: "Is the invoice generator free?", answer: "Yes. No account or payment required." },
     ],
   },

@@ -68,4 +68,32 @@ export const EXTENDED_TOOL_COMPONENTS: Record<string, ComponentType> = {
   "color-contrast-checker": lazy(() => import("./finance/CoolFinanceTools").then((m) => ({ default: m.ColorContrastTool }))),
 
   "qr-code-generator": lazy(() => import("./QRGenerator")),
+
+  "safe-zone-checker": lazy(() => import("./creators/CreatorQaTools").then((m) => ({ default: m.SafeZoneCheckerTool }))),
+  "youtube-thumbnail-checker": lazy(() => import("./creators/CreatorQaTools").then((m) => ({ default: m.YoutubeThumbnailCheckerTool }))),
+  "social-image-size-checker": lazy(() => import("./creators/CreatorQaTools").then((m) => ({ default: m.SocialImageSizeFitTool }))),
+  "compress-to-exact-size": lazy(() => import("./creators/CreatorQaTools").then((m) => ({ default: m.CompressToExactSizeTool }))),
+  "youtube-chapter-generator": lazy(() => import("./creators/CreatorQaTools").then((m) => ({ default: m.YoutubeChapterGeneratorTool }))),
+
+  "avif-to-jpg": lazy(() => import("./media/MediaUtilityTools").then((m) => ({ default: m.AvifToJpgTool }))),
+  "jpg-to-avif": lazy(() => import("./media/MediaUtilityTools").then((m) => ({ default: m.JpgToAvifTool }))),
+  "opus-to-mp3": lazy(() => import("./media/MediaUtilityTools").then((m) => ({ default: m.OpusToMp3Tool }))),
+  "csv-to-json": lazy(() => import("./media/MediaUtilityTools").then((m) => ({ default: m.CsvToJsonTool }))),
+  "json-to-csv": lazy(() => import("./media/MediaUtilityTools").then((m) => ({ default: m.JsonToCsvTool }))),
+  "excel-to-csv": lazy(() => import("./media/MediaUtilityTools").then((m) => ({ default: m.ExcelToCsvTool }))),
+  "face-blur": lazy(() => import("./media/MediaUtilityTools").then((m) => ({ default: m.FaceBlurTool }))),
+
+  "burn-rate-runway-calculator": lazy(() => import("./business/BizGrowthTools").then((m) => ({ default: m.BurnRateRunwayTool }))),
+  "freelancer-hourly-rate-calculator": lazy(() => import("./business/BizGrowthTools").then((m) => ({ default: m.FreelancerRateTool }))),
+  "ab-test-significance-calculator": lazy(() => import("./business/BizGrowthTools").then((m) => ({ default: m.AbTestSignificanceTool }))),
+  "ai-crawler-robots-checker": lazy(() => import("./business/BizGrowthTools").then((m) => ({ default: m.AiCrawlerRobotsCheckerTool }))),
+  "llms-txt-generator": lazy(() => import("./business/BizGrowthTools").then((m) => ({ default: m.LlmsTxtGeneratorTool }))),
+  "jwt-decoder": lazy(() => import("./business/BizGrowthTools").then((m) => ({ default: m.JwtDecoderTool }))),
+
+  "ctc-in-hand-calculator": lazy(() => import("./finance/IndiaFinanceTools").then((m) => ({ default: m.CtcInHandTool }))),
+  "tds-calculator": lazy(() => import("./finance/IndiaFinanceTools").then((m) => ({ default: m.TdsCalculatorTool }))),
+  "hra-exemption-calculator": lazy(() => import("./finance/IndiaFinanceTools").then((m) => ({ default: m.HraExemptionTool }))),
+  "gratuity-calculator": lazy(() => import("./finance/IndiaFinanceTools").then((m) => ({ default: m.GratuityCalculatorTool }))),
+  "hsn-sac-finder": lazy(() => import("./finance/IndiaFinanceTools").then((m) => ({ default: m.HsnSacFinderTool }))),
+  "ifsc-finder": lazy(() => import("./finance/IndiaFinanceTools").then((m) => ({ default: m.IfscFinderTool }))),
 };

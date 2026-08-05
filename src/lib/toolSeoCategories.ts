@@ -128,6 +128,34 @@ export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {
   "governor-limits-calculator": ["calculators", "developer"],
   "omnistudio-expression-builder": ["developer", "generators"],
   "revenue-cloud-pricing-calculator": ["calculators", "business"],
+
+  "safe-zone-checker": ["social-media", "image"],
+  "youtube-thumbnail-checker": ["social-media", "image"],
+  "social-image-size-checker": ["social-media", "image"],
+  "compress-to-exact-size": ["image"],
+  "youtube-chapter-generator": ["social-media", "generators"],
+
+  "avif-to-jpg": ["image"],
+  "jpg-to-avif": ["image"],
+  "opus-to-mp3": ["generators"],
+  "csv-to-json": ["developer"],
+  "json-to-csv": ["developer"],
+  "excel-to-csv": ["developer", "business"],
+  "face-blur": ["image"],
+
+  "burn-rate-runway-calculator": ["business", "calculators"],
+  "freelancer-hourly-rate-calculator": ["business", "calculators"],
+  "ab-test-significance-calculator": ["business", "calculators"],
+  "ai-crawler-robots-checker": ["seo", "developer"],
+  "llms-txt-generator": ["seo", "generators"],
+  "jwt-decoder": ["developer"],
+
+  "ctc-in-hand-calculator": ["calculators", "business"],
+  "tds-calculator": ["calculators", "business"],
+  "hra-exemption-calculator": ["calculators", "business"],
+  "gratuity-calculator": ["calculators", "business"],
+  "hsn-sac-finder": ["business", "generators"],
+  "ifsc-finder": ["business", "generators"],
 };
 
 export const SEO_CATEGORY_HUBS: SeoCategoryHub[] = [
