@@ -1,90 +1,205 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import { KPIStrip } from "@/components/tools/viz";
+import {
+  getDefaultFab,
+  getLicPlan,
+  getPlanBonusRate,
+  LIC_PLANS,
+  type LicPlanId,
+} from "@/lib/licPlans";
 
 function fmt(n: number) {
   return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(n);
 }
 
-/**
- * Educational LIC maturity estimate:
- * Maturity ≈ Sum Assured + (Bonus rate × SA/1000 × years) + Final Additional Bonus.
- * Bonus rates and FAB vary by plan/year — user-supplied estimates only.
- */
 export default function LicMaturityEstimator() {
-  const [planName, setPlanName] = useState("Jeevan Labh / similar endowment");
+  const [planId, setPlanId] = useState<LicPlanId>("jeevan-labh-736");
+  const plan = getLicPlan(planId);
+  const [termIndex, setTermIndex] = useState(2);
+  const termOption = plan.terms[Math.min(termIndex, plan.terms.length - 1)] ?? plan.terms[0];
+
   const [sumAssured, setSumAssured] = useState(1000000);
   const [annualPremium, setAnnualPremium] = useState(50000);
-  const [policyTerm, setPolicyTerm] = useState(25);
-  const [ppt, setPpt] = useState(16);
   const [yearsElapsed, setYearsElapsed] = useState(5);
-  const [bonusPerThousand, setBonusPerThousand] = useState(48);
-  const [fabPerThousand, setFabPerThousand] = useState(25);
   const [startYear, setStartYear] = useState(new Date().getFullYear() - 5);
+  const [overrideBonus, setOverrideBonus] = useState(false);
+  const [bonusPerThousand, setBonusPerThousand] = useState(48);
+  const [overrideFab, setOverrideFab] = useState(false);
+  const [fabPerThousand, setFabPerThousand] = useState(45);
+  const [customPpt, setCustomPpt] = useState(16);
+
+  // When plan changes, reset to a sensible term and auto bonus/FAB
+  useEffect(() => {
+    const idx = Math.min(termIndex, plan.terms.length - 1);
+    setTermIndex(idx >= 0 ? idx : 0);
+    const t = plan.terms[idx >= 0 ? idx : 0];
+    if (!t) return;
+    if (!overrideBonus) {
+      setBonusPerThousand(getPlanBonusRate(planId, t.term, sumAssured));
+    }
+    if (!overrideFab) {
+      setFabPerThousand(getDefaultFab(t.term));
+    }
+    setCustomPpt(t.ppt);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only react to plan switch
+  }, [planId]);
+
+  // Keep auto bonus in sync with term / SA when not overridden
+  useEffect(() => {
+    if (!termOption) return;
+    if (!overrideBonus) {
+      setBonusPerThousand(getPlanBonusRate(planId, termOption.term, sumAssured));
+    }
+    if (!overrideFab) {
+      setFabPerThousand(getDefaultFab(termOption.term));
+    }
+    if (planId !== "custom") {
+      setCustomPpt(termOption.ppt);
+    }
+  }, [planId, termOption, sumAssured, overrideBonus, overrideFab]);
+
+  const policyTerm = termOption?.term ?? 25;
+  const ppt = planId === "custom" ? customPpt : termOption?.ppt ?? policyTerm;
 
   const result = useMemo(() => {
     const yearsToMaturity = Math.max(0, policyTerm - yearsElapsed);
     const maturityYear = startYear + policyTerm;
+    const saOnMaturity = sumAssured * plan.maturitySaFactor;
     const vestedBonus = (bonusPerThousand * sumAssured) / 1000 * policyTerm;
     const fab = (fabPerThousand * sumAssured) / 1000;
-    const maturityAmount = sumAssured + vestedBonus + fab;
+    const maturityAmount = saOnMaturity + vestedBonus + fab;
+    const interimMoneyBack =
+      plan.moneyBackPct && plan.moneyBackPct > 0 ? (sumAssured * plan.moneyBackPct) / 100 : 0;
     const totalPremiums = annualPremium * ppt;
-    const gain = maturityAmount - totalPremiums;
-    const approxCagr =
-      totalPremiums > 0 && policyTerm > 0
-        ? (Math.pow(maturityAmount / Math.max(totalPremiums / 2, 1), 1 / policyTerm) - 1) * 100
-        : 0;
+    const lifetimeCash =
+      maturityAmount + (plan.category === "Money back" || plan.moneyBackPct ? interimMoneyBack : 0);
+    const gainVsPremiums = lifetimeCash - totalPremiums;
 
     return {
       yearsToMaturity,
       maturityYear,
+      saOnMaturity,
       vestedBonus,
       fab,
       maturityAmount,
+      interimMoneyBack,
       totalPremiums,
-      gain,
-      approxCagr,
+      lifetimeCash,
+      gainVsPremiums,
     };
   }, [
-    sumAssured,
-    annualPremium,
     policyTerm,
-    ppt,
     yearsElapsed,
+    startYear,
+    sumAssured,
+    plan.maturitySaFactor,
+    plan.moneyBackPct,
+    plan.category,
     bonusPerThousand,
     fabPerThousand,
-    startYear,
+    annualPremium,
+    ppt,
   ]);
 
   return (
     <div className="space-y-6">
       <div className="glass-card space-y-4 p-6">
-        <h3 className="font-semibold text-theme-heading">Policy inputs</h3>
+        <h3 className="font-semibold text-theme-heading">Select LIC plan</h3>
         <div>
-          <label className="mb-1 block text-xs text-theme-subtle">Plan / policy name</label>
-          <input
-            value={planName}
-            onChange={(e) => setPlanName(e.target.value)}
+          <label className="mb-1 block text-xs text-theme-subtle">Plan</label>
+          <select
+            value={planId}
+            onChange={(e) => setPlanId(e.target.value as LicPlanId)}
             className="input-field"
-            placeholder="e.g. LIC Jeevan Anand, Jeevan Labh, New Endowment"
-          />
+          >
+            {LIC_PLANS.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.name} ({p.planNumber}) — {p.category}
+              </option>
+            ))}
+          </select>
         </div>
-        <CalculatorSlider label="Sum assured" value={sumAssured} min={50000} max={10000000} step={25000} prefix="₹" onChange={setSumAssured} />
-        <CalculatorSlider label="Annual premium (approx)" value={annualPremium} min={5000} max={500000} step={1000} prefix="₹" onChange={setAnnualPremium} />
-        <CalculatorSlider label="Policy term" value={policyTerm} min={5} max={40} step={1} unit=" yrs" onChange={setPolicyTerm} />
-        <CalculatorSlider label="Premium paying term (PPT)" value={ppt} min={5} max={40} step={1} unit=" yrs" onChange={setPpt} />
-        <CalculatorSlider label="Years already elapsed" value={yearsElapsed} min={0} max={Math.max(policyTerm - 1, 0)} step={1} unit=" yrs" onChange={setYearsElapsed} />
-        <CalculatorSlider label="Policy start year" value={startYear} min={1980} max={new Date().getFullYear()} step={1} onChange={setStartYear} />
+        <p className="text-sm text-theme-muted">{plan.blurb}</p>
+        <div>
+          <label className="mb-1 block text-xs text-theme-subtle">Policy term / PPT</label>
+          <select
+            value={termIndex}
+            onChange={(e) => setTermIndex(Number(e.target.value))}
+            className="input-field"
+          >
+            {plan.terms.map((t, i) => (
+              <option key={`${t.term}-${t.ppt}`} value={i}>
+                {t.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        {planId === "custom" && (
+          <CalculatorSlider label="Custom PPT (years)" value={customPpt} min={1} max={40} step={1} unit=" yrs" onChange={setCustomPpt} />
+        )}
+        <div className="rounded-xl border border-theme bg-theme-surface/50 p-3 text-xs text-theme-subtle">
+          <p>
+            <span className="font-semibold text-theme-heading">Plan rules applied:</span> Term {policyTerm} yrs · PPT{" "}
+            {ppt} yrs · Maturity SA factor {(plan.maturitySaFactor * 100).toFixed(0)}% of basic SA
+            {plan.moneyBackPct ? ` · Interim money-back ~${plan.moneyBackPct}% of SA` : ""}
+          </p>
+          <p className="mt-1">{plan.notes}</p>
+        </div>
       </div>
 
       <div className="glass-card space-y-4 p-6">
-        <h3 className="font-semibold text-theme-heading">Bonus assumptions (estimate)</h3>
+        <h3 className="font-semibold text-theme-heading">Your policy numbers</h3>
+        <CalculatorSlider
+          label="Basic sum assured"
+          value={sumAssured}
+          min={plan.minSumAssured}
+          max={10000000}
+          step={25000}
+          prefix="₹"
+          onChange={setSumAssured}
+        />
+        <CalculatorSlider
+          label={planId === "single-premium-endowment-717" ? "Single premium" : "Annual premium (approx)"}
+          value={annualPremium}
+          min={5000}
+          max={500000}
+          step={1000}
+          prefix="₹"
+          onChange={setAnnualPremium}
+        />
+        <CalculatorSlider
+          label="Years already elapsed"
+          value={yearsElapsed}
+          min={0}
+          max={Math.max(policyTerm - 1, 0)}
+          step={1}
+          unit=" yrs"
+          onChange={setYearsElapsed}
+        />
+        <CalculatorSlider
+          label="Policy start year"
+          value={startYear}
+          min={1980}
+          max={new Date().getFullYear()}
+          step={1}
+          onChange={setStartYear}
+        />
+      </div>
+
+      <div className="glass-card space-y-4 p-6">
+        <h3 className="font-semibold text-theme-heading">Bonus rates (from plan + SA band)</h3>
         <p className="text-sm text-theme-muted">
-          Enter simple reversionary bonus as ₹ per ₹1,000 sum assured per year, and optional Final Additional Bonus (FAB).
-          Check your bonus statement or agent for realistic rates — this is not an LIC live lookup.
+          Auto-filled from illustrative published-style bands for this plan, term, and sum-assured slab. Override if your
+          bonus statement differs.
         </p>
+        <label className="flex cursor-pointer items-center gap-2 text-sm text-theme-muted">
+          <input type="checkbox" checked={overrideBonus} onChange={(e) => setOverrideBonus(e.target.checked)} />
+          Override reversionary bonus rate
+        </label>
         <CalculatorSlider
           label="Reversionary bonus (₹ / 1000 SA / year)"
           value={bonusPerThousand}
@@ -92,45 +207,73 @@ export default function LicMaturityEstimator() {
           max={80}
           step={1}
           prefix="₹"
-          onChange={setBonusPerThousand}
+          onChange={(v) => {
+            setOverrideBonus(true);
+            setBonusPerThousand(v);
+          }}
         />
+        <label className="flex cursor-pointer items-center gap-2 text-sm text-theme-muted">
+          <input type="checkbox" checked={overrideFab} onChange={(e) => setOverrideFab(e.target.checked)} />
+          Override Final Additional Bonus (FAB)
+        </label>
         <CalculatorSlider
-          label="Final additional bonus FAB (₹ / 1000 SA)"
+          label="FAB (₹ / 1000 SA, once at maturity)"
           value={fabPerThousand}
           min={0}
-          max={100}
+          max={120}
           step={1}
           prefix="₹"
-          onChange={setFabPerThousand}
+          onChange={(v) => {
+            setOverrideFab(true);
+            setFabPerThousand(v);
+          }}
         />
       </div>
 
       <KPIStrip
         items={[
-          { label: "Est. maturity amount", value: fmt(result.maturityAmount), highlight: true },
+          { label: "Est. maturity payout", value: fmt(result.maturityAmount), highlight: true },
           { label: "Years to maturity", value: `${result.yearsToMaturity}` },
           { label: "Maturity year", value: `${result.maturityYear}` },
         ]}
       />
       <KPIStrip
         items={[
+          { label: "SA on maturity", value: fmt(result.saOnMaturity) },
+          { label: "Vested bonus (full term)", value: fmt(result.vestedBonus) },
+          { label: "FAB", value: fmt(result.fab) },
           { label: "Total premiums (PPT)", value: fmt(result.totalPremiums) },
-          { label: "Est. vested bonus", value: fmt(result.vestedBonus) },
-          { label: "Est. FAB", value: fmt(result.fab) },
-          { label: "Est. gain vs premiums", value: fmt(result.gain) },
         ]}
       />
+      {result.interimMoneyBack > 0 && (
+        <KPIStrip
+          items={[
+            { label: "Est. interim money-back (lifetime)", value: fmt(result.interimMoneyBack) },
+            { label: "Maturity + money-back total", value: fmt(result.lifetimeCash), highlight: true },
+            { label: "Gain vs premiums", value: fmt(result.gainVsPremiums) },
+          ]}
+        />
+      )}
+      {result.interimMoneyBack === 0 && (
+        <KPIStrip items={[{ label: "Est. gain vs premiums", value: fmt(result.gainVsPremiums), highlight: true }]} />
+      )}
 
       <div className="rounded-2xl border border-theme bg-theme-surface/60 p-5 text-sm text-theme-muted">
-        <p className="font-semibold text-theme-heading">{planName || "Your LIC plan"}</p>
+        <p className="font-semibold text-theme-heading">
+          {plan.name} · Plan {plan.planNumber}
+        </p>
         <p className="mt-2">
-          Estimated maturity ≈ Sum assured ({fmt(sumAssured)}) + reversionary bonus over {policyTerm} years (
-          {fmt(result.vestedBonus)}) + FAB ({fmt(result.fab)}).
+          Maturity ≈ SA on maturity ({fmt(result.saOnMaturity)}) + reversionary bonus @ ₹{bonusPerThousand}/1000 ×{" "}
+          {policyTerm} yrs ({fmt(result.vestedBonus)}) + FAB @ ₹{fabPerThousand}/1000 ({fmt(result.fab)}).
         </p>
         <p className="mt-2 text-xs text-theme-subtle">
-          Illustrative only. Actual LIC maturity depends on declared bonuses, plan conditions, paid-up/lapse status,
-          loans, and claim settlement. Use the official LIC portal or branch for exact figures. Pair with the SWP
-          calculator to model this maturity as a future corpus top-up.
+          Educational estimate using plan structure and illustrative bonus bands — not a live LIC policy lookup and not
+          guaranteed. Actual bonuses/FAB change yearly. Confirm on the LIC portal or with your branch. Add this maturity
+          amount into the{" "}
+          <Link href="/tools/swp" className="text-accent hover:underline">
+            SWP calculator
+          </Link>{" "}
+          as a future corpus top-up.
         </p>
       </div>
     </div>
