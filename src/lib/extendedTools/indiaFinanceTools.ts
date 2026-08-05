@@ -128,4 +128,113 @@ export const INDIA_FINANCE_TOOLS: ToolConfig[] = [
       { question: "Is every branch listed?", answer: "No. This uses a curated sample of major banks. Use RBI or bank websites for exhaustive lookup." },
     ],
   }),
+  makeTool({
+    slug: "lic-maturity-calculator",
+    title: "LIC Maturity Calculator",
+    shortDescription:
+      "Estimate LIC policy maturity amount from sum assured, term, PPT, reversionary bonus and FAB — Jeevan Anand, Labh, endowment-style planning.",
+    category: "financial",
+    icon: "ShieldCheck",
+    gradient: "from-indigo-500 to-blue-600",
+    badge: "LIC Planner",
+    popular: true,
+    seoTitle: "LIC Maturity Calculator Online Free — Policy Maturity Amount Estimator India | Ranburg",
+    seoDescription:
+      "Free LIC maturity calculator online. Estimate LIC policy maturity amount, bonus and FAB for endowment plans like Jeevan Anand, Jeevan Labh. LIC maturity date & years left — planning only, not live LIC API.",
+    keywords: [
+      "lic maturity calculator",
+      "lic maturity amount calculator",
+      "lic policy maturity calculator",
+      "lic maturity value calculator",
+      "lic bonus calculator",
+      "lic jeevan anand maturity calculator",
+      "lic jeevan labh maturity calculator",
+      "lic endowment maturity calculator",
+      "lic policy maturity amount",
+      "how to calculate lic maturity amount",
+      "lic maturity date calculator",
+      "lic surrender vs maturity",
+      "lic final additional bonus calculator",
+      "lic reversionary bonus calculator",
+      "lic maturity calculator india",
+      "estimate lic maturity amount online free",
+    ],
+    howToUse: [
+      "Enter plan name, sum assured, annual premium, policy term and PPT.",
+      "Set years already elapsed and policy start year.",
+      "Enter estimated reversionary bonus (₹ per 1000 SA per year) and FAB.",
+      "View estimated maturity amount, maturity year, and gain vs premiums.",
+      "Copy the estimate into the SWP calculator as a future LIC top-up.",
+    ],
+    formula: "Maturity ≈ Sum Assured + (Bonus ₹/1000 × SA/1000 × term) + (FAB ₹/1000 × SA/1000)",
+    faq: [
+      ...indiaFaq,
+      {
+        question: "Does this fetch live LIC policy data by policy number?",
+        answer:
+          "No. LIC does not offer a public API for that. This tool estimates maturity from your inputs and bonus assumptions. Use the official LIC portal or SMS for actual policy status.",
+      },
+      {
+        question: "Which LIC plans can I model?",
+        answer:
+          "Any endowment-style plan where maturity is roughly SA + bonuses + FAB (e.g. Jeevan Anand, Jeevan Labh, New Endowment). ULIP NAV-based plans need different inputs.",
+      },
+      {
+        question: "Where do I get bonus rates?",
+        answer: "From LIC bonus declarations, your bonus statement, or your agent. Rates change by plan and year.",
+      },
+    ],
+  }),
+  makeTool({
+    slug: "pf-calculator",
+    title: "PF Calculator",
+    shortDescription:
+      "Project EPF / PF corpus with existing balance, monthly contributions, annual salary hike, and PF interest rate.",
+    category: "financial",
+    icon: "PiggyBank",
+    gradient: "from-teal-500 to-emerald-600",
+    badge: "EPF Planner",
+    popular: true,
+    seoTitle: "PF Calculator Online Free — EPF Balance & Salary Hike Projection India | Ranburg",
+    seoDescription:
+      "Free PF calculator / EPF calculator India. Project provident fund corpus with existing PF balance, monthly contribution, average salary hike per annum, and EPFO interest — online free.",
+    keywords: [
+      "pf calculator",
+      "epf calculator",
+      "pf calculator india",
+      "epf balance calculator",
+      "provident fund calculator",
+      "pf interest calculator",
+      "epf corpus calculator",
+      "pf contribution calculator",
+      "employee provident fund calculator",
+      "pf calculator with salary hike",
+      "epf projection calculator",
+      "how much will my pf be",
+      "pf maturity calculator",
+      "uan pf calculator",
+      "epf calculator with existing balance",
+    ],
+    howToUse: [
+      "Enter existing PF balance and current monthly basic.",
+      "Set employee and employer contribution percentages.",
+      "Choose average salary hike per year and PF interest rate.",
+      "Select years to project and optional ₹1,800 monthly cap.",
+      "View projected corpus, contributions, and interest earned.",
+    ],
+    formula:
+      "Each month: Balance = Balance × (1 + r/12) + Employee%×Basic + Employer%×Basic; Basic grows by salary hike each year",
+    faq: [
+      ...indiaFaq,
+      {
+        question: "Does this connect to EPFO / UAN?",
+        answer: "No. It is a browser-only projection. Check your real passbook on the EPFO member portal.",
+      },
+      {
+        question: "Should I include EPS?",
+        answer:
+          "This model treats employer % as going into the interest-bearing PF pot for simplicity. In reality a portion may go to EPS — adjust employer % if you want a conservative estimate.",
+      },
+    ],
+  }),
 ];

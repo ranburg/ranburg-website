@@ -279,6 +279,9 @@ const RAW_TOPICS: RawTopic[] = [
   ["freelancer-hourly-rate-formula", "Freelancer Hourly Rate Calculator: Tax, Benefits, Billable Hours", "freelancer hourly rate calculator", ["freelancer-hourly-rate-calculator", "invoice-generator"], "small-business", "Startup Finance"],
   ["ai-crawler-robots-txt-guide", "AI Crawler robots.txt Checker: GPTBot, ClaudeBot, Perplexity", "ai crawler robots.txt", ["ai-crawler-robots-checker", "robots-txt-generator"], "seo", "GEO & AEO"],
   ["whatsapp-opus-to-mp3-guide", "Convert WhatsApp Voice Notes (Opus) to MP3 Online Free", "opus to mp3", ["opus-to-mp3", "face-blur"], "creators", "Media Utilities"],
+  ["lic-maturity-calculator-guide", "LIC Maturity Calculator: Estimate Policy Maturity Amount Online", "lic maturity calculator", ["lic-maturity-calculator", "swp", "pf-calculator"], "calculators", "India Retirement"],
+  ["pf-epf-calculator-salary-hike", "PF / EPF Calculator with Salary Hike and Existing Balance", "pf calculator india", ["pf-calculator", "ctc-in-hand-calculator", "swp"], "calculators", "India Retirement"],
+  ["swp-with-lic-and-pf-retirement", "SWP Calculator with LIC Maturity and PF for Retirement Planning", "swp calculator india", ["swp", "lic-maturity-calculator", "pf-calculator"], "calculators", "India Retirement"],
 ];
 
 export const SEO_BLOG_TOPICS: SeoBlogTopic[] = RAW_TOPICS.map(expand);

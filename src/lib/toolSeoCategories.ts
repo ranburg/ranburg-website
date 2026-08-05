@@ -156,6 +156,8 @@ export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {
   "gratuity-calculator": ["calculators", "business"],
   "hsn-sac-finder": ["business", "generators"],
   "ifsc-finder": ["business", "generators"],
+  "lic-maturity-calculator": ["calculators", "business"],
+  "pf-calculator": ["calculators", "business"],
 };
 
 export const SEO_CATEGORY_HUBS: SeoCategoryHub[] = [

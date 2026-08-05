@@ -19,8 +19,8 @@ const PATHS = [
     href: "/tools/calculators",
     links: [
       { label: "CTC to in-hand", href: "/tools/ctc-in-hand-calculator" },
-      { label: "GST calculator", href: "/tools/gst-calculator" },
-      { label: "EMI calculator", href: "/tools/emi" },
+      { label: "LIC maturity", href: "/tools/lic-maturity-calculator" },
+      { label: "PF calculator", href: "/tools/pf-calculator" },
     ],
     icon: IndianRupee,
   },

@@ -55,7 +55,9 @@ export const TOOL_RELATED_LINKS: Record<string, string[]> = {
   "qr-generator": ["qr-code-generator", "uuid-generator", "password-generator", "open-graph-generator"],
   "qr-code-generator": ["qr-generator", "uuid-generator", "password-generator", "meta-tag-generator"],
 
-  swp: ["sip", "emi", "compound-interest-calculator", "currency-converter"],
+  swp: ["sip", "lic-maturity-calculator", "pf-calculator", "compound-interest-calculator"],
+  "lic-maturity-calculator": ["swp", "pf-calculator", "sip", "ctc-in-hand-calculator"],
+  "pf-calculator": ["swp", "lic-maturity-calculator", "ctc-in-hand-calculator", "salary-hike-calculator"],
   "ltv-cac": ["roi-calculator", "profit-margin-calculator", "break-even-calculator", "adsense-revenue-calculator"],
   "twitch-sub-revenue": ["youtube-revenue-calculator", "tiktok-earnings-calculator", "instagram-revenue-calculator", "adsense-revenue-calculator"],
   "json-formatter": ["sql-formatter", "base64-encoder", "regex-tester", "minifier"],

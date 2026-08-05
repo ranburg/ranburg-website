@@ -36,6 +36,9 @@ export const POPULAR_TOOL_SLUGS = [
 ];
 
 export const RECENT_TOOL_SLUGS = [
+  "lic-maturity-calculator",
+  "pf-calculator",
+  "swp",
   "ctc-in-hand-calculator",
   "invoice-generator",
   "safe-zone-checker",
@@ -48,9 +51,6 @@ export const RECENT_TOOL_SLUGS = [
   "csv-to-json",
   "hsn-sac-finder",
   "gratuity-calculator",
-  "freelancer-hourly-rate-calculator",
-  "face-blur",
-  "llms-txt-generator",
 ];
 
 export const SEARCH_SUGGESTIONS = [

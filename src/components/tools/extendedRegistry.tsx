@@ -96,4 +96,6 @@ export const EXTENDED_TOOL_COMPONENTS: Record<string, ComponentType> = {
   "gratuity-calculator": lazy(() => import("./finance/IndiaFinanceTools").then((m) => ({ default: m.GratuityCalculatorTool }))),
   "hsn-sac-finder": lazy(() => import("./finance/IndiaFinanceTools").then((m) => ({ default: m.HsnSacFinderTool }))),
   "ifsc-finder": lazy(() => import("./finance/IndiaFinanceTools").then((m) => ({ default: m.IfscFinderTool }))),
+  "lic-maturity-calculator": lazy(() => import("./finance/LicMaturityEstimator")),
+  "pf-calculator": lazy(() => import("./finance/PfCalculator")),
 };
