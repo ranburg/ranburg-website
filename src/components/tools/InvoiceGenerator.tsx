@@ -1,5 +1,6 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
 import { useMemo, useRef, useState } from "react";
 import { Download, ImagePlus, Plus, Printer, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -25,6 +26,7 @@ function newLine(taxRate: number): LineItem {
 }
 
 export default function InvoiceGenerator() {
+  const { t } = useToolUi("invoice-generator");
   const printRef = useRef<HTMLDivElement>(null);
   const [country, setCountry] = useState<InvoiceCountry>("IN");
   const profile = getInvoiceCountry(country);
@@ -58,7 +60,7 @@ export default function InvoiceGenerator() {
   });
   const [client, setClient] = useState<Record<string, string>>({
     name: "Client Name",
-    address: "Client address",
+    address: t("clientAddress"),
     gstin: "",
     placeOfSupply: "",
     state: "",
@@ -182,7 +184,7 @@ export default function InvoiceGenerator() {
   return (
     <div className="space-y-8">
       <div className="glass-card space-y-4 p-6">
-        <h3 className="font-semibold text-theme-heading">Country & branding</h3>
+        <h3 className="font-semibold text-theme-heading">{t("countryBranding")}</h3>
         <div className="flex flex-wrap gap-2">
           {INVOICE_COUNTRIES.map((c) => (
             <button
@@ -200,7 +202,7 @@ export default function InvoiceGenerator() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <p className="mb-2 text-xs text-theme-subtle">Accent color</p>
+            <p className="mb-2 text-xs text-theme-subtle">{t("accentColor")}</p>
             <div className="flex flex-wrap items-center gap-2">
               {INVOICE_COLOR_PRESETS.map((p) => (
                 <button
@@ -222,10 +224,10 @@ export default function InvoiceGenerator() {
             </div>
           </div>
           <div>
-            <p className="mb-2 text-xs text-theme-subtle">Logo (stays in your browser)</p>
+            <p className="mb-2 text-xs text-theme-subtle">{t("logo")}</p>
             <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-dashed border-theme px-3 py-2 text-sm text-theme-muted hover:border-accent/40">
               <ImagePlus className="h-4 w-4" />
-              {logoDataUrl ? "Change logo" : "Upload logo"}
+              {logoDataUrl ? t("changeLogo") : t("uploadLogo")}
               <input type="file" accept="image/*" className="hidden" onChange={(e) => onLogo(e.target.files?.[0] ?? null)} />
             </label>
             {logoDataUrl && (
@@ -239,11 +241,11 @@ export default function InvoiceGenerator() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="glass-card space-y-3 p-6">
-          <h3 className="font-semibold text-theme-heading">Your business</h3>
-          <input value={business.name} onChange={(e) => setBusiness({ ...business, name: e.target.value })} placeholder="Business name" className="input-field" />
-          <input value={business.address} onChange={(e) => setBusiness({ ...business, address: e.target.value })} placeholder="Address" className="input-field" />
-          <input value={business.email} onChange={(e) => setBusiness({ ...business, email: e.target.value })} placeholder="Email" className="input-field" />
-          <input value={business.phone} onChange={(e) => setBusiness({ ...business, phone: e.target.value })} placeholder="Phone" className="input-field" />
+          <h3 className="font-semibold text-theme-heading">{t("yourBusiness")}</h3>
+          <input value={business.name} onChange={(e) => setBusiness({ ...business, name: e.target.value })} placeholder={t("businessName")} className="input-field" />
+          <input value={business.address} onChange={(e) => setBusiness({ ...business, address: e.target.value })} placeholder={t("address")} className="input-field" />
+          <input value={business.email} onChange={(e) => setBusiness({ ...business, email: e.target.value })} placeholder={t("email")} className="input-field" />
+          <input value={business.phone} onChange={(e) => setBusiness({ ...business, phone: e.target.value })} placeholder={t("phone")} className="input-field" />
           {profile.sellerFields.map((f) => (
             <input
               key={f.key}
@@ -255,9 +257,9 @@ export default function InvoiceGenerator() {
           ))}
         </div>
         <div className="glass-card space-y-3 p-6">
-          <h3 className="font-semibold text-theme-heading">Bill to</h3>
-          <input value={client.name} onChange={(e) => setClient({ ...client, name: e.target.value })} placeholder="Client name" className="input-field" />
-          <input value={client.address} onChange={(e) => setClient({ ...client, address: e.target.value })} placeholder="Client address" className="input-field" />
+          <h3 className="font-semibold text-theme-heading">{t("billTo")}</h3>
+          <input value={client.name} onChange={(e) => setClient({ ...client, name: e.target.value })} placeholder={t("clientName")} className="input-field" />
+          <input value={client.address} onChange={(e) => setClient({ ...client, address: e.target.value })} placeholder={t("clientAddress")} className="input-field" />
           {profile.clientFields.map((f) => (
             <input
               key={f.key}
@@ -272,32 +274,32 @@ export default function InvoiceGenerator() {
 
       <div className="glass-card grid gap-4 p-6 sm:grid-cols-3">
         <div>
-          <label className="mb-1 block text-xs text-theme-subtle">Invoice #</label>
+          <label className="mb-1 block text-xs text-theme-subtle">{t("invoiceNumber")}</label>
           <input value={meta.invoiceNo} onChange={(e) => setMeta({ ...meta, invoiceNo: e.target.value })} className="input-field" />
         </div>
         <div>
-          <label className="mb-1 block text-xs text-theme-subtle">Date</label>
+          <label className="mb-1 block text-xs text-theme-subtle">{t("date")}</label>
           <input type="date" value={meta.date} onChange={(e) => setMeta({ ...meta, date: e.target.value })} className="input-field" />
         </div>
         <div>
-          <label className="mb-1 block text-xs text-theme-subtle">Due date</label>
+          <label className="mb-1 block text-xs text-theme-subtle">{t("dueDate")}</label>
           <input type="date" value={meta.dueDate} onChange={(e) => setMeta({ ...meta, dueDate: e.target.value })} className="input-field" />
         </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
         {profile.showIntraInter &&
-          (["intra", "inter"] as const).map((t) => (
+          (["intra", "inter"] as const).map((mode) => (
             <button
-              key={t}
+              key={mode}
               type="button"
-              onClick={() => setTaxType(t)}
+              onClick={() => setTaxType(mode)}
               className={cn(
                 "rounded-lg px-4 py-2 text-xs font-medium",
-                taxType === t ? "bg-accent text-white" : "border border-theme-subtle text-theme-muted"
+                taxType === mode ? "bg-accent text-white" : "border border-theme-subtle text-theme-muted"
               )}
             >
-              {t === "intra" ? "CGST + SGST" : "IGST"}
+              {mode === "intra" ? "CGST + SGST" : t("igst")}
             </button>
           ))}
         {profile.taxMode === "vat" && (
@@ -318,12 +320,12 @@ export default function InvoiceGenerator() {
         <table className="w-full min-w-[640px] text-sm">
           <thead>
             <tr className="border-b border-theme-subtle text-left text-xs uppercase text-theme-subtle">
-              <th className="pb-3 pr-2">Description</th>
-              {profile.showHsn && <th className="pb-3 pr-2">HSN/SAC</th>}
-              <th className="pb-3 pr-2">Qty</th>
-              <th className="pb-3 pr-2">Rate</th>
+              <th className="pb-3 pr-2">{t("description")}</th>
+              {profile.showHsn && <th className="pb-3 pr-2">{t("hsnSac")}</th>}
+              <th className="pb-3 pr-2">{t("quantity")}</th>
+              <th className="pb-3 pr-2">{t("rate")}</th>
               <th className="pb-3 pr-2">{profile.taxLabels.primary} %</th>
-              <th className="pb-3 pr-2 text-right">Amount</th>
+              <th className="pb-3 pr-2 text-right">{t("amount")}</th>
               <th className="w-8" />
             </tr>
           </thead>
@@ -335,7 +337,7 @@ export default function InvoiceGenerator() {
                 </td>
                 {profile.showHsn && (
                   <td className="py-2 pr-2">
-                    <input value={line.hsn} onChange={(e) => updateLine(line.id, { hsn: e.target.value })} className="input-field w-24 py-1.5" placeholder="Code" />
+                    <input value={line.hsn} onChange={(e) => updateLine(line.id, { hsn: e.target.value })} className="input-field w-24 py-1.5" placeholder={t("code")} />
                   </td>
                 )}
                 <td className="py-2 pr-2">
@@ -383,7 +385,7 @@ export default function InvoiceGenerator() {
           disabled={downloading}
           className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-medium text-white hover:opacity-90 disabled:opacity-60"
         >
-          <Download className="h-4 w-4" /> {downloading ? "Preparing PDF…" : "Download PDF"}
+          <Download className="h-4 w-4" /> {downloading ? "Preparing PDF…" : t("downloadPdf")}
         </button>
         <button type="button" onClick={handlePrint} className="inline-flex items-center gap-2 rounded-xl border border-theme px-5 py-2.5 text-sm font-medium text-theme-heading hover:border-accent/40">
           <Printer className="h-4 w-4" /> Print
@@ -419,7 +421,7 @@ export default function InvoiceGenerator() {
 
         <div className="mt-6 grid gap-6 text-sm sm:grid-cols-2">
           <div>
-            <p className="text-xs font-semibold uppercase text-slate-500">Bill to</p>
+            <p className="text-xs font-semibold uppercase text-slate-500">{t("billTo")}</p>
             <p className="mt-1 font-medium text-slate-900">{client.name}</p>
             <ClientExtras client={client} profileCode={country} />
             <p className="text-slate-600">{client.address}</p>
@@ -436,12 +438,12 @@ export default function InvoiceGenerator() {
           <table className="mt-8 w-full min-w-[480px] text-sm">
             <thead>
               <tr className="border-b border-slate-200 text-left text-xs uppercase text-slate-500">
-                <th className="pb-2">Description</th>
-                {profile.showHsn && <th className="pb-2">HSN/SAC</th>}
-                <th className="pb-2">Qty</th>
-                <th className="pb-2">Rate</th>
+                <th className="pb-2">{t("description")}</th>
+                {profile.showHsn && <th className="pb-2">{t("hsnSac")}</th>}
+                <th className="pb-2">{t("quantity")}</th>
+                <th className="pb-2">{t("rate")}</th>
                 <th className="pb-2">{profile.taxLabels.primary}</th>
-                <th className="pb-2 text-right">Total</th>
+                <th className="pb-2 text-right">{t("total")}</th>
               </tr>
             </thead>
             <tbody>
@@ -461,19 +463,19 @@ export default function InvoiceGenerator() {
 
         <div className="ml-auto mt-6 max-w-full space-y-1 text-sm sm:max-w-xs">
           <div className="flex justify-between">
-            <span className="text-slate-500">Subtotal</span>
+            <span className="text-slate-500">{t("subtotal")}</span>
             <span>{money(totals.subtotal)}</span>
           </div>
           <TaxBreakdown profileCode={country} taxType={taxType} totals={totals} money={money} labels={profile.taxLabels} />
           <div className="flex justify-between border-t border-slate-200 pt-2 text-base font-bold">
-            <span>Grand total</span>
+            <span>{t("grandTotal")}</span>
             <span style={{ color: accent }}>{money(totals.grandTotal)}</span>
           </div>
         </div>
 
         {meta.notes && (
           <p className="mt-8 text-sm text-slate-600">
-            <span className="font-medium">Notes: </span>
+            <span className="font-medium">{t("notes")}</span>
             {meta.notes}
           </p>
         )}
@@ -578,7 +580,7 @@ function TaxBreakdown({
     }
     return (
       <div className="flex justify-between">
-        <span className="text-slate-500">IGST</span>
+        <span className="text-slate-500">{labels.primary || "IGST"}</span>
         <span>{money(totals.igst)}</span>
       </div>
     );

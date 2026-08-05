@@ -1,4 +1,6 @@
-﻿"use client";
+"use client";
+
+import { useToolUi } from "@/hooks/useToolUi";
 
 import { useMemo, useState } from "react";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
@@ -9,6 +11,7 @@ function CalcLayout({ children }: { children: React.ReactNode }) {
 }
 
 export function RentVsBuyTool() {
+  const { t } = useToolUi("rent-vs-buy-calculator");
   const [rent, setRent] = useState(25000);
   const [homePrice, setHomePrice] = useState(7500000);
   const [downPct, setDownPct] = useState(20);
@@ -59,6 +62,7 @@ export function RentVsBuyTool() {
 }
 
 export function BillSplitTool() {
+  const { t } = useToolUi("bill-split-calculator");
   const [bill, setBill] = useState(2400);
   const [people, setPeople] = useState(4);
   const [tip, setTip] = useState(10);
@@ -81,6 +85,7 @@ export function BillSplitTool() {
 }
 
 export function CompoundInterestTool() {
+  const { t } = useToolUi("compound-interest-calculator");
   const [principal, setPrincipal] = useState(100000);
   const [rate, setRate] = useState(10);
   const [years, setYears] = useState(10);
@@ -110,6 +115,7 @@ export function CompoundInterestTool() {
 }
 
 export function SleepCalculatorTool() {
+  const { t } = useToolUi("sleep-calculator");
   const [wakeH, setWakeH] = useState(7);
   const [wakeM, setWakeM] = useState(0);
   const cycles = useMemo(() => {
@@ -150,6 +156,7 @@ export function SleepCalculatorTool() {
 }
 
 export function SalaryHikeTool() {
+  const { t } = useToolUi("salary-hike-calculator");
   const [current, setCurrent] = useState(1200000);
   const [hike, setHike] = useState(15);
   const [tax, setTax] = useState(20);
@@ -174,6 +181,7 @@ export function SalaryHikeTool() {
 }
 
 export function ColorContrastTool() {
+  const { t } = useToolUi("color-contrast-checker");
   const [fg, setFg] = useState("#0f766e");
   const [bg, setBg] = useState("#f3f6f4");
 

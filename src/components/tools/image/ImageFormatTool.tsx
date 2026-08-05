@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useRef, useState } from "react";
 import { Download } from "lucide-react";
 import FileDropzone from "@/components/tools/shared/FileDropzone";
@@ -19,6 +21,7 @@ interface ImageFormatToolProps {
 }
 
 export default function ImageFormatTool({ config }: ImageFormatToolProps) {
+  const { t } = useToolUi("image-converter");
   const [preview, setPreview] = useState<string | null>(null);
   const [originalSize, setOriginalSize] = useState(0);
   const [outputSize, setOutputSize] = useState(0);
@@ -59,18 +62,18 @@ export default function ImageFormatTool({ config }: ImageFormatToolProps) {
 
       {config.outputMime !== "image/png" && (
         <AdvancedOptions>
-          <CalculatorSlider label="Quality" value={quality} min={10} max={100} step={5} unit="%" onChange={setQuality} />
+          <CalculatorSlider label={t("quality")} value={quality} min={10} max={100} step={5} unit="%" onChange={setQuality} />
         </AdvancedOptions>
       )}
 
-      {loading && <p className="text-sm text-theme-muted">Converting…</p>}
+      {loading && <p className="text-sm text-theme-muted">{t("processing")}</p>}
 
       {preview && (
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="glass-card p-6">
-            <p className="mb-3 text-sm font-medium text-theme-body">Preview</p>
+            <p className="mb-3 text-sm font-medium text-theme-body">{t("preview")}</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={preview} alt="Converted" className="max-h-72 rounded-lg object-contain" />
+            <img src={preview} alt={t("output")} className="max-h-72 rounded-lg object-contain" />
             {originalSize > 0 && (
               <p className="mt-3 text-xs text-theme-subtle">
                 {formatBytes(originalSize)} → {formatBytes(outputSize)}

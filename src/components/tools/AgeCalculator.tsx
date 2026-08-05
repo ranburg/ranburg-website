@@ -1,5 +1,6 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
 import { useMemo, useState } from "react";
 
 function diffDates(from: Date, to: Date) {
@@ -27,6 +28,7 @@ function diffDates(from: Date, to: Date) {
 }
 
 export default function AgeCalculator() {
+  const { t } = useToolUi("age-calculator");
   const today = new Date().toISOString().slice(0, 10);
   const [dob, setDob] = useState("1990-01-01");
   const [asOf, setAsOf] = useState(today);
@@ -42,11 +44,11 @@ export default function AgeCalculator() {
     <div className="space-y-6">
       <div className="glass-card grid gap-6 p-6 sm:grid-cols-2">
         <div>
-          <label className="mb-2 block text-sm font-medium text-theme-body">Date of birth</label>
+          <label className="mb-2 block text-sm font-medium text-theme-body">{t("dateOfBirth")}</label>
           <input type="date" value={dob} onChange={(e) => setDob(e.target.value)} className="input-field" max={asOf} />
         </div>
         <div>
-          <label className="mb-2 block text-sm font-medium text-theme-body">Calculate age as of</label>
+          <label className="mb-2 block text-sm font-medium text-theme-body">{t("calculateAgeAsOf")}</label>
           <input type="date" value={asOf} onChange={(e) => setAsOf(e.target.value)} className="input-field" />
         </div>
       </div>
@@ -55,18 +57,18 @@ export default function AgeCalculator() {
         <>
           <div className="rounded-2xl border border-accent/20 bg-accent/5 p-8 text-center">
             <p className="text-4xl font-extrabold text-theme-heading sm:text-5xl">
-              {result.years} <span className="text-2xl font-semibold text-theme-muted">years</span>{" "}
-              {result.months} <span className="text-2xl font-semibold text-theme-muted">months</span>{" "}
-              {result.days} <span className="text-2xl font-semibold text-theme-muted">days</span>
+              {result.years} <span className="text-2xl font-semibold text-theme-muted">{t("years")}</span>{" "}
+              {result.months} <span className="text-2xl font-semibold text-theme-muted">{t("months")}</span>{" "}
+              {result.days} <span className="text-2xl font-semibold text-theme-muted">{t("days")}</span>
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Total days lived</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("totalDaysLived")}</p>
               <p className="mt-2 text-2xl font-bold text-theme-heading">{result.totalDays.toLocaleString()}</p>
             </div>
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Days until next birthday</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("daysUntilNextBirthday")}</p>
               <p className="mt-2 text-2xl font-bold text-accent">{result.daysToBirthday}</p>
             </div>
           </div>

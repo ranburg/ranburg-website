@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
@@ -8,6 +10,7 @@ import PurchasingPowerCard from "@/components/tools/PurchasingPowerCard";
 import { formatCurrency, presentValue } from "@/lib/utils";
 
 export default function LTVCACCalculator() {
+  const { t } = useToolUi("ltv-cac");
   const [arpu, setArpu] = useState(5000);
   const [grossMargin, setGrossMargin] = useState(80);
   const [lifespan, setLifespan] = useState(24);
@@ -34,27 +37,27 @@ export default function LTVCACCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-6 p-8">
-        <h2 className="text-xl font-bold text-theme-heading">Business Metrics</h2>
-        <CalculatorSlider label="Monthly ARPU" value={arpu} min={100} max={100000} step={100} prefix="₹" onChange={setArpu} />
-        <CalculatorSlider label="Gross Margin" value={grossMargin} min={10} max={100} step={1} unit="%" onChange={setGrossMargin} />
-        <CalculatorSlider label="Monthly Churn Rate" value={churnRate} min={0.5} max={20} step={0.5} unit="%" onChange={setChurnRate} />
-        <CalculatorSlider label="Marketing Spend" value={marketingSpend} min={10000} max={10000000} step={10000} prefix="₹" onChange={setMarketingSpend} />
-        <CalculatorSlider label="New Customers Acquired" value={newCustomers} min={1} max={1000} step={1} onChange={setNewCustomers} />
+        <h2 className="text-xl font-bold text-theme-heading">{t("businessMetrics")}</h2>
+        <CalculatorSlider label={t("monthlyArpu")} value={arpu} min={100} max={100000} step={100} prefix="₹" onChange={setArpu} />
+        <CalculatorSlider label={t("grossMargin")} value={grossMargin} min={10} max={100} step={1} unit="%" onChange={setGrossMargin} />
+        <CalculatorSlider label={t("monthlyChurnRate")} value={churnRate} min={0.5} max={20} step={0.5} unit="%" onChange={setChurnRate} />
+        <CalculatorSlider label={t("marketingSpend")} value={marketingSpend} min={10000} max={10000000} step={10000} prefix="₹" onChange={setMarketingSpend} />
+        <CalculatorSlider label={t("newCustomersAcquired")} value={newCustomers} min={1} max={1000} step={1} onChange={setNewCustomers} />
 
         <AdvancedOptions>
-          <CalculatorSlider label="Inflation Rate" value={inflationRate} min={1} max={15} step={0.5} unit="%" onChange={setInflationRate} />
-          <CalculatorSlider label="Revenue Projection (Years)" value={projectionYears} min={1} max={10} step={1} unit=" yrs" onChange={setProjectionYears} />
-          <CalculatorSlider label="Customer Lifespan (fallback)" value={lifespan} min={1} max={60} step={1} unit=" mo" onChange={setLifespan} />
+          <CalculatorSlider label={t("inflationRate")} value={inflationRate} min={1} max={15} step={0.5} unit="%" onChange={setInflationRate} />
+          <CalculatorSlider label={t("revenueProjectionYears")} value={projectionYears} min={1} max={10} step={1} unit=" yrs" onChange={setProjectionYears} />
+          <CalculatorSlider label={t("customerLifespan")} value={lifespan} min={1} max={60} step={1} unit=" mo" onChange={setLifespan} />
         </AdvancedOptions>
       </div>
 
       <div className="space-y-6">
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard label="Customer LTV" value={results.ltv} variant="blue" highlight />
-          <ResultCard label="CAC" value={results.cac} />
+          <ResultCard label={t("customerLtv")} value={results.ltv} variant="blue" highlight />
+          <ResultCard label={t("cac")} value={results.cac} />
         </div>
         <div className="glass-card p-6 text-center">
-          <p className="text-sm text-slate-500">LTV:CAC Ratio</p>
+          <p className="text-sm text-slate-500">{t("ltvCacRatio")}</p>
           <p className={`mt-2 text-5xl font-bold ${ratioColor}`}>
             {results.ratio.toFixed(1)}:1
           </p>

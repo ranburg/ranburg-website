@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
 import { SEO_CATEGORY_HUBS } from "@/lib/toolSeoCategories";
 import { getToolsForSeoCategory } from "@/lib/toolSeoCategories";

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { getPrimarySeoCategoryForTool } from "@/lib/toolSeoCategories";
 import { POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
 import { getToolBySlug } from "@/lib/toolsConfig";

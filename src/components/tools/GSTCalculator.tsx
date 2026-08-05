@@ -1,5 +1,6 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
 import { useMemo, useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
@@ -29,6 +30,7 @@ function newLine(): LineItem {
 }
 
 export default function GSTCalculator() {
+  const { t } = useToolUi("gst-calculator");
   const [mode, setMode] = useState<"quick" | "invoice">("quick");
   const [taxType, setTaxType] = useState<"intra" | "inter">("intra");
   const [pricingMode, setPricingMode] = useState<"exclusive" | "inclusive">("exclusive");
@@ -115,7 +117,7 @@ export default function GSTCalculator() {
               mode === m ? "bg-accent text-white" : "bg-theme-surface text-theme-muted hover:text-theme-heading"
             )}
           >
-            {m === "quick" ? "Quick Calculator" : "Multi-Line Invoice"}
+            {m === "quick" ? t("quickCalculator") : t("multiLineInvoice")}
           </button>
         ))}
       </div>
@@ -129,7 +131,7 @@ export default function GSTCalculator() {
             taxType === "intra" ? "bg-accent/15 text-accent" : "border border-theme-subtle text-theme-muted"
           )}
         >
-          Intra-state (CGST + SGST)
+          {t("intraState")}
         </button>
         <button
           type="button"
@@ -139,7 +141,7 @@ export default function GSTCalculator() {
             taxType === "inter" ? "bg-accent/15 text-accent" : "border border-theme-subtle text-theme-muted"
           )}
         >
-          Inter-state (IGST)
+          {t("interState")}
         </button>
         <button
           type="button"
@@ -155,12 +157,12 @@ export default function GSTCalculator() {
           <div className="glass-card space-y-6 p-6">
             <div>
               <label className="mb-2 block text-sm font-medium text-theme-body">
-                {pricingMode === "exclusive" ? "Taxable amount (before GST)" : "Amount (including GST)"}
+                {pricingMode === "exclusive" ? t("taxableAmount") : t("amountIncludingGst")}
               </label>
               <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} className="input-field text-lg font-semibold" min={0} />
             </div>
             <div>
-              <label className="mb-3 block text-sm font-medium text-theme-body">GST Rate</label>
+              <label className="mb-3 block text-sm font-medium text-theme-body">{t("gstRate")}</label>
               <div className="flex flex-wrap gap-2">
                 {GST_RATES.filter((r) => r > 0).map((r) => (
                   <button
@@ -181,18 +183,18 @@ export default function GSTCalculator() {
 
           {quickResult && (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <ResultCard label="Taxable value" value={quickResult.net} />
+              <ResultCard label={t("taxableValue")} value={quickResult.net} />
               <ResultCard label={`GST (${rate}%)`} value={quickResult.gst} highlight />
               {taxType === "intra" ? (
                 <>
-                  <ResultCard label="CGST (50%)" value={quickResult.cgst} />
-                  <ResultCard label="SGST (50%)" value={quickResult.sgst} />
+                  <ResultCard label={t("cgst")} value={quickResult.cgst} />
+                  <ResultCard label={t("sgst")} value={quickResult.sgst} />
                 </>
               ) : (
-                <ResultCard label="IGST" value={quickResult.igst} />
+                <ResultCard label={t("igst")} value={quickResult.igst} />
               )}
               {quickResult.cess > 0 && <ResultCard label={`Cess (${cessRate}%)`} value={quickResult.cess} />}
-              <ResultCard label="Grand total" value={quickResult.gross} variant="emerald" />
+              <ResultCard label={t("grandTotal")} value={quickResult.gross} variant="emerald" />
             </div>
           )}
         </>
@@ -202,13 +204,13 @@ export default function GSTCalculator() {
             <table className="w-full min-w-[640px] text-sm">
               <thead>
                 <tr className="border-b border-theme-subtle text-left text-xs uppercase tracking-wider text-theme-subtle">
-                  <th className="pb-3 pr-2">Description</th>
-                  <th className="pb-3 pr-2">HSN/SAC</th>
-                  <th className="pb-3 pr-2">Qty</th>
-                  <th className="pb-3 pr-2">Rate (₹)</th>
-                  <th className="pb-3 pr-2">GST %</th>
-                  <th className="pb-3 pr-2 text-right">Taxable</th>
-                  <th className="pb-3 text-right">Total</th>
+                  <th className="pb-3 pr-2">{t("description")}</th>
+                  <th className="pb-3 pr-2">{t("hsnSac")}</th>
+                  <th className="pb-3 pr-2">{t("quantity")}</th>
+                  <th className="pb-3 pr-2">{t("rate")}</th>
+                  <th className="pb-3 pr-2">{t("gstPercent")}</th>
+                  <th className="pb-3 pr-2 text-right">{t("taxable")}</th>
+                  <th className="pb-3 text-right">{t("total")}</th>
                   <th className="pb-3 w-8" />
                 </tr>
               </thead>
@@ -220,7 +222,7 @@ export default function GSTCalculator() {
                         value={row.description}
                         onChange={(e) => updateLine(row.id, { description: e.target.value })}
                         className="input-field py-1.5 text-sm"
-                        placeholder="Item name"
+                        placeholder={t("itemName")}
                       />
                     </td>
                     <td className="py-2 pr-2">
@@ -269,7 +271,7 @@ export default function GSTCalculator() {
                         type="button"
                         onClick={() => setLines((prev) => prev.filter((l) => l.id !== row.id))}
                         className="text-theme-subtle hover:text-red-500"
-                        aria-label="Remove line"
+                        aria-label={t("removeLine")}
                         disabled={lines.length <= 1}
                       >
                         <Trash2 className="h-4 w-4" />
@@ -285,30 +287,30 @@ export default function GSTCalculator() {
               className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
             >
               <Plus className="h-4 w-4" />
-              Add line item
+              {t("addLineItem")}
             </button>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <ResultCard label="Total taxable" value={invoiceResult.taxable} />
-            <ResultCard label="Total GST" value={invoiceResult.totalGst} highlight />
+            <ResultCard label={t("totalTaxable")} value={invoiceResult.taxable} />
+            <ResultCard label={t("totalGst")} value={invoiceResult.totalGst} highlight />
             {taxType === "intra" ? (
               <>
-                <ResultCard label="CGST" value={invoiceResult.cgst} />
-                <ResultCard label="SGST" value={invoiceResult.sgst} />
+                <ResultCard label={t("cgst")} value={invoiceResult.cgst} />
+                <ResultCard label={t("sgst")} value={invoiceResult.sgst} />
               </>
             ) : (
-              <ResultCard label="IGST" value={invoiceResult.igst} />
+              <ResultCard label={t("igst")} value={invoiceResult.igst} />
             )}
-            {invoiceResult.totalCess > 0 && <ResultCard label="Cess" value={invoiceResult.totalCess} />}
-            <ResultCard label="Grand total" value={invoiceResult.grandTotal} variant="emerald" />
+            {invoiceResult.totalCess > 0 && <ResultCard label={t("cess")} value={invoiceResult.totalCess} />}
+            <ResultCard label={t("grandTotal")} value={invoiceResult.grandTotal} variant="emerald" />
           </div>
         </>
       )}
 
       <AdvancedOptions>
         <div>
-          <label className="mb-2 block text-sm font-medium text-theme-body">Cess rate (%)</label>
+          <label className="mb-2 block text-sm font-medium text-theme-body">{t("cessRate")}</label>
           <input
             type="number"
             value={cessRate}

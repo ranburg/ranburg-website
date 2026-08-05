@@ -1,5 +1,6 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
 import { useMemo, useState } from "react";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
@@ -106,6 +107,7 @@ function amortizeFull(principal: number, annualRate: number, months: number, ext
 }
 
 export default function LoanForeclosureCalculator() {
+  const { t } = useToolUi("loan-foreclosure-calculator");
   const [loanAmount, setLoanAmount] = useState(3000000);
   const [interestRate, setInterestRate] = useState(9);
   const [tenureYears, setTenureYears] = useState(20);
@@ -162,14 +164,14 @@ export default function LoanForeclosureCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-6 p-4 sm:p-6">
-        <h2 className="text-xl font-bold text-theme-heading">Loan Details</h2>
-        <CalculatorSlider label="Loan Amount" value={loanAmount} min={100000} max={50000000} step={50000} prefix="₹" onChange={setLoanAmount} />
-        <CalculatorSlider label="Interest Rate" value={interestRate} min={5} max={18} step={0.1} unit="%" onChange={setInterestRate} />
-        <CalculatorSlider label="Original Tenure" value={tenureYears} min={1} max={30} step={1} unit=" yrs" onChange={setTenureYears} />
-        <CalculatorSlider label="EMIs Already Paid" value={monthsPaid} min={0} max={months - 1} step={1} unit=" mo" onChange={setMonthsPaid} />
+        <h2 className="text-xl font-bold text-theme-heading">{t("loanDetails")}</h2>
+        <CalculatorSlider label={t("loanAmount")} value={loanAmount} min={100000} max={50000000} step={50000} prefix="₹" onChange={setLoanAmount} />
+        <CalculatorSlider label={t("interestRate")} value={interestRate} min={5} max={18} step={0.1} unit="%" onChange={setInterestRate} />
+        <CalculatorSlider label={t("originalTenure")} value={tenureYears} min={1} max={30} step={1} unit=" yrs" onChange={setTenureYears} />
+        <CalculatorSlider label={t("emisAlreadyPaid")} value={monthsPaid} min={0} max={months - 1} step={1} unit=" mo" onChange={setMonthsPaid} />
 
         <div>
-          <p className="mb-3 text-sm font-medium text-theme-body">Closure Strategy</p>
+          <p className="mb-3 text-sm font-medium text-theme-body">{t("closureStrategy")}</p>
           <div className="flex flex-wrap gap-2">
             {(
               [
@@ -194,7 +196,7 @@ export default function LoanForeclosureCalculator() {
         </div>
 
         {strategy === "extra_yearly" && (
-          <CalculatorSlider label="Extra Payment Per Year" value={extraYearly} min={10000} max={2000000} step={10000} prefix="₹" onChange={setExtraYearly} />
+          <CalculatorSlider label={t("extraPaymentYearly")} value={extraYearly} min={10000} max={2000000} step={10000} prefix="₹" onChange={setExtraYearly} />
         )}
 
         {strategy === "prepay_all" && (
@@ -204,9 +206,9 @@ export default function LoanForeclosureCalculator() {
               Use flat foreclosure charge instead of percentage
             </label>
             {useFlatCharge ? (
-              <CalculatorSlider label="Foreclosure Charge (flat)" value={foreclosureFlat} min={0} max={500000} step={1000} prefix="₹" onChange={setForeclosureFlat} />
+              <CalculatorSlider label={t("foreclosureChargeFlat")} value={foreclosureFlat} min={0} max={500000} step={1000} prefix="₹" onChange={setForeclosureFlat} />
             ) : (
-              <CalculatorSlider label="Foreclosure Charge (%)" value={foreclosurePct} min={0} max={5} step={0.25} unit="%" onChange={setForeclosurePct} />
+              <CalculatorSlider label={t("foreclosureChargePercent")} value={foreclosurePct} min={0} max={5} step={0.25} unit="%" onChange={setForeclosurePct} />
             )}
           </AdvancedOptions>
         )}
@@ -214,20 +216,20 @@ export default function LoanForeclosureCalculator() {
 
       <div className="space-y-6">
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          <ResultCard label="Current EMI" value={results.emi} highlight />
-          <ResultCard label="Outstanding Principal" value={results.outstanding} variant="emerald" />
-          <ResultCard label="Remaining Interest (if continue)" value={results.remainingInterest} />
-          <ResultCard label="Total Interest (full tenure)" value={results.totalInterestFull} />
+          <ResultCard label={t("currentEmi")} value={results.emi} highlight />
+          <ResultCard label={t("outstandingPrincipal")} value={results.outstanding} variant="emerald" />
+          <ResultCard label={t("remainingInterest")} value={results.remainingInterest} />
+          <ResultCard label={t("totalInterest")} value={results.totalInterestFull} />
         </div>
 
         {strategy === "prepay_all" && (
           <div className="glass-card space-y-4 p-6">
-            <h3 className="font-semibold text-theme-heading">Full Prepayment Analysis</h3>
+            <h3 className="font-semibold text-theme-heading">{t("fullPrepaymentAnalysis")}</h3>
             <div className="grid gap-3 sm:grid-cols-2">
-              <ResultCard label="Outstanding balance" value={results.outstanding} />
-              <ResultCard label="Foreclosure charges" value={results.foreclosureCharge} />
-              <ResultCard label="Total payout to close" value={results.prepayTotal} highlight />
-              <ResultCard label="Interest saved" value={results.interestSavedPrepay} variant="emerald" />
+              <ResultCard label={t("outstandingBalance")} value={results.outstanding} />
+              <ResultCard label={t("foreclosureCharges")} value={results.foreclosureCharge} />
+              <ResultCard label={t("totalPayoutToClose")} value={results.prepayTotal} highlight />
+              <ResultCard label={t("interestSaved")} value={results.interestSavedPrepay} variant="emerald" />
               <ResultCard label="Net benefit (saved − charges)" value={results.netBenefitPrepay} variant={results.netBenefitPrepay >= 0 ? "emerald" : "blue"} />
             </div>
             <p className="text-sm text-theme-muted">
@@ -240,13 +242,13 @@ export default function LoanForeclosureCalculator() {
 
         {strategy === "extra_yearly" && (
           <div className="glass-card space-y-4 p-6">
-            <h3 className="font-semibold text-theme-heading">Extra Annual Payment Analysis</h3>
+            <h3 className="font-semibold text-theme-heading">{t("extraAnnualPaymentAnalysis")}</h3>
             <div className="grid gap-3 sm:grid-cols-2">
-              <ResultCard label="Remaining interest (baseline)" value={results.remainingInterest} />
-              <ResultCard label="Remaining interest (with extra)" value={results.extraRemainingInterest} highlight />
-              <ResultCard label="Interest saved" value={results.extraBenefit} variant="emerald" />
+              <ResultCard label={t("remainingInterestBaseline")} value={results.remainingInterest} />
+              <ResultCard label={t("remainingInterestWithExtra")} value={results.extraRemainingInterest} highlight />
+              <ResultCard label={t("interestSaved")} value={results.extraBenefit} variant="emerald" />
               <div className="glass-card p-5 text-center">
-                <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Months saved (approx)</p>
+                <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("monthsSaved")}</p>
                 <p className="mt-2 text-2xl font-bold text-theme-heading">{results.extraMonthsSaved}</p>
               </div>
             </div>

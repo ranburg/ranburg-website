@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useCallback, useState } from "react";
 import { RefreshCw } from "lucide-react";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
@@ -15,6 +17,7 @@ function generateUUID(): string {
 }
 
 export default function UUIDGenerator() {
+  const { t } = useToolUi("uuid-generator" );
   const [uuids, setUuids] = useState<string[]>([generateUUID()]);
   const [quantity, setQuantity] = useState(1);
   const [uppercase, setUppercase] = useState(false);

@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import {
   BarChart,
@@ -18,6 +20,7 @@ function fmtUsd(n: number): string {
 }
 
 export function ProfitMarginTool() {
+  const { t } = useToolUi("profit-margin-calculator" );
   const [revenue, setRevenue] = useState(100000);
   const [cogs, setCogs] = useState(40000);
   const [opex, setOpex] = useState(30000);
@@ -64,6 +67,7 @@ export function ProfitMarginTool() {
 }
 
 export function RoiCalculatorTool() {
+  const { t } = useToolUi("profit-margin-calculator" );
   const [cost, setCost] = useState(1000);
   const [gain, setGain] = useState(1500);
   const [altGain, setAltGain] = useState(1800);
@@ -101,6 +105,7 @@ export function RoiCalculatorTool() {
 }
 
 export function BreakEvenTool() {
+  const { t } = useToolUi("profit-margin-calculator" );
   const [fixed, setFixed] = useState(50000);
   const [variable, setVariable] = useState(20);
   const [price, setPrice] = useState(50);

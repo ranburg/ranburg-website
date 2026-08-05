@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import { KPIStrip, ScenarioCompare } from "@/components/tools/viz";
@@ -18,6 +20,7 @@ function fmtDate(d: Date): string {
 }
 
 export function BurnRateRunwayTool() {
+  const { t } = useToolUi("burn-rate-runway-calculator" );
   const [cash, setCash] = useState(500000);
   const [expenses, setExpenses] = useState(80000);
   const [revenue, setRevenue] = useState(25000);
@@ -100,6 +103,7 @@ export function BurnRateRunwayTool() {
 }
 
 export function FreelancerRateTool() {
+  const { t } = useToolUi("burn-rate-runway-calculator" );
   const [salary, setSalary] = useState(85000);
   const [taxPct, setTaxPct] = useState(28);
   const [benefitsPct, setBenefitsPct] = useState(15);
@@ -177,6 +181,7 @@ function sampleSizeForMde(baseline: number, mdePct: number, power = 0.8, alpha =
 }
 
 export function AbTestSignificanceTool() {
+  const { t } = useToolUi("burn-rate-runway-calculator" );
   const [visA, setVisA] = useState(10000);
   const [convA, setConvA] = useState(320);
   const [visB, setVisB] = useState(10000);
@@ -281,6 +286,7 @@ function parseRobotsForBot(text: string, bot: string): BotRule {
 }
 
 export function AiCrawlerRobotsCheckerTool() {
+  const { t } = useToolUi("burn-rate-runway-calculator" );
   const [robots, setRobots] = useState(
     `User-agent: GPTBot\nDisallow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nUser-agent: *\nDisallow: /admin/`
   );
@@ -339,6 +345,7 @@ export function AiCrawlerRobotsCheckerTool() {
 }
 
 export function LlmsTxtGeneratorTool() {
+  const { t } = useToolUi("burn-rate-runway-calculator" );
   const [siteName, setSiteName] = useState("Ranburg Tools");
   const [lines, setLines] = useState(
     "https://ranburg.com/tools | Free online tools\nhttps://ranburg.com/tools/sip-calculator | SIP Calculator\nhttps://ranburg.com/blog | Blog"
@@ -384,6 +391,7 @@ function b64UrlDecode(str: string): string {
 }
 
 export function JwtDecoderTool() {
+  const { t } = useToolUi("burn-rate-runway-calculator" );
   const [token, setToken] = useState("");
   const [secret, setSecret] = useState("");
   const [verifyNote, setVerifyNote] = useState<string | null>(null);

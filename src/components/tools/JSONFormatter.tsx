@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import CopyButton from "@/components/ui/CopyButton";
@@ -25,6 +27,7 @@ function stripComments(json: string): string {
 }
 
 export default function JSONFormatter() {
+  const { t } = useToolUi("json-formatter");
   const [input, setInput] = useState('{\n  "name": "Ranburg",\n  "tools": ["sip", "swp"]\n}');
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
@@ -51,7 +54,7 @@ export default function JSONFormatter() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="glass-card p-6">
-          <label className="mb-2 block text-sm font-medium text-theme-body">Input JSON</label>
+          <label className="mb-2 block text-sm font-medium text-theme-body">{t("inputJson")}</label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -62,7 +65,7 @@ export default function JSONFormatter() {
         </div>
         <div className="glass-card p-6">
           <div className="mb-2 flex items-center justify-between">
-            <label className="text-sm font-medium text-theme-body">Output</label>
+            <label className="text-sm font-medium text-theme-body">{t("output")}</label>
             <CopyButton text={output} />
           </div>
           <textarea
@@ -70,7 +73,7 @@ export default function JSONFormatter() {
             readOnly
             rows={14}
             className="input-field font-mono text-sm text-accent-emerald"
-            placeholder="Formatted output appears here..."
+            placeholder={t("formattedOutputPlaceholder")}
           />
         </div>
       </div>
@@ -81,13 +84,13 @@ export default function JSONFormatter() {
 
       <div className="flex flex-wrap gap-3">
         <button type="button" onClick={() => process("format")} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-theme-heading hover:bg-accent/90">
-          Format
+          {t("format")}
         </button>
         <button type="button" onClick={() => process("minify")} className="rounded-xl border border-white/20 px-6 py-2.5 text-sm font-semibold text-theme-heading hover:bg-white/5">
-          Minify
+          {t("minify")}
         </button>
         <button type="button" onClick={() => { setError(""); try { JSON.parse(lenient ? stripComments(input) : input); setError(""); setOutput("✓ Valid JSON"); } catch (e) { setError(e instanceof Error ? e.message : "Invalid"); } }} className="rounded-xl border border-accent-emerald/30 px-6 py-2.5 text-sm font-semibold text-accent-emerald hover:bg-accent-emerald/10">
-          Validate
+          {t("validate")}
         </button>
       </div>
 
@@ -95,23 +98,23 @@ export default function JSONFormatter() {
         <AdvancedOptions>
           <div className="flex gap-4">
             <label className="flex items-center gap-2 text-sm text-theme-muted">
-              <input type="radio" checked={indent === 2} onChange={() => setIndent(2)} className="accent-accent" /> 2 spaces
+              <input type="radio" checked={indent === 2} onChange={() => setIndent(2)} className="accent-accent" /> {t("twoSpaces")}
             </label>
             <label className="flex items-center gap-2 text-sm text-theme-muted">
-              <input type="radio" checked={indent === 4} onChange={() => setIndent(4)} className="accent-accent" /> 4 spaces
+              <input type="radio" checked={indent === 4} onChange={() => setIndent(4)} className="accent-accent" /> {t("fourSpaces")}
             </label>
           </div>
           <label className="flex items-center gap-3 text-sm text-theme-muted">
             <input type="checkbox" checked={sortKeys} onChange={(e) => setSortKeys(e.target.checked)} className="accent-accent" />
-            Sort object keys alphabetically
+            {t("sortObjectKeys")}
           </label>
           <label className="flex items-center gap-3 text-sm text-theme-muted">
             <input type="checkbox" checked={lenient} onChange={(e) => setLenient(e.target.checked)} className="accent-accent" />
-            Lenient mode (strip comments)
+            {t("lenientMode")}
           </label>
           <label className="flex items-center gap-3 text-sm text-theme-muted">
             <input type="checkbox" checked={minify} onChange={(e) => setMinify(e.target.checked)} className="accent-accent" />
-            Default to minify on format
+            {t("defaultMinify")}
           </label>
         </AdvancedOptions>
       </div>

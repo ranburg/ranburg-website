@@ -1,9 +1,12 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import { CopyResultPanel, KPIStrip, SerpPreview, OgCardPreview } from "@/components/tools/viz";
 
 export function KeywordDensityTool() {
+  const { t } = useToolUi("keyword-density-checker" );
   const [text, setText] = useState("");
   const [target, setTarget] = useState("");
   const words = text.toLowerCase().match(/\b[a-z]{3,}\b/g) ?? [];
@@ -91,6 +94,7 @@ export function KeywordDensityTool() {
 }
 
 export function MetaTagGeneratorTool() {
+  const { t } = useToolUi("keyword-density-checker" );
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [url, setUrl] = useState("https://example.com");
@@ -121,6 +125,7 @@ export function MetaTagGeneratorTool() {
 }
 
 export function RobotsTxtTool() {
+  const { t } = useToolUi("keyword-density-checker" );
   const [ua, setUa] = useState("*");
   const [disallow, setDisallow] = useState("/admin/");
   const [allow, setAllow] = useState("");
@@ -140,6 +145,7 @@ export function RobotsTxtTool() {
 }
 
 export function XmlSitemapTool() {
+  const { t } = useToolUi("keyword-density-checker" );
   const [urls, setUrls] = useState("https://example.com/\nhttps://example.com/about");
   const [priority, setPriority] = useState("0.8");
   const [freq, setFreq] = useState("weekly");
@@ -168,6 +174,7 @@ export function XmlSitemapTool() {
 }
 
 export function OpenGraphTool() {
+  const { t } = useToolUi("keyword-density-checker" );
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState("");
@@ -197,6 +204,7 @@ export function OpenGraphTool() {
 }
 
 export function SchemaMarkupTool() {
+  const { t } = useToolUi("keyword-density-checker" );
   const [type, setType] = useState("Article");
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
@@ -287,6 +295,7 @@ export function SchemaMarkupTool() {
 }
 
 export function UrlEncoderTool() {
+  const { t } = useToolUi("keyword-density-checker" );
   const [text, setText] = useState("");
   const [mode, setMode] = useState<"encode" | "decode">("encode");
   const output = useMemo(() => {
@@ -317,6 +326,7 @@ export function UrlEncoderTool() {
 }
 
 export function WordCounterTool() {
+  const { t } = useToolUi("keyword-density-checker" );
   const [text, setText] = useState("");
   const words = text.trim() ? text.trim().split(/\s+/).length : 0;
   const chars = text.length;
@@ -338,6 +348,7 @@ export function WordCounterTool() {
 }
 
 export function SlugGeneratorTool() {
+  const { t } = useToolUi("keyword-density-checker" );
   const [text, setText] = useState("");
   const slug = text
     .toLowerCase()

@@ -1,9 +1,12 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import CopyButton from "@/components/ui/CopyButton";
 
 export default function ApexTestGenerator() {
+  const { t } = useToolUi("apex-test-generator" );
   const [className, setClassName] = useState("AccountService");
   const [methodName, setMethodName] = useState("updateAccounts");
 

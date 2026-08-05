@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 

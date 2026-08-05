@@ -1,0 +1,40 @@
+{
+  "about": {
+    "title": "Ranburg について",
+    "description": "Ranburg LLP - 無料のオンライン ツールとソフトウェア サービスについて学びましょう。"
+  },
+  "contact": {
+    "title": "接触",
+    "description": "Ranburg LLP にご連絡ください。"
+  },
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "description": "Ranburg が無料オンライン ツールのプライバシーをどのように扱うか。"
+  },
+  "terms": {
+    "title": "利用規約",
+    "description": "Ranburg の無料オンライン ツールの使用規約。"
+  },
+  "disclaimer": {
+    "title": "免責事項",
+    "description": "Ranburg の計算機およびツールに関する重要な免責事項。"
+  },
+  "blog": {
+    "title": "ブログ",
+    "description": "財務、クリエイター、開発者、生産性ツールのためのガイドとヒント。",
+    "readMore": "続きを読む"
+  },
+  "caseStudies": {
+    "title": "ケーススタディ",
+    "description": "Ranburg LLP から選択されたプロジェクトの成果。",
+    "readMore": "ケーススタディを見る"
+  },
+  "services": {
+    "title": "サービス",
+    "description": "Ranburg LLP のソフトウェアと Salesforce サービス。"
+  },
+  "toolsIndex": {
+    "title": "無料のオンラインツール",
+    "description": "サインアップ不要で、無料の計算機、コンバーター、ユーティリティを閲覧できます。"
+  }
+}

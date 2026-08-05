@@ -1,0 +1,40 @@
+{
+  "about": {
+    "title": "حول Ranburg",
+    "description": "تعرف على Ranburg LLP — أدوات وخدمات برمجية مجانية عبر الإنترنت."
+  },
+  "contact": {
+    "title": "اتصال",
+    "description": "تواصل مع Ranburg LLP."
+  },
+  "privacy": {
+    "title": "سياسة الخصوصية",
+    "description": "كيفية تعامل Ranburg مع خصوصية الأدوات المجانية عبر الإنترنت."
+  },
+  "terms": {
+    "title": "شروط الاستخدام",
+    "description": "شروط استخدام أدوات Ranburg المجانية عبر الإنترنت."
+  },
+  "disclaimer": {
+    "title": "تنصل",
+    "description": "إخلاء المسؤولية المهم بخصوص الآلات الحاسبة والأدوات Ranburg."
+  },
+  "blog": {
+    "title": "مدونة",
+    "description": "أدلة ونصائح للتمويل والمبدعين والمطورين وأدوات الإنتاجية.",
+    "readMore": "اقرأ المزيد"
+  },
+  "caseStudies": {
+    "title": "دراسات الحالة",
+    "description": "نتائج المشروع المختارة من Ranburg LLP.",
+    "readMore": "عرض دراسة الحالة"
+  },
+  "services": {
+    "title": "خدمات",
+    "description": "خدمات البرمجيات وSalesforce من Ranburg LLP."
+  },
+  "toolsIndex": {
+    "title": "أدوات مجانية على الإنترنت",
+    "description": "تصفح الآلات الحاسبة والمحولات والأدوات المساعدة المجانية - بدون اشتراك."
+  }
+}

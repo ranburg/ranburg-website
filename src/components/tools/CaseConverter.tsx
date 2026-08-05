@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import CopyButton from "@/components/ui/CopyButton";
 
@@ -15,6 +17,7 @@ const CASES = [
 ];
 
 export default function CaseConverter() {
+  const { t } = useToolUi("case-converter" );
   const [input, setInput] = useState("Hello World Example Text");
 
   const results = useMemo(

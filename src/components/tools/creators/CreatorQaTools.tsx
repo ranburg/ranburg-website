@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Download } from "lucide-react";
 import FileDropzone from "@/components/tools/shared/FileDropzone";
@@ -52,6 +54,7 @@ function drawSafeZoneOverlay(
 }
 
 export function SafeZoneCheckerTool() {
+  const { t } = useToolUi("safe-zone-checker");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [platform, setPlatform] = useState<VerticalPlatform>("tiktok");
   const [img, setImg] = useState<HTMLImageElement | null>(null);
@@ -148,6 +151,7 @@ function StatusBadge({ status, text }: { status: CheckStatus; text: string }) {
 }
 
 export function YoutubeThumbnailCheckerTool() {
+  const { t } = useToolUi("youtube-thumbnail-checker");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [img, setImg] = useState<HTMLImageElement | null>(null);
@@ -248,6 +252,7 @@ const PLATFORM_SPECS = [
 ] as const;
 
 export function SocialImageSizeFitTool() {
+  const { t } = useToolUi("social-image-size-checker");
   const [img, setImg] = useState<HTMLImageElement | null>(null);
 
   const fits = useMemo(() => {
@@ -331,6 +336,7 @@ export function SocialImageSizeFitTool() {
 }
 
 export function CompressToExactSizeTool() {
+  const { t } = useToolUi("compress-to-exact-size");
   const [targetKb, setTargetKb] = useState(200);
   const [img, setImg] = useState<HTMLImageElement | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);
@@ -436,6 +442,7 @@ function buildChapters(input: string): string {
 }
 
 export function YoutubeChapterGeneratorTool() {
+  const { t } = useToolUi("youtube-chapter-generator");
   const [input, setInput] = useState("0:00 Intro\n1:30 Main topic\n5:45 Demo\n8:00 Outro");
   const output = useMemo(() => buildChapters(input), [input]);
   const lineCount = output ? output.split("\n").length : 0;

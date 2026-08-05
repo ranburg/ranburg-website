@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
 import { SITE } from "./siteConfig";
+import {
+  localeOgMap,
+  localizedPath,
+  locales,
+  type AppLocale,
+} from "@/i18n/routing";
 
 interface PageSeoInput {
   title: string;
@@ -9,6 +15,7 @@ interface PageSeoInput {
   ogImage?: string;
   noIndex?: boolean;
   ogType?: "website" | "article";
+  locale?: AppLocale;
 }
 
 export function buildMetadata({
@@ -19,22 +26,29 @@ export function buildMetadata({
   ogImage,
   noIndex = false,
   ogType = "website",
+  locale = "en",
 }: PageSeoInput): Metadata {
-  const url = `${SITE.url}${path}`;
+  const localized = localizedPath(locale, path);
+  const url = `${SITE.url}${localized}`;
   const image = ogImage ?? SITE.defaultOgImage;
+
+  const languages: Record<string, string> = { "x-default": `${SITE.url}${path}` };
+  for (const loc of locales) {
+    languages[loc] = `${SITE.url}${localizedPath(loc, path)}`;
+  }
 
   return {
     title,
     description,
     keywords,
-    alternates: { canonical: url },
+    alternates: { canonical: url, languages },
     robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
     openGraph: {
       title,
       description,
       url,
       siteName: SITE.name,
-      locale: SITE.locale,
+      locale: localeOgMap[locale] ?? SITE.locale,
       type: ogType,
       images: [{ url: `${SITE.url}${image}`, width: 1200, height: 630, alt: title }],
     },

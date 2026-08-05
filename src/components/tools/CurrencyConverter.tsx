@@ -1,5 +1,6 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowLeftRight, RefreshCw } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -10,6 +11,7 @@ const CURRENCIES = [
 ];
 
 export default function CurrencyConverter() {
+  const { t } = useToolUi("currency-converter");
   const [rates, setRates] = useState<Record<string, number>>({});
   const [base, setBase] = useState("USD");
   const [from, setFrom] = useState("USD");
@@ -76,7 +78,7 @@ export default function CurrencyConverter() {
 
         <div className="grid items-end gap-4 sm:grid-cols-[1fr_auto_1fr]">
           <div>
-            <label className="mb-2 block text-sm text-theme-muted">Amount</label>
+            <label className="mb-2 block text-sm text-theme-muted">{t("amount")}</label>
             <div className="flex gap-2">
               <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} className="input-field flex-1 text-lg font-semibold" />
               <select value={from} onChange={(e) => setFrom(e.target.value)} className="input-field w-24">
@@ -86,11 +88,11 @@ export default function CurrencyConverter() {
               </select>
             </div>
           </div>
-          <button type="button" onClick={swap} className="mb-2 rounded-xl border border-theme-subtle p-3 text-theme-muted hover:border-accent/40 hover:text-accent" aria-label="Swap currencies">
+          <button type="button" onClick={swap} className="mb-2 rounded-xl border border-theme-subtle p-3 text-theme-muted hover:border-accent/40 hover:text-accent" aria-label={t("swapCurrencies")}>
             <ArrowLeftRight className="h-5 w-5" />
           </button>
           <div>
-            <label className="mb-2 block text-sm text-theme-muted">Converted</label>
+            <label className="mb-2 block text-sm text-theme-muted">{t("converted")}</label>
             <div className="flex gap-2">
               <div className="input-field flex-1 text-lg font-semibold text-accent">{convert()}</div>
               <select value={to} onChange={(e) => setTo(e.target.value)} className="input-field w-24">

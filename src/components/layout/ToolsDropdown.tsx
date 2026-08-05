@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Wrench, Cloud, ArrowRight } from "lucide-react";
 import { usePathname } from "next/navigation";

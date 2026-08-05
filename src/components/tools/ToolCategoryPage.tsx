@@ -1,6 +1,7 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { SITE } from "@/lib/siteConfig";
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import type { AppLocale } from "@/i18n/routing";
 import JsonLd from "@/components/seo/JsonLd";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ToolSearch from "@/components/tools/ToolSearch";
@@ -23,13 +24,14 @@ interface ToolCategoryPageProps {
   categorySlug: SeoCategorySlug;
 }
 
-export function generateCategoryMetadata(slug: SeoCategorySlug): Metadata {
+export function generateCategoryMetadata(slug: SeoCategorySlug, locale: AppLocale = "en"): Metadata {
   const hub = getSeoCategoryHub(slug)!;
   return buildMetadata({
     title: `${hub.headline} | Ranburg.com`,
     description: hub.description,
     path: `/tools/${slug}`,
     keywords: hub.keywords,
+    locale,
   });
 }
 

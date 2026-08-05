@@ -18,10 +18,12 @@ import ResultCard from "@/components/tools/ResultCard";
 import PurchasingPowerCard from "@/components/tools/PurchasingPowerCard";
 import { formatCurrency, presentValue } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { useToolUi } from "@/hooks/useToolUi";
 
 const COLORS = ["#3b82f6", "#f59e0b"];
 
 export default function EMICalculator() {
+  const { t } = useToolUi("emi");
   const [loanAmount, setLoanAmount] = useState(5000000);
   const [interestRate, setInterestRate] = useState(8.5);
   const [tenure, setTenure] = useState(20);
@@ -74,8 +76,8 @@ export default function EMICalculator() {
       totalPayment,
       totalPaymentPV,
       pieData: [
-        { name: "Principal", value: loanAmount },
-        { name: "Interest", value: totalInterest },
+        { name: t("principal"), value: loanAmount },
+        { name: t("totalInterest"), value: totalInterest },
       ],
       yearlyBreakdown,
     };
@@ -86,9 +88,9 @@ export default function EMICalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-8 p-8">
-        <h2 className="text-xl font-bold text-theme-heading">Adjust Parameters</h2>
+        <h2 className="text-xl font-bold text-theme-heading">{t("inputs")}</h2>
         <CalculatorSlider
-          label="Loan Amount"
+          label={t("loanAmount")}
           value={loanAmount}
           min={100000}
           max={100000000}
@@ -97,7 +99,7 @@ export default function EMICalculator() {
           onChange={setLoanAmount}
         />
         <CalculatorSlider
-          label="Interest Rate"
+          label={t("interestRate")}
           value={interestRate}
           min={1}
           max={20}
@@ -108,7 +110,7 @@ export default function EMICalculator() {
 
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-theme-body">Loan Tenure</label>
+            <label className="text-sm font-medium text-theme-body">{t("tenureYears")}</label>
             <div className="flex rounded-lg border border-theme p-0.5">
               {(["years", "months"] as const).map((unit) => (
                 <button
@@ -125,7 +127,7 @@ export default function EMICalculator() {
                       : "text-theme-muted hover:text-slate-900 dark:hover:text-white"
                   )}
                 >
-                  {unit}
+                  {t(unit)}
                 </button>
               ))}
             </div>
@@ -143,7 +145,7 @@ export default function EMICalculator() {
 
         <AdvancedOptions>
           <CalculatorSlider
-            label="Inflation Rate (for PV adjustment)"
+            label={t("inflationRate")}
             value={inflationRate}
             min={1}
             max={15}
@@ -156,17 +158,17 @@ export default function EMICalculator() {
 
       <div className="space-y-6">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <ResultCard label="Monthly EMI" value={results.emi} highlight variant="blue" />
+          <ResultCard label={t("emi")} value={results.emi} highlight variant="blue" />
           <ResultCard
-            label="Total Interest"
+            label={t("totalInterest")}
             value={results.totalInterest}
             variant="emerald"
           />
-          <ResultCard label="Total Payment" value={results.totalPayment} />
+          <ResultCard label={t("totalPayment")} value={results.totalPayment} />
         </div>
 
         <PurchasingPowerCard
-          label="Total Payment"
+          label={t("totalPayment")}
           nominalValue={results.totalPayment}
           presentValue={results.totalPaymentPV}
           highlight
@@ -174,7 +176,7 @@ export default function EMICalculator() {
 
         <div className="glass-card p-6">
           <h3 className="mb-4 text-sm font-semibold text-theme-body">
-            Payment Breakdown
+            {t("results")}
           </h3>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
             <div className="h-[180px] w-full sm:w-1/2">
@@ -223,7 +225,7 @@ export default function EMICalculator() {
 
         <div className="glass-card p-6">
           <h3 className="mb-4 text-sm font-semibold text-theme-body">
-            Yearly Principal vs Interest
+            {t("principal")} vs {t("totalInterest")}
           </h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={results.yearlyBreakdown}>

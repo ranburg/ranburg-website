@@ -1,11 +1,14 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import CopyButton from "@/components/ui/CopyButton";
 import { cn } from "@/lib/utils";
 
 export default function RegexTester() {
+  const { t } = useToolUi("regex-tester" );
   const [pattern, setPattern] = useState("\\d+");
   const [flags, setFlags] = useState({ g: true, i: false, m: false, s: false });
   const [text, setText] = useState("Order #12345 shipped on 2024-01-15. Ref: #67890.");

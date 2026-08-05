@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useCallback } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Search, X, Command, FileText, Wrench } from "lucide-react";
 import { globalSearch, type GlobalSearchFilter, type SearchResult } from "@/lib/globalSearch";
 import { getToolIcon } from "@/lib/toolIcons";

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
 import { ArrowRight, BarChart3, DollarSign, TrendingUp, Users } from "lucide-react";

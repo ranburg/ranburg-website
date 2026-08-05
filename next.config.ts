@@ -1,6 +1,27 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 import { TOOL_SLUG_REDIRECTS } from "./src/lib/salesforceToolsHub";
 import { getCategoryAliasRedirects } from "./src/lib/categoryAliases";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+const locales = ["es", "pt", "hi", "ar", "ja", "ko"] as const;
+
+function withLocaleRedirects(
+  redirects: { source: string; destination: string; permanent: boolean }[]
+) {
+  const out = [...redirects];
+  for (const r of redirects) {
+    for (const locale of locales) {
+      out.push({
+        source: `/${locale}${r.source}`,
+        destination: `/${locale}${r.destination}`,
+        permanent: r.permanent,
+      });
+    }
+  }
+  return out;
+}
 
 const toolRedirects = Object.entries(TOOL_SLUG_REDIRECTS).map(([source, destination]) => ({
   source: `/tools/${source}`,
@@ -25,7 +46,7 @@ const nextConfig: NextConfig = {
   },
   poweredByHeader: false,
   async redirects() {
-    return [
+    return withLocaleRedirects([
       {
         source: "/services/salesforce-development",
         destination: "/tools/salesforce",
@@ -33,8 +54,8 @@ const nextConfig: NextConfig = {
       },
       ...toolRedirects,
       ...getCategoryAliasRedirects(),
-    ];
+    ]);
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

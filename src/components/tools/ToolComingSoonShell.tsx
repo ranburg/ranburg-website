@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Clock, Mail } from "lucide-react";
 import type { ComingSoonTool } from "@/lib/toolComingSoonConfig";
 import { SITE } from "@/lib/siteConfig";

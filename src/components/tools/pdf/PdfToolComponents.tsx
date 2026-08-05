@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import { Download } from "lucide-react";
 import FileDropzone, { FileList } from "@/components/tools/shared/FileDropzone";
@@ -11,6 +13,7 @@ async function loadPdfLib() {
 }
 
 export function PdfMergeTool() {
+  const { t } = useToolUi("pdf-tools" );
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
@@ -45,6 +48,7 @@ export function PdfMergeTool() {
 }
 
 export function PdfSplitTool() {
+  const { t } = useToolUi("pdf-tools" );
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
@@ -75,6 +79,7 @@ export function PdfSplitTool() {
 }
 
 export function PdfCompressorTool() {
+  const { t } = useToolUi("pdf-tools" );
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
@@ -117,6 +122,7 @@ export function PdfCompressorTool() {
 }
 
 export function PdfPageExtractorTool() {
+  const { t } = useToolUi("pdf-tools" );
   const [files, setFiles] = useState<File[]>([]);
   const [range, setRange] = useState("1");
   const [status, setStatus] = useState("");
@@ -152,6 +158,7 @@ export function PdfPageExtractorTool() {
 }
 
 export function PdfPageRemoverTool() {
+  const { t } = useToolUi("pdf-tools" );
   const [files, setFiles] = useState<File[]>([]);
   const [remove, setRemove] = useState("1");
   const [status, setStatus] = useState("");
@@ -189,6 +196,7 @@ export function PdfPageRemoverTool() {
 }
 
 export function JpgToPdfTool() {
+  const { t } = useToolUi("pdf-tools" );
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
@@ -220,6 +228,7 @@ export function JpgToPdfTool() {
 }
 
 export function WordToPdfTool() {
+  const { t } = useToolUi("pdf-tools" );
   const [text, setText] = useState("");
   const [title, setTitle] = useState("Document");
   const [status, setStatus] = useState("");
@@ -286,6 +295,7 @@ export function WordToPdfTool() {
 }
 
 export function PdfToJpgTool() {
+  const { t } = useToolUi("pdf-tools" );
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);

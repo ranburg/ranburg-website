@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useCallback, useMemo, useState } from "react";
 import { RefreshCw } from "lucide-react";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
@@ -66,6 +68,7 @@ function strengthScore(pw: string): { score: number; label: string; color: strin
 }
 
 export default function PasswordGenerator() {
+  const { t } = useToolUi("password-generator" );
   const [length, setLength] = useState(16);
   const [upper, setUpper] = useState(true);
   const [lower, setLower] = useState(true);

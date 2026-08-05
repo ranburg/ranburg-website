@@ -21,7 +21,11 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-plus-jakarta)", "system-ui", "sans-serif"],
+        sans: ["var(--font-plus-jakarta)", "var(--font-noto-sans)", "system-ui", "sans-serif"],
+        hi: ["var(--font-noto-devanagari)", "var(--font-plus-jakarta)", "system-ui", "sans-serif"],
+        ar: ["var(--font-noto-arabic)", "var(--font-plus-jakarta)", "system-ui", "sans-serif"],
+        ja: ["var(--font-noto-jp)", "var(--font-plus-jakarta)", "system-ui", "sans-serif"],
+        ko: ["var(--font-noto-kr)", "var(--font-plus-jakarta)", "system-ui", "sans-serif"],
       },
       backgroundImage: {
         "grid-pattern":

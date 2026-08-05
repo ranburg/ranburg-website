@@ -1,13 +1,26 @@
-import Link from "next/link";
+"use client";
+
+import { useTranslations, useMessages } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Zap, Mail, MapPin, Phone, Linkedin, Twitter } from "lucide-react";
 import { SITE } from "@/lib/siteConfig";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { SEO_CATEGORY_HUBS } from "@/lib/toolSeoCategories";
 import { POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
+import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 
 const MAPS_URL = "https://maps.app.goo.gl/Cm1m7Qv2vF5cS7vr7";
 
 export default function Footer() {
+  const t = useTranslations("footer");
+  const tCommon = useTranslations("common");
+  const messages = useMessages() as {
+    tools?: { meta?: Record<string, { title?: string }> };
+  };
+
+  const titleFor = (slug: string, fallback: string) =>
+    messages.tools?.meta?.[slug]?.title ?? fallback;
+
   const popularTools = POPULAR_TOOL_SLUGS.slice(0, 6)
     .map((s) => TOOLS_CONFIG.find((t) => t.slug === s))
     .filter(Boolean);
@@ -30,9 +43,8 @@ export default function Footer() {
                 Ranburg<span className="text-accent">.com</span>
               </span>
             </Link>
-            <p className="text-sm leading-relaxed text-theme-muted">
-              Free online tools for developers, businesses, and SEO professionals — calculators, formatters, and utilities from Ranburg.
-            </p>
+            <p className="text-sm leading-relaxed text-theme-muted">{t("tagline")}</p>
+            <LanguageSwitcher />
             <div className="flex gap-3">
               <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-lg border border-theme bg-theme-surface text-theme-muted hover:border-accent/30 hover:text-accent" aria-label="LinkedIn">
                 <Linkedin className="h-4 w-4" />
@@ -44,27 +56,31 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">Tools</h3>
-            <p className="mb-2 text-xs font-medium text-theme-subtle">Popular</p>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">{tCommon("tools")}</h3>
+            <p className="mb-2 text-xs font-medium text-theme-subtle">{t("popularTools")}</p>
             <ul className="space-y-2">
               {popularTools.map((tool) => tool && (
                 <li key={tool.slug}>
-                  <Link href={`/tools/${tool.slug}`} className="text-sm text-theme-muted hover:text-accent">{tool.title}</Link>
+                  <Link href={`/tools/${tool.slug}`} className="text-sm text-theme-muted hover:text-accent">
+                    {titleFor(tool.slug, tool.title)}
+                  </Link>
                 </li>
               ))}
             </ul>
-            <p className="mb-2 mt-4 text-xs font-medium text-theme-subtle">Recently Added</p>
+            <p className="mb-2 mt-4 text-xs font-medium text-theme-subtle">{t("popularTools")}</p>
             <ul className="space-y-2">
               {recentTools.map((tool) => tool && (
                 <li key={tool.slug}>
-                  <Link href={`/tools/${tool.slug}`} className="text-sm text-theme-muted hover:text-accent">{tool.title}</Link>
+                  <Link href={`/tools/${tool.slug}`} className="text-sm text-theme-muted hover:text-accent">
+                    {titleFor(tool.slug, tool.title)}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">Categories</h3>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">{tCommon("allCategories")}</h3>
             <ul className="space-y-2">
               {SEO_CATEGORY_HUBS.map((cat) => (
                 <li key={cat.slug}>
@@ -72,18 +88,18 @@ export default function Footer() {
                 </li>
               ))}
               <li>
-                <Link href="/tools" className="text-sm font-medium text-accent hover:underline">All Tools →</Link>
+                <Link href="/tools" className="text-sm font-medium text-accent hover:underline">{t("allTools")} →</Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">Company</h3>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">{t("company")}</h3>
             <ul className="space-y-2">
               {[
-                { href: "/about", label: "About" },
-                { href: "/case-studies", label: "Case Studies" },
-                { href: "/contact", label: "Contact" },
+                { href: "/about", label: t("about") },
+                { href: "/case-studies", label: t("caseStudies") },
+                { href: "/contact", label: t("contact") },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm text-theme-muted hover:text-accent">{link.label}</Link>
@@ -93,20 +109,20 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">Resources</h3>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-theme-body">{t("resources")}</h3>
             <ul className="space-y-2">
               {[
-                { href: "/blog", label: "Blog" },
-                { href: "/privacy", label: "Privacy Policy" },
-                { href: "/terms", label: "Terms of Service" },
-                { href: "/disclaimer", label: "Disclaimer" },
+                { href: "/blog", label: t("blog") },
+                { href: "/privacy", label: t("privacy") },
+                { href: "/terms", label: t("terms") },
+                { href: "/disclaimer", label: t("disclaimer") },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm text-theme-muted hover:text-accent">{link.label}</Link>
                 </li>
               ))}
             </ul>
-            <h3 className="mb-3 mt-6 text-sm font-semibold uppercase tracking-wider text-theme-body">Contact</h3>
+            <h3 className="mb-3 mt-6 text-sm font-semibold uppercase tracking-wider text-theme-body">{t("contact")}</h3>
             <ul className="space-y-2 text-sm text-theme-muted">
               <li>
                 <a href={`mailto:${SITE.email}`} className="flex items-center gap-1.5 hover:text-accent">
@@ -128,7 +144,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 border-t border-theme-subtle pt-8 text-center text-xs text-slate-500">
-          © {new Date().getFullYear()} Ranburg LLP. All rights reserved. Free tools are provided as-is; see Disclaimer.
+          {t("rights", { year: new Date().getFullYear() })}
         </div>
       </div>
     </footer>

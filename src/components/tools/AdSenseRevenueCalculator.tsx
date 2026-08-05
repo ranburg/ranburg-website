@@ -1,5 +1,6 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
 import { useMemo, useState } from "react";
 import {
   ResponsiveContainer,
@@ -17,6 +18,7 @@ import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import { formatUsd } from "@/lib/socialInsights";
 
 export default function AdSenseRevenueCalculator() {
+  const { t } = useToolUi("adsense-revenue-calculator");
   const [pageViews, setPageViews] = useState(100_000);
   const [rpm, setRpm] = useState(5);
   const [ctr, setCtr] = useState(1.5);
@@ -71,9 +73,9 @@ export default function AdSenseRevenueCalculator() {
     <div className="space-y-8">
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="glass-card space-y-6 p-8">
-          <h2 className="text-xl font-bold text-theme-heading">Site Metrics</h2>
+          <h2 className="text-xl font-bold text-theme-heading">{t("siteMetrics")}</h2>
           <CalculatorSlider
-            label="Monthly Page Views"
+            label={t("monthlyPageViews")}
             value={pageViews}
             min={1000}
             max={10_000_000}
@@ -81,7 +83,7 @@ export default function AdSenseRevenueCalculator() {
             onChange={setPageViews}
           />
           <CalculatorSlider
-            label="RPM (Revenue per 1K page views)"
+            label={t("pageRpm")}
             value={rpm}
             min={0.5}
             max={30}
@@ -91,7 +93,7 @@ export default function AdSenseRevenueCalculator() {
           />
           <AdvancedOptions>
             <CalculatorSlider
-              label="Click-Through Rate (CTR)"
+              label={t("clickThroughRate")}
               value={ctr}
               min={0.1}
               max={10}
@@ -100,7 +102,7 @@ export default function AdSenseRevenueCalculator() {
               onChange={setCtr}
             />
             <CalculatorSlider
-              label="Cost per Click (CPC)"
+              label={t("costPerClick")}
               value={cpc}
               min={0.05}
               max={5}
@@ -109,7 +111,7 @@ export default function AdSenseRevenueCalculator() {
               onChange={setCpc}
             />
             <CalculatorSlider
-              label="Traffic Growth / Year"
+              label={t("trafficGrowthYearly")}
               value={trafficGrowth}
               min={0}
               max={100}
@@ -118,7 +120,7 @@ export default function AdSenseRevenueCalculator() {
               onChange={setTrafficGrowth}
             />
             <CalculatorSlider
-              label="Projection Period"
+              label={t("projectionPeriod")}
               value={projectionMonths}
               min={3}
               max={24}
@@ -132,31 +134,31 @@ export default function AdSenseRevenueCalculator() {
         <div className="space-y-6">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="glass-card border-accent/30 p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Monthly Revenue</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("monthlyRevenue")}</p>
               <p className="mt-2 text-2xl font-bold text-accent">{formatUsd(results.monthlyRevenue)}</p>
             </div>
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Annual Revenue</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("annualRevenue")}</p>
               <p className="mt-2 text-2xl font-bold text-accent-emerald">{formatUsd(results.annualRevenue)}</p>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Daily Revenue</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("dailyRevenue")}</p>
               <p className="mt-2 text-2xl font-bold text-theme-heading">{formatUsd(results.dailyRevenue)}</p>
             </div>
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Daily Page Views</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("dailyPageViews")}</p>
               <p className="mt-2 text-2xl font-bold text-theme-heading">{results.dailyPageViews.toLocaleString()}</p>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Est. Clicks / mo</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("estimatedClicksMonthly")}</p>
               <p className="mt-2 text-2xl font-bold text-theme-heading">{results.clicks.toLocaleString()}</p>
             </div>
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">CPC-based Revenue</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("cpcBasedRevenue")}</p>
               <p className="mt-2 text-2xl font-bold text-theme-heading">{formatUsd(results.cpcRevenue)}</p>
             </div>
           </div>
@@ -169,7 +171,7 @@ export default function AdSenseRevenueCalculator() {
 
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-lg font-bold text-theme-heading">Revenue Projection</h3>
+          <h3 className="mb-4 text-lg font-bold text-theme-heading">{t("revenueProjection")}</h3>
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={results.chartData}>
@@ -197,7 +199,7 @@ export default function AdSenseRevenueCalculator() {
         </div>
 
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-lg font-bold text-theme-heading">Revenue by Niche (your traffic)</h3>
+          <h3 className="mb-4 text-lg font-bold text-theme-heading">{t("revenueByNiche")}</h3>
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={results.nicheComparison} layout="vertical" margin={{ left: 20 }}>

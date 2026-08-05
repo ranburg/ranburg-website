@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import { KPIStrip, ScenarioCompare } from "@/components/tools/viz";
@@ -58,6 +60,7 @@ function taxOldRegime(taxable: number): number {
 }
 
 export function CtcInHandTool() {
+  const { t } = useToolUi("ctc-in-hand-calculator");
   const [ctc, setCtc] = useState(1200000);
   const [basicPct, setBasicPct] = useState(40);
   const [metro, setMetro] = useState(true);
@@ -148,6 +151,7 @@ export function CtcInHandTool() {
 }
 
 export function TdsCalculatorTool() {
+  const { t } = useToolUi("tds-calculator");
   const [section, setSection] = useState<"194C" | "194J" | "194I" | "192">("194J");
   const [amount, setAmount] = useState(100000);
   const [hasPan, setHasPan] = useState(true);
@@ -199,6 +203,7 @@ export function TdsCalculatorTool() {
 }
 
 export function HraExemptionTool() {
+  const { t } = useToolUi("hra-exemption-calculator");
   const [basic, setBasic] = useState(500000);
   const [hra, setHra] = useState(200000);
   const [rent, setRent] = useState(240000);
@@ -234,6 +239,7 @@ export function HraExemptionTool() {
 }
 
 export function GratuityCalculatorTool() {
+  const { t } = useToolUi("gratuity-calculator");
   const [lastDrawn, setLastDrawn] = useState(50000);
   const [years, setYears] = useState(7);
   const [months, setMonths] = useState(0);
@@ -263,6 +269,7 @@ export function GratuityCalculatorTool() {
 }
 
 export function HsnSacFinderTool() {
+  const { t } = useToolUi("hsn-sac-finder");
   const [q, setQ] = useState("");
   const hits = useMemo(() => {
     const s = q.trim().toLowerCase();
@@ -308,6 +315,7 @@ export function HsnSacFinderTool() {
 }
 
 export function IfscFinderTool() {
+  const { t } = useToolUi("ifsc-finder");
   const [q, setQ] = useState("");
   const hits = useMemo(() => {
     const s = q.trim().toLowerCase();

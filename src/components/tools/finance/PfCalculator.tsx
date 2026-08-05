@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import {
   Area,
@@ -22,6 +24,7 @@ function fmt(n: number) {
  * EPF-style projection with existing balance, monthly contribution, salary hike, and interest.
  */
 export default function PfCalculator() {
+  const { t } = useToolUi("pf-calculator");
   const [existingBalance, setExistingBalance] = useState(350000);
   const [monthlyBasic, setMonthlyBasic] = useState(40000);
   const [employeePct, setEmployeePct] = useState(12);
@@ -81,9 +84,9 @@ export default function PfCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-5 p-6">
-        <h3 className="font-semibold text-theme-heading">PF projection inputs</h3>
+        <h3 className="font-semibold text-theme-heading">{t("pfProjectionInputs")}</h3>
         <CalculatorSlider
-          label="Existing PF balance"
+          label={t("currentPfBalance")}
           value={existingBalance}
           min={0}
           max={10000000}
@@ -92,7 +95,7 @@ export default function PfCalculator() {
           onChange={setExistingBalance}
         />
         <CalculatorSlider
-          label="Current monthly basic (for PF %)"
+          label={t("currentMonthlyBasic")}
           value={monthlyBasic}
           min={5000}
           max={500000}
@@ -100,11 +103,11 @@ export default function PfCalculator() {
           prefix="₹"
           onChange={setMonthlyBasic}
         />
-        <CalculatorSlider label="Employee contribution %" value={employeePct} min={0} max={20} step={0.5} unit="%" onChange={setEmployeePct} />
-        <CalculatorSlider label="Employer contribution %" value={employerPct} min={0} max={20} step={0.5} unit="%" onChange={setEmployerPct} />
-        <CalculatorSlider label="Expected salary hike / year" value={salaryHike} min={0} max={20} step={0.5} unit="%" onChange={setSalaryHike} />
-        <CalculatorSlider label="PF interest rate / year" value={interestRate} min={5} max={12} step={0.05} unit="%" onChange={setInterestRate} />
-        <CalculatorSlider label="Years to project" value={years} min={1} max={40} step={1} unit=" yrs" onChange={setYears} />
+        <CalculatorSlider label={t("employeeContribution")} value={employeePct} min={0} max={20} step={0.5} unit="%" onChange={setEmployeePct} />
+        <CalculatorSlider label={t("employerContribution")} value={employerPct} min={0} max={20} step={0.5} unit="%" onChange={setEmployerPct} />
+        <CalculatorSlider label={t("expectedSalaryHike")} value={salaryHike} min={0} max={20} step={0.5} unit="%" onChange={setSalaryHike} />
+        <CalculatorSlider label={t("pfInterestRate")} value={interestRate} min={5} max={12} step={0.05} unit="%" onChange={setInterestRate} />
+        <CalculatorSlider label={t("yearsToProject")} value={years} min={1} max={40} step={1} unit=" yrs" onChange={setYears} />
         <label className="flex cursor-pointer items-center gap-2 text-sm text-theme-muted">
           <input type="checkbox" checked={capPf} onChange={(e) => setCapPf(e.target.checked)} />
           Cap monthly PF at ₹1,800 (wage-ceiling style)
@@ -118,20 +121,20 @@ export default function PfCalculator() {
       <div className="space-y-5">
         <KPIStrip
           items={[
-            { label: "Projected PF corpus", value: fmt(result.finalBalance), highlight: true },
-            { label: "Total contributions", value: fmt(result.totalContributed) },
-            { label: "Interest earned (est.)", value: fmt(result.interestEarned) },
+            { label: t("projectedPfCorpus"), value: fmt(result.finalBalance), highlight: true },
+            { label: t("totalContributions"), value: fmt(result.totalContributed) },
+            { label: t("interestEarned"), value: fmt(result.interestEarned) },
           ]}
         />
         <KPIStrip
           items={[
-            { label: "Employee share", value: fmt(result.totalEmployee) },
-            { label: "Employer share", value: fmt(result.totalEmployer) },
-            { label: "Basic after hikes", value: fmt(result.endingBasic) },
+            { label: t("employeeShare"), value: fmt(result.totalEmployee) },
+            { label: t("employerShare"), value: fmt(result.totalEmployer) },
+            { label: t("basicAfterHikes"), value: fmt(result.endingBasic) },
           ]}
         />
         <div className="glass-card p-5">
-          <h3 className="mb-3 text-sm font-semibold text-theme-heading">PF balance over time</h3>
+          <h3 className="mb-3 text-sm font-semibold text-theme-heading">{t("pfBalanceOverTime")}</h3>
           <ResponsiveContainer width="100%" height={240}>
             <AreaChart data={result.chart}>
               <CartesianGrid strokeDasharray="3 3" opacity={0.15} />

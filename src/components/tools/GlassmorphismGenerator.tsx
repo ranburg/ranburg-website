@@ -1,11 +1,14 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import CopyButton from "@/components/ui/CopyButton";
 
 export default function GlassmorphismGenerator() {
+  const { t } = useToolUi("glassmorphism-generator" );
   const [blur, setBlur] = useState(12);
   const [opacity, setOpacity] = useState(10);
   const [borderOpacity, setBorderOpacity] = useState(15);

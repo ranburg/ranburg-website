@@ -1,7 +1,10 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { getMessages, getTranslations } from "next-intl/server";
 import { BookOpen, LayoutGrid } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { getToolBySlug, getCategoryById } from "@/lib/toolsConfig";
+import { localizeTool } from "@/lib/i18n/localizeTool";
+import { localizedPath, type AppLocale } from "@/i18n/routing";
 import { getBlogForTool } from "@/lib/blogConfig";
 import { getToolIcon } from "@/lib/toolIcons";
 import { getPrimarySeoCategoryForTool } from "@/lib/toolSeoCategories";
@@ -31,37 +34,46 @@ import AffiliateCta from "@/components/ui/AffiliateCta";
 
 interface ToolPageProps {
   slug: string;
+  locale: AppLocale;
 }
 
-export default function ToolPageShell({ slug }: ToolPageProps) {
-  const tool = getToolBySlug(slug);
-  if (!tool) notFound();
+export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
+  const configuredTool = getToolBySlug(slug);
+  if (!configuredTool) notFound();
+  const [tShell, messages] = await Promise.all([
+    getTranslations("tools.shell"),
+    getMessages(),
+  ]);
+  const tool = localizeTool(
+    configuredTool,
+    (messages as { tools?: { meta?: Record<string, object> } }).tools?.meta
+  );
 
   const Icon = getToolIcon(tool.icon);
   const category = getCategoryById(tool.category);
   const seoCategory = getPrimarySeoCategoryForTool(slug);
   const seoSections = generateToolSeoSections(tool);
-  const toolUrl = `${SITE.url}/tools/${slug}`;
+  const toolUrl = `${SITE.url}${localizedPath(locale, `/tools/${slug}`)}`;
 
   const hubCrumb =
     tool.category === "salesforce"
       ? { label: "Salesforce Tools", href: "/tools/salesforce" }
       : seoCategory
         ? { label: seoCategory.label, href: `/tools/${seoCategory.slug}` }
-        : { label: "Tools", href: "/tools" };
+        : { label: tShell("breadcrumbTools"), href: "/tools" };
 
   const breadcrumbs = [
-    { label: "Home", href: "/" },
-    { label: "Tools", href: "/tools" },
+    { label: tShell("breadcrumbHome"), href: "/" },
+    { label: tShell("breadcrumbTools"), href: "/tools" },
     hubCrumb,
     { label: tool.title },
   ];
 
   const schema = [
     breadcrumbJsonLd([
-      { name: "Home", url: SITE.url },
-      { name: "Tools", url: `${SITE.url}/tools` },
-      { name: hubCrumb.label, url: `${SITE.url}${hubCrumb.href}` },
+      { name: tShell("breadcrumbHome"), url: `${SITE.url}${localizedPath(locale, "/")}` },
+      { name: tShell("breadcrumbTools"), url: `${SITE.url}${localizedPath(locale, "/tools")}` },
+      { name: hubCrumb.label, url: `${SITE.url}${localizedPath(locale, hubCrumb.href)}` },
       { name: tool.title, url: toolUrl },
     ]),
     softwareApplicationJsonLd(
@@ -100,7 +112,7 @@ export default function ToolPageShell({ slug }: ToolPageProps) {
                   className="inline-flex items-center gap-1.5 text-xs font-medium text-theme-subtle transition-colors hover:text-accent"
                 >
                   <LayoutGrid className="h-3.5 w-3.5" />
-                  Browse all tools
+                  {tShell("allTools")}
                 </Link>
               </div>
               <h1 className="mt-1 break-words text-2xl font-extrabold text-theme-heading sm:text-3xl">{tool.title}</h1>

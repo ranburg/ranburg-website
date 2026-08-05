@@ -1,0 +1,40 @@
+{
+  "about": {
+    "title": "About Ranburg",
+    "description": "Learn about Ranburg LLP — free online tools and software services."
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Get in touch with Ranburg LLP."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "description": "How Ranburg handles privacy for free online tools."
+  },
+  "terms": {
+    "title": "Terms of Use",
+    "description": "Terms for using Ranburg free online tools."
+  },
+  "disclaimer": {
+    "title": "Disclaimer",
+    "description": "Important disclaimers for Ranburg calculators and tools."
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Guides and tips for finance, creators, developers, and productivity tools.",
+    "readMore": "Read more"
+  },
+  "caseStudies": {
+    "title": "Case Studies",
+    "description": "Selected project outcomes from Ranburg LLP.",
+    "readMore": "View case study"
+  },
+  "services": {
+    "title": "Services",
+    "description": "Software and Salesforce services from Ranburg LLP."
+  },
+  "toolsIndex": {
+    "title": "Free Online Tools",
+    "description": "Browse free calculators, converters, and utilities — no signup."
+  }
+}

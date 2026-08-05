@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import {
   PieChart,
@@ -21,6 +23,7 @@ import { formatCurrency, presentValue } from "@/lib/utils";
 const COLORS = ["#3b82f6", "#10b981"];
 
 export default function SIPCalculator() {
+  const { t } = useToolUi("sip");
   const [monthlyInvestment, setMonthlyInvestment] = useState(10000);
   const [returnRate, setReturnRate] = useState(12);
   const [years, setYears] = useState(10);
@@ -71,8 +74,8 @@ export default function SIPCalculator() {
       totalValue: futureValue,
       totalValuePV: futureValuePV,
       pieData: [
-        { name: "Invested", value: totalInvestment },
-        { name: "Returns", value: Math.max(estimatedReturns, 0) },
+        { name: t("investedAmount"), value: totalInvestment },
+        { name: t("wealthGained"), value: Math.max(estimatedReturns, 0) },
       ],
       chartData,
     };
@@ -81,9 +84,9 @@ export default function SIPCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       <div className="glass-card space-y-6 p-8">
-        <h2 className="text-xl font-bold text-theme-heading">Adjust Parameters</h2>
+        <h2 className="text-xl font-bold text-theme-heading">{t("adjustParameters")}</h2>
         <CalculatorSlider
-          label="Monthly Investment"
+          label={t("monthlyInvestment")}
           value={monthlyInvestment}
           min={500}
           max={500000}
@@ -92,7 +95,7 @@ export default function SIPCalculator() {
           onChange={setMonthlyInvestment}
         />
         <CalculatorSlider
-          label="Expected Return Rate"
+          label={t("expectedReturn")}
           value={returnRate}
           min={1}
           max={30}
@@ -101,7 +104,7 @@ export default function SIPCalculator() {
           onChange={setReturnRate}
         />
         <CalculatorSlider
-          label="Time Period"
+          label={t("tenureYears")}
           value={years}
           min={1}
           max={40}
@@ -112,7 +115,7 @@ export default function SIPCalculator() {
 
         <AdvancedOptions>
           <CalculatorSlider
-            label="Inflation Rate"
+            label={t("inflationRate")}
             value={inflationRate}
             min={1}
             max={15}
@@ -121,7 +124,7 @@ export default function SIPCalculator() {
             onChange={setInflationRate}
           />
           <CalculatorSlider
-            label="Annual SIP Step-Up"
+            label={t("annualSipStepUp")}
             value={stepUpPercent}
             min={0}
             max={25}
@@ -134,14 +137,14 @@ export default function SIPCalculator() {
 
       <div className="space-y-6">
         <div className="grid gap-4 sm:grid-cols-3">
-          <ResultCard label="Total Investment" value={results.totalInvestment} />
+          <ResultCard label={t("investedAmount")} value={results.totalInvestment} />
           <ResultCard
-            label="Est. Returns"
+            label={t("wealthGained")}
             value={results.estimatedReturns}
             variant="emerald"
           />
           <ResultCard
-            label="Total Value"
+            label={t("maturityAmount")}
             value={results.totalValue}
             highlight
             variant="blue"
@@ -149,7 +152,7 @@ export default function SIPCalculator() {
         </div>
 
         <PurchasingPowerCard
-          label="Maturity Value (Today's Purchasing Power)"
+          label={t("maturityAmount")}
           nominalValue={results.totalValue}
           presentValue={results.totalValuePV}
           highlight
@@ -157,7 +160,7 @@ export default function SIPCalculator() {
 
         <div className="glass-card p-6">
           <h3 className="mb-4 text-sm font-semibold text-theme-body">
-            Investment Breakdown
+            {t("investmentBreakdown")}
           </h3>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
             <div className="h-[180px] w-full sm:w-1/2">
@@ -205,7 +208,7 @@ export default function SIPCalculator() {
         </div>
 
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-sm font-semibold text-theme-body">Growth Over Time</h3>
+          <h3 className="mb-4 text-sm font-semibold text-theme-body">{t("growthOverTime")}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <AreaChart data={results.chartData}>
               <defs>

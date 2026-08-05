@@ -1,0 +1,40 @@
+{
+  "about": {
+    "title": "Sobre Ranburg",
+    "description": "Saiba mais sobre Ranburg LLP — ferramentas online gratuitas e serviços de software."
+  },
+  "contact": {
+    "title": "Contato",
+    "description": "Entre em contato com Ranburg LLP."
+  },
+  "privacy": {
+    "title": "política de Privacidade",
+    "description": "Como Ranburg lida com a privacidade de ferramentas on-line gratuitas."
+  },
+  "terms": {
+    "title": "Termos de Uso",
+    "description": "Termos para usar ferramentas on-line gratuitas Ranburg."
+  },
+  "disclaimer": {
+    "title": "Isenção de responsabilidade",
+    "description": "Isenções de responsabilidade importantes para calculadoras e ferramentas Ranburg."
+  },
+  "blog": {
+    "title": "Blogue",
+    "description": "Guias e dicas para finanças, criadores, desenvolvedores e ferramentas de produtividade.",
+    "readMore": "Leia mais"
+  },
+  "caseStudies": {
+    "title": "Estudos de caso",
+    "description": "Resultados do projeto selecionados de Ranburg LLP.",
+    "readMore": "Ver estudo de caso"
+  },
+  "services": {
+    "title": "Serviços",
+    "description": "Serviços de software e Salesforce de Ranburg LLP."
+  },
+  "toolsIndex": {
+    "title": "Ferramentas on-line gratuitas",
+    "description": "Procure calculadoras, conversores e utilitários gratuitos – sem inscrição."
+  }
+}

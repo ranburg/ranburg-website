@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import { CopyResultPanel } from "@/components/tools/viz";
 
@@ -14,6 +16,7 @@ const LABELS: Record<TemplateKey, string> = {
 };
 
 export default function DateFormulaHelper() {
+  const { t } = useToolUi("date-formula-helper" );
   const [template, setTemplate] = useState<TemplateKey>("addDays");
   const [field, setField] = useState("CloseDate");
   const [field2, setField2] = useState("CreatedDate");

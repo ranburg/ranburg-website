@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import { Search, Loader2, Calendar, BarChart3 } from "lucide-react";
 import SocialInsightResults, { formatSocialCount, Users, Eye, TrendingUp } from "./SocialInsightResults";
@@ -25,6 +27,7 @@ interface InstagramData {
 }
 
 export default function InstagramProfileInsights() {
+  const { t } = useToolUi("instagram-profile-insights" );
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

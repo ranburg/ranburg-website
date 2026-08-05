@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
@@ -31,6 +33,7 @@ function generateParagraph() {
 }
 
 export default function LoremIpsumGenerator() {
+  const { t } = useToolUi("lorem-ipsum" );
   const [count, setCount] = useState(3);
   const [mode, setMode] = useState<"paragraphs" | "sentences" | "words">("paragraphs");
   const [output, setOutput] = useState("");

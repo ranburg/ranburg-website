@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useState } from "react";
 import { TOOLS_CONFIG, getToolBySlug } from "@/lib/toolsConfig";
 import { COMING_SOON_TOOLS } from "@/lib/toolComingSoonConfig";

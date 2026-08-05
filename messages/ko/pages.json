@@ -1,0 +1,40 @@
+{
+  "about": {
+    "title": "Ranburg 정보",
+    "description": "무료 온라인 도구 및 소프트웨어 서비스인 Ranburg LLP에 대해 알아보세요."
+  },
+  "contact": {
+    "title": "연락하다",
+    "description": "Ranburg LLP에 문의하세요."
+  },
+  "privacy": {
+    "title": "개인 정보 보호 정책",
+    "description": "Ranburg가 무료 온라인 도구의 개인정보를 처리하는 방법입니다."
+  },
+  "terms": {
+    "title": "이용약관",
+    "description": "Ranburg 무료 온라인 도구 사용에 관한 약관입니다."
+  },
+  "disclaimer": {
+    "title": "부인 성명",
+    "description": "Ranburg 계산기 및 도구에 대한 중요 면책조항입니다."
+  },
+  "blog": {
+    "title": "블로그",
+    "description": "금융, 창작자, 개발자, 생산성 도구를 위한 가이드와 팁입니다.",
+    "readMore": "더 읽어보세요"
+  },
+  "caseStudies": {
+    "title": "사례 연구",
+    "description": "Ranburg LLP에서 선택된 프로젝트 결과.",
+    "readMore": "사례 연구 보기"
+  },
+  "services": {
+    "title": "서비스",
+    "description": "Ranburg LLP의 소프트웨어 및 Salesforce 서비스."
+  },
+  "toolsIndex": {
+    "title": "무료 온라인 도구",
+    "description": "가입할 필요 없이 무료 계산기, 변환기, 유틸리티를 찾아보세요."
+  }
+}

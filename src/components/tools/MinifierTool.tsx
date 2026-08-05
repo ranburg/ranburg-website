@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import CopyButton from "@/components/ui/CopyButton";
@@ -28,6 +30,7 @@ function minifyJS(code: string, preserveComments: boolean): string {
 }
 
 export default function MinifierTool() {
+  const { t } = useToolUi("minifier" );
   const [codeType, setCodeType] = useState<CodeType>("html");
   const [input, setInput] = useState("<div class=\"container\">\n  <p>Hello World</p>\n</div>");
   const [output, setOutput] = useState("");

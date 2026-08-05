@@ -1,11 +1,14 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState, useRef } from "react";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import CopyButton from "@/components/ui/CopyButton";
 
 export default function ImageConverter() {
+  const { t } = useToolUi("image-converter" );
   const [preview, setPreview] = useState<string | null>(null);
   const [output, setOutput] = useState("");
   const [format, setFormat] = useState<"webp" | "base64">("base64");

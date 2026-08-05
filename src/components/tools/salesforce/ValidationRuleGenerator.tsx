@@ -1,9 +1,12 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import CopyButton from "@/components/ui/CopyButton";
 
 export default function ValidationRuleGenerator() {
+  const { t } = useToolUi("validation-rule-generator" );
   const [field, setField] = useState("Email");
   const [condition, setCondition] = useState("required");
   const [message, setMessage] = useState("Email is required before saving this record.");

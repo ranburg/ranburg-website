@@ -1,7 +1,9 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import { KPIStrip } from "@/components/tools/viz";
 import {
@@ -17,6 +19,7 @@ function fmt(n: number) {
 }
 
 export default function LicMaturityEstimator() {
+  const { t } = useToolUi("lic-maturity-calculator");
   const [planId, setPlanId] = useState<LicPlanId>("jeevan-labh-736");
   const plan = getLicPlan(planId);
   const [termIndex, setTermIndex] = useState(2);
@@ -108,9 +111,9 @@ export default function LicMaturityEstimator() {
   return (
     <div className="space-y-6">
       <div className="glass-card space-y-4 p-6">
-        <h3 className="font-semibold text-theme-heading">Select LIC plan</h3>
+        <h3 className="font-semibold text-theme-heading">{t("selectLicPlan")}</h3>
         <div>
-          <label className="mb-1 block text-xs text-theme-subtle">Plan</label>
+          <label className="mb-1 block text-xs text-theme-subtle">{t("plan")}</label>
           <select
             value={planId}
             onChange={(e) => setPlanId(e.target.value as LicPlanId)}
@@ -125,21 +128,21 @@ export default function LicMaturityEstimator() {
         </div>
         <p className="text-sm text-theme-muted">{plan.blurb}</p>
         <div>
-          <label className="mb-1 block text-xs text-theme-subtle">Policy term / PPT</label>
+          <label className="mb-1 block text-xs text-theme-subtle">{t("policyTermPpt")}</label>
           <select
             value={termIndex}
             onChange={(e) => setTermIndex(Number(e.target.value))}
             className="input-field"
           >
-            {plan.terms.map((t, i) => (
-              <option key={`${t.term}-${t.ppt}`} value={i}>
-                {t.label}
+            {plan.terms.map((termOpt, i) => (
+              <option key={`${termOpt.term}-${termOpt.ppt}`} value={i}>
+                {termOpt.label}
               </option>
             ))}
           </select>
         </div>
         {planId === "custom" && (
-          <CalculatorSlider label="Custom PPT (years)" value={customPpt} min={1} max={40} step={1} unit=" yrs" onChange={setCustomPpt} />
+          <CalculatorSlider label={t("customPptYears")} value={customPpt} min={1} max={40} step={1} unit=" yrs" onChange={setCustomPpt} />
         )}
         <div className="rounded-xl border border-theme bg-theme-surface/50 p-3 text-xs text-theme-subtle">
           <p>
@@ -152,9 +155,9 @@ export default function LicMaturityEstimator() {
       </div>
 
       <div className="glass-card space-y-4 p-6">
-        <h3 className="font-semibold text-theme-heading">Your policy numbers</h3>
+        <h3 className="font-semibold text-theme-heading">{t("yourPolicyNumbers")}</h3>
         <CalculatorSlider
-          label="Basic sum assured"
+          label={t("basicSumAssured")}
           value={sumAssured}
           min={plan.minSumAssured}
           max={10000000}
@@ -163,7 +166,7 @@ export default function LicMaturityEstimator() {
           onChange={setSumAssured}
         />
         <CalculatorSlider
-          label={planId === "single-premium-endowment-717" ? "Single premium" : "Annual premium (approx)"}
+          label={planId === "single-premium-endowment-717" ? t("singlePremium") : t("annualPremium")}
           value={annualPremium}
           min={5000}
           max={500000}
@@ -172,7 +175,7 @@ export default function LicMaturityEstimator() {
           onChange={setAnnualPremium}
         />
         <CalculatorSlider
-          label="Years already elapsed"
+          label={t("yearsAlreadyElapsed")}
           value={yearsElapsed}
           min={0}
           max={Math.max(policyTerm - 1, 0)}
@@ -181,7 +184,7 @@ export default function LicMaturityEstimator() {
           onChange={setYearsElapsed}
         />
         <CalculatorSlider
-          label="Policy start year"
+          label={t("policyStartYear")}
           value={startYear}
           min={1980}
           max={new Date().getFullYear()}
@@ -191,7 +194,7 @@ export default function LicMaturityEstimator() {
       </div>
 
       <div className="glass-card space-y-4 p-6">
-        <h3 className="font-semibold text-theme-heading">Bonus rates (from plan + SA band)</h3>
+        <h3 className="font-semibold text-theme-heading">{t("bonusRates")}</h3>
         <p className="text-sm text-theme-muted">
           Auto-filled from illustrative published-style bands for this plan, term, and sum-assured slab. Override if your
           bonus statement differs.
@@ -232,17 +235,17 @@ export default function LicMaturityEstimator() {
 
       <KPIStrip
         items={[
-          { label: "Est. maturity payout", value: fmt(result.maturityAmount), highlight: true },
-          { label: "Years to maturity", value: `${result.yearsToMaturity}` },
-          { label: "Maturity year", value: `${result.maturityYear}` },
+          { label: t("estimatedMaturityPayout"), value: fmt(result.maturityAmount), highlight: true },
+          { label: t("yearsToMaturity"), value: `${result.yearsToMaturity}` },
+          { label: t("maturityYear"), value: `${result.maturityYear}` },
         ]}
       />
       <KPIStrip
         items={[
-          { label: "SA on maturity", value: fmt(result.saOnMaturity) },
-          { label: "Vested bonus (full term)", value: fmt(result.vestedBonus) },
-          { label: "FAB", value: fmt(result.fab) },
-          { label: "Total premiums (PPT)", value: fmt(result.totalPremiums) },
+          { label: t("saOnMaturity"), value: fmt(result.saOnMaturity) },
+          { label: t("vestedBonus"), value: fmt(result.vestedBonus) },
+          { label: t("fab"), value: fmt(result.fab) },
+          { label: t("totalPremiums"), value: fmt(result.totalPremiums) },
         ]}
       />
       {result.interimMoneyBack > 0 && (
@@ -255,7 +258,7 @@ export default function LicMaturityEstimator() {
         />
       )}
       {result.interimMoneyBack === 0 && (
-        <KPIStrip items={[{ label: "Est. gain vs premiums", value: fmt(result.gainVsPremiums), highlight: true }]} />
+        <KPIStrip items={[{ label: t("gainVsPremiums"), value: fmt(result.gainVsPremiums), highlight: true }]} />
       )}
 
       <div className="rounded-2xl border border-theme bg-theme-surface/60 p-5 text-sm text-theme-muted">

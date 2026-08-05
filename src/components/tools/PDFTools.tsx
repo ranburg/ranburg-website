@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import { Download, FileUp, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -21,6 +23,7 @@ function parsePageRange(spec: string, total: number): number[] {
 }
 
 export default function PDFTools() {
+  const { t } = useToolUi("pdf-tools" );
   const [mode, setMode] = useState<Mode>("merge");
   const [files, setFiles] = useState<File[]>([]);
   const [pageSpec, setPageSpec] = useState("1");

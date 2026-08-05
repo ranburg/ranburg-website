@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Download, Upload, X } from "lucide-react";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
@@ -9,6 +11,7 @@ type QrStyle = "square" | "rounded" | "dots";
 type ErrorLevel = "L" | "M" | "Q" | "H";
 
 export default function QRGenerator() {
+  const { t } = useToolUi("qr-code-generator" );
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [text, setText] = useState("https://www.ranburg.com");
   const [size, setSize] = useState(320);

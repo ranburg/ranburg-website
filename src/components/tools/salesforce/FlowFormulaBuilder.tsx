@@ -1,9 +1,12 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import CopyButton from "@/components/ui/CopyButton";
 
 export default function FlowFormulaBuilder() {
+  const { t } = useToolUi("flow-formula-builder" );
   const [resource, setResource] = useState("varAmount");
   const [threshold, setThreshold] = useState("10000");
 

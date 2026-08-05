@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Pause, Play, Volume2, VolumeX } from "lucide-react";
 import {

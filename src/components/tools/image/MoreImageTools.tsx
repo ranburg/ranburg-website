@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import { Download } from "lucide-react";
 import FileDropzone from "@/components/tools/shared/FileDropzone";
@@ -14,6 +16,7 @@ import {
 } from "@/lib/imageProcessing";
 
 export function ImageCompressorTool() {
+  const { t } = useToolUi("image-converter" );
   const [preview, setPreview] = useState<string | null>(null);
   const [quality, setQuality] = useState(75);
   const [maxWidth, setMaxWidth] = useState(1920);
@@ -54,6 +57,7 @@ export function ImageCompressorTool() {
 }
 
 export function ImageResizerTool() {
+  const { t } = useToolUi("image-converter" );
   const [width, setWidth] = useState(800);
   const [height, setHeight] = useState(600);
   const [keepRatio, setKeepRatio] = useState(true);
@@ -106,6 +110,7 @@ export function ImageResizerTool() {
 }
 
 export function CropImageTool() {
+  const { t } = useToolUi("image-converter" );
   const [srcPreview, setSrcPreview] = useState<string | null>(null);
   const [outPreview, setOutPreview] = useState<string | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);
@@ -220,6 +225,7 @@ export function CropImageTool() {
 }
 
 export function ImageToBase64Tool() {
+  const { t } = useToolUi("image-converter" );
   const [output, setOutput] = useState("");
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -250,6 +256,7 @@ export function ImageToBase64Tool() {
 }
 
 export function Base64ToImageTool() {
+  const { t } = useToolUi("image-converter" );
   const [input, setInput] = useState("");
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState("");
@@ -288,6 +295,7 @@ export function Base64ToImageTool() {
 }
 
 export function RemoveExifTool() {
+  const { t } = useToolUi("image-converter" );
   const [preview, setPreview] = useState<string | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);
   const [sizes, setSizes] = useState({ before: 0, after: 0 });
@@ -333,6 +341,7 @@ export function RemoveExifTool() {
 }
 
 export function HeicToJpgTool() {
+  const { t } = useToolUi("image-converter" );
   const [status, setStatus] = useState("");
   const [preview, setPreview] = useState<string | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);
@@ -367,6 +376,7 @@ export function HeicToJpgTool() {
 }
 
 export function SvgToPngTool() {
+  const { t } = useToolUi("image-converter" );
   const [width, setWidth] = useState(512);
   const [preview, setPreview] = useState<string | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);

@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import {
   PieChart,
@@ -14,7 +16,7 @@ import {
   Legend,
 } from "recharts";
 import { Plus, Trash2 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import ResultCard from "@/components/tools/ResultCard";
@@ -51,6 +53,7 @@ function monthsFromToday(isoDate: string): number | null {
 }
 
 export default function SWPCalculator() {
+  const { t } = useToolUi("swp");
   const [mfCorpus, setMfCorpus] = useState(5000000);
   const [pfBalance, setPfBalance] = useState(0);
   const [includePfNow, setIncludePfNow] = useState(true);
@@ -157,9 +160,9 @@ export default function SWPCalculator() {
       leftoverPf,
       injectionLog,
       pieData: [
-        { name: "Withdrawn", value: totalWithdrawn },
-        { name: "Remaining SWP", value: finalBalance },
-        { name: "Unused PF pocket", value: leftoverPf },
+        { name: t("totalWithdrawn"), value: totalWithdrawn },
+        { name: t("remainingSwp"), value: finalBalance },
+        { name: t("unusedPfPocket"), value: leftoverPf },
       ].filter((d) => d.value > 0),
       chartData,
     };
@@ -185,9 +188,9 @@ export default function SWPCalculator() {
     <div className="space-y-8">
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="glass-card space-y-6 p-8">
-          <h2 className="text-xl font-bold text-theme-heading">SWP & investable corpus</h2>
+          <h2 className="text-xl font-bold text-theme-heading">{t("swpCorpus")}</h2>
           <CalculatorSlider
-            label="Mutual fund / SWP corpus"
+            label={t("swpCorpus")}
             value={mfCorpus}
             min={100000}
             max={50000000}
@@ -196,7 +199,7 @@ export default function SWPCalculator() {
             onChange={setMfCorpus}
           />
           <CalculatorSlider
-            label="Monthly withdrawal"
+            label={t("monthlyWithdrawal")}
             value={monthlyWithdrawal}
             min={1000}
             max={500000}
@@ -204,23 +207,23 @@ export default function SWPCalculator() {
             prefix="₹"
             onChange={setMonthlyWithdrawal}
           />
-          <CalculatorSlider label="Expected return (invested corpus)" value={returnRate} min={1} max={20} step={0.5} unit="%" onChange={setReturnRate} />
-          <CalculatorSlider label="Time period" value={years} min={1} max={40} step={1} unit=" yrs" onChange={setYears} />
+          <CalculatorSlider label={t("expectedReturn")} value={returnRate} min={1} max={20} step={0.5} unit="%" onChange={setReturnRate} />
+          <CalculatorSlider label={t("tenureYears")} value={years} min={1} max={40} step={1} unit=" yrs" onChange={setYears} />
 
           <div className="rounded-xl border border-theme p-4 space-y-3">
-            <h3 className="text-sm font-semibold text-theme-heading">Provident Fund (PF)</h3>
-            <CalculatorSlider label="Current PF balance" value={pfBalance} min={0} max={20000000} step={10000} prefix="₹" onChange={setPfBalance} />
+            <h3 className="text-sm font-semibold text-theme-heading">{t("providentFund")}</h3>
+            <CalculatorSlider label={t("currentPfBalance")} value={pfBalance} min={0} max={20000000} step={10000} prefix="₹" onChange={setPfBalance} />
             <label className="flex cursor-pointer items-center gap-2 text-sm text-theme-muted">
               <input type="checkbox" checked={includePfNow} onChange={(e) => setIncludePfNow(e.target.checked)} />
-              Add PF to SWP corpus from day one
+              {t("addPfToSwp")}
             </label>
             {!includePfNow && pfBalance > 0 && (
               <>
                 <div>
-                  <label className="mb-1 block text-xs text-theme-subtle">PF access / transfer date</label>
+                  <label className="mb-1 block text-xs text-theme-subtle">{t("pfAccessDate")}</label>
                   <input type="date" value={pfAccessDate} onChange={(e) => setPfAccessDate(e.target.value)} className="input-field" />
                 </div>
-                <CalculatorSlider label="PF growth until access" value={pfGrowthRate} min={5} max={12} step={0.05} unit="%" onChange={setPfGrowthRate} />
+                <CalculatorSlider label={t("pfGrowthUntilAccess")} value={pfGrowthRate} min={5} max={12} step={0.05} unit="%" onChange={setPfGrowthRate} />
               </>
             )}
             <p className="text-xs text-theme-subtle">
@@ -233,7 +236,7 @@ export default function SWPCalculator() {
           </div>
 
           <AdvancedOptions>
-            <CalculatorSlider label="Inflation rate" value={inflationRate} min={1} max={15} step={0.5} unit="%" onChange={setInflationRate} />
+            <CalculatorSlider label={t("inflationRate")} value={inflationRate} min={1} max={15} step={0.5} unit="%" onChange={setInflationRate} />
             <label className="flex cursor-pointer items-center gap-3 text-sm text-theme-muted">
               <input
                 type="checkbox"
@@ -241,7 +244,7 @@ export default function SWPCalculator() {
                 onChange={(e) => setInflationAdjustWithdrawals(e.target.checked)}
                 className="h-4 w-4 rounded border-white/20 bg-slate-800 accent-accent"
               />
-              Increase withdrawals annually by inflation rate
+              {t("increaseWithdrawalsByInflation")}
             </label>
           </AdvancedOptions>
         </div>
@@ -249,25 +252,25 @@ export default function SWPCalculator() {
         <div className="space-y-6">
           <div className="grid gap-4 sm:grid-cols-2">
             <PurchasingPowerCard
-              label="Total final SWP balance"
+              label={t("finalSwpBalance")}
               nominalValue={results.finalBalance}
               presentValue={results.finalBalancePV}
               highlight
             />
             <PurchasingPowerCard
-              label="Total withdrawn"
+              label={t("totalWithdrawn")}
               nominalValue={results.totalWithdrawn}
               presentValue={results.totalWithdrawnPV}
             />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <ResultCard label="Starting corpus (MF + PF if now)" value={results.startingCorpus} variant="blue" />
-            <ResultCard label="LIC maturities injected" value={results.licInjected} variant="emerald" />
+            <ResultCard label={t("startingCorpus")} value={results.startingCorpus} variant="blue" />
+            <ResultCard label={t("licMaturitiesInjected")} value={results.licInjected} variant="emerald" />
           </div>
           {(results.pfInjected > 0 || results.leftoverPf > 0) && (
             <div className="grid gap-4 sm:grid-cols-2">
-              <ResultCard label="PF injected into SWP" value={results.pfInjected} variant="blue" />
-              <ResultCard label="PF left outside SWP" value={results.leftoverPf} variant="emerald" />
+              <ResultCard label={t("pfInjectedIntoSwp")} value={results.pfInjected} variant="blue" />
+              <ResultCard label={t("pfLeftOutsideSwp")} value={results.leftoverPf} variant="emerald" />
             </div>
           )}
         </div>
@@ -276,7 +279,7 @@ export default function SWPCalculator() {
       <div className="glass-card space-y-4 p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 className="font-semibold text-theme-heading">LIC policies (optional, multiple)</h3>
+            <h3 className="font-semibold text-theme-heading">{t("licPolicies")}</h3>
             <p className="mt-1 text-sm text-theme-muted">
               Add each policy’s maturity date and estimated maturity amount. When a policy matures during the SWP
               horizon, that lump sum is added to the invested corpus. Estimate amounts with the{" "}
@@ -291,12 +294,12 @@ export default function SWPCalculator() {
             onClick={() => setPolicies((p) => [...p, newPolicy()])}
             className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2 text-sm font-medium text-white"
           >
-            <Plus className="h-4 w-4" /> Add LIC policy
+            <Plus className="h-4 w-4" /> {t("addLicPolicy")}
           </button>
         </div>
 
         {policies.length === 0 ? (
-          <p className="text-sm text-theme-subtle">No LIC policies added — SWP runs on MF corpus (+ PF rules) only.</p>
+          <p className="text-sm text-theme-subtle">{t("noLicPolicies")}</p>
         ) : (
           <div className="space-y-4">
             {policies.map((p) => (
@@ -305,14 +308,14 @@ export default function SWPCalculator() {
                   value={p.name}
                   onChange={(e) => updatePolicy(p.id, { name: e.target.value })}
                   className="input-field lg:col-span-2"
-                  placeholder="Plan name"
+                  placeholder={t("planName")}
                 />
                 <div>
-                  <label className="mb-1 block text-xs text-theme-subtle">Start date</label>
+                  <label className="mb-1 block text-xs text-theme-subtle">{t("startDate")}</label>
                   <input type="date" value={p.startDate} onChange={(e) => updatePolicy(p.id, { startDate: e.target.value })} className="input-field" />
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs text-theme-subtle">Maturity date</label>
+                  <label className="mb-1 block text-xs text-theme-subtle">{t("maturityDate")}</label>
                   <input
                     type="date"
                     value={p.maturityDate}
@@ -322,7 +325,7 @@ export default function SWPCalculator() {
                 </div>
                 <div className="flex items-end gap-2">
                   <div className="flex-1">
-                    <label className="mb-1 block text-xs text-theme-subtle">Est. maturity ₹</label>
+                    <label className="mb-1 block text-xs text-theme-subtle">{t("estimatedMaturity")}</label>
                     <input
                       type="number"
                       min={0}
@@ -335,7 +338,7 @@ export default function SWPCalculator() {
                     type="button"
                     onClick={() => setPolicies((prev) => prev.filter((x) => x.id !== p.id))}
                     className="mb-1 rounded-lg p-2 text-theme-subtle hover:text-red-500"
-                    aria-label="Remove policy"
+                    aria-label={t("removePolicy")}
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -347,7 +350,7 @@ export default function SWPCalculator() {
 
         {results.injectionLog.length > 0 && (
           <div className="rounded-xl bg-accent/5 p-4 text-sm text-theme-muted">
-            <p className="font-semibold text-theme-heading">Scheduled corpus top-ups</p>
+            <p className="font-semibold text-theme-heading">{t("scheduledCorpusTopUps")}</p>
             <ul className="mt-2 list-disc space-y-1 pl-5">
               {results.injectionLog.map((line) => (
                 <li key={line}>{line}</li>
@@ -359,7 +362,7 @@ export default function SWPCalculator() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-sm font-semibold text-theme-body">Withdrawal breakdown</h3>
+          <h3 className="mb-4 text-sm font-semibold text-theme-body">{t("withdrawalBreakdown")}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
               <Pie data={results.pieData} cx="50%" cy="50%" innerRadius={50} outerRadius={75} paddingAngle={4} dataKey="value">
@@ -377,7 +380,7 @@ export default function SWPCalculator() {
         </div>
 
         <div className="glass-card p-6">
-          <h3 className="mb-4 text-sm font-semibold text-theme-body">Balance: nominal vs purchasing power</h3>
+          <h3 className="mb-4 text-sm font-semibold text-theme-body">{t("balancePurchasingPower")}</h3>
           <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={results.chartData}>
               <defs>

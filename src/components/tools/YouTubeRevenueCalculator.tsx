@@ -1,5 +1,6 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
 import { useMemo, useState } from "react";
 import {
   ResponsiveContainer,
@@ -15,6 +16,7 @@ import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import { formatUsd } from "@/lib/socialInsights";
 
 export default function YouTubeRevenueCalculator() {
+  const { t } = useToolUi("youtube-revenue-calculator");
   const [monthlyViews, setMonthlyViews] = useState(100_000);
   const [rpm, setRpm] = useState(4);
   const [sponsorshipDeals, setSponsorshipDeals] = useState(1);
@@ -57,9 +59,9 @@ export default function YouTubeRevenueCalculator() {
     <div className="space-y-8">
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="glass-card space-y-6 p-8">
-          <h2 className="text-xl font-bold text-theme-heading">Channel Metrics</h2>
+          <h2 className="text-xl font-bold text-theme-heading">{t("channelMetrics")}</h2>
           <CalculatorSlider
-            label="Monthly Views"
+            label={t("monthlyViews")}
             value={monthlyViews}
             min={1000}
             max={10_000_000}
@@ -67,7 +69,7 @@ export default function YouTubeRevenueCalculator() {
             onChange={setMonthlyViews}
           />
           <CalculatorSlider
-            label="RPM (Revenue per 1K views)"
+            label={t("rpm")}
             value={rpm}
             min={0.5}
             max={25}
@@ -76,7 +78,7 @@ export default function YouTubeRevenueCalculator() {
             onChange={setRpm}
           />
           <CalculatorSlider
-            label="Sponsorship Deals / Month"
+            label={t("sponsorshipDealsMonthly")}
             value={sponsorshipDeals}
             min={0}
             max={10}
@@ -84,7 +86,7 @@ export default function YouTubeRevenueCalculator() {
             onChange={setSponsorshipDeals}
           />
           <CalculatorSlider
-            label="Avg Sponsorship Rate"
+            label={t("averageSponsorshipRate")}
             value={sponsorshipRate}
             min={0}
             max={50_000}
@@ -94,7 +96,7 @@ export default function YouTubeRevenueCalculator() {
           />
           <AdvancedOptions>
             <CalculatorSlider
-              label="Membership Revenue / Month"
+              label={t("membershipRevenueMonthly")}
               value={membershipRevenue}
               min={0}
               max={10_000}
@@ -103,7 +105,7 @@ export default function YouTubeRevenueCalculator() {
               onChange={setMembershipRevenue}
             />
             <CalculatorSlider
-              label="Monthly View Growth"
+              label={t("monthlyViewGrowth")}
               value={growthRate}
               min={0}
               max={30}
@@ -112,7 +114,7 @@ export default function YouTubeRevenueCalculator() {
               onChange={setGrowthRate}
             />
             <CalculatorSlider
-              label="Projection Period"
+              label={t("projectionPeriod")}
               value={projectionMonths}
               min={3}
               max={24}
@@ -126,21 +128,21 @@ export default function YouTubeRevenueCalculator() {
         <div className="space-y-6">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="glass-card border-accent/30 p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Ad Revenue / mo</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("adRevenueMonthly")}</p>
               <p className="mt-2 text-2xl font-bold text-accent">{formatUsd(results.adRevenue)}</p>
             </div>
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Total Revenue / mo</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("totalRevenueMonthly")}</p>
               <p className="mt-2 text-2xl font-bold text-accent-emerald">{formatUsd(results.monthlyTotal)}</p>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Sponsorship / mo</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("sponsorshipMonthly")}</p>
               <p className="mt-2 text-2xl font-bold text-theme-heading">{formatUsd(results.sponsorshipRevenue)}</p>
             </div>
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Annual Revenue</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("annualRevenue")}</p>
               <p className="mt-2 text-2xl font-bold text-theme-heading">{formatUsd(results.annualTotal)}</p>
             </div>
           </div>
@@ -152,7 +154,7 @@ export default function YouTubeRevenueCalculator() {
       </div>
 
       <div className="glass-card p-6">
-        <h3 className="mb-4 text-lg font-bold text-theme-heading">Revenue Projection</h3>
+        <h3 className="mb-4 text-lg font-bold text-theme-heading">{t("revenueProjection")}</h3>
         <div className="h-72 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={results.chartData}>

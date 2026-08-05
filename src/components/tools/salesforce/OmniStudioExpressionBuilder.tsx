@@ -1,9 +1,12 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import { CopyResultPanel } from "@/components/tools/viz";
 
 export default function OmniStudioExpressionBuilder() {
+  const { t } = useToolUi("omnistudio-expression-builder" );
   const [jsonPath, setJsonPath] = useState("Account:Name");
   const [transform, setTransform] = useState("uppercase");
   const [suffix, setSuffix] = useState(" - Processed");

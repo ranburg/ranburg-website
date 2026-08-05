@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import Button from "@/components/ui/Button";
 import ToolSearch from "@/components/tools/ToolSearch";
 import { ArrowRight, Sparkles, Zap } from "lucide-react";
@@ -18,6 +19,7 @@ const INTENT_CHIPS = [
 ] as const;
 
 export default function Hero() {
+  const t = useTranslations("home");
   const [loan, setLoan] = useState(2500000);
   const [rate, setRate] = useState(8.5);
   const [years, setYears] = useState(20);
@@ -59,16 +61,16 @@ export default function Hero() {
         >
           <p className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             <Sparkles className="h-4 w-4" />
-            Ranburg Tools
+            {t("heroBrand")} Tools
           </p>
           <h1 className="mt-4 text-5xl font-extrabold leading-[0.95] tracking-tight text-theme-heading sm:text-6xl lg:text-7xl">
             Ranburg
           </h1>
           <p className="mt-3 max-w-xl text-xl font-medium text-theme-heading sm:text-2xl">
-            The free toolkit creators and builders keep open.
+            {t("heroHeadline")}
           </p>
           <p className="mt-4 max-w-lg text-base leading-relaxed text-theme-muted sm:text-lg">
-            {TOOL_COUNT}+ calculators, converters, and social utilities — instant results in your browser. No signup.
+            {t("heroSub")}
           </p>
 
           <div className="mt-8 max-w-xl">
@@ -89,10 +91,10 @@ export default function Hero() {
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Button href="/tools" size="lg" icon>
-              Explore tools
+              {t("ctaTools")}
             </Button>
-            <Button href="/tools/invoice-generator" variant="outline" size="lg">
-              Create an invoice
+            <Button href="/contact" variant="outline" size="lg">
+              {t("ctaContact")}
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>

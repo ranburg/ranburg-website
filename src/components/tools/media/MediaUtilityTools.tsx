@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Download } from "lucide-react";
 import FileDropzone from "@/components/tools/shared/FileDropzone";
@@ -47,6 +49,7 @@ function canEncodeAvif(): boolean {
 }
 
 export function AvifToJpgTool() {
+  const { t } = useToolUi("avif-to-jpg");
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const [quality, setQuality] = useState(90);
@@ -84,6 +87,7 @@ export function AvifToJpgTool() {
 }
 
 export function JpgToAvifTool() {
+  const { t } = useToolUi("jpg-to-avif");
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const encodeOk = useMemo(() => (typeof window !== "undefined" ? canEncodeAvif() : false), []);
@@ -139,6 +143,7 @@ export function JpgToAvifTool() {
 }
 
 export function OpusToMp3Tool() {
+  const { t } = useToolUi("opus-to-mp3");
   const [status, setStatus] = useState<"idle" | "loading" | "ready" | "missing" | "converting" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
   const ffmpegRef = useRef<{ ffmpeg: { load: (opts: object) => Promise<void>; writeFile: (n: string, d: Uint8Array) => Promise<void>; exec: (a: string[]) => Promise<void>; readFile: (n: string) => Promise<Uint8Array> }; fetchFile: (f: File) => Promise<Uint8Array> } | null>(null);
@@ -243,6 +248,7 @@ function toCsv(rows: Record<string, unknown>[]): string {
 }
 
 export function CsvToJsonTool() {
+  const { t } = useToolUi("csv-to-json");
   const [input, setInput] = useState("name,email\nAlice,alice@example.com\nBob,bob@example.com");
   const output = useMemo(() => {
     try {
@@ -261,6 +267,7 @@ export function CsvToJsonTool() {
 }
 
 export function JsonToCsvTool() {
+  const { t } = useToolUi("json-to-csv");
   const [input, setInput] = useState('[{"name":"Alice","email":"alice@example.com"},{"name":"Bob","email":"bob@example.com"}]');
   const [error, setError] = useState("");
   const output = useMemo(() => {
@@ -285,6 +292,7 @@ export function JsonToCsvTool() {
 }
 
 export function ExcelToCsvTool() {
+  const { t } = useToolUi("excel-to-csv");
   const [busy, setBusy] = useState(false);
   const [csv, setCsv] = useState("");
   const [sheetNames, setSheetNames] = useState<string[]>([]);
@@ -369,6 +377,7 @@ interface BlurRect {
 }
 
 export function FaceBlurTool() {
+  const { t } = useToolUi("face-blur");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [img, setImg] = useState<HTMLImageElement | null>(null);

@@ -1,5 +1,6 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
 import { useMemo, useState } from "react";
 import {
   ResponsiveContainer,
@@ -15,6 +16,7 @@ import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import { formatUsd } from "@/lib/socialInsights";
 
 export default function InstagramRevenueCalculator() {
+  const { t } = useToolUi("instagram-revenue-calculator");
   const [followers, setFollowers] = useState(50_000);
   const [engagementRate, setEngagementRate] = useState(3);
   const [sponsoredPosts, setSponsoredPosts] = useState(2);
@@ -64,9 +66,9 @@ export default function InstagramRevenueCalculator() {
     <div className="space-y-8">
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="glass-card space-y-6 p-8">
-          <h2 className="text-xl font-bold text-theme-heading">Profile Metrics</h2>
+          <h2 className="text-xl font-bold text-theme-heading">{t("profileMetrics")}</h2>
           <CalculatorSlider
-            label="Followers"
+            label={t("followers")}
             value={followers}
             min={500}
             max={5_000_000}
@@ -74,7 +76,7 @@ export default function InstagramRevenueCalculator() {
             onChange={setFollowers}
           />
           <CalculatorSlider
-            label="Engagement Rate"
+            label={t("engagementRate")}
             value={engagementRate}
             min={0.5}
             max={15}
@@ -83,7 +85,7 @@ export default function InstagramRevenueCalculator() {
             onChange={setEngagementRate}
           />
           <CalculatorSlider
-            label="Sponsored Posts / Month"
+            label={t("sponsoredPostsMonthly")}
             value={sponsoredPosts}
             min={0}
             max={12}
@@ -91,7 +93,7 @@ export default function InstagramRevenueCalculator() {
             onChange={setSponsoredPosts}
           />
           <CalculatorSlider
-            label="Rate per Sponsored Post"
+            label={t("ratePerSponsoredPost")}
             value={ratePerPost}
             min={0}
             max={25_000}
@@ -101,7 +103,7 @@ export default function InstagramRevenueCalculator() {
           />
           <AdvancedOptions>
             <CalculatorSlider
-              label="Affiliate / Shop Revenue / mo"
+              label={t("affiliateRevenueMonthly")}
               value={affiliateCommission}
               min={0}
               max={10_000}
@@ -110,7 +112,7 @@ export default function InstagramRevenueCalculator() {
               onChange={setAffiliateCommission}
             />
             <CalculatorSlider
-              label="Reels Bonus / mo"
+              label={t("reelsBonusMonthly")}
               value={reelsBonus}
               min={0}
               max={5000}
@@ -119,7 +121,7 @@ export default function InstagramRevenueCalculator() {
               onChange={setReelsBonus}
             />
             <CalculatorSlider
-              label="Follower Growth / Year"
+              label={t("followerGrowthYearly")}
               value={growthRate}
               min={0}
               max={50}
@@ -128,7 +130,7 @@ export default function InstagramRevenueCalculator() {
               onChange={setGrowthRate}
             />
             <CalculatorSlider
-              label="Projection Period"
+              label={t("projectionPeriod")}
               value={projectionMonths}
               min={3}
               max={24}
@@ -142,21 +144,21 @@ export default function InstagramRevenueCalculator() {
         <div className="space-y-6">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="glass-card border-accent/30 p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Sponsorship / mo</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("sponsorshipMonthly")}</p>
               <p className="mt-2 text-2xl font-bold text-accent">{formatUsd(results.sponsorshipRevenue)}</p>
             </div>
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Total Revenue / mo</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("totalRevenueMonthly")}</p>
               <p className="mt-2 text-2xl font-bold text-accent-emerald">{formatUsd(results.monthlyTotal)}</p>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Suggested Post Rate</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("suggestedPostRate")}</p>
               <p className="mt-2 text-2xl font-bold text-theme-heading">{formatUsd(results.suggestedRate)}</p>
             </div>
             <div className="glass-card p-5 text-center">
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Annual Revenue</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">{t("annualRevenue")}</p>
               <p className="mt-2 text-2xl font-bold text-theme-heading">{formatUsd(results.annualTotal)}</p>
             </div>
           </div>
@@ -168,7 +170,7 @@ export default function InstagramRevenueCalculator() {
       </div>
 
       <div className="glass-card p-6">
-        <h3 className="mb-4 text-lg font-bold text-theme-heading">Revenue Projection</h3>
+        <h3 className="mb-4 text-lg font-bold text-theme-heading">{t("revenueProjection")}</h3>
         <div className="h-72 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={results.chartData}>

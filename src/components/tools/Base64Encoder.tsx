@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import CopyButton from "@/components/ui/CopyButton";
@@ -20,6 +22,7 @@ function decodeText(b64: string, urlSafe: boolean): string {
 }
 
 export default function Base64Encoder() {
+  const { t } = useToolUi("base64-encoder" );
   const [mode, setMode] = useState<"encode" | "decode">("encode");
   const [input, setInput] = useState("Hello, Ranburg!");
   const [output, setOutput] = useState("");

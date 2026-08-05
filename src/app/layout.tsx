@@ -1,42 +1,49 @@
-import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import type { Viewport } from "next";
+import { Plus_Jakarta_Sans, Noto_Sans, Noto_Sans_Arabic, Noto_Sans_Devanagari, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import Providers from "@/components/theme/Providers";
-import CommandPaletteProvider from "@/components/search/CommandPaletteProvider";
-import JsonLd from "@/components/seo/JsonLd";
-import {
-  organizationJsonLd,
-  websiteJsonLd,
-  localBusinessJsonLd,
-  buildMetadata,
-} from "@/lib/seo";
 import { SITE } from "@/lib/siteConfig";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   variable: "--font-plus-jakarta",
   display: "swap",
 });
 
-export const metadata: Metadata = buildMetadata({
-  title: "Ranburg — Free Online Tools, Calculators & Developer Utilities",
-  description:
-    "Ranburg (Ranburg LLP) — free online tools for finance, creators, and developers. EMI, SIP, GST calculators, YouTube & Instagram tools, PDF/image utilities. No signup.",
-  path: "/",
-  keywords: [
-    "Ranburg",
-    "Ranburg LLP",
-    "ranburg.com",
-    "Ranburg tools",
-    "free online tools",
-    "developer tools",
-    "SEO tools",
-    "calculators online",
-    "Salesforce tools",
-  ],
+const notoSans = Noto_Sans({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-noto-sans",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoDevanagari = Noto_Sans_Devanagari({
+  subsets: ["devanagari"],
+  variable: "--font-noto-devanagari",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoArabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  variable: "--font-noto-arabic",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoJp = Noto_Sans_JP({
+  subsets: ["latin"],
+  variable: "--font-noto-jp",
+  display: "swap",
+  weight: ["400", "500", "700"],
+});
+
+const notoKr = Noto_Sans_KR({
+  subsets: ["latin"],
+  variable: "--font-noto-kr",
+  display: "swap",
+  weight: ["400", "500", "700"],
 });
 
 export const viewport: Viewport = {
@@ -49,13 +56,15 @@ export const viewport: Viewport = {
   ],
 };
 
+const fontVars = `${plusJakarta.variable} ${notoSans.variable} ${notoDevanagari.variable} ${notoArabic.variable} ${notoJp.variable} ${notoKr.variable}`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={plusJakarta.variable} suppressHydrationWarning>
+    <html className={fontVars} suppressHydrationWarning>
       <head>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaMeasurementId}`} />
         <script
@@ -77,14 +86,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen overflow-x-hidden font-sans antialiased">
-        <JsonLd data={[organizationJsonLd(), websiteJsonLd(), localBusinessJsonLd()]} />
-        <Providers>
-          <CommandPaletteProvider>
-            <Navbar />
-            <main className="pt-[var(--nav-height)]">{children}</main>
-            <Footer />
-          </CommandPaletteProvider>
-        </Providers>
+        <Providers>{children}</Providers>
         <Analytics />
       </body>
     </html>

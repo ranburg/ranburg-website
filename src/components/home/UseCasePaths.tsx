@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ArrowRight, Briefcase, Code2, IndianRupee, Video } from "lucide-react";
 
 const PATHS = [

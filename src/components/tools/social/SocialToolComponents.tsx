@@ -1,5 +1,6 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
 import { useCallback, useMemo, useState } from "react";
 import CopyButton from "@/components/ui/CopyButton";
 import { KPIStrip, BenchmarkGauge, CopyResultPanel } from "@/components/tools/viz";
@@ -14,6 +15,7 @@ const PLATFORMS = [
 ];
 
 export function SocialCharacterCounterTool() {
+  const { t } = useToolUi("social-media-character-counter");
   const [text, setText] = useState("");
   const len = [...text].length;
   return (
@@ -33,6 +35,7 @@ export function SocialCharacterCounterTool() {
 }
 
 export function YoutubeTagsTool() {
+  const { t } = useToolUi("youtube-tags-generator");
   const [topic, setTopic] = useState("");
   const [keyword, setKeyword] = useState("");
   const [niche, setNiche] = useState("");
@@ -136,6 +139,7 @@ export function YoutubeTagsTool() {
 }
 
 export function YoutubeDescriptionTool() {
+  const { t } = useToolUi("youtube-description-generator");
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [channelUrl, setChannelUrl] = useState("");
@@ -183,6 +187,7 @@ export function YoutubeDescriptionTool() {
 }
 
 export function YoutubeHashtagTool() {
+  const { t } = useToolUi("youtube-hashtag-generator");
   return (
     <HashtagGeneratorPanel
       platform="youtube"
@@ -198,6 +203,7 @@ export function YoutubeHashtagTool() {
 }
 
 export function InstagramHashtagTool() {
+  const { t } = useToolUi("instagram-hashtag-generator");
   return (
     <HashtagGeneratorPanel
       platform="instagram"
@@ -232,6 +238,7 @@ function HashtagGeneratorPanel({
   showNiche: boolean;
   presets: { value: HashtagPreset; label: string }[];
 }) {
+  const { t } = useToolUi(platform === "youtube" ? "youtube-hashtag-generator" : "instagram-hashtag-generator");
   const [topic, setTopic] = useState("");
   const [niche, setNiche] = useState("");
   const [count, setCount] = useState(defaultCount);
@@ -344,7 +351,7 @@ function HashtagGeneratorPanel({
         </div>
 
         <div>
-          <label className="text-sm text-theme-muted">Format</label>
+          <label className="text-sm text-theme-muted">{t("format")}</label>
           <div className="mt-2 flex flex-wrap gap-2">
             {presets.map((p) => (
               <button
@@ -443,6 +450,7 @@ function HashtagGeneratorPanel({
 }
 
 export function InstagramEngagementTool() {
+  const { t } = useToolUi("instagram-engagement-calculator");
   const [followers, setFollowers] = useState(10000);
   const [likes, setLikes] = useState(500);
   const [comments, setComments] = useState(25);
@@ -473,6 +481,7 @@ export function InstagramEngagementTool() {
 }
 
 export function TiktokEngagementTool() {
+  const { t } = useToolUi("tiktok-engagement-calculator");
   const [views, setViews] = useState(100000);
   const [likes, setLikes] = useState(5000);
   const [comments, setComments] = useState(200);
@@ -508,6 +517,7 @@ export function TiktokEngagementTool() {
 }
 
 export function TiktokEarningsTool() {
+  const { t } = useToolUi("tiktok-earnings-calculator");
   const [views, setViews] = useState(1000000);
   const [rpm, setRpm] = useState(0.03);
   const low = (views / 1000) * (rpm * 0.5);

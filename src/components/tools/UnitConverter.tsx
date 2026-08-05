@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import { ArrowLeftRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -73,6 +75,7 @@ function convertTemp(value: number, from: string, to: string): number {
 }
 
 export default function UnitConverter() {
+  const { t } = useToolUi("unit-converter" );
   const [category, setCategory] = useState<Category>("length");
   const units = UNITS[category];
   const [fromUnit, setFromUnit] = useState(units[0].id);

@@ -1,10 +1,13 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 import ResultCard from "@/components/tools/ResultCard";
 
 export default function RevenueCloudPricingCalculator() {
+  const { t } = useToolUi("revenue-cloud-pricing-calculator" );
   const [listPrice, setListPrice] = useState(10000);
   const [quantity, setQuantity] = useState(10);
   const [discount, setDiscount] = useState(15);

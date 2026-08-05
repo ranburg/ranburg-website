@@ -1,19 +1,15 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Zap, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ToolsSubNav from "@/components/layout/ToolsSubNav";
 import ThemeToggle from "@/components/theme/ThemeToggle";
+import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import { useCommandPaletteOptional } from "@/components/search/CommandPaletteProvider";
-
-const navLinks = [
-  { href: "/blog", label: "Blog" },
-  { href: "/case-studies", label: "Case Studies" },
-];
 
 const navLinkClass = (active: boolean) =>
   cn(
@@ -24,12 +20,17 @@ const navLinkClass = (active: boolean) =>
   );
 
 export default function Navbar() {
+  const t = useTranslations("nav");
   const pathname = usePathname();
   const palette = useCommandPaletteOptional();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const isToolsActive = pathname.startsWith("/tools");
+  const navLinks = [
+    { href: "/blog", label: t("blog") },
+    { href: "/case-studies", label: t("caseStudies") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -65,16 +66,16 @@ export default function Navbar() {
               <Zap className="h-5 w-5 text-white" />
             </div>
             <span className="truncate text-lg font-bold tracking-tight text-theme-heading sm:text-xl">
-              Ranburg
+              {t("brand")}
             </span>
           </Link>
 
           <div className="hidden items-center gap-0.5 lg:flex">
             <Link href="/" className={navLinkClass(pathname === "/")}>
-              Home
+              {t("home")}
             </Link>
             <Link href="/tools" className={navLinkClass(isToolsActive)}>
-              Tools
+              {t("tools")}
             </Link>
             {navLinks.map((link) => (
               <Link
@@ -86,30 +87,32 @@ export default function Navbar() {
               </Link>
             ))}
             <Link href="/contact" className={navLinkClass(pathname === "/contact")}>
-              Contact
+              {t("contact")}
             </Link>
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
+            <LanguageSwitcher />
             <button
               type="button"
               onClick={() => palette?.setOpen(true)}
               className="flex items-center gap-2 rounded-xl border border-theme-subtle bg-theme-surface/50 px-3 py-2 text-sm text-theme-subtle transition-colors hover:border-accent/30 hover:text-theme-heading"
-              aria-label="Search tools and blogs"
+              aria-label={t("searchAria")}
             >
               <Search className="h-4 w-4 shrink-0" />
-              <span className="hidden xl:inline">Search</span>
-              <kbd className="ml-1 hidden rounded border border-theme-subtle px-1.5 py-0.5 text-xs xl:inline">⌘K</kbd>
+              <span className="hidden xl:inline">{t("search")}</span>
+              <kbd className="ms-1 hidden rounded border border-theme-subtle px-1.5 py-0.5 text-xs xl:inline">⌘K</kbd>
             </button>
             <ThemeToggle />
           </div>
 
           <div className="flex items-center gap-1 sm:gap-2 lg:hidden">
+            <LanguageSwitcher className="hidden sm:inline-flex" />
             <button
               type="button"
               onClick={openSearch}
               className="flex h-11 w-11 items-center justify-center rounded-lg text-theme-muted hover:bg-theme-surface hover:text-theme-heading"
-              aria-label="Search tools and blogs"
+              aria-label={t("searchAria")}
             >
               <Search className="h-5 w-5" />
             </button>
@@ -118,7 +121,7 @@ export default function Navbar() {
               type="button"
               className="flex h-11 w-11 items-center justify-center rounded-lg text-theme-muted hover:bg-theme-surface hover:text-theme-heading"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle menu"
+              aria-label={mobileOpen ? t("closeMenu") : t("openMenu")}
               aria-expanded={mobileOpen}
             >
               {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -139,19 +142,20 @@ export default function Navbar() {
               className="border-t border-theme-subtle bg-[var(--dropdown-bg)] lg:hidden"
             >
               <div className="px-4 py-3">
+                <LanguageSwitcher className="mb-3 w-full" />
                 <button
                   type="button"
                   onClick={openSearch}
                   className="flex w-full items-center gap-3 rounded-xl border border-theme-subtle bg-theme-surface/50 px-4 py-3 text-left text-sm text-theme-subtle hover:border-accent/30 hover:text-theme-heading"
                 >
                   <Search className="h-4 w-4 shrink-0" />
-                  Search tools & blogs…
+                  {t("searchPlaceholder")}
                 </button>
               </div>
               <div className="max-h-[65vh] overflow-y-auto overscroll-contain">
                 <div className="flex flex-col gap-1 px-4 pb-4">
                   <Link href="/" onClick={closeMobile} className="rounded-lg px-4 py-3 text-sm font-medium text-theme-muted hover:bg-theme-surface">
-                    Home
+                    {t("home")}
                   </Link>
                   <Link
                     href="/tools"
@@ -161,10 +165,9 @@ export default function Navbar() {
                       isToolsActive ? "bg-theme-hover text-theme-heading" : "text-theme-muted"
                     )}
                   >
-                    Tools
+                    {t("tools")}
                   </Link>
 
-                  <p className="px-4 pt-2 text-xs font-semibold uppercase tracking-wider text-accent">Tool categories</p>
                   <ToolsSubNav variant="stack" onNavigate={closeMobile} className="px-1" />
 
                   {navLinks.map((link) => (
@@ -179,7 +182,7 @@ export default function Navbar() {
                   ))}
 
                   <Link href="/contact" onClick={closeMobile} className="rounded-lg px-4 py-3 text-sm font-medium text-theme-muted">
-                    Contact
+                    {t("contact")}
                   </Link>
                 </div>
               </div>

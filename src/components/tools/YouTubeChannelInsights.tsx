@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import { Search, Loader2, Calendar, Globe, ThumbsUp, MessageCircle } from "lucide-react";
 import SocialInsightResults, { formatSocialCount, Users, Eye, Video, TrendingUp } from "./SocialInsightResults";
@@ -36,6 +38,7 @@ interface YouTubeData {
 }
 
 export default function YouTubeChannelInsights() {
+  const { t } = useToolUi("youtube-channel-insights" );
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

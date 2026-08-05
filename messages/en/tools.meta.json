@@ -1,0 +1,3302 @@
+{
+  "sip": {
+    "title": "SIP Calculator",
+    "shortDescription": "Calculate returns on monthly mutual fund investments over time.",
+    "seoTitle": "SIP Calculator — Systematic Investment Plan Returns | Ranburg.com",
+    "seoDescription": "Free SIP calculator with charts. Estimate total investment, returns, and maturity value for monthly mutual fund SIPs with inflation-adjusted purchasing power.",
+    "howToUse": [
+      "Set your monthly investment amount using the slider.",
+      "Adjust the expected annual return rate based on your fund category.",
+      "Choose the investment time period in years.",
+      "Review total investment, estimated returns, and maturity value instantly.",
+      "Enable Advanced Options to model inflation and see today's purchasing power."
+    ],
+    "faq": [
+      {
+        "question": "What is a SIP?",
+        "answer": "A Systematic Investment Plan (SIP) is a method of investing a fixed sum regularly in mutual funds, leveraging rupee-cost averaging and compound growth."
+      },
+      {
+        "question": "How does a SIP calculator work?",
+        "answer": "It projects maturity value from your monthly amount, expected annual return, and tenure using the SIP future-value formula. Ranburg’s calculator also shows invested amount vs wealth gained and optional inflation-adjusted purchasing power."
+      },
+      {
+        "question": "What return rate should I use?",
+        "answer": "Equity funds historically average 10–12% annually, debt funds 6–8%. Past performance does not guarantee future results."
+      },
+      {
+        "question": "Is ₹5,000 or ₹10,000 per month a good SIP?",
+        "answer": "Both work — consistency matters more than starting size. Use this SIP calculator to compare scenarios (e.g. ₹5k vs ₹10k for 10–15 years) before you increase contributions."
+      },
+      {
+        "question": "Does this include taxes?",
+        "answer": "No. Results are pre-tax estimates. Capital gains tax may apply on redemption based on holding period and fund type."
+      },
+      {
+        "question": "Can I use this SIP calculator for India mutual funds?",
+        "answer": "Yes. Enter amounts in rupees and an expected return that matches your fund category. Pair it with the EMI calculator if you are balancing investments and loan EMIs."
+      }
+    ]
+  },
+  "swp": {
+    "title": "SWP Calculator",
+    "shortDescription": "Model systematic withdrawals with inflation, multiple LIC maturity top-ups, and PF balance for real-world retirement income planning.",
+    "seoTitle": "SWP Calculator Online Free — LIC Maturity & PF Retirement Planner | Ranburg",
+    "seoDescription": "Free SWP calculator with inflation adjustment, multiple LIC policy maturity top-ups, and PF balance. Plan systematic withdrawal income for retirement in India — no signup.",
+    "howToUse": [
+      "Enter your mutual fund SWP corpus and monthly withdrawal.",
+      "Optionally add current PF balance (now or on a future access date).",
+      "Add one or more LIC policies with plan name, dates, and estimated maturity amount.",
+      "Set expected return, years, and inflation options.",
+      "Review corpus top-ups when LIC matures and how long withdrawals last."
+    ],
+    "faq": [
+      {
+        "question": "What is an SWP?",
+        "answer": "A Systematic Withdrawal Plan lets you withdraw a fixed amount regularly from investments while the remainder continues to grow."
+      },
+      {
+        "question": "Can I include LIC policies?",
+        "answer": "Yes. Add multiple policies with maturity dates and estimated maturity amounts. When a policy matures during the SWP horizon, that amount is added to the corpus."
+      },
+      {
+        "question": "How does PF work here?",
+        "answer": "Add your current PF balance and either fold it into the SWP corpus immediately or schedule it for a future access date while it grows at a PF-like rate."
+      },
+      {
+        "question": "Is maturity amount from LIC live?",
+        "answer": "No. Estimate with our LIC maturity calculator or your bonus statement, then paste the amount into SWP."
+      },
+      {
+        "question": "Why show purchasing power?",
+        "answer": "Nominal rupees in future years buy less due to inflation. Present value shows today’s purchasing power."
+      }
+    ]
+  },
+  "emi": {
+    "title": "Loan EMI Calculator",
+    "shortDescription": "Calculate monthly EMI, total interest, and payment breakdown.",
+    "seoTitle": "Loan EMI Calculator — Home, Car & Personal Loans | Ranburg.com",
+    "seoDescription": "Calculate monthly EMI, total interest payable, and yearly principal vs interest breakdown for any loan amount, rate, and tenure.",
+    "howToUse": [
+      "Enter the loan principal amount.",
+      "Set the annual interest rate offered by your lender.",
+      "Choose tenure in years or months.",
+      "View monthly EMI, total interest, and total payment.",
+      "Use Advanced Options for inflation-adjusted total payment value."
+    ],
+    "faq": [
+      {
+        "question": "What is EMI?",
+        "answer": "Equated Monthly Installment (EMI) is a fixed payment comprising principal and interest, spread evenly across the loan tenure."
+      },
+      {
+        "question": "How is EMI calculated?",
+        "answer": "EMI = P × r × (1 + r)^n / [(1 + r)^n − 1], where P is principal, r is monthly interest rate, and n is tenure in months. This free EMI calculator updates the chart as you change loan amount, rate, or tenure."
+      },
+      {
+        "question": "Does EMI change over time?",
+        "answer": "The EMI amount stays fixed, but the principal-to-interest ratio shifts — early payments are interest-heavy."
+      },
+      {
+        "question": "How can I reduce my home loan EMI?",
+        "answer": "Shorter tenure, lower rate, or a larger down payment all reduce EMI or total interest. Compare 15-year vs 20-year tenures here, then check the loan foreclosure calculator if you plan to prepay."
+      },
+      {
+        "question": "Can I prepay my loan?",
+        "answer": "Most lenders allow prepayment. Reducing principal early lowers total interest, though prepayment charges may apply."
+      },
+      {
+        "question": "Is this EMI calculator free for India home and car loans?",
+        "answer": "Yes. Use it for home, car, or personal loans with amounts in ₹. No signup required — results stay in your browser session."
+      }
+    ]
+  },
+  "ltv-cac": {
+    "title": "LTV / CAC Calculator",
+    "shortDescription": "Measure customer lifetime value against acquisition cost.",
+    "seoTitle": "LTV CAC Ratio Calculator with Inflation Adjustment | Ranburg.com",
+    "seoDescription": "Calculate customer lifetime value, acquisition cost, LTV:CAC ratio, and inflation-adjusted future revenue for SaaS and subscription businesses.",
+    "howToUse": [
+      "Enter average revenue per customer per month and gross margin percentage.",
+      "Set average customer lifespan in months and monthly churn rate.",
+      "Input total marketing spend and new customers acquired.",
+      "Review LTV, CAC, ratio, and inflation-adjusted projections."
+    ],
+    "faq": [
+      {
+        "question": "What is a good LTV:CAC ratio?",
+        "answer": "A ratio of 3:1 or higher is generally considered healthy for SaaS businesses, meaning each customer generates 3× their acquisition cost."
+      },
+      {
+        "question": "How does churn affect LTV?",
+        "answer": "Higher churn reduces customer lifespan, directly lowering lifetime value. Even small churn improvements significantly boost LTV."
+      },
+      {
+        "question": "Should I include sales salaries in CAC?",
+        "answer": "Yes. Fully-loaded CAC includes all sales and marketing costs divided by new customers acquired in the same period."
+      }
+    ]
+  },
+  "twitch-sub-revenue": {
+    "title": "Twitch Sub Revenue Calculator",
+    "shortDescription": "Estimate Twitch subscription and ad revenue with growth projections.",
+    "seoTitle": "Twitch Sub Revenue Calculator with Inflation Projection | Ranburg.com",
+    "seoDescription": "Calculate Twitch Tier 1/2/3 sub revenue, ad income, and partner splits. Project creator earnings with inflation-adjusted purchasing power.",
+    "howToUse": [
+      "Enter subscriber counts for Tier 1, Tier 2, and Tier 3.",
+      "Set your partner revenue share percentage (typically 50%).",
+      "Add estimated monthly ad revenue and projected growth rate.",
+      "View monthly and annual revenue with today's purchasing power equivalent."
+    ],
+    "faq": [
+      {
+        "question": "How much does Twitch pay per sub?",
+        "answer": "Partners typically earn 50% of the subscription price: ~$2.50 for Tier 1 ($4.99), ~$5 for Tier 2 ($9.99), and ~$12.50 for Tier 3 ($24.99) in the US."
+      },
+      {
+        "question": "Do Prime subs count?",
+        "answer": "Prime Gaming subs are Tier 1 equivalents. They count toward sub count but may have different payout structures."
+      },
+      {
+        "question": "What about bits and donations?",
+        "answer": "This calculator focuses on sub and ad revenue. Bits pay $0.01 per bit to partners; donations via third-party platforms vary."
+      }
+    ]
+  },
+  "json-formatter": {
+    "title": "JSON Formatter & Validator",
+    "shortDescription": "Format, validate, and beautify JSON with advanced options.",
+    "seoTitle": "JSON Formatter & Validator — Beautify JSON Online | Ranburg.com",
+    "seoDescription": "Free online JSON formatter and validator. Beautify, minify, sort keys, and validate JSON with custom indentation and one-click copy.",
+    "howToUse": [
+      "Paste your JSON into the input panel.",
+      "Click Format to beautify or Validate to check syntax.",
+      "Open Advanced Options for indent size, key sorting, and minify mode.",
+      "Copy the result with one click and get instant success feedback."
+    ],
+    "faq": [
+      {
+        "question": "Can I format invalid JSON?",
+        "answer": "No. The validator will highlight the syntax error location. Fix errors before formatting."
+      },
+      {
+        "question": "Does it support JSON with comments?",
+        "answer": "Standard JSON does not support comments. Enable 'Lenient Mode' in Advanced Options to strip // and /* */ comments before parsing."
+      },
+      {
+        "question": "Is my data sent to a server?",
+        "answer": "No. All processing happens client-side in your browser. Your data never leaves your device."
+      }
+    ]
+  },
+  "sql-formatter": {
+    "title": "SQL Query Formatter",
+    "shortDescription": "Beautify and structure SQL queries for readability.",
+    "seoTitle": "SQL Formatter — Beautify SQL Queries Online | Ranburg.com",
+    "seoDescription": "Format SQL queries with keyword capitalization, line breaks, and custom indentation. Free online SQL beautifier for developers.",
+    "howToUse": [
+      "Paste your SQL query into the input area.",
+      "Click Format to apply keyword casing and indentation.",
+      "Use Advanced Options to choose uppercase/lowercase keywords and indent width.",
+      "Copy the formatted query with one-click feedback."
+    ],
+    "faq": [
+      {
+        "question": "Which SQL dialects are supported?",
+        "answer": "The formatter handles standard ANSI SQL keywords. Dialect-specific syntax (T-SQL, PL/pgSQL) is supported for basic formatting."
+      },
+      {
+        "question": "Will it change my query logic?",
+        "answer": "No. Formatting only adjusts whitespace and keyword casing. Query semantics remain identical."
+      },
+      {
+        "question": "Can I minify SQL?",
+        "answer": "Yes. Enable Minify Mode in Advanced Options to collapse whitespace for compact storage."
+      }
+    ]
+  },
+  "minifier": {
+    "title": "HTML / CSS / JS Minifier",
+    "shortDescription": "Minify HTML, CSS, and JavaScript for production.",
+    "seoTitle": "HTML CSS JS Minifier — Compress Code Online | Ranburg.com",
+    "seoDescription": "Minify HTML, CSS, and JavaScript online. Reduce file size, preserve comments optionally, and copy minified output instantly.",
+    "howToUse": [
+      "Select the code type: HTML, CSS, or JavaScript.",
+      "Paste your source code into the input panel.",
+      "Toggle Advanced Options for comment preservation and compression level.",
+      "Copy minified output and see size reduction percentage."
+    ],
+    "faq": [
+      {
+        "question": "Is minification safe?",
+        "answer": "Yes for production code. Always keep an unminified source copy for development and debugging."
+      },
+      {
+        "question": "How much size reduction can I expect?",
+        "answer": "Typically 20–60% depending on code style, comment density, and whitespace usage."
+      },
+      {
+        "question": "Does it obfuscate variable names?",
+        "answer": "This tool performs whitespace and comment removal only. It does not rename variables or obfuscate logic."
+      }
+    ]
+  },
+  "linkedin-formatter": {
+    "title": "LinkedIn Formatting & Hook Previewer",
+    "shortDescription": "Preview LinkedIn posts with hook analysis and formatting.",
+    "seoTitle": "LinkedIn Post Formatter & Hook Previewer | Ranburg.com",
+    "seoDescription": "Format LinkedIn posts with bold Unicode, preview hooks, analyze character count, and optimize your professional content for engagement.",
+    "howToUse": [
+      "Write or paste your LinkedIn post in the editor.",
+      "See a live preview with hook line highlighted.",
+      "Check character count against LinkedIn's 3,000 character limit.",
+      "Use formatting shortcuts for bold, italic, and line breaks."
+    ],
+    "faq": [
+      {
+        "question": "What makes a good LinkedIn hook?",
+        "answer": "Strong hooks are under 150 characters, create curiosity, and appear before the 'see more' fold. Questions and specific numbers boost engagement."
+      },
+      {
+        "question": "Can I use bold text on LinkedIn?",
+        "answer": "LinkedIn doesn't support HTML bold. This tool generates Unicode mathematical bold characters that render as visually bold on LinkedIn."
+      },
+      {
+        "question": "What is the ideal post length?",
+        "answer": "Posts between 1,200–1,900 characters tend to perform well. Hooks should capture attention within the first 2 lines."
+      }
+    ]
+  },
+  "case-converter": {
+    "title": "Case Converter",
+    "shortDescription": "Convert text between camelCase, snake_case, Title Case, and more.",
+    "seoTitle": "Case Converter — camelCase, snake_case, Title Case | Ranburg.com",
+    "seoDescription": "Convert text between uppercase, lowercase, Title Case, camelCase, snake_case, kebab-case, and PascalCase instantly.",
+    "howToUse": [
+      "Paste or type your text in the input field.",
+      "Click any case style button to convert instantly.",
+      "View all case variations simultaneously in the output grid.",
+      "Copy any result with one-click feedback."
+    ],
+    "faq": [
+      {
+        "question": "What is camelCase?",
+        "answer": "camelCase joins words without spaces, lowercase first word, capitalizing subsequent words: myVariableName."
+      },
+      {
+        "question": "When should I use snake_case?",
+        "answer": "snake_case is common in Python, Ruby, and database column names: my_variable_name."
+      },
+      {
+        "question": "Does it handle special characters?",
+        "answer": "Non-alphanumeric characters are treated as word separators. Accented characters are preserved."
+      }
+    ]
+  },
+  "lorem-ipsum": {
+    "title": "Lorem Ipsum Generator",
+    "shortDescription": "Generate placeholder paragraphs, sentences, or words.",
+    "seoTitle": "Lorem Ipsum Generator — Placeholder Text | Ranburg.com",
+    "seoDescription": "Generate Lorem Ipsum placeholder text by paragraphs, sentences, or words. Copy instantly for design mockups and development.",
+    "howToUse": [
+      "Choose output type: paragraphs, sentences, or words.",
+      "Set the quantity using the slider.",
+      "Click Generate to create fresh placeholder text.",
+      "Copy the output with one-click feedback."
+    ],
+    "faq": [
+      {
+        "question": "What is Lorem Ipsum?",
+        "answer": "Lorem Ipsum is standard placeholder text used in design and publishing since the 1500s to demonstrate layout without meaningful content."
+      },
+      {
+        "question": "Can I generate HTML paragraphs?",
+        "answer": "Enable 'HTML Output' in Advanced Options to wrap each paragraph in <p> tags."
+      },
+      {
+        "question": "Is the text random each time?",
+        "answer": "Yes. Each generation produces a unique combination from the Lorem Ipsum word corpus."
+      }
+    ]
+  },
+  "glassmorphism-generator": {
+    "title": "CSS Glassmorphism Generator",
+    "shortDescription": "Generate glassmorphism CSS with live preview.",
+    "seoTitle": "CSS Glassmorphism Generator — Live Preview | Ranburg.com",
+    "seoDescription": "Generate glassmorphism CSS code with adjustable blur, opacity, border, and shadow. Live preview and one-click copy for modern UI design.",
+    "howToUse": [
+      "Adjust blur, background opacity, border opacity, and border radius sliders.",
+      "See the glass effect update in the live preview panel.",
+      "Copy the generated CSS with one click.",
+      "Use Advanced Options for custom background color and shadow intensity."
+    ],
+    "faq": [
+      {
+        "question": "What is glassmorphism?",
+        "answer": "Glassmorphism is a UI trend using frosted-glass effects via backdrop-filter blur, semi-transparent backgrounds, and subtle borders."
+      },
+      {
+        "question": "Which browsers support backdrop-filter?",
+        "answer": "All modern browsers support backdrop-filter. Safari requires -webkit-backdrop-filter prefix, included in generated code."
+      },
+      {
+        "question": "Can I use this in Tailwind?",
+        "answer": "Copy the raw CSS values into your Tailwind config or use arbitrary values: backdrop-blur-[12px] bg-white/10."
+      }
+    ]
+  },
+  "image-converter": {
+    "title": "Image to WebP / Base64 Converter",
+    "shortDescription": "Convert images to WebP or Base64 data URIs client-side.",
+    "seoTitle": "Image to WebP & Base64 Converter Online | Ranburg.com",
+    "seoDescription": "Convert images to WebP format or Base64 data URIs in your browser. Adjust quality, preview results, and copy output instantly. No upload to server.",
+    "howToUse": [
+      "Upload an image file (PNG, JPG, GIF, WebP).",
+      "Choose output format: WebP download or Base64 string.",
+      "Adjust quality and max width in Advanced Options.",
+      "Preview the result and copy or download instantly."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. All conversion happens locally in your browser using the Canvas API. Your images never leave your device."
+      },
+      {
+        "question": "Why use WebP?",
+        "answer": "WebP offers 25–35% smaller file sizes than JPEG/PNG at similar quality, improving page load speed and Core Web Vitals."
+      },
+      {
+        "question": "What is a Base64 data URI?",
+        "answer": "A Base64 data URI embeds image data directly in HTML/CSS as a string, eliminating separate HTTP requests for small images."
+      }
+    ]
+  },
+  "regex-tester": {
+    "title": "Regex Tester",
+    "shortDescription": "Test regular expressions with live match highlighting and capture groups.",
+    "seoTitle": "Regex Tester — Test Regular Expressions Online | Ranburg.com",
+    "seoDescription": "Free online regex tester with live match highlighting, capture groups, and flag support. Debug JavaScript regular expressions instantly in your browser.",
+    "howToUse": [
+      "Enter your regular expression pattern.",
+      "Add test text in the input area.",
+      "Toggle flags (global, case-insensitive, multiline, dotall).",
+      "Review matches, groups, and match count in real time."
+    ],
+    "faq": [
+      {
+        "question": "Which regex flavor is supported?",
+        "answer": "JavaScript (ECMAScript) regular expressions — the same engine used in browsers and Node.js."
+      },
+      {
+        "question": "Can I test replace operations?",
+        "answer": "Yes. Enter a replacement string in Advanced Options to preview the replaced output."
+      },
+      {
+        "question": "Is my data sent to a server?",
+        "answer": "No. All regex testing runs locally in your browser."
+      }
+    ]
+  },
+  "uuid-generator": {
+    "title": "UUID Generator",
+    "shortDescription": "Generate RFC 4122 v4 UUIDs instantly with bulk copy support.",
+    "seoTitle": "UUID Generator — Generate v4 UUIDs Online | Ranburg.com",
+    "seoDescription": "Generate cryptographically random UUID v4 identifiers. Create single or bulk UUIDs with uppercase/lowercase formatting and one-click copy.",
+    "howToUse": [
+      "Click Generate to create a new UUID v4.",
+      "Set quantity in Advanced Options for bulk generation.",
+      "Choose uppercase or lowercase formatting.",
+      "Copy individual UUIDs or all at once."
+    ],
+    "faq": [
+      {
+        "question": "Are these UUIDs cryptographically secure?",
+        "answer": "Yes. This tool uses crypto.getRandomValues() for randomness, suitable for database keys and session IDs."
+      },
+      {
+        "question": "What is UUID v4?",
+        "answer": "Version 4 UUIDs are randomly generated 128-bit identifiers with extremely low collision probability."
+      },
+      {
+        "question": "Can I generate bulk UUIDs?",
+        "answer": "Yes. Set quantity up to 100 in Advanced Options and copy the full list."
+      }
+    ]
+  },
+  "password-generator": {
+    "title": "Password Generator",
+    "shortDescription": "Create strong random passwords with customizable character sets.",
+    "seoTitle": "Password Generator — Strong Random Passwords | Ranburg.com",
+    "seoDescription": "Generate secure random passwords with custom length, uppercase, lowercase, numbers, and symbols. Strength meter and one-click copy.",
+    "howToUse": [
+      "Set desired password length (8–64 characters).",
+      "Toggle character types: uppercase, lowercase, numbers, symbols.",
+      "Click Generate for a new password.",
+      "Copy instantly and check the strength indicator."
+    ],
+    "faq": [
+      {
+        "question": "How long should my password be?",
+        "answer": "At least 12–16 characters with mixed character types is recommended for most accounts."
+      },
+      {
+        "question": "Are passwords stored anywhere?",
+        "answer": "No. Passwords are generated locally in your browser and never transmitted."
+      },
+      {
+        "question": "Can I exclude ambiguous characters?",
+        "answer": "Yes. Enable 'Exclude ambiguous' in Advanced Options to omit 0/O, 1/l/I, etc."
+      }
+    ]
+  },
+  "base64-encoder": {
+    "title": "Base64 Encoder / Decoder",
+    "shortDescription": "Encode and decode text or files to Base64 instantly.",
+    "seoTitle": "Base64 Encoder Decoder — Encode Decode Online | Ranburg.com",
+    "seoDescription": "Free Base64 encoder and decoder for text and files. URL-safe mode, UTF-8 support, and one-click copy. All processing in your browser.",
+    "howToUse": [
+      "Choose Encode or Decode mode.",
+      "Paste text or upload a file.",
+      "View output instantly with line-wrap options.",
+      "Copy result with one click."
+    ],
+    "faq": [
+      {
+        "question": "Does it support UTF-8?",
+        "answer": "Yes. Unicode text including emoji is encoded and decoded correctly."
+      },
+      {
+        "question": "What is URL-safe Base64?",
+        "answer": "URL-safe Base64 replaces + with - and / with _ so the string can be used in URLs without encoding."
+      },
+      {
+        "question": "Can I encode files?",
+        "answer": "Yes. Upload any file to get its Base64 representation without sending it to a server."
+      }
+    ]
+  },
+  "pdf-tools": {
+    "title": "PDF Tools — Merge & Split",
+    "shortDescription": "Merge multiple PDFs or extract pages — 100% client-side.",
+    "seoTitle": "PDF Tools — Merge & Split PDF Online Free | Ranburg.com",
+    "seoDescription": "Merge multiple PDF files into one or extract specific pages. Free online PDF tools that run entirely in your browser — no upload to server.",
+    "howToUse": [
+      "Select Merge or Extract Pages mode.",
+      "Upload one or more PDF files.",
+      "For extract: enter page numbers (e.g. 1,3,5-7).",
+      "Download the resulting PDF instantly."
+    ],
+    "faq": [
+      {
+        "question": "Are my PDFs uploaded?",
+        "answer": "No. All PDF processing happens locally in your browser using pdf-lib."
+      },
+      {
+        "question": "Is there a file size limit?",
+        "answer": "Browser memory limits apply — typically 50–100 MB total works well on modern devices."
+      },
+      {
+        "question": "Can I reorder pages?",
+        "answer": "Merge mode preserves upload order. Use extract to pull specific pages into a new file."
+      }
+    ]
+  },
+  "qr-generator": {
+    "title": "QR Code Generator",
+    "shortDescription": "Create QR codes for URLs, text, WiFi, and contact info.",
+    "seoTitle": "QR Code Generator — Free QR Code Maker | Ranburg.com",
+    "seoDescription": "Generate QR codes for URLs, plain text, phone numbers, and WiFi credentials. Customize size and download as PNG. No signup required.",
+    "howToUse": [
+      "Enter a URL or text to encode.",
+      "Adjust QR code size and error correction level.",
+      "Preview the QR code instantly.",
+      "Download as PNG or copy the image."
+    ],
+    "faq": [
+      {
+        "question": "What can I encode?",
+        "answer": "URLs, plain text, phone numbers (tel:), emails (mailto:), and WiFi credentials (WIFI:T:WPA;S:name;P:pass;;)."
+      },
+      {
+        "question": "Will the QR code expire?",
+        "answer": "No. Static QR codes encode your data directly and work indefinitely."
+      },
+      {
+        "question": "What error correction should I use?",
+        "answer": "Medium (M) is default. Use High (H) for logos or damaged print; Low (L) for maximum data capacity."
+      }
+    ]
+  },
+  "unit-converter": {
+    "title": "Unit Converter",
+    "shortDescription": "Convert length, weight, temperature, volume, area, and speed units.",
+    "seoTitle": "Unit Converter — Length, Weight, Temperature & More | Ranburg.com",
+    "seoDescription": "Free online unit converter for length, weight, temperature, volume, area, and speed. Instant conversions with common and metric units.",
+    "howToUse": [
+      "Select a category: length, weight, temperature, volume, area, or speed.",
+      "Enter a value in the 'from' unit.",
+      "Choose the target unit — result updates instantly.",
+      "Swap units with one click."
+    ],
+    "faq": [
+      {
+        "question": "Which units are supported?",
+        "answer": "Metric and imperial: meters, feet, miles, kg, lbs, °C/°F/K, liters, gallons, sq meters, sq feet, km/h, mph, and more."
+      },
+      {
+        "question": "How accurate are conversions?",
+        "answer": "Uses standard conversion factors with up to 6 decimal places displayed."
+      },
+      {
+        "question": "Can I convert multiple values?",
+        "answer": "Change the input value anytime — output updates in real time."
+      }
+    ]
+  },
+  "age-calculator": {
+    "title": "Age Calculator",
+    "shortDescription": "Calculate exact age in years, months, days, and total days lived.",
+    "seoTitle": "Age Calculator — Calculate Age from Date of Birth | Ranburg.com",
+    "seoDescription": "Calculate your exact age in years, months, and days from your date of birth. See next birthday countdown and total days lived.",
+    "howToUse": [
+      "Enter your date of birth.",
+      "Optionally set a 'calculate as of' date (defaults to today).",
+      "View age in years, months, and days.",
+      "See days until next birthday and total days lived."
+    ],
+    "faq": [
+      {
+        "question": "Does it handle leap years?",
+        "answer": "Yes. February 29 birthdays and leap years are handled correctly."
+      },
+      {
+        "question": "Can I calculate age on a past date?",
+        "answer": "Yes. Set the 'as of' date to any future or past date."
+      },
+      {
+        "question": "What timezone is used?",
+        "answer": "Dates are interpreted in your local timezone at midnight."
+      }
+    ]
+  },
+  "currency-converter": {
+    "title": "Currency Converter",
+    "shortDescription": "Convert world currencies with live exchange rates.",
+    "seoTitle": "Currency Converter — Live Exchange Rates | Ranburg.com",
+    "seoDescription": "Convert between 30+ world currencies with live ECB exchange rates. Free currency converter with amount swap and rate display.",
+    "howToUse": [
+      "Select source and target currencies.",
+      "Enter an amount to convert.",
+      "View converted amount and current exchange rate.",
+      "Swap currencies with one click."
+    ],
+    "faq": [
+      {
+        "question": "How often are rates updated?",
+        "answer": "Exchange rates are fetched from the European Central Bank via Frankfurter API, updated on business days."
+      },
+      {
+        "question": "Is this for bank transactions?",
+        "answer": "Rates are indicative reference rates. Banks may apply spreads and fees."
+      },
+      {
+        "question": "Which currencies are supported?",
+        "answer": "30+ major currencies including USD, EUR, GBP, INR, JPY, AUD, CAD, and CHF."
+      }
+    ]
+  },
+  "gst-calculator": {
+    "title": "GST Calculator (India)",
+    "shortDescription": "Calculate GST inclusive and exclusive amounts for India tax rates.",
+    "seoTitle": "GST Calculator India — Inclusive & Exclusive GST | Ranburg.com",
+    "seoDescription": "Free India GST calculator for 5%, 12%, 18%, and 28% rates. Calculate GST amount, net price, and gross total for inclusive or exclusive pricing.",
+    "howToUse": [
+      "Use Quick Calculator for single amounts or Multi-Line Invoice for itemized bills.",
+      "Choose intra-state (CGST+SGST) or inter-state (IGST) tax type.",
+      "Toggle GST-inclusive or GST-exclusive pricing.",
+      "Add HSN/SAC codes and multiple line items with per-line GST rates.",
+      "Apply cess if applicable in Advanced Options."
+    ],
+    "faq": [
+      {
+        "question": "What GST rates are supported?",
+        "answer": "Standard India GST slabs: 0%, 5%, 12%, 18%, and 28% per line item."
+      },
+      {
+        "question": "How do I calculate GST inclusive vs exclusive price?",
+        "answer": "Exclusive: GST = amount × rate/100. Inclusive: net = amount / (1 + rate/100). Toggle Inclusive/Exclusive in this GST calculator to match how you quote clients."
+      },
+      {
+        "question": "What is CGST and SGST?",
+        "answer": "For intra-state sales, GST splits equally into CGST (central) and SGST (state), each half the total GST."
+      },
+      {
+        "question": "When do I use IGST?",
+        "answer": "For inter-state transactions, the full GST amount is IGST. Select Inter-state mode in the calculator."
+      },
+      {
+        "question": "Can I calculate multi-item invoices?",
+        "answer": "Yes. Switch to Multi-Line Invoice mode to add items with HSN codes, quantities, and per-line GST rates."
+      },
+      {
+        "question": "What is HSN/SAC?",
+        "answer": "Harmonized System of Nomenclature (goods) or Services Accounting Code — required for GST invoices and e-way bills."
+      },
+      {
+        "question": "Is this GST calculator free for Indian businesses?",
+        "answer": "Yes. No signup. After you finish, try the invoice generator to turn the same amounts into a client-ready bill."
+      }
+    ]
+  },
+  "youtube-channel-insights": {
+    "title": "YouTube Channel Analytics",
+    "shortDescription": "Analyze any public YouTube channel — subscribers, views, revenue estimates, and growth charts.",
+    "seoTitle": "YouTube Channel Analytics — Free Channel Stats Checker | Ranburg.com",
+    "seoDescription": "Free YouTube channel analytics tool. Enter a channel handle or URL to see subscribers, views, monetization status, potential revenue, growth charts, and personalized recommendations.",
+    "howToUse": [
+      "Enter a YouTube @handle, channel name, or full channel URL.",
+      "Click Analyze Channel to fetch public statistics.",
+      "Review subscriber count, views, video count, monetization status, and potential ad revenue.",
+      "Explore growth trend charts and recent video performance.",
+      "Read personalized growth recommendations based on channel tier and engagement."
+    ],
+    "faq": [
+      {
+        "question": "Do I need to log in?",
+        "answer": "No. Enter any public YouTube channel handle or URL."
+      },
+      {
+        "question": "Why does it say API not configured?",
+        "answer": "The site admin must add a YouTube Data API key (YOUTUBE_API_KEY) in Vercel environment variables."
+      },
+      {
+        "question": "Can I analyze private channels?",
+        "answer": "No. Only public channel statistics are available via the YouTube API."
+      },
+      {
+        "question": "How often is data updated?",
+        "answer": "YouTube updates statistics periodically. Results are cached for up to 1 hour."
+      },
+      {
+        "question": "Can I see potential YouTube earnings?",
+        "answer": "Yes. The tool estimates monthly ad revenue ranges based on views and RPM, and shows 'Not monetized yet' if the channel has under 1,000 subscribers."
+      }
+    ]
+  },
+  "instagram-profile-insights": {
+    "title": "Instagram Profile Analytics",
+    "shortDescription": "Check public Instagram stats, sponsorship revenue estimates, growth charts, and content tips.",
+    "seoTitle": "Instagram Profile Analytics — Free Instagram Stats & Revenue Estimator | Ranburg.com",
+    "seoDescription": "Free Instagram profile analyzer. See followers, posts, sponsorship revenue estimates, growth trend charts, and actionable content strategy recommendations.",
+    "howToUse": [
+      "Enter an Instagram @username or profile URL.",
+      "Click Analyze Profile to fetch public profile statistics.",
+      "Review followers, engagement estimates, and potential sponsorship revenue.",
+      "Explore growth trend charts and tailored Reels and posting recommendations."
+    ],
+    "faq": [
+      {
+        "question": "Does this work for private accounts?",
+        "answer": "No. Only public Instagram profiles with visible stats can be analyzed."
+      },
+      {
+        "question": "Why did analysis fail?",
+        "answer": "Instagram aggressively blocks datacenter IPs. We use browser-impersonated requests; if it still fails, wait a minute and retry. Private accounts are not supported."
+      },
+      {
+        "question": "Can I estimate Instagram earnings?",
+        "answer": "Yes. The tool shows sponsorship and affiliate revenue ranges based on follower tier and posting frequency."
+      },
+      {
+        "question": "How accurate are the stats?",
+        "answer": "Stats reflect publicly visible follower and post counts at the time of the request."
+      },
+      {
+        "question": "Do you store usernames?",
+        "answer": "No. Queries are processed on demand and not stored on our servers."
+      }
+    ]
+  },
+  "youtube-revenue-calculator": {
+    "title": "YouTube Revenue Calculator",
+    "shortDescription": "Estimate YouTube ad revenue, sponsorship income, and monthly earnings from views and RPM.",
+    "seoTitle": "YouTube Revenue Calculator — Estimate Channel Earnings | Ranburg.com",
+    "seoDescription": "Free YouTube revenue calculator. Estimate monthly and annual ad revenue from views, RPM, sponsorship deals, and memberships with growth projections.",
+    "howToUse": [
+      "Enter your estimated monthly views and RPM (revenue per 1,000 views).",
+      "Add sponsorship deals per month and average deal value.",
+      "Optionally include membership revenue and growth rate.",
+      "View monthly, annual, and projected revenue charts."
+    ],
+    "faq": [
+      {
+        "question": "What is YouTube RPM?",
+        "answer": "RPM (Revenue Per Mille) is estimated earnings per 1,000 views after YouTube's revenue share. Typical ranges: $1–$4 general, $4–$12 finance/tech."
+      },
+      {
+        "question": "How much does YouTube pay per 1,000 views?",
+        "answer": "It varies widely by niche and country. Use this YouTube revenue calculator with a low/mid/high RPM (e.g. $1.50 / $3 / $6) to bracket realistic monthly ad income before you rely on a single number."
+      },
+      {
+        "question": "Is this accurate?",
+        "answer": "Results are estimates. Actual YouTube earnings vary by niche, geography, ad seasonality, and audience demographics."
+      },
+      {
+        "question": "Does this include Shorts revenue?",
+        "answer": "Enter your total monthly views including Shorts. Shorts typically have lower RPM than long-form content."
+      },
+      {
+        "question": "Can I add brand deals?",
+        "answer": "Yes. Set sponsored posts per month and average deal value to include sponsorship income."
+      },
+      {
+        "question": "How do I estimate earnings for a public channel?",
+        "answer": "Paste the channel into YouTube Channel Insights for views/subscribers, then plug those numbers into this revenue calculator with a niche-appropriate RPM."
+      },
+      {
+        "question": "Is the calculator free?",
+        "answer": "Yes. No signup required."
+      }
+    ]
+  },
+  "instagram-revenue-calculator": {
+    "title": "Instagram Revenue Calculator",
+    "shortDescription": "Estimate Instagram sponsorship income, affiliate revenue, and creator earnings by follower count.",
+    "seoTitle": "Instagram Revenue Calculator — Estimate Creator Earnings | Ranburg.com",
+    "seoDescription": "Free Instagram revenue calculator. Estimate sponsorship income, affiliate earnings, and annual creator revenue based on followers and engagement rate.",
+    "howToUse": [
+      "Enter follower count and engagement rate.",
+      "Set sponsored posts per month and rate per post.",
+      "Add affiliate or shop revenue and Reels bonus if applicable.",
+      "Review suggested post rates and revenue projection chart."
+    ],
+    "faq": [
+      {
+        "question": "How do Instagram creators make money?",
+        "answer": "Primarily through brand sponsorships, affiliate marketing, product sales, and occasional Reels bonuses — not direct ad revenue."
+      },
+      {
+        "question": "What is a typical sponsorship rate?",
+        "answer": "Micro-influencers (10K–50K) often charge $100–$500 per post. Mid-tier (50K–500K) charge $500–$5,000+. Rates vary by niche and engagement."
+      },
+      {
+        "question": "What engagement rate should I use?",
+        "answer": "3–6% is typical for micro creators. Macro accounts often see 1–3%. Check Instagram Insights for your actual rate."
+      },
+      {
+        "question": "Is this guaranteed income?",
+        "answer": "No. These are industry-average estimates for planning purposes."
+      },
+      {
+        "question": "Is the calculator free?",
+        "answer": "Yes. No account required."
+      }
+    ]
+  },
+  "adsense-revenue-calculator": {
+    "title": "Google AdSense Revenue Calculator",
+    "shortDescription": "Estimate Google AdSense earnings from page views, RPM, CTR, and traffic growth projections.",
+    "seoTitle": "Google AdSense Revenue Calculator — Estimate Website Earnings | Ranburg.com",
+    "seoDescription": "Free Google AdSense revenue calculator. Estimate monthly and annual ad earnings from page views, RPM, CTR, CPC, and compare revenue across content niches.",
+    "howToUse": [
+      "Enter monthly page views and your estimated RPM.",
+      "Optionally set CTR and CPC for click-based estimates.",
+      "Adjust traffic growth rate for projections.",
+      "Compare earnings across finance, tech, health, and entertainment niches."
+    ],
+    "faq": [
+      {
+        "question": "What is a good AdSense RPM?",
+        "answer": "Finance and tech blogs: $8–$15 RPM. Health: $4–$8. General blogs: $2–$6. Entertainment: $1–$3."
+      },
+      {
+        "question": "How is AdSense RPM calculated?",
+        "answer": "RPM = (estimated earnings ÷ page views) × 1,000. It includes all ad formats and varies by geography and season."
+      },
+      {
+        "question": "Does this include YouTube AdSense?",
+        "answer": "This calculator is for website/blog AdSense. Use our YouTube Revenue Calculator for video earnings."
+      },
+      {
+        "question": "How accurate are projections?",
+        "answer": "Estimates assume steady RPM and growth. Actual AdSense earnings fluctuate with traffic quality and advertiser demand."
+      },
+      {
+        "question": "Is the calculator free?",
+        "answer": "Yes. No signup required."
+      }
+    ]
+  },
+  "invoice-generator": {
+    "title": "Invoice Generator",
+    "shortDescription": "Create professional multi-country invoices with logo, custom colors, GST/VAT/sales-tax fields, and PDF download — India, US, UK, CA, AU, SG, UAE, and EU.",
+    "seoTitle": "Free Invoice Generator Online Free – Logo, GST & VAT PDF | Ranburg",
+    "seoDescription": "Free invoice generator with logo upload, custom colors, and country tax fields (GST India, US sales tax, UK/EU VAT, AU/SG GST). Download PDF in your browser — no signup.",
+    "howToUse": [
+      "Choose your country to load the right tax labels and optional compliance fields.",
+      "Upload a logo, pick an accent color, and enter seller + client details (GSTIN, VAT ID, EIN, ABN, etc. as needed).",
+      "Add line items with quantity, rate, and tax rate. For India, choose CGST+SGST or IGST and optional HSN/SAC.",
+      "Preview the invoice, then Download PDF or Print. Nothing is uploaded to our servers."
+    ],
+    "faq": [
+      {
+        "question": "Which countries are supported?",
+        "answer": "India, United States, United Kingdom, Canada, Australia, Singapore, UAE, Germany, France, and Netherlands — each with relevant optional tax IDs and currency defaults."
+      },
+      {
+        "question": "Can I add my logo and brand colors?",
+        "answer": "Yes. Upload a logo (processed only in your browser) and pick a preset or custom accent color for the invoice header."
+      },
+      {
+        "question": "Does it support GST, VAT, and US sales tax?",
+        "answer": "Yes. India supports GSTIN, LUT, PAN, HSN/SAC, and CGST/SGST/IGST. US supports EIN and sales tax or tax-exempt. UK/EU/UAE use VAT; AU/SG/CA use GST/HST-style rates."
+      },
+      {
+        "question": "Can I download a PDF?",
+        "answer": "Yes. Click Download PDF to save a client-side PDF, or use Print. Your invoice data never leaves the device."
+      },
+      {
+        "question": "Is UPI or payment collection included?",
+        "answer": "No. This tool creates invoices only — it does not process payments or generate UPI payment QR codes."
+      },
+      {
+        "question": "Is the invoice generator free?",
+        "answer": "Yes. No account or payment required."
+      }
+    ]
+  },
+  "loan-foreclosure-calculator": {
+    "title": "Loan Foreclosure Calculator",
+    "shortDescription": "Calculate savings from early loan closure — full prepayment vs extra EMI per year, including bank foreclosure charges.",
+    "seoTitle": "Loan Foreclosure Calculator — Early Closure Savings | Ranburg.com",
+    "seoDescription": "Free loan foreclosure calculator. Compare full prepayment vs extra annual EMI payments. Includes bank foreclosure charges and net interest savings.",
+    "howToUse": [
+      "Enter loan amount, interest rate, original tenure, and EMIs already paid.",
+      "Choose strategy: full prepayment, extra payment per year, or continue as-is.",
+      "Set foreclosure charges as a percentage or flat fee for full prepayment.",
+      "Review interest saved, net benefit after charges, and remaining interest."
+    ],
+    "faq": [
+      {
+        "question": "What are foreclosure charges?",
+        "answer": "Banks may charge 0–5% of outstanding principal or a flat fee when you close a loan early. Enter your bank's rate for accurate comparison."
+      },
+      {
+        "question": "Is prepaying always beneficial?",
+        "answer": "Not always. If foreclosure charges exceed interest savings, continuing or making partial prepayments may be better."
+      },
+      {
+        "question": "What is extra EMI per year?",
+        "answer": "An alternative to full closure — pay an additional lump sum each year to reduce principal without triggering full foreclosure penalties."
+      },
+      {
+        "question": "Does this work for home loans?",
+        "answer": "Yes. Enter your home loan parameters. Floating-rate loans may have different foreclosure rules than fixed-rate loans."
+      },
+      {
+        "question": "Is the calculator free?",
+        "answer": "Yes. No signup required."
+      }
+    ]
+  },
+  "jpg-to-png": {
+    "title": "JPG to PNG Converter",
+    "shortDescription": "Convert JPG and JPEG images to PNG format instantly in your browser.",
+    "seoTitle": "JPG to PNG Converter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Convert JPG to PNG online for free. Fast, secure, no software required. Turn JPEG photos into PNG images in your browser — no signup.",
+    "howToUse": [
+      "Upload a JPG or JPEG file.",
+      "Preview the converted PNG.",
+      "Download the PNG file."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      }
+    ]
+  },
+  "png-to-jpg": {
+    "title": "PNG to JPG Converter",
+    "shortDescription": "Convert PNG images to JPG/JPEG with adjustable quality.",
+    "seoTitle": "PNG to JPG Converter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Convert PNG to JPG online for free. Fast, secure browser conversion with quality control. No software install or signup required.",
+    "howToUse": [
+      "Upload a PNG file.",
+      "Adjust JPG quality if needed.",
+      "Download the JPG file."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      }
+    ]
+  },
+  "webp-to-png": {
+    "title": "WEBP to PNG Converter",
+    "shortDescription": "Convert WebP images to PNG for broader compatibility.",
+    "seoTitle": "WEBP to PNG Converter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Convert WEBP to PNG online for free. Make WebP images compatible with editors and platforms that need PNG — secure, no signup.",
+    "howToUse": [
+      "Upload a WebP image.",
+      "Preview the PNG output.",
+      "Download PNG."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      }
+    ]
+  },
+  "png-to-webp": {
+    "title": "PNG to WEBP Converter",
+    "shortDescription": "Convert PNG to WebP for smaller file sizes and faster websites.",
+    "seoTitle": "PNG to WEBP Converter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Convert PNG to WEBP online for free. Shrink image size for faster websites while keeping solid quality. No signup.",
+    "howToUse": [
+      "Upload a PNG file.",
+      "Set WebP quality.",
+      "Download WebP."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      }
+    ]
+  },
+  "image-compressor": {
+    "title": "Image Compressor",
+    "shortDescription": "Compress JPG, PNG, and WebP images without uploading to a server.",
+    "seoTitle": "Image Compressor Online Free – Instant Results | Ranburg",
+    "seoDescription": "Compress images online for free. Reduce JPG, PNG, and WebP file size in your browser — fast, secure, no upload to our servers.",
+    "howToUse": [
+      "Upload an image.",
+      "Adjust quality and max width.",
+      "Compare size savings and download."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      }
+    ]
+  },
+  "image-resizer": {
+    "title": "Image Resizer",
+    "shortDescription": "Resize images to exact width and height in pixels.",
+    "seoTitle": "Image Resizer Online Free – Instant Results | Ranburg",
+    "seoDescription": "Resize images online for free. Set exact pixel width and height in your browser — no software or signup required.",
+    "howToUse": [
+      "Upload an image.",
+      "Enter target width and height.",
+      "Maintain aspect ratio or stretch.",
+      "Download resized image."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      }
+    ]
+  },
+  "crop-image": {
+    "title": "Crop Image",
+    "shortDescription": "Crop images to a custom region with live preview.",
+    "seoTitle": "Crop Image Online Free – Instant Results | Ranburg",
+    "seoDescription": "Crop images online for free with live preview. Trim photos in your browser — secure, no account required.",
+    "howToUse": [
+      "Upload an image.",
+      "Set crop X, Y, width, and height.",
+      "Preview and download cropped image."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      }
+    ]
+  },
+  "image-to-base64": {
+    "title": "Image to Base64 Converter",
+    "shortDescription": "Encode images to Base64 data URLs for HTML, CSS, and APIs.",
+    "seoTitle": "Image to Base64 Converter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Convert image to Base64 online for free. Generate data URLs for HTML, CSS, and APIs in your browser — no signup.",
+    "howToUse": [
+      "Upload an image.",
+      "Copy the Base64 string or data URL.",
+      "Paste into HTML img src or CSS."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      }
+    ]
+  },
+  "base64-to-image": {
+    "title": "Base64 to Image Decoder",
+    "shortDescription": "Decode Base64 strings back to downloadable image files.",
+    "seoTitle": "Base64 to Image Decoder Online Free – Instant Results | Ranburg",
+    "seoDescription": "Decode Base64 to image online for free. Paste a data URL, preview, and download PNG — fast and private in your browser.",
+    "howToUse": [
+      "Paste a Base64 or data URL string.",
+      "Preview the decoded image.",
+      "Download as PNG."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      }
+    ]
+  },
+  "remove-exif": {
+    "title": "Remove EXIF Metadata",
+    "shortDescription": "Strip EXIF metadata from photos by re-encoding in the browser.",
+    "seoTitle": "Remove EXIF Metadata Online Free – Instant Results | Ranburg",
+    "seoDescription": "Remove EXIF metadata online for free. Strip GPS and camera data by re-encoding photos in your browser — no signup.",
+    "howToUse": [
+      "Upload a JPG or PNG photo.",
+      "Re-encode strips most embedded metadata.",
+      "Download the clean image."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      },
+      {
+        "question": "Does this remove GPS location?",
+        "answer": "Re-encoding via canvas typically removes EXIF including GPS. Always verify sensitive images before sharing."
+      }
+    ]
+  },
+  "heic-to-jpg": {
+    "title": "HEIC to JPG Converter",
+    "shortDescription": "Convert iPhone HEIC photos to JPG in your browser — free, fast, no signup.",
+    "seoTitle": "HEIC to JPG Converter Online Free – Convert HEIC Images to JPG Instantly",
+    "seoDescription": "Convert HEIC to JPG online for free. Fast, secure, no software required. Turn iPhone HEIC photos into high-quality JPG files in seconds — no signup.",
+    "howToUse": [
+      "Upload a .heic file from iPhone or Files.",
+      "Wait a few seconds for browser conversion.",
+      "Preview the JPG result.",
+      "Download the high-quality JPG."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      },
+      {
+        "question": "What is HEIC?",
+        "answer": "HEIC (High Efficiency Image Container) is the default iPhone photo format. It keeps excellent quality at smaller file sizes than JPG, but many Windows apps, email clients, and websites cannot open it."
+      },
+      {
+        "question": "Is HEIC better than JPG?",
+        "answer": "HEIC is often better for iPhone storage. JPG is better for universal sharing — Windows, email, CMS uploads, and clients. Convert to JPG when compatibility matters more than file size."
+      },
+      {
+        "question": "Can I convert multiple HEIC files?",
+        "answer": "Convert files one after another on this page, or repeat the upload step for each photo. Keeping conversion in-browser avoids uploading entire albums to unknown cloud converters."
+      },
+      {
+        "question": "How do I open HEIC files on Windows?",
+        "answer": "Convert HEIC to JPG with this free tool, then open the JPG in any Windows photo viewer. Conversion is usually simpler than installing HEIF extensions for every recipient."
+      }
+    ]
+  },
+  "svg-to-png": {
+    "title": "SVG to PNG Converter",
+    "shortDescription": "Rasterize SVG vector graphics to PNG at custom resolution.",
+    "seoTitle": "SVG to PNG Converter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Convert SVG to PNG online for free. Rasterize vector graphics at custom size in your browser — no software or signup.",
+    "howToUse": [
+      "Upload an SVG file or paste SVG markup.",
+      "Set output width.",
+      "Download PNG."
+    ],
+    "faq": [
+      {
+        "question": "Are my images uploaded to a server?",
+        "answer": "No. Ranburg image tools process files locally in your browser whenever possible. Your images are not uploaded to our servers for storage."
+      },
+      {
+        "question": "What image formats are supported?",
+        "answer": "Most tools accept PNG, JPG/JPEG, WebP, and GIF. HEIC conversion depends on browser decode support. Check each tool page for format notes."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. Ranburg image tools are free forever with no signup, watermarks, or forced account."
+      },
+      {
+        "question": "Can I use these tools on iPhone?",
+        "answer": "Yes. Open the tool in Safari or Chrome on iPhone, upload from Photos/Files, convert or edit, then save the result."
+      },
+      {
+        "question": "Will converting reduce quality?",
+        "answer": "It depends on the target format. PNG is typically lossless for these workflows; JPG/WebP use quality settings. Always preview before downloading when quality matters."
+      }
+    ]
+  },
+  "pdf-merge": {
+    "title": "PDF Merge",
+    "shortDescription": "Combine multiple PDF files into one document — drag, drop, merge.",
+    "seoTitle": "PDF Merge Online Free – Instant Results | Ranburg",
+    "seoDescription": "Combine multiple PDF files into one document — drag, drop, merge. Use PDF Merge online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload two or more PDF files.",
+      "Drag to reorder if needed.",
+      "Click Merge and download."
+    ],
+    "faq": [
+      {
+        "question": "Are PDFs uploaded to Ranburg servers?",
+        "answer": "No. PDF processing runs entirely in your browser using WebAssembly and JavaScript."
+      },
+      {
+        "question": "Is there a file size limit?",
+        "answer": "Browser memory limits apply. Most documents under 50MB work well."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All PDF tools on Ranburg.com are free."
+      }
+    ]
+  },
+  "pdf-split": {
+    "title": "PDF Split",
+    "shortDescription": "Split a PDF into separate files — one PDF per page.",
+    "seoTitle": "PDF Split Online Free – Instant Results | Ranburg",
+    "seoDescription": "Split a PDF into separate files — one PDF per page. Use PDF Split online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload a PDF.",
+      "Click Split.",
+      "Download a ZIP of individual page PDFs."
+    ],
+    "faq": [
+      {
+        "question": "Are PDFs uploaded to Ranburg servers?",
+        "answer": "No. PDF processing runs entirely in your browser using WebAssembly and JavaScript."
+      },
+      {
+        "question": "Is there a file size limit?",
+        "answer": "Browser memory limits apply. Most documents under 50MB work well."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All PDF tools on Ranburg.com are free."
+      }
+    ]
+  },
+  "pdf-compressor": {
+    "title": "PDF Compressor",
+    "shortDescription": "Reduce PDF file size by optimizing and re-saving in the browser.",
+    "seoTitle": "PDF Compressor Online Free – Instant Results | Ranburg",
+    "seoDescription": "Reduce PDF file size by optimizing and re-saving in the browser. Use PDF Compressor online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload a PDF.",
+      "Choose compression level.",
+      "Download optimized PDF."
+    ],
+    "faq": [
+      {
+        "question": "Are PDFs uploaded to Ranburg servers?",
+        "answer": "No. PDF processing runs entirely in your browser using WebAssembly and JavaScript."
+      },
+      {
+        "question": "Is there a file size limit?",
+        "answer": "Browser memory limits apply. Most documents under 50MB work well."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All PDF tools on Ranburg.com are free."
+      }
+    ]
+  },
+  "pdf-to-jpg": {
+    "title": "PDF to JPG Converter",
+    "shortDescription": "Convert PDF pages to JPG images for sharing and editing.",
+    "seoTitle": "PDF to JPG Converter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Convert PDF pages to JPG images for sharing and editing. Use PDF to JPG Converter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload a PDF.",
+      "Select page or all pages.",
+      "Download JPG images."
+    ],
+    "faq": [
+      {
+        "question": "Are PDFs uploaded to Ranburg servers?",
+        "answer": "No. PDF processing runs entirely in your browser using WebAssembly and JavaScript."
+      },
+      {
+        "question": "Is there a file size limit?",
+        "answer": "Browser memory limits apply. Most documents under 50MB work well."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All PDF tools on Ranburg.com are free."
+      }
+    ]
+  },
+  "jpg-to-pdf": {
+    "title": "JPG to PDF Converter",
+    "shortDescription": "Convert JPG and PNG images into a single PDF document.",
+    "seoTitle": "JPG to PDF Converter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Convert JPG and PNG images into a single PDF document. Use JPG to PDF Converter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload one or more images.",
+      "Reorder if needed.",
+      "Download combined PDF."
+    ],
+    "faq": [
+      {
+        "question": "Are PDFs uploaded to Ranburg servers?",
+        "answer": "No. PDF processing runs entirely in your browser using WebAssembly and JavaScript."
+      },
+      {
+        "question": "Is there a file size limit?",
+        "answer": "Browser memory limits apply. Most documents under 50MB work well."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All PDF tools on Ranburg.com are free."
+      }
+    ]
+  },
+  "word-to-pdf": {
+    "title": "Text to PDF Converter",
+    "shortDescription": "Paste text or upload a .txt file and download a clean PDF — browser-based, no Word install.",
+    "seoTitle": "Text to PDF Converter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Paste text or upload a .txt file and download a clean PDF — browser-based, no Word install. Use Text to PDF Converter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Paste text or upload a plain .txt file.",
+      "Set a document title.",
+      "Download your PDF."
+    ],
+    "faq": [
+      {
+        "question": "Are PDFs uploaded to Ranburg servers?",
+        "answer": "No. PDF processing runs entirely in your browser using WebAssembly and JavaScript."
+      },
+      {
+        "question": "Is there a file size limit?",
+        "answer": "Browser memory limits apply. Most documents under 50MB work well."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All PDF tools on Ranburg.com are free."
+      },
+      {
+        "question": "Does this convert .docx Word files?",
+        "answer": "Not directly. Paste text from Word or upload a .txt file. Full .docx parsing needs desktop software — this tool creates PDFs from text content honestly and instantly."
+      }
+    ]
+  },
+  "pdf-page-extractor": {
+    "title": "PDF Page Extractor",
+    "shortDescription": "Extract specific pages from a PDF by page range.",
+    "seoTitle": "PDF Page Extractor Online Free – Instant Results | Ranburg",
+    "seoDescription": "Extract specific pages from a PDF by page range. Use PDF Page Extractor online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload a PDF.",
+      "Enter page range (e.g. 1-3, 5).",
+      "Download extracted PDF."
+    ],
+    "faq": [
+      {
+        "question": "Are PDFs uploaded to Ranburg servers?",
+        "answer": "No. PDF processing runs entirely in your browser using WebAssembly and JavaScript."
+      },
+      {
+        "question": "Is there a file size limit?",
+        "answer": "Browser memory limits apply. Most documents under 50MB work well."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All PDF tools on Ranburg.com are free."
+      }
+    ]
+  },
+  "pdf-page-remover": {
+    "title": "PDF Page Remover",
+    "shortDescription": "Delete unwanted pages from a PDF document.",
+    "seoTitle": "PDF Page Remover Online Free – Instant Results | Ranburg",
+    "seoDescription": "Delete unwanted pages from a PDF document. Use PDF Page Remover online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload a PDF.",
+      "Enter pages to remove.",
+      "Download PDF without those pages."
+    ],
+    "faq": [
+      {
+        "question": "Are PDFs uploaded to Ranburg servers?",
+        "answer": "No. PDF processing runs entirely in your browser using WebAssembly and JavaScript."
+      },
+      {
+        "question": "Is there a file size limit?",
+        "answer": "Browser memory limits apply. Most documents under 50MB work well."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All PDF tools on Ranburg.com are free."
+      }
+    ]
+  },
+  "keyword-density-checker": {
+    "title": "Keyword Density Checker",
+    "shortDescription": "Analyze keyword frequency and density in your content for on-page SEO.",
+    "seoTitle": "Keyword Density Checker Online Free – Instant Results | Ranburg",
+    "seoDescription": "Analyze keyword frequency and density in your content for on-page SEO. Use Keyword Density Checker online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Paste your article or page copy.",
+      "View word count and keyword percentages.",
+      "Optimize over-stuffed terms."
+    ],
+    "faq": [
+      {
+        "question": "Is my content sent to a server?",
+        "answer": "No. SEO tools process your text locally in the browser."
+      },
+      {
+        "question": "Can I use output on client websites?",
+        "answer": "Yes. Generated meta tags, robots.txt, and schema are yours to use commercially."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg SEO tools are free."
+      }
+    ]
+  },
+  "meta-tag-generator": {
+    "title": "Meta Tag Generator",
+    "shortDescription": "Generate title, description, and canonical meta tags for any page.",
+    "seoTitle": "Meta Tag Generator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Generate title, description, and canonical meta tags for any page. Use Meta Tag Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter page title and description.",
+      "Add URL and robots directives.",
+      "Copy HTML meta tags."
+    ],
+    "faq": [
+      {
+        "question": "Is my content sent to a server?",
+        "answer": "No. SEO tools process your text locally in the browser."
+      },
+      {
+        "question": "Can I use output on client websites?",
+        "answer": "Yes. Generated meta tags, robots.txt, and schema are yours to use commercially."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg SEO tools are free."
+      }
+    ]
+  },
+  "robots-txt-generator": {
+    "title": "Robots.txt Generator",
+    "shortDescription": "Build robots.txt files with allow/disallow rules and sitemap URL.",
+    "seoTitle": "Robots.txt Generator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Build robots.txt files with allow/disallow rules and sitemap URL. Use Robots.txt Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Set user-agent rules.",
+      "Add disallow/allow paths.",
+      "Include sitemap URL.",
+      "Copy robots.txt."
+    ],
+    "faq": [
+      {
+        "question": "Is my content sent to a server?",
+        "answer": "No. SEO tools process your text locally in the browser."
+      },
+      {
+        "question": "Can I use output on client websites?",
+        "answer": "Yes. Generated meta tags, robots.txt, and schema are yours to use commercially."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg SEO tools are free."
+      }
+    ]
+  },
+  "xml-sitemap-generator": {
+    "title": "XML Sitemap Generator",
+    "shortDescription": "Create XML sitemaps from a list of URLs with priority and changefreq.",
+    "seoTitle": "XML Sitemap Generator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Create XML sitemaps from a list of URLs with priority and changefreq. Use XML Sitemap Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter URLs one per line.",
+      "Set default priority and changefreq.",
+      "Copy or download sitemap.xml."
+    ],
+    "faq": [
+      {
+        "question": "Is my content sent to a server?",
+        "answer": "No. SEO tools process your text locally in the browser."
+      },
+      {
+        "question": "Can I use output on client websites?",
+        "answer": "Yes. Generated meta tags, robots.txt, and schema are yours to use commercially."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg SEO tools are free."
+      }
+    ]
+  },
+  "open-graph-generator": {
+    "title": "Open Graph Generator",
+    "shortDescription": "Generate Open Graph and Twitter Card meta tags for social sharing.",
+    "seoTitle": "Open Graph Generator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Generate Open Graph and Twitter Card meta tags for social sharing. Use Open Graph Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter title, description, image URL, and page URL.",
+      "Copy OG and Twitter meta tags.",
+      "Paste into page <head>."
+    ],
+    "faq": [
+      {
+        "question": "Is my content sent to a server?",
+        "answer": "No. SEO tools process your text locally in the browser."
+      },
+      {
+        "question": "Can I use output on client websites?",
+        "answer": "Yes. Generated meta tags, robots.txt, and schema are yours to use commercially."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg SEO tools are free."
+      }
+    ]
+  },
+  "schema-markup-generator": {
+    "title": "Schema Markup Generator",
+    "shortDescription": "Build JSON-LD structured data for articles, products, FAQs, and organizations.",
+    "seoTitle": "Schema Markup Generator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Build JSON-LD structured data for articles, products, FAQs, and organizations. Use Schema Markup Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Choose schema type.",
+      "Fill required fields.",
+      "Copy JSON-LD script tag."
+    ],
+    "faq": [
+      {
+        "question": "Is my content sent to a server?",
+        "answer": "No. SEO tools process your text locally in the browser."
+      },
+      {
+        "question": "Can I use output on client websites?",
+        "answer": "Yes. Generated meta tags, robots.txt, and schema are yours to use commercially."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg SEO tools are free."
+      }
+    ]
+  },
+  "url-encoder-decoder": {
+    "title": "URL Encoder / Decoder",
+    "shortDescription": "Encode and decode URLs and query strings for safe transmission.",
+    "seoTitle": "URL Encoder / Decoder Online Free – Instant Results | Ranburg",
+    "seoDescription": "Encode and decode URLs and query strings for safe transmission. Use URL Encoder / Decoder online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Paste text or URL.",
+      "Switch encode/decode mode.",
+      "Copy result."
+    ],
+    "faq": [
+      {
+        "question": "Is my content sent to a server?",
+        "answer": "No. SEO tools process your text locally in the browser."
+      },
+      {
+        "question": "Can I use output on client websites?",
+        "answer": "Yes. Generated meta tags, robots.txt, and schema are yours to use commercially."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg SEO tools are free."
+      }
+    ]
+  },
+  "word-counter": {
+    "title": "Word Counter",
+    "shortDescription": "Count words, characters, sentences, and reading time for any text.",
+    "seoTitle": "Word Counter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Count words, characters, sentences, and reading time for any text. Use Word Counter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Paste or type your text.",
+      "View word, character, and sentence counts.",
+      "Use reading time for blog planning."
+    ],
+    "faq": [
+      {
+        "question": "Is my content sent to a server?",
+        "answer": "No. SEO tools process your text locally in the browser."
+      },
+      {
+        "question": "Can I use output on client websites?",
+        "answer": "Yes. Generated meta tags, robots.txt, and schema are yours to use commercially."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg SEO tools are free."
+      }
+    ]
+  },
+  "slug-generator": {
+    "title": "Slug Generator",
+    "shortDescription": "Create SEO-friendly URL slugs from titles and headlines.",
+    "seoTitle": "Slug Generator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Create SEO-friendly URL slugs from titles and headlines. Use Slug Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter a title or phrase.",
+      "Preview the generated slug.",
+      "Copy for CMS or blog URLs."
+    ],
+    "faq": [
+      {
+        "question": "Is my content sent to a server?",
+        "answer": "No. SEO tools process your text locally in the browser."
+      },
+      {
+        "question": "Can I use output on client websites?",
+        "answer": "Yes. Generated meta tags, robots.txt, and schema are yours to use commercially."
+      },
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg SEO tools are free."
+      }
+    ]
+  },
+  "youtube-tags-generator": {
+    "title": "YouTube Tags Generator",
+    "shortDescription": "Generate SEO-friendly YouTube video tags from your topic and keywords.",
+    "seoTitle": "YouTube Tags Generator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Generate SEO-friendly YouTube video tags from your topic and keywords. Use YouTube Tags Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter video topic and main keyword.",
+      "Add niche and competitor terms.",
+      "Copy comma-separated tags."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg social media tools are free."
+      },
+      {
+        "question": "Is my data stored?",
+        "answer": "No. Inputs are processed in your browser only."
+      },
+      {
+        "question": "Can I use generated content commercially?",
+        "answer": "Yes. Tags, descriptions, and hashtags are yours to use."
+      }
+    ]
+  },
+  "youtube-description-generator": {
+    "title": "YouTube Description Generator",
+    "shortDescription": "Create optimized YouTube video descriptions with timestamps and CTAs.",
+    "seoTitle": "YouTube Description Generator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Create optimized YouTube video descriptions with timestamps and CTAs. Use YouTube Description Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter video title and summary.",
+      "Add links and timestamps.",
+      "Copy formatted description."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg social media tools are free."
+      },
+      {
+        "question": "Is my data stored?",
+        "answer": "No. Inputs are processed in your browser only."
+      },
+      {
+        "question": "Can I use generated content commercially?",
+        "answer": "Yes. Tags, descriptions, and hashtags are yours to use."
+      }
+    ]
+  },
+  "youtube-hashtag-generator": {
+    "title": "YouTube Hashtag Generator",
+    "shortDescription": "Generate trend-assisted hashtags for Shorts or long-form — choose count and mix.",
+    "seoTitle": "YouTube Hashtag Generator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Generate trend-assisted hashtags for Shorts or long-form — choose count and mix. Use YouTube Hashtag Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter your video topic.",
+      "Choose Shorts or long-form, tag count (5–30), and mix (balanced / broad / niche / branded).",
+      "Generate related + trend hashtags, deselect any you don’t need, then copy."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg social media tools are free."
+      },
+      {
+        "question": "Is my data stored?",
+        "answer": "No. Inputs are processed in your browser only."
+      },
+      {
+        "question": "Can I use generated content commercially?",
+        "answer": "Yes. Tags, descriptions, and hashtags are yours to use."
+      }
+    ]
+  },
+  "instagram-hashtag-generator": {
+    "title": "Instagram Hashtag Generator",
+    "shortDescription": "Build Reels or feed hashtag sets with count control, mix, and trend-assisted tags.",
+    "seoTitle": "Instagram Hashtag Generator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Build Reels or feed hashtag sets with count control, mix, and trend-assisted tags. Use Instagram Hashtag Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter post topic and optional niche.",
+      "Pick Reels or feed, set tag count (5–30), and choose broad / niche / branded mix.",
+      "Generate, toggle tags on/off, then copy your set."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg social media tools are free."
+      },
+      {
+        "question": "Is my data stored?",
+        "answer": "No. Inputs are processed in your browser only."
+      },
+      {
+        "question": "Can I use generated content commercially?",
+        "answer": "Yes. Tags, descriptions, and hashtags are yours to use."
+      }
+    ]
+  },
+  "instagram-engagement-calculator": {
+    "title": "Instagram Engagement Calculator",
+    "shortDescription": "Calculate Instagram engagement rate from likes, comments, and followers.",
+    "seoTitle": "Instagram Engagement Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Calculate Instagram engagement rate from likes, comments, and followers. Use Instagram Engagement Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter followers, likes, and comments.",
+      "View engagement rate percentage.",
+      "Benchmark against industry averages."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg social media tools are free."
+      },
+      {
+        "question": "Is my data stored?",
+        "answer": "No. Inputs are processed in your browser only."
+      },
+      {
+        "question": "Can I use generated content commercially?",
+        "answer": "Yes. Tags, descriptions, and hashtags are yours to use."
+      }
+    ]
+  },
+  "tiktok-engagement-calculator": {
+    "title": "TikTok Engagement Calculator",
+    "shortDescription": "Calculate TikTok engagement rate from views, likes, comments, and shares.",
+    "seoTitle": "TikTok Engagement Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Calculate TikTok engagement rate from views, likes, comments, and shares. Use TikTok Engagement Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter views, likes, comments, shares.",
+      "View engagement rate.",
+      "Compare video performance."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg social media tools are free."
+      },
+      {
+        "question": "Is my data stored?",
+        "answer": "No. Inputs are processed in your browser only."
+      },
+      {
+        "question": "Can I use generated content commercially?",
+        "answer": "Yes. Tags, descriptions, and hashtags are yours to use."
+      }
+    ]
+  },
+  "tiktok-earnings-calculator": {
+    "title": "TikTok Earnings Calculator",
+    "shortDescription": "Estimate TikTok creator fund and brand deal earnings from views and RPM.",
+    "seoTitle": "TikTok Earnings Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Estimate TikTok creator fund and brand deal earnings from views and RPM. Use TikTok Earnings Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter monthly views or per-video views.",
+      "Set RPM or CPM estimate.",
+      "View projected earnings."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg social media tools are free."
+      },
+      {
+        "question": "Is my data stored?",
+        "answer": "No. Inputs are processed in your browser only."
+      },
+      {
+        "question": "Can I use generated content commercially?",
+        "answer": "Yes. Tags, descriptions, and hashtags are yours to use."
+      },
+      {
+        "question": "Are earnings guaranteed?",
+        "answer": "No. This is an estimate based on your inputs. Actual TikTok payouts vary by region and program."
+      }
+    ]
+  },
+  "social-media-character-counter": {
+    "title": "Social Media Character Counter",
+    "shortDescription": "Count characters for Twitter/X, Instagram, LinkedIn, YouTube, and TikTok limits.",
+    "seoTitle": "Social Media Character Counter Online Free – Instant Results | Ranburg",
+    "seoDescription": "Count characters for Twitter/X, Instagram, LinkedIn, YouTube, and TikTok limits. Use Social Media Character Counter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Paste your caption or post.",
+      "View counts per platform limit.",
+      "Trim to fit each network."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg social media tools are free."
+      },
+      {
+        "question": "Is my data stored?",
+        "answer": "No. Inputs are processed in your browser only."
+      },
+      {
+        "question": "Can I use generated content commercially?",
+        "answer": "Yes. Tags, descriptions, and hashtags are yours to use."
+      }
+    ]
+  },
+  "profit-margin-calculator": {
+    "title": "Profit Margin Calculator",
+    "shortDescription": "Calculate gross, operating, and net profit margins from revenue and costs.",
+    "seoTitle": "Profit Margin Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Calculate gross, operating, and net profit margins from revenue and costs. Use Profit Margin Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter revenue and cost of goods sold.",
+      "Add operating expenses for net margin.",
+      "View margin percentages."
+    ],
+    "faq": [
+      {
+        "question": "Is this calculator free?",
+        "answer": "Yes. All Ranburg business calculators are free."
+      },
+      {
+        "question": "Is output financial advice?",
+        "answer": "No. Results are estimates for planning. Consult professionals for tax and investment decisions."
+      },
+      {
+        "question": "Can I use this for my business?",
+        "answer": "Yes. Commercial use of calculator outputs is permitted."
+      }
+    ]
+  },
+  "roi-calculator": {
+    "title": "ROI Calculator",
+    "shortDescription": "Calculate return on investment percentage and net gain from any campaign or project.",
+    "seoTitle": "ROI Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Calculate return on investment percentage and net gain from any campaign or project. Use ROI Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter investment cost and return value.",
+      "View ROI percentage and net profit.",
+      "Compare multiple scenarios."
+    ],
+    "faq": [
+      {
+        "question": "Is this calculator free?",
+        "answer": "Yes. All Ranburg business calculators are free."
+      },
+      {
+        "question": "Is output financial advice?",
+        "answer": "No. Results are estimates for planning. Consult professionals for tax and investment decisions."
+      },
+      {
+        "question": "Can I use this for my business?",
+        "answer": "Yes. Commercial use of calculator outputs is permitted."
+      }
+    ]
+  },
+  "break-even-calculator": {
+    "title": "Break-even Calculator",
+    "shortDescription": "Find break-even units and revenue for your product or service.",
+    "seoTitle": "Break-even Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Find break-even units and revenue for your product or service. Use Break-even Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter fixed costs, variable cost per unit, and price per unit.",
+      "View break-even units and revenue.",
+      "Model price changes."
+    ],
+    "faq": [
+      {
+        "question": "Is this calculator free?",
+        "answer": "Yes. All Ranburg business calculators are free."
+      },
+      {
+        "question": "Is output financial advice?",
+        "answer": "No. Results are estimates for planning. Consult professionals for tax and investment decisions."
+      },
+      {
+        "question": "Can I use this for my business?",
+        "answer": "Yes. Commercial use of calculator outputs is permitted."
+      }
+    ]
+  },
+  "credit-card-finder": {
+    "title": "Credit Card Finder",
+    "shortDescription": "Answer a short quiz about income, credit band, and spending — get ranked credit card matches for India, US, UK, Canada, Australia, Singapore, and UAE.",
+    "seoTitle": "Credit Card Finder — Best Card for Your Spending | Ranburg",
+    "seoDescription": "Free credit card recommender. Tell us your country, income, score band, and spend categories — get ranked card matches for IN, US, UK, CA, AU, SG, and UAE.",
+    "howToUse": [
+      "Select your country.",
+      "Enter monthly income and credit score band.",
+      "Add typical spend by category (groceries, fuel, travel, etc.).",
+      "Review ranked cards with estimated rewards fit."
+    ],
+    "faq": [
+      {
+        "question": "Is this financial advice?",
+        "answer": "No. Ranburg tools provide educational estimates only. Confirm products, fees, and eligibility with banks or licensed advisors."
+      },
+      {
+        "question": "Is it free?",
+        "answer": "Yes. No signup required."
+      },
+      {
+        "question": "Which countries are supported?",
+        "answer": "India, United States, United Kingdom, Canada, Australia, Singapore, and UAE."
+      },
+      {
+        "question": "Will I get approved?",
+        "answer": "We cannot guarantee approval. Results are planning matches based on typical issuer gates."
+      }
+    ]
+  },
+  "rent-vs-buy-calculator": {
+    "title": "Rent vs Buy Calculator",
+    "shortDescription": "Compare renting vs buying a home over your time horizon with EMI, down payment, and appreciation.",
+    "seoTitle": "Rent vs Buy Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Compare renting vs buying a home over your time horizon with EMI, down payment, and appreciation. Use Rent vs Buy Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter rent and home price.",
+      "Set down payment, rate, and tenure.",
+      "Compare costs over your horizon."
+    ],
+    "faq": [
+      {
+        "question": "Is this financial advice?",
+        "answer": "No. Ranburg tools provide educational estimates only. Confirm products, fees, and eligibility with banks or licensed advisors."
+      },
+      {
+        "question": "Is it free?",
+        "answer": "Yes. No signup required."
+      }
+    ]
+  },
+  "bill-split-calculator": {
+    "title": "Bill Split Calculator",
+    "shortDescription": "Split restaurant or group bills with tip — see total and per-person share instantly.",
+    "seoTitle": "Bill Split Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Split restaurant or group bills with tip — see total and per-person share instantly. Use Bill Split Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter bill amount.",
+      "Set people and tip %.",
+      "Share the per-person total."
+    ],
+    "faq": [
+      {
+        "question": "Is this financial advice?",
+        "answer": "No. Ranburg tools provide educational estimates only. Confirm products, fees, and eligibility with banks or licensed advisors."
+      },
+      {
+        "question": "Is it free?",
+        "answer": "Yes. No signup required."
+      }
+    ]
+  },
+  "compound-interest-calculator": {
+    "title": "Compound Interest Calculator",
+    "shortDescription": "Project how principal grows with compounding frequency — monthly, quarterly, or yearly.",
+    "seoTitle": "Compound Interest Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Project how principal grows with compounding frequency — monthly, quarterly, or yearly. Use Compound Interest Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter principal, rate, and years.",
+      "Choose compounds per year.",
+      "View future value and interest."
+    ],
+    "faq": [
+      {
+        "question": "Is this financial advice?",
+        "answer": "No. Ranburg tools provide educational estimates only. Confirm products, fees, and eligibility with banks or licensed advisors."
+      },
+      {
+        "question": "Is it free?",
+        "answer": "Yes. No signup required."
+      }
+    ]
+  },
+  "sleep-calculator": {
+    "title": "Sleep Cycle Calculator",
+    "shortDescription": "Pick a wake-up time and get suggested bedtimes aligned to ~90-minute sleep cycles.",
+    "seoTitle": "Sleep Cycle Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "Pick a wake-up time and get suggested bedtimes aligned to ~90-minute sleep cycles. Use Sleep Cycle Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter your wake-up time.",
+      "Review 4–6 cycle bedtime options.",
+      "Pick the one that fits your night."
+    ],
+    "faq": [
+      {
+        "question": "Is this medical advice?",
+        "answer": "No. It is a simple planning heuristic based on typical sleep cycles."
+      },
+      {
+        "question": "Is it free?",
+        "answer": "Yes."
+      }
+    ]
+  },
+  "salary-hike-calculator": {
+    "title": "Salary Hike Calculator",
+    "shortDescription": "See how a CTC hike translates to approximate monthly take-home after tax assumptions.",
+    "seoTitle": "Salary Hike Calculator Online Free – Instant Results | Ranburg",
+    "seoDescription": "See how a CTC hike translates to approximate monthly take-home after tax assumptions. Use Salary Hike Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter current CTC.",
+      "Set hike % and tax/deduction estimate.",
+      "View new CTC and monthly delta."
+    ],
+    "faq": [
+      {
+        "question": "Is this financial advice?",
+        "answer": "No. Ranburg tools provide educational estimates only. Confirm products, fees, and eligibility with banks or licensed advisors."
+      },
+      {
+        "question": "Is it free?",
+        "answer": "Yes. No signup required."
+      }
+    ]
+  },
+  "color-contrast-checker": {
+    "title": "Color Contrast Checker",
+    "shortDescription": "Check WCAG AA/AAA contrast between text and background colors for accessible UI design.",
+    "seoTitle": "Color Contrast Checker Online Free – Instant Results | Ranburg",
+    "seoDescription": "Check WCAG AA/AAA contrast between text and background colors for accessible UI design. Use Color Contrast Checker online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Pick foreground and background colors.",
+      "Preview sample text.",
+      "Read ratio and AA/AAA pass/fail."
+    ],
+    "faq": [
+      {
+        "question": "What ratio do I need?",
+        "answer": "WCAG AA normal text needs at least 4.5:1; large text needs 3:1. AAA needs 7:1."
+      },
+      {
+        "question": "Is it free?",
+        "answer": "Yes."
+      }
+    ]
+  },
+  "safe-zone-checker": {
+    "title": "Safe Zone Checker",
+    "shortDescription": "Preview TikTok, Reels, and Shorts UI safe zones on your vertical video thumbnail or frame.",
+    "seoTitle": "Safe Zone Checker Online Free — TikTok, Reels & Shorts Overlay | Ranburg",
+    "seoDescription": "Preview TikTok, Reels, and Shorts UI safe zones on your vertical video thumbnail or frame. Use Safe Zone Checker online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload a vertical image or video frame screenshot.",
+      "Switch between TikTok, Reels, and Shorts presets.",
+      "Keep key text and faces inside the green safe box.",
+      "Download the annotated preview to share with your editor."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      },
+      {
+        "question": "Are safe zones exact?",
+        "answer": "Overlays are approximate guides based on common platform UI — always preview on each app."
+      }
+    ]
+  },
+  "youtube-thumbnail-checker": {
+    "title": "YouTube Thumbnail Checker",
+    "shortDescription": "Validate YouTube thumbnail size, 16:9 ratio, 1280×720 recommendation, and 2 MB limit with safe zone overlay.",
+    "seoTitle": "YouTube Thumbnail Checker Online Free — Size & Safe Zone | Ranburg",
+    "seoDescription": "Validate YouTube thumbnail size, 16:9 ratio, 1280×720 recommendation, and 2 MB limit with safe zone overlay. Use YouTube Thumbnail Checker online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload your thumbnail JPG or PNG.",
+      "Review pass, warn, and fail checks for ratio, resolution, and file size.",
+      "Adjust title text to stay inside the green safe area.",
+      "Export a corrected 1280×720 image if checks fail."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      },
+      {
+        "question": "What is the best YouTube thumbnail size?",
+        "answer": "1280×720 pixels at 16:9 aspect ratio, under 2 MB."
+      }
+    ]
+  },
+  "social-image-size-checker": {
+    "title": "Social Image Size Checker",
+    "shortDescription": "See which social platforms your image fits — Instagram, LinkedIn, X, Pinterest, YouTube, and vertical video specs.",
+    "seoTitle": "Social Image Size Checker Online Free — IG, LinkedIn, X & More | Ranburg",
+    "seoDescription": "See which social platforms your image fits — Instagram, LinkedIn, X, Pinterest, YouTube, and vertical video specs. Use Social Image Size Checker online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload any image.",
+      "Compare your dimensions against platform target sizes.",
+      "Use pass/warn/fail to decide if you need crop or resize.",
+      "Resize with Ranburg image tools if needed."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      }
+    ]
+  },
+  "compress-to-exact-size": {
+    "title": "Compress to Exact Size",
+    "shortDescription": "Binary-search JPEG quality to hit an exact target file size in KB — useful for upload limits.",
+    "seoTitle": "Compress Image to Exact Size Online Free — Target KB | Ranburg",
+    "seoDescription": "Binary-search JPEG quality to hit an exact target file size in KB — useful for upload limits. Use Compress to Exact Size online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload a JPG or PNG.",
+      "Set your target size in KB with the slider.",
+      "Run compression — quality is tuned via binary search.",
+      "Download the JPEG at or near your target size."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      }
+    ]
+  },
+  "youtube-chapter-generator": {
+    "title": "YouTube Chapter Generator",
+    "shortDescription": "Turn timestamp lines into a copy-ready YouTube chapters block for your video description.",
+    "seoTitle": "YouTube Chapter Generator Online Free — Timestamp Chapters | Ranburg",
+    "seoDescription": "Turn timestamp lines into a copy-ready YouTube chapters block for your video description. Use YouTube Chapter Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter one chapter per line: 0:00 Intro, 1:30 Topic, etc.",
+      "Ensure the first chapter starts at 0:00.",
+      "Copy the generated block into your video description.",
+      "YouTube requires 3+ chapters spaced at least 10 seconds apart."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      }
+    ]
+  },
+  "avif-to-jpg": {
+    "title": "AVIF to JPG Converter",
+    "shortDescription": "Convert AVIF images to JPEG in your browser using canvas decode — no upload required.",
+    "seoTitle": "AVIF to JPG Converter Online Free — Browser Decode | Ranburg",
+    "seoDescription": "Convert AVIF images to JPEG in your browser using canvas decode — no upload required. Use AVIF to JPG Converter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload an .avif file.",
+      "Adjust JPEG quality.",
+      "Download the converted JPG instantly."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      }
+    ]
+  },
+  "jpg-to-avif": {
+    "title": "JPG to AVIF Converter",
+    "shortDescription": "Convert JPEG to AVIF when your browser supports AVIF encoding; PNG fallback otherwise.",
+    "seoTitle": "JPG to AVIF Converter Online Free — Browser Encode | Ranburg",
+    "seoDescription": "Convert JPEG to AVIF when your browser supports AVIF encoding; PNG fallback otherwise. Use JPG to AVIF Converter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload a JPG or JPEG.",
+      "If your browser supports AVIF encoding, download .avif.",
+      "Otherwise a PNG fallback is offered with a clear notice."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      }
+    ]
+  },
+  "opus-to-mp3": {
+    "title": "Opus to MP3 Converter",
+    "shortDescription": "Convert Opus/Ogg audio to MP3 locally with FFmpeg WASM — client-only, no server upload.",
+    "seoTitle": "Opus to MP3 Converter Online Free — Client-Side FFmpeg | Ranburg",
+    "seoDescription": "Convert Opus/Ogg audio to MP3 locally with FFmpeg WASM — client-only, no server upload. Use Opus to MP3 Converter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Install @ffmpeg/ffmpeg and @ffmpeg/util if prompted.",
+      "Upload an Opus or Ogg audio file.",
+      "Wait for WASM conversion in your browser.",
+      "Download the MP3 output."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      },
+      {
+        "question": "Why do I need to install FFmpeg packages?",
+        "answer": "The site loads FFmpeg WASM dynamically. Run npm install @ffmpeg/ffmpeg @ffmpeg/util in the project for full support."
+      }
+    ]
+  },
+  "csv-to-json": {
+    "title": "CSV to JSON Converter",
+    "shortDescription": "Convert CSV with header row to formatted JSON arrays in your browser.",
+    "seoTitle": "CSV to JSON Converter Online Free — Instant Parse | Ranburg",
+    "seoDescription": "Convert CSV with header row to formatted JSON arrays in your browser. Use CSV to JSON Converter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Paste CSV with a header row.",
+      "Review JSON output.",
+      "Copy or use in your app."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      }
+    ]
+  },
+  "json-to-csv": {
+    "title": "JSON to CSV Converter",
+    "shortDescription": "Flatten a JSON array of objects into CSV with automatic headers.",
+    "seoTitle": "JSON to CSV Converter Online Free — Array to Spreadsheet | Ranburg",
+    "seoDescription": "Flatten a JSON array of objects into CSV with automatic headers. Use JSON to CSV Converter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Paste a JSON array of objects.",
+      "Copy the generated CSV.",
+      "Open in Excel or Google Sheets."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      }
+    ]
+  },
+  "excel-to-csv": {
+    "title": "Excel to CSV Converter",
+    "shortDescription": "Convert .xlsx and .xls workbooks to CSV per sheet in your browser.",
+    "seoTitle": "Excel to CSV Converter Online Free — XLSX to CSV | Ranburg",
+    "seoDescription": "Convert .xlsx and .xls workbooks to CSV per sheet in your browser. Use Excel to CSV Converter online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload an Excel file (.xlsx, .xls).",
+      "Select a sheet if the workbook has multiple tabs.",
+      "Copy or save the CSV output."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      },
+      {
+        "question": "Which Excel formats are supported?",
+        "answer": ".xlsx, .xls, and .xlsm via the xlsx library."
+      }
+    ]
+  },
+  "face-blur": {
+    "title": "Face Blur Tool",
+    "shortDescription": "Draw rectangles on an image to pixelate faces or sensitive regions, then download PNG.",
+    "seoTitle": "Face Blur Tool Online Free — Pixelate Regions in Browser | Ranburg",
+    "seoDescription": "Draw rectangles on an image to pixelate faces or sensitive regions, then download PNG. Use Face Blur Tool online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Upload a photo.",
+      "Click and drag rectangles over faces or sensitive areas.",
+      "Adjust pixel block size.",
+      "Download the blurred PNG."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      }
+    ]
+  },
+  "burn-rate-runway-calculator": {
+    "title": "Burn Rate & Runway Calculator",
+    "shortDescription": "Calculate gross/net burn, runway months, cash-out date, and default-alive with optional revenue growth.",
+    "seoTitle": "Burn Rate Runway Calculator Online Free — Startup Cash Planning | Ranburg",
+    "seoDescription": "Calculate gross/net burn, runway months, cash-out date, and default-alive with optional revenue growth. Use Burn Rate & Runway Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter cash on hand, monthly expenses, and revenue.",
+      "View gross burn, net burn, and runway in months.",
+      "Enable revenue growth to model default-alive scenarios.",
+      "Use cash-out date for fundraising timelines."
+    ],
+    "faq": [
+      {
+        "question": "Is this calculator free?",
+        "answer": "Yes. No signup required."
+      },
+      {
+        "question": "What is net burn?",
+        "answer": "Monthly expenses minus monthly revenue. Negative net burn means cash-flow positive."
+      },
+      {
+        "question": "What is default alive?",
+        "answer": "A startup reaches default alive when revenue growth covers burn before cash runs out."
+      },
+      {
+        "question": "Is this financial advice?",
+        "answer": "No. Use for planning estimates only."
+      }
+    ]
+  },
+  "freelancer-hourly-rate-calculator": {
+    "title": "Freelancer Hourly Rate Calculator",
+    "shortDescription": "Back into an hourly rate from desired salary, taxes, benefits, and billable hours.",
+    "seoTitle": "Freelancer Hourly Rate Calculator Online Free — Price Your Time | Ranburg",
+    "seoDescription": "Back into an hourly rate from desired salary, taxes, benefits, and billable hours. Use Freelancer Hourly Rate Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Set your target annual salary.",
+      "Add effective tax rate and benefits/overhead.",
+      "Enter billable hours per week and weeks per year.",
+      "Use the hourly and day rate in proposals."
+    ],
+    "faq": [
+      {
+        "question": "Should I include taxes?",
+        "answer": "Yes. Self-employed workers should gross up for income and self-employment taxes."
+      },
+      {
+        "question": "How many billable hours is realistic?",
+        "answer": "Many freelancers bill 25–30 hours per week after sales and admin."
+      },
+      {
+        "question": "Is this free?",
+        "answer": "Yes."
+      },
+      {
+        "question": "Can I use this for agency pricing?",
+        "answer": "Yes. Adjust overhead for team and tool costs."
+      }
+    ]
+  },
+  "ab-test-significance-calculator": {
+    "title": "A/B Test Significance Calculator",
+    "shortDescription": "Two-proportion z-test for A/B conversions plus sample size planner for MDE at 80% power.",
+    "seoTitle": "A/B Test Significance Calculator Online Free — Z-Test & Sample Size | Ranburg",
+    "seoDescription": "Two-proportion z-test for A/B conversions plus sample size planner for MDE at 80% power. Use A/B Test Significance Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter visitors and conversions for variants A and B.",
+      "Read p-value and significance at 95% confidence.",
+      "Use the sample size planner before launching tests.",
+      "Set baseline conversion and minimum detectable effect."
+    ],
+    "faq": [
+      {
+        "question": "What p-value means significant?",
+        "answer": "p < 0.05 is commonly used for 95% confidence."
+      },
+      {
+        "question": "Is this a full Bayesian calculator?",
+        "answer": "No. This uses a frequentist two-proportion z-test approximation."
+      },
+      {
+        "question": "What is MDE?",
+        "answer": "Minimum detectable effect — the smallest relative lift you want to detect."
+      },
+      {
+        "question": "Is my data sent anywhere?",
+        "answer": "No. All math runs locally."
+      }
+    ]
+  },
+  "ai-crawler-robots-checker": {
+    "title": "AI Crawler Robots.txt Checker",
+    "shortDescription": "Paste robots.txt and see allow/disallow status for GPTBot, ClaudeBot, Google-Extended, and other AI crawlers.",
+    "seoTitle": "AI Crawler Robots.txt Checker Online Free — GPTBot & ClaudeBot | Ranburg",
+    "seoDescription": "Paste robots.txt and see allow/disallow status for GPTBot, ClaudeBot, Google-Extended, and other AI crawlers. Use AI Crawler Robots.txt Checker online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Paste your robots.txt content.",
+      "Review allow/disallow for each AI user-agent.",
+      "Update your live robots.txt on your server accordingly.",
+      "Combine with llms.txt for LLM-specific guidance."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      }
+    ]
+  },
+  "llms-txt-generator": {
+    "title": "llms.txt Generator",
+    "shortDescription": "Generate an llms.txt markdown file from your site name and curated URL list for LLM crawlers.",
+    "seoTitle": "llms.txt Generator Online Free — LLM Crawler Markdown | Ranburg",
+    "seoDescription": "Generate an llms.txt markdown file from your site name and curated URL list for LLM crawlers. Use llms.txt Generator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter your site or project name.",
+      "Add URLs one per line with optional titles (url | title).",
+      "Copy the generated llms.txt.",
+      "Host at https://yoursite.com/llms.txt"
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      }
+    ]
+  },
+  "jwt-decoder": {
+    "title": "JWT Decoder",
+    "shortDescription": "Decode JWT header and payload in your browser — view exp date and optionally verify HS256 signatures.",
+    "seoTitle": "JWT Decoder Online Free — Decode Token Header & Payload | Ranburg",
+    "seoDescription": "Decode JWT header and payload in your browser — view exp date and optionally verify HS256 signatures. Use JWT Decoder online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Paste a JWT (three base64url segments).",
+      "Inspect header and payload JSON.",
+      "Check exp claim as a human-readable date.",
+      "Optionally verify HS256 with your secret — never on untrusted machines."
+    ],
+    "faq": [
+      {
+        "question": "Is this tool free?",
+        "answer": "Yes. All Ranburg tools are free with no signup."
+      },
+      {
+        "question": "Are my files uploaded to a server?",
+        "answer": "No. Processing runs entirely in your browser."
+      },
+      {
+        "question": "Can I use this commercially?",
+        "answer": "Yes. Outputs are yours to use for personal or commercial projects."
+      },
+      {
+        "question": "Does it work on mobile?",
+        "answer": "Most tools work on modern mobile browsers; large files may be slower on phones."
+      },
+      {
+        "question": "Is my token sent to a server?",
+        "answer": "Never. Decoding is 100% client-side."
+      },
+      {
+        "question": "Can this verify RS256 tokens?",
+        "answer": "Only HS256 with a shared secret is supported here. RS256 needs a public key workflow."
+      }
+    ]
+  },
+  "ctc-in-hand-calculator": {
+    "title": "CTC to In-Hand Salary Calculator",
+    "shortDescription": "Estimate monthly in-hand salary from CTC with PF, gratuity, HRA exemption, and new vs old tax regime comparison.",
+    "seoTitle": "CTC to In-Hand Salary Calculator Online Free — India FY 2026-27 | Ranburg",
+    "seoDescription": "Estimate monthly in-hand salary from CTC with PF, gratuity, HRA exemption, and new vs old tax regime comparison. Use CTC to In-Hand Salary Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter annual CTC and basic salary percentage.",
+      "Set HRA, rent paid, and 80C deductions for old regime.",
+      "Toggle metro city and PF cap options.",
+      "Compare monthly in-hand under new vs old tax regime."
+    ],
+    "faq": [
+      {
+        "question": "Is this India finance calculator free?",
+        "answer": "Yes. All Ranburg India tools are free with no signup."
+      },
+      {
+        "question": "Are rates and slabs current?",
+        "answer": "Calculators use common planning rates and illustrative FY slabs. Verify against official CBDT/GST notifications before filing."
+      },
+      {
+        "question": "Is this tax or legal advice?",
+        "answer": "No. Results are estimates for planning. Consult a CA or tax advisor for returns and compliance."
+      },
+      {
+        "question": "Is my salary data stored?",
+        "answer": "No. All calculations run in your browser only."
+      }
+    ]
+  },
+  "tds-calculator": {
+    "title": "TDS Calculator India",
+    "shortDescription": "Estimate TDS on professional fees (194J), contractors (194C), rent (194I), and PAN vs no-PAN rates.",
+    "seoTitle": "TDS Calculator Online Free — Section 194J, 194C, 194I India | Ranburg",
+    "seoDescription": "Estimate TDS on professional fees (194J), contractors (194C), rent (194I), and PAN vs no-PAN rates. Use TDS Calculator India online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Select TDS section (194J, 194C, 194I).",
+      "Enter payment amount.",
+      "Toggle whether payee has PAN.",
+      "View TDS rate, TDS amount, and net payable."
+    ],
+    "faq": [
+      {
+        "question": "Is this India finance calculator free?",
+        "answer": "Yes. All Ranburg India tools are free with no signup."
+      },
+      {
+        "question": "Are rates and slabs current?",
+        "answer": "Calculators use common planning rates and illustrative FY slabs. Verify against official CBDT/GST notifications before filing."
+      },
+      {
+        "question": "Is this tax or legal advice?",
+        "answer": "No. Results are estimates for planning. Consult a CA or tax advisor for returns and compliance."
+      },
+      {
+        "question": "Is my salary data stored?",
+        "answer": "No. All calculations run in your browser only."
+      }
+    ]
+  },
+  "hra-exemption-calculator": {
+    "title": "HRA Exemption Calculator",
+    "shortDescription": "Calculate HRA tax exemption under Section 10(13A) — least of HRA received, rent minus 10% basic, or 40%/50% of basic.",
+    "seoTitle": "HRA Exemption Calculator Online Free — Section 10(13A) India | Ranburg",
+    "seoDescription": "Calculate HRA tax exemption under Section 10(13A) — least of HRA received, rent minus 10% basic, or 40%/50% of basic. Use HRA Exemption Calculator online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter annual basic salary and HRA received.",
+      "Enter annual rent paid.",
+      "Select metro or non-metro city.",
+      "View exempt HRA and taxable HRA balance."
+    ],
+    "faq": [
+      {
+        "question": "Is this India finance calculator free?",
+        "answer": "Yes. All Ranburg India tools are free with no signup."
+      },
+      {
+        "question": "Are rates and slabs current?",
+        "answer": "Calculators use common planning rates and illustrative FY slabs. Verify against official CBDT/GST notifications before filing."
+      },
+      {
+        "question": "Is this tax or legal advice?",
+        "answer": "No. Results are estimates for planning. Consult a CA or tax advisor for returns and compliance."
+      },
+      {
+        "question": "Is my salary data stored?",
+        "answer": "No. All calculations run in your browser only."
+      }
+    ]
+  },
+  "gratuity-calculator": {
+    "title": "Gratuity Calculator India",
+    "shortDescription": "Estimate gratuity amount for private sector employees using (15 × last drawn salary × years) / 26 formula.",
+    "seoTitle": "Gratuity Calculator Online Free — Payment of Gratuity Act India | Ranburg",
+    "seoDescription": "Estimate gratuity amount for private sector employees using (15 × last drawn salary × years) / 26 formula. Use Gratuity Calculator India online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Enter last drawn monthly basic + DA.",
+      "Enter completed years and extra months of service.",
+      "View gratuity amount and amount above ₹20 lakh tax-free cap.",
+      "Confirm eligibility (typically 5+ years) with HR."
+    ],
+    "faq": [
+      {
+        "question": "Is this India finance calculator free?",
+        "answer": "Yes. All Ranburg India tools are free with no signup."
+      },
+      {
+        "question": "Are rates and slabs current?",
+        "answer": "Calculators use common planning rates and illustrative FY slabs. Verify against official CBDT/GST notifications before filing."
+      },
+      {
+        "question": "Is this tax or legal advice?",
+        "answer": "No. Results are estimates for planning. Consult a CA or tax advisor for returns and compliance."
+      },
+      {
+        "question": "Is my salary data stored?",
+        "answer": "No. All calculations run in your browser only."
+      }
+    ]
+  },
+  "hsn-sac-finder": {
+    "title": "HSN / SAC Code Finder",
+    "shortDescription": "Search common HSN and SAC GST codes with descriptions and indicative GST rates.",
+    "seoTitle": "HSN SAC Code Finder Online Free — GST Tariff Search India | Ranburg",
+    "seoDescription": "Search common HSN and SAC GST codes with descriptions and indicative GST rates. Use HSN / SAC Code Finder online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Search by HSN/SAC code or product/service description.",
+      "Review code type, GST rate, and description.",
+      "Verify against the official GST tariff before invoicing."
+    ],
+    "faq": [
+      {
+        "question": "Is this India finance calculator free?",
+        "answer": "Yes. All Ranburg India tools are free with no signup."
+      },
+      {
+        "question": "Are rates and slabs current?",
+        "answer": "Calculators use common planning rates and illustrative FY slabs. Verify against official CBDT/GST notifications before filing."
+      },
+      {
+        "question": "Is this tax or legal advice?",
+        "answer": "No. Results are estimates for planning. Consult a CA or tax advisor for returns and compliance."
+      },
+      {
+        "question": "Is my salary data stored?",
+        "answer": "No. All calculations run in your browser only."
+      },
+      {
+        "question": "Is this the official GST portal?",
+        "answer": "No. This is a quick reference sample. Always confirm on cbic-gst.gov.in or your ERP."
+      }
+    ]
+  },
+  "ifsc-finder": {
+    "title": "IFSC Code Finder",
+    "shortDescription": "Look up sample IFSC codes by bank name, branch, or city for NEFT, RTGS, and IMPS transfers.",
+    "seoTitle": "IFSC Code Finder Online Free — Bank Branch Lookup India | Ranburg",
+    "seoDescription": "Look up sample IFSC codes by bank name, branch, or city for NEFT, RTGS, and IMPS transfers. Use IFSC Code Finder online for free — fast, secure, no software or signup required. Instant results in your browser.",
+    "howToUse": [
+      "Search by IFSC, bank name, branch, or city.",
+      "Copy the IFSC for your transfer form.",
+      "Confirm with your bank or cheque leaf before sending money."
+    ],
+    "faq": [
+      {
+        "question": "Is this India finance calculator free?",
+        "answer": "Yes. All Ranburg India tools are free with no signup."
+      },
+      {
+        "question": "Are rates and slabs current?",
+        "answer": "Calculators use common planning rates and illustrative FY slabs. Verify against official CBDT/GST notifications before filing."
+      },
+      {
+        "question": "Is this tax or legal advice?",
+        "answer": "No. Results are estimates for planning. Consult a CA or tax advisor for returns and compliance."
+      },
+      {
+        "question": "Is my salary data stored?",
+        "answer": "No. All calculations run in your browser only."
+      },
+      {
+        "question": "Is every branch listed?",
+        "answer": "No. This uses a curated sample of major banks. Use RBI or bank websites for exhaustive lookup."
+      }
+    ]
+  },
+  "lic-maturity-calculator": {
+    "title": "LIC Maturity Calculator",
+    "shortDescription": "Pick an LIC plan (Jeevan Labh, New Jeevan Anand, New Endowment, money-back & more) — term/PPT and illustrative bonus bands drive the maturity estimate.",
+    "seoTitle": "LIC Maturity Calculator Online Free — Jeevan Labh, Anand & Plan-wise Estimator | Ranburg",
+    "seoDescription": "Free LIC maturity calculator by plan. Select Jeevan Labh, New Jeevan Anand, New Endowment or money-back — auto term/PPT and bonus bands estimate maturity amount online.",
+    "howToUse": [
+      "Select your LIC plan from the list (Jeevan Labh, New Jeevan Anand, New Endowment, money-back, etc.).",
+      "Choose the allowed policy term / PPT combination for that plan.",
+      "Enter sum assured, premium, years elapsed, and start year.",
+      "Review auto-filled reversionary bonus and FAB (override if your statement differs).",
+      "Copy the estimated maturity into the SWP calculator as a future top-up."
+    ],
+    "faq": [
+      {
+        "question": "Is this India finance calculator free?",
+        "answer": "Yes. All Ranburg India tools are free with no signup."
+      },
+      {
+        "question": "Are rates and slabs current?",
+        "answer": "Calculators use common planning rates and illustrative FY slabs. Verify against official CBDT/GST notifications before filing."
+      },
+      {
+        "question": "Is this tax or legal advice?",
+        "answer": "No. Results are estimates for planning. Consult a CA or tax advisor for returns and compliance."
+      },
+      {
+        "question": "Is my salary data stored?",
+        "answer": "No. All calculations run in your browser only."
+      },
+      {
+        "question": "Does this fetch live LIC policy data by policy number?",
+        "answer": "No. LIC does not offer a public API for that. Choose your plan, enter SA and premiums, and we estimate using plan rules and illustrative bonus bands."
+      },
+      {
+        "question": "Which LIC plans are supported?",
+        "answer": "Jeevan Labh, New Jeevan Anand, New Endowment, Jeevan Lakshya, Single Premium Endowment, Jeevan Tarun, New Children’s Money Back, Money Back 20/25, plus a Custom option."
+      },
+      {
+        "question": "Are bonus rates guaranteed?",
+        "answer": "No. Auto rates are illustrative published-style bands by plan/term/SA. Override from your bonus statement. FAB is especially variable."
+      }
+    ]
+  },
+  "pf-calculator": {
+    "title": "PF Calculator",
+    "shortDescription": "Project EPF / PF corpus with existing balance, monthly contributions, annual salary hike, and PF interest rate.",
+    "seoTitle": "PF Calculator Online Free — EPF Balance & Salary Hike Projection India | Ranburg",
+    "seoDescription": "Free PF calculator / EPF calculator India. Project provident fund corpus with existing PF balance, monthly contribution, average salary hike per annum, and EPFO interest — online free.",
+    "howToUse": [
+      "Enter existing PF balance and current monthly basic.",
+      "Set employee and employer contribution percentages.",
+      "Choose average salary hike per year and PF interest rate.",
+      "Select years to project and optional ₹1,800 monthly cap.",
+      "View projected corpus, contributions, and interest earned."
+    ],
+    "faq": [
+      {
+        "question": "Is this India finance calculator free?",
+        "answer": "Yes. All Ranburg India tools are free with no signup."
+      },
+      {
+        "question": "Are rates and slabs current?",
+        "answer": "Calculators use common planning rates and illustrative FY slabs. Verify against official CBDT/GST notifications before filing."
+      },
+      {
+        "question": "Is this tax or legal advice?",
+        "answer": "No. Results are estimates for planning. Consult a CA or tax advisor for returns and compliance."
+      },
+      {
+        "question": "Is my salary data stored?",
+        "answer": "No. All calculations run in your browser only."
+      },
+      {
+        "question": "Does this connect to EPFO / UAN?",
+        "answer": "No. It is a browser-only projection. Check your real passbook on the EPFO member portal."
+      },
+      {
+        "question": "Should I include EPS?",
+        "answer": "This model treats employer % as going into the interest-bearing PF pot for simplicity. In reality a portion may go to EPS — adjust employer % if you want a conservative estimate."
+      }
+    ]
+  },
+  "qr-code-generator": {
+    "title": "QR Code Generator",
+    "shortDescription": "Create custom QR codes with logo, colors, and PNG/SVG/JPG download.",
+    "seoTitle": "QR Code Generator — Free Custom QR with Logo | Ranburg.com",
+    "seoDescription": "Free QR code generator with logo upload, custom colors, rounded dots, and PNG/SVG/JPG download. No signup.",
+    "howToUse": [
+      "Enter a URL or text.",
+      "Customize colors, style, and optional logo.",
+      "Download as PNG, SVG, or JPG."
+    ],
+    "faq": [
+      {
+        "question": "Can I add a logo to my QR code?",
+        "answer": "Yes. Upload a PNG or SVG logo and it will be centered with auto-scaling."
+      },
+      {
+        "question": "What download formats are supported?",
+        "answer": "PNG, SVG, and JPG."
+      },
+      {
+        "question": "Do QR codes expire?",
+        "answer": "Static QR codes encode your data directly and work indefinitely."
+      },
+      {
+        "question": "Is this free?",
+        "answer": "Yes. No signup required."
+      }
+    ]
+  },
+  "cron-generator": {
+    "title": "Salesforce Cron Expression Generator",
+    "shortDescription": "Generate valid Salesforce cron expressions for scheduled Apex and Flow jobs.",
+    "seoTitle": "Salesforce Cron Expression Generator | Free Scheduler Tool | Ranburg",
+    "seoDescription": "Free Salesforce cron generator. Build valid cron expressions for Schedulable Apex, Flow scheduled paths, and batch jobs. Copy-ready output with examples.",
+    "howToUse": [
+      "Select frequency: hourly, daily, weekly, or monthly.",
+      "Choose the time, day, and month settings for your schedule.",
+      "Review the generated cron expression in Salesforce format.",
+      "Copy and paste into your Schedulable class or Flow scheduled trigger."
+    ],
+    "faq": [
+      {
+        "question": "What cron format does Salesforce use?",
+        "answer": "Salesforce uses a 6- or 7-field cron expression: Seconds Minutes Hours Day_of_month Month Day_of_week Optional_year. Seconds are required unlike Unix cron."
+      },
+      {
+        "question": "Can I schedule a Flow with cron?",
+        "answer": "Yes. Scheduled Flows and Scheduled Paths use the same cron syntax. Test in sandbox before production."
+      },
+      {
+        "question": "What is the minimum interval?",
+        "answer": "Salesforce scheduled jobs can run at minimum once per hour for most org types. Verify governor limits for your edition."
+      }
+    ]
+  },
+  "formula-generator": {
+    "title": "Salesforce Formula Generator",
+    "shortDescription": "Build formulas for fields, flows, and validation rules with guided templates.",
+    "seoTitle": "Salesforce Formula Generator | Free Formula Builder | Ranburg",
+    "seoDescription": "Generate Salesforce formulas for formula fields, validation rules, and flows. IF, CASE, TEXT, DATE, and cross-object formula templates with copy-ready output.",
+    "howToUse": [
+      "Choose a formula type: IF, CASE, TEXT, DATE, or BLANKVALUE.",
+      "Enter field API names and comparison values.",
+      "Preview the generated formula syntax.",
+      "Copy into Formula Field, Validation Rule, or Flow formula resource."
+    ],
+    "faq": [
+      {
+        "question": "Can I use this for validation rules?",
+        "answer": "Yes. Generated formulas work in formula fields, validation rules, workflow field updates, and Flow formula resources."
+      },
+      {
+        "question": "What return types are supported?",
+        "answer": "Checkbox, Text, Number, Date, and DateTime return types depending on the template selected."
+      },
+      {
+        "question": "Are cross-object formulas supported?",
+        "answer": "Use the template and replace merge fields with valid cross-object relationship paths like Account.Name."
+      }
+    ]
+  },
+  "soql-builder": {
+    "title": "Salesforce SOQL Query Builder",
+    "shortDescription": "Visually build SOQL queries with filters, joins, and aggregations.",
+    "seoTitle": "Salesforce SOQL Builder | Free SOQL Query Generator | Ranburg",
+    "seoDescription": "Free SOQL query builder for Salesforce. Select objects, fields, WHERE clauses, ORDER BY, and LIMIT. Generate copy-ready SOQL for Developer Console and Apex.",
+    "howToUse": [
+      "Enter the primary sObject API name (e.g., Account, Opportunity).",
+      "Add fields to SELECT clause.",
+      "Define WHERE conditions with operators (=, !=, IN, LIKE).",
+      "Set ORDER BY and LIMIT, then copy the SOQL query."
+    ],
+    "faq": [
+      {
+        "question": "Does this support relationship queries?",
+        "answer": "Yes. Use relationship dot notation like Account.Name or Contact.Account.Industry in the field list."
+      },
+      {
+        "question": "Can I use aggregate functions?",
+        "answer": "Enable aggregate mode to add COUNT(), SUM(), AVG(), MIN(), MAX() with GROUP BY."
+      },
+      {
+        "question": "Is SOQL injection safe?",
+        "answer": "Always bind variables in Apex. This tool generates static queries for development and testing only."
+      }
+    ]
+  },
+  "validation-rule-generator": {
+    "title": "Salesforce Validation Rule Generator",
+    "shortDescription": "Create validation rule formulas with error messages and field-level guidance.",
+    "seoTitle": "Salesforce Validation Rule Generator | Free Rule Builder | Ranburg",
+    "seoDescription": "Generate Salesforce validation rules with formulas and error messages. Required fields, format checks, cross-field logic, and regex patterns.",
+    "howToUse": [
+      "Select validation type: required, format, range, or custom logic.",
+      "Enter field API names and conditions.",
+      "Write a user-friendly error message.",
+      "Copy formula and message into Setup → Validation Rules."
+    ],
+    "faq": [
+      {
+        "question": "When does a validation rule fire?",
+        "answer": "Validation rules run on insert and update when the formula evaluates to TRUE, preventing the record save."
+      },
+      {
+        "question": "Can I show errors on specific fields?",
+        "answer": "Yes. Set the error location to a field API name so the error appears inline on that field."
+      },
+      {
+        "question": "How do I bypass for integrations?",
+        "answer": "Use System.isBatch() or a Hierarchy Custom Setting flag in the formula for controlled bypass."
+      }
+    ]
+  },
+  "apex-test-generator": {
+    "title": "Salesforce Apex Test Class Generator",
+    "shortDescription": "Generate Apex test class boilerplate with assertions and data factory stubs.",
+    "seoTitle": "Salesforce Apex Test Class Generator | Free Apex Helper | Ranburg",
+    "seoDescription": "Generate Apex test class templates with @isTest annotation, Test.startTest/stopTest, assertions, and mock data factory patterns for deployment coverage.",
+    "howToUse": [
+      "Enter the Apex class name to test.",
+      "Select methods to cover and assertion types.",
+      "Choose data factory pattern: inline or @TestSetup.",
+      "Copy generated test class into your Salesforce org."
+    ],
+    "faq": [
+      {
+        "question": "What coverage is required?",
+        "answer": "Salesforce requires 75% Apex code coverage for production deployments. Each trigger must have coverage."
+      },
+      {
+        "question": "Should I use @TestSetup?",
+        "answer": "@TestSetup methods run once per test class and reduce DML. Use for shared test data across multiple test methods."
+      },
+      {
+        "question": "How do I mock callouts?",
+        "answer": "Implement HttpCalloutMock and Test.setMock(HttpCalloutMock.class, mock) before Test.startTest()."
+      }
+    ]
+  },
+  "flow-formula-builder": {
+    "title": "Salesforce Flow Formula Builder",
+    "shortDescription": "Build formulas for Flow decision elements and formula resources.",
+    "seoTitle": "Salesforce Flow Formula Builder | Free Flow Helper | Ranburg",
+    "seoDescription": "Build formulas for Salesforce Flow decisions, assignments, and formula resources. IF, ISBLANK, TEXT, and DATE functions with Flow-friendly syntax.",
+    "howToUse": [
+      "Select the Flow element type: Decision, Assignment, or Formula Resource.",
+      "Pick a function template and enter resource API names.",
+      "Preview the formula compatible with Flow formula editor.",
+      "Copy into your Flow Builder formula field."
+    ],
+    "faq": [
+      {
+        "question": "How are Flow formulas different from field formulas?",
+        "answer": "Flow formulas reference Flow resources with {!syntax}, support collections, and can reference $Record in record-triggered flows."
+      },
+      {
+        "question": "Can I use formulas in Decision elements?",
+        "answer": "Yes. Decision outcomes use formula conditions. Each outcome evaluates a formula that returns TRUE or FALSE."
+      },
+      {
+        "question": "What about null handling?",
+        "answer": "Use ISBLANK(), BLANKVALUE(), and NULLVALUE() to handle nulls safely in Flow formulas."
+      }
+    ]
+  },
+  "date-formula-helper": {
+    "title": "Salesforce Date Formula Helper",
+    "shortDescription": "Generate date and datetime formulas: TODAY, DATEVALUE, ADDMONTHS, and more.",
+    "seoTitle": "Salesforce Date Formula Helper | TODAY, ADDMONTHS | Ranburg",
+    "seoDescription": "Free Salesforce date formula helper. Generate TODAY(), DATEVALUE(), ADDMONTHS(), and business day calculations for formulas, flows, and validation rules.",
+    "howToUse": [
+      "Choose a date operation: add days, add months, difference, or convert datetime.",
+      "Enter field API names or literal dates.",
+      "Preview the formula with correct Salesforce date functions.",
+      "Copy into your formula field or validation rule."
+    ],
+    "faq": [
+      {
+        "question": "How do timezones affect date formulas?",
+        "answer": "TODAY() and NOW() use the org default timezone. DateTime fields store UTC and display in user timezone."
+      },
+      {
+        "question": "How do I calculate business days?",
+        "answer": "Use CASE(MOD(startDate - DATE(1900,1,7), 7), ...) patterns or integrate with Business Hours API for complex logic."
+      },
+      {
+        "question": "Can I compare dates in validation rules?",
+        "answer": "Yes. Date comparisons use standard operators: CloseDate < TODAY() fires for overdue opportunities."
+      }
+    ]
+  },
+  "governor-limits-calculator": {
+    "title": "Salesforce Governor Limits Calculator",
+    "shortDescription": "Estimate SOQL, DML, CPU, and heap usage for bulk Apex operations.",
+    "seoTitle": "Salesforce Governor Limits Calculator | Bulk Apex Planner | Ranburg",
+    "seoDescription": "Calculate Salesforce governor limit usage for bulk Apex. Plan SOQL queries, DML rows, CPU time, and heap size before deployment.",
+    "howToUse": [
+      "Enter batch size and number of SOQL queries per record.",
+      "Add DML operations and estimated CPU time per iteration.",
+      "Review limit usage against synchronous and async thresholds.",
+      "Adjust batch size to stay within governor limits."
+    ],
+    "faq": [
+      {
+        "question": "What are the main governor limits?",
+        "answer": "Key limits: 100 SOQL queries, 150 DML statements, 50,000 DML rows, 10s CPU, 6MB heap (sync) per transaction."
+      },
+      {
+        "question": "When should I use batch Apex?",
+        "answer": "Use Batch Apex for processing 10,000+ records. Batch jobs have higher limits and run asynchronously."
+      },
+      {
+        "question": "How do I reduce SOQL in loops?",
+        "answer": "Query once outside the loop, store in a Map, and reference by Id inside the loop. Never SOQL inside for loops."
+      }
+    ]
+  },
+  "omnistudio-expression-builder": {
+    "title": "OmniStudio Expression Builder",
+    "shortDescription": "Build OmniStudio DataRaptor and Integration Procedure expressions.",
+    "seoTitle": "OmniStudio Expression Builder | Free OmniStudio Tool | Ranburg",
+    "seoDescription": "Free OmniStudio expression builder for DataRaptor transforms, Integration Procedures, and OmniScripts. JSON path, merge field, and formula expressions.",
+    "howToUse": [
+      "Select expression context: DataRaptor, Integration Procedure, or OmniScript.",
+      "Define input JSON path and target merge field.",
+      "Add transformation logic: concat, format, conditional.",
+      "Copy expression into your OmniStudio designer."
+    ],
+    "faq": [
+      {
+        "question": "What is OmniStudio?",
+        "answer": "OmniStudio (formerly Vlocity) is Salesforce's industry cloud development framework for DataRaptors, Integration Procedures, and OmniScripts."
+      },
+      {
+        "question": "How do DataRaptor expressions work?",
+        "answer": "DataRaptor Extract/Transform/Load steps use formulas to map, filter, and transform JSON data between systems and Salesforce."
+      },
+      {
+        "question": "Do I need Industries Cloud for OmniStudio?",
+        "answer": "OmniStudio is available with Industries Cloud licenses and select Enterprise+ configurations."
+      }
+    ]
+  },
+  "revenue-cloud-pricing-calculator": {
+    "title": "Revenue Cloud Pricing Calculator",
+    "shortDescription": "Model CPQ pricing: list price, discounts, quantity breaks, and net price.",
+    "seoTitle": "Revenue Cloud Pricing Calculator | CPQ Price Estimator | Ranburg",
+    "seoDescription": "Free Revenue Cloud and CPQ pricing calculator. Model list price, volume discounts, partner margins, and net price for Salesforce quoting scenarios.",
+    "howToUse": [
+      "Enter list price and quantity for the product line.",
+      "Apply discount percentage or partner margin.",
+      "Add volume break thresholds for tiered pricing.",
+      "Review net price, total contract value, and annual recurring revenue."
+    ],
+    "faq": [
+      {
+        "question": "What is Revenue Cloud?",
+        "answer": "Salesforce Revenue Cloud combines CPQ, Billing, and Subscription Management for configure-price-quote-to-cash workflows."
+      },
+      {
+        "question": "How do volume discounts work in CPQ?",
+        "answer": "CPQ discount schedules apply tiered discounts based on quantity breaks defined in product rules."
+      },
+      {
+        "question": "Can this replace CPQ configuration?",
+        "answer": "This is an estimation tool for planning. Actual quotes require Salesforce CPQ or Revenue Cloud product configuration."
+      }
+    ]
+  }
+}

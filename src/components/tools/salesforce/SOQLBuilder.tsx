@@ -1,11 +1,14 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import { CopyResultPanel } from "@/components/tools/viz";
 
 const PRESETS = ["Id", "Name", "CreatedDate", "LastModifiedDate", "OwnerId", "Industry", "Email", "Phone", "Status", "Amount"];
 
 export default function SOQLBuilder() {
+  const { t } = useToolUi("soql-builder" );
   const [objectName, setObjectName] = useState("Account");
   const [fieldList, setFieldList] = useState<string[]>(["Id", "Name", "Industry"]);
   const [customField, setCustomField] = useState("");

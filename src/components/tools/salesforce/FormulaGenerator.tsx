@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import CopyButton from "@/components/ui/CopyButton";
 
@@ -13,6 +15,7 @@ const TEMPLATES = {
 };
 
 export default function FormulaGenerator() {
+  const { t } = useToolUi("formula-generator" );
   const [type, setType] = useState<keyof typeof TEMPLATES>("if");
   const [field, setField] = useState("Amount");
   const [value, setValue] = useState("10000");

@@ -1,11 +1,14 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import CopyButton from "@/components/ui/CopyButton";
 
 const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 export default function CronGenerator() {
+  const { t } = useToolUi("cron-generator" );
   const [freq, setFreq] = useState<"hourly" | "daily" | "weekly" | "monthly">("daily");
   const [minute, setMinute] = useState(0);
   const [hour, setHour] = useState(6);

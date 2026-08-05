@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { getRecommendedTools } from "@/lib/toolRecommendations";
 import { getToolIcon } from "@/lib/toolIcons";

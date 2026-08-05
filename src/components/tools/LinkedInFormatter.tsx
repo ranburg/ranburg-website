@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import CopyButton from "@/components/ui/CopyButton";
 
@@ -25,6 +27,7 @@ function hookScore(text: string): number {
 }
 
 export default function LinkedInFormatter() {
+  const { t } = useToolUi("linkedin-formatter" );
   const [text, setText] = useState(
     "I spent 5 years building products that failed.\n\nThen I changed one thing.\n\nHere's what I learned about building software that actually ships 👇"
   );

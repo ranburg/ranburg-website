@@ -1,11 +1,14 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useMemo, useState } from "react";
 import CalculatorSlider from "@/components/ui/CalculatorSlider";
 
 const LIMITS = { soql: 100, dml: 150, dmlRows: 50000, cpu: 10000, heap: 6 };
 
 export default function GovernorLimitsCalculator() {
+  const { t } = useToolUi("governor-limits-calculator" );
   const [records, setRecords] = useState(200);
   const [soqlPerRecord, setSoqlPerRecord] = useState(1);
   const [dmlPerRecord, setDmlPerRecord] = useState(1);

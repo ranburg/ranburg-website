@@ -1,5 +1,7 @@
 "use client";
 
+import { useToolUi } from "@/hooks/useToolUi";
+
 import { useState } from "react";
 import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import CopyButton from "@/components/ui/CopyButton";
@@ -49,6 +51,7 @@ function minifySQL(sql: string): string {
 }
 
 export default function SQLFormatter() {
+  const { t } = useToolUi("sql-formatter" );
   const [input, setInput] = useState("SELECT u.name, o.total FROM users u JOIN orders o ON u.id = o.user_id WHERE o.total > 100 ORDER BY o.total DESC");
   const [output, setOutput] = useState("");
   const [uppercase, setUppercase] = useState(true);
