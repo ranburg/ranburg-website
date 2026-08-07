@@ -77,6 +77,119 @@
     background: color-mix(in srgb, var(--accent) 35%, transparent);
     color: var(--foreground);
   }
+
+  /* Persona accent themes — keep layout/nav structure; swap accent tokens only */
+  [data-persona="content-creator"] {
+    --accent: #c026d3;
+    --accent-soft: #e879f9;
+    --accent-emerald: #d946ef;
+    --grid-color: rgba(192, 38, 211, 0.08);
+  }
+
+  [data-persona="developer"] {
+    --accent: #10b981;
+    --accent-soft: #34d399;
+    --accent-emerald: #059669;
+    --grid-color: rgba(16, 185, 129, 0.08);
+  }
+
+  [data-persona="finance-pro"] {
+    --accent: #1d4ed8;
+    --accent-soft: #3b82f6;
+    --accent-emerald: #0f766e;
+    --grid-color: rgba(29, 78, 216, 0.08);
+  }
+
+  [data-persona="small-business"] {
+    --accent: #0f766e;
+    --accent-soft: #14b8a6;
+    --accent-emerald: #b45309;
+    --grid-color: rgba(15, 118, 110, 0.08);
+  }
+
+  .dark[data-persona="content-creator"] {
+    --accent: #e879f9;
+    --accent-soft: #f0abfc;
+    --accent-emerald: #f472b6;
+    --grid-color: rgba(232, 121, 249, 0.08);
+  }
+
+  .dark[data-persona="developer"] {
+    --accent: #34d399;
+    --accent-soft: #6ee7b7;
+    --accent-emerald: #10b981;
+    --grid-color: rgba(52, 211, 153, 0.08);
+  }
+
+  .dark[data-persona="finance-pro"] {
+    --accent: #60a5fa;
+    --accent-soft: #93c5fd;
+    --accent-emerald: #2dd4bf;
+    --grid-color: rgba(96, 165, 250, 0.08);
+  }
+
+  .dark[data-persona="small-business"] {
+    --accent: #2dd4bf;
+    --accent-soft: #5eead4;
+    --accent-emerald: #fbbf24;
+    --grid-color: rgba(45, 212, 191, 0.08);
+  }
+
+  [data-persona="content-creator"] body {
+    background-image:
+      radial-gradient(ellipse 90% 70% at 10% -20%, rgba(192, 38, 211, 0.14), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(236, 72, 153, 0.1), transparent 45%),
+      linear-gradient(180deg, transparent 0%, var(--background) 70%);
+  }
+
+  [data-persona="developer"] body {
+    background-image:
+      radial-gradient(ellipse 90% 70% at 10% -20%, rgba(16, 185, 129, 0.14), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(5, 150, 105, 0.08), transparent 45%),
+      linear-gradient(180deg, transparent 0%, var(--background) 70%);
+  }
+
+  [data-persona="finance-pro"] body {
+    background-image:
+      radial-gradient(ellipse 90% 70% at 10% -20%, rgba(29, 78, 216, 0.12), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(15, 118, 110, 0.08), transparent 45%),
+      linear-gradient(180deg, transparent 0%, var(--background) 70%);
+  }
+
+  [data-persona="small-business"] body {
+    background-image:
+      radial-gradient(ellipse 90% 70% at 10% -20%, rgba(15, 118, 110, 0.14), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(180, 83, 9, 0.08), transparent 45%),
+      linear-gradient(180deg, transparent 0%, var(--background) 70%);
+  }
+
+  .dark[data-persona="content-creator"] body {
+    background-image:
+      radial-gradient(ellipse 90% 70% at 15% -25%, rgba(232, 121, 249, 0.16), transparent 55%),
+      radial-gradient(ellipse 45% 35% at 95% 5%, rgba(244, 114, 182, 0.1), transparent 45%),
+      linear-gradient(180deg, #0f0612 0%, var(--background) 55%);
+  }
+
+  .dark[data-persona="developer"] body {
+    background-image:
+      radial-gradient(ellipse 90% 70% at 15% -25%, rgba(52, 211, 153, 0.16), transparent 55%),
+      radial-gradient(ellipse 45% 35% at 95% 5%, rgba(16, 185, 129, 0.08), transparent 45%),
+      linear-gradient(180deg, #06110e 0%, var(--background) 55%);
+  }
+
+  .dark[data-persona="finance-pro"] body {
+    background-image:
+      radial-gradient(ellipse 90% 70% at 15% -25%, rgba(96, 165, 250, 0.14), transparent 55%),
+      radial-gradient(ellipse 45% 35% at 95% 5%, rgba(45, 212, 191, 0.08), transparent 45%),
+      linear-gradient(180deg, #060b14 0%, var(--background) 55%);
+  }
+
+  .dark[data-persona="small-business"] body {
+    background-image:
+      radial-gradient(ellipse 90% 70% at 15% -25%, rgba(45, 212, 191, 0.14), transparent 55%),
+      radial-gradient(ellipse 45% 35% at 95% 5%, rgba(251, 191, 36, 0.08), transparent 45%),
+      linear-gradient(180deg, #06110e 0%, var(--background) 55%);
+  }
 }
 
 @layer components {

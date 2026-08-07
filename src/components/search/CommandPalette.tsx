@@ -7,6 +7,8 @@ import { globalSearch, type GlobalSearchFilter, type SearchResult } from "@/lib/
 import { getToolIcon } from "@/lib/toolIcons";
 import { SEARCH_SUGGESTIONS } from "@/lib/toolsHubConfig";
 import { getRecentSearches, getPopularSearches, trackSearch } from "@/lib/toolAnalytics";
+import { getPersonaToolSlugs } from "@/lib/personas";
+import { usePersonaOptional } from "@/hooks/usePersona";
 import { cn } from "@/lib/utils";
 
 interface CommandPaletteProps {
@@ -62,6 +64,7 @@ const FILTER_TABS: { id: GlobalSearchFilter; label: string }[] = [
 ];
 
 export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
+  const personaCtx = usePersonaOptional();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<GlobalSearchFilter>("all");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -86,9 +89,14 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
+  const prioritizeToolSlugs = useMemo(
+    () => (personaCtx?.persona ? getPersonaToolSlugs(personaCtx.persona) : undefined),
+    [personaCtx?.persona]
+  );
+
   const results = useMemo(
-    () => globalSearch(query, 12, filter),
-    [query, filter]
+    () => globalSearch(query, 12, filter, { prioritizeToolSlugs }),
+    [query, filter, prioritizeToolSlugs]
   );
   const hasQuery = query.trim().length > 0;
 
@@ -259,9 +267,11 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
                   <span
                     className={cn(
                       "shrink-0 rounded-full px-2 py-0.5 text-xs",
-                      result.type === "blog"
-                        ? "bg-accent/10 text-accent"
-                        : "bg-accent-emerald/10 text-accent-emerald"
+                      result.badge === "For you"
+                        ? "bg-accent text-white"
+                        : result.type === "blog"
+                          ? "bg-accent/10 text-accent"
+                          : "bg-accent-emerald/10 text-accent-emerald"
                     )}
                   >
                     {result.badge}

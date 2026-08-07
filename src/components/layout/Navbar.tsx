@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import ToolsSubNav from "@/components/layout/ToolsSubNav";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
+import PersonaSelector from "@/components/persona/PersonaSelector";
 import { useCommandPaletteOptional } from "@/components/search/CommandPaletteProvider";
 
 const navLinkClass = (active: boolean) =>
@@ -92,6 +93,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
+            <PersonaSelector />
             <LanguageSwitcher />
             <button
               type="button"
@@ -143,6 +145,7 @@ export default function Navbar() {
             >
               <div className="px-4 py-3">
                 <LanguageSwitcher className="mb-3 w-full" />
+                <PersonaSelector variant="stack" onNavigate={closeMobile} className="mb-3" />
                 <button
                   type="button"
                   onClick={openSearch}

@@ -1,5 +1,6 @@
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { CASE_STUDIES } from "@/lib/caseStudiesConfig";
+import { PERSONAS } from "@/lib/personas";
 import { buildSitemapXml, isoDate, SITEMAP_BASE } from "@/lib/sitemapXml";
 import { locales, localizedPath } from "@/i18n/routing";
 
@@ -32,6 +33,12 @@ export async function GET() {
       lastmod,
       changefreq: "monthly",
       priority: 0.65,
+    })),
+    ...PERSONAS.map((p) => ({
+      loc: `${SITEMAP_BASE}${localizedPath(locale, `/for/${p.slug}`)}`,
+      lastmod,
+      changefreq: "weekly",
+      priority: 0.8,
     })),
   ]);
 

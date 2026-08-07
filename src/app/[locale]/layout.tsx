@@ -5,6 +5,7 @@ import { routing, type AppLocale } from "@/i18n/routing";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CommandPaletteProvider from "@/components/search/CommandPaletteProvider";
+import { PersonaProvider } from "@/components/persona/PersonaProvider";
 import LocaleHtmlAttrs from "@/components/i18n/LocaleHtmlAttrs";
 import JsonLd from "@/components/seo/JsonLd";
 import {
@@ -45,13 +46,15 @@ export default async function LocaleLayout({ children, params }: Props) {
     <NextIntlClientProvider messages={messages}>
       <LocaleHtmlAttrs locale={locale as AppLocale} />
       <JsonLd data={[organizationJsonLd(), websiteJsonLd(), localBusinessJsonLd()]} />
-      <CommandPaletteProvider>
-        <div className={fontClass || undefined}>
-          <Navbar />
-          <main className="pt-[var(--nav-height)]">{children}</main>
-          <Footer />
-        </div>
-      </CommandPaletteProvider>
+      <PersonaProvider>
+        <CommandPaletteProvider>
+          <div className={fontClass || undefined}>
+            <Navbar />
+            <main className="pt-[var(--nav-height)]">{children}</main>
+            <Footer />
+          </div>
+        </CommandPaletteProvider>
+      </PersonaProvider>
     </NextIntlClientProvider>
   );
 }

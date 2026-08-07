@@ -24,24 +24,32 @@ function matchesQuery(haystack: string, q: string): boolean {
   return q.split(/\s+/).filter(Boolean).every((word) => lower.includes(word));
 }
 
+export interface GlobalSearchOptions {
+  /** Tool slugs to boost (e.g. active persona featured + recommended) */
+  prioritizeToolSlugs?: string[];
+}
+
 export function globalSearch(
   query: string,
   limit = 12,
-  filter: GlobalSearchFilter = "all"
+  filter: GlobalSearchFilter = "all",
+  options: GlobalSearchOptions = {}
 ): SearchResult[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
 
+  const priority = new Set(options.prioritizeToolSlugs ?? []);
   const results: SearchResult[] = [];
 
   if (filter === "all" || filter === "tool") {
     searchTools(q).forEach((t) => {
+      const forYou = priority.has(t.slug);
       results.push({
         type: "tool",
         title: t.title,
         description: t.shortDescription,
         href: `/tools/${t.slug}`,
-        badge: "Tool",
+        badge: forYou ? "For you" : "Tool",
         icon: t.icon,
         gradient: t.gradient,
       });
@@ -99,8 +107,18 @@ export function globalSearch(
     "coming-soon": 4,
   };
 
+  const slugFromHref = (href: string) => {
+    const m = href.match(/\/tools\/([^/?#]+)/);
+    return m?.[1] ?? "";
+  };
+
   return results
-    .sort((a, b) => typeOrder[a.type] - typeOrder[b.type])
+    .sort((a, b) => {
+      const aPri = a.type === "tool" && priority.has(slugFromHref(a.href)) ? 0 : 1;
+      const bPri = b.type === "tool" && priority.has(slugFromHref(b.href)) ? 0 : 1;
+      if (aPri !== bPri) return aPri - bPri;
+      return typeOrder[a.type] - typeOrder[b.type];
+    })
     .slice(0, limit);
 }
 
