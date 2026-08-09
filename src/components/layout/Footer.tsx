@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations, useMessages } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Zap, Mail, MapPin, Phone, Linkedin, Twitter } from "lucide-react";
 import { SITE } from "@/lib/siteConfig";
@@ -14,13 +14,8 @@ const MAPS_URL = "https://maps.app.goo.gl/Cm1m7Qv2vF5cS7vr7";
 export default function Footer() {
   const t = useTranslations("footer");
   const tCommon = useTranslations("common");
-  const messages = useMessages() as {
-    tools?: { meta?: Record<string, { title?: string }> };
-  };
 
-  const titleFor = (slug: string, fallback: string) =>
-    messages.tools?.meta?.[slug]?.title ?? fallback;
-
+  // Use canonical English titles from TOOLS_CONFIG — avoids shipping tools.meta (~153KB) to every page.
   const popularTools = POPULAR_TOOL_SLUGS.slice(0, 6)
     .map((s) => TOOLS_CONFIG.find((t) => t.slug === s))
     .filter(Boolean);
@@ -62,7 +57,7 @@ export default function Footer() {
               {popularTools.map((tool) => tool && (
                 <li key={tool.slug}>
                   <Link href={`/tools/${tool.slug}`} className="text-sm text-theme-muted hover:text-accent">
-                    {titleFor(tool.slug, tool.title)}
+                    {tool.title}
                   </Link>
                 </li>
               ))}
@@ -72,7 +67,7 @@ export default function Footer() {
               {recentTools.map((tool) => tool && (
                 <li key={tool.slug}>
                   <Link href={`/tools/${tool.slug}`} className="text-sm text-theme-muted hover:text-accent">
-                    {titleFor(tool.slug, tool.title)}
+                    {tool.title}
                   </Link>
                 </li>
               ))}

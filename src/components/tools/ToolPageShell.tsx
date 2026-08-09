@@ -30,6 +30,7 @@ import ToolViewTracker from "@/components/tools/ToolViewTracker";
 import RecentlyViewed from "@/components/tools/RecentlyViewed";
 import ToolInternalLinks from "@/components/tools/ToolInternalLinks";
 import ToolRenderer from "@/components/tools/ToolRenderer";
+import ToolUiMessages from "@/components/i18n/ToolUiMessages";
 import AffiliateCta from "@/components/ui/AffiliateCta";
 
 interface ToolPageProps {
@@ -151,7 +152,9 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
           <WorkedExampleBanner slug={slug} />
 
           <div className="min-w-0" data-tool-interactive>
-            <ToolRenderer slug={slug} />
+            <ToolUiMessages>
+              <ToolRenderer slug={slug} />
+            </ToolUiMessages>
           </div>
 
           <ToolNextSteps currentSlug={slug} limit={3} />
