@@ -138,7 +138,7 @@ export async function fetchDatamuseRelated(topic: string, max = 40): Promise<Has
 
   try {
     const url = `https://api.datamuse.com/words?ml=${query}&max=${max}`;
-    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) return [];
     const data = (await res.json()) as DatamuseWord[];
     const items: HashtagItem[] = [];

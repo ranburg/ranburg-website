@@ -30,7 +30,7 @@ interface YtChannel {
 
 async function ytFetch(path: string, apiKey: string) {
   const url = `https://www.googleapis.com/youtube/v3/${path}${path.includes("?") ? "&" : "?"}key=${apiKey}`;
-  const res = await fetch(url, { next: { revalidate: 3600 } });
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) return null;
   return res.json();
 }

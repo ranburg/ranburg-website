@@ -22,6 +22,7 @@ export default function BlogCard({ post, variant = "default", priority = false, 
     return (
       <Link
         href={`/blog/${post.slug}`}
+        prefetch={false}
         className={cn(
           "group grid overflow-hidden rounded-2xl border border-theme-subtle bg-[var(--glass-bg)] shadow-sm transition-all hover:border-accent/30 hover:shadow-lg md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]",
           className
@@ -70,6 +71,7 @@ export default function BlogCard({ post, variant = "default", priority = false, 
     return (
       <Link
         href={`/blog/${post.slug}`}
+        prefetch={false}
         className={cn(
           "group flex gap-4 overflow-hidden rounded-xl border border-theme-subtle bg-[var(--glass-bg)] p-3 transition-all hover:border-accent/30 hover:shadow-md",
           className
@@ -92,6 +94,7 @@ export default function BlogCard({ post, variant = "default", priority = false, 
   return (
     <Link
       href={`/blog/${post.slug}`}
+      prefetch={false}
       className={cn(
         "group flex h-full flex-col overflow-hidden rounded-2xl border border-theme-subtle bg-[var(--glass-bg)] shadow-sm transition-all hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg",
         className

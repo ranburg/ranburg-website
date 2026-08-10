@@ -22,7 +22,7 @@ export default function ToolCard({ slug, showCategory = true, showUseCount = tru
   const seoCat = getPrimarySeoCategoryForTool(tool.slug);
 
   return (
-    <Link href={`/tools/${tool.slug}`} className={cn("group block h-full", className)}>
+    <Link href={`/tools/${tool.slug}`} prefetch={false} className={cn("group block h-full", className)}>
       <article className="relative flex h-full flex-col overflow-hidden rounded-xl border border-theme-subtle bg-theme-surface/40 p-5 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-accent/40 group-hover:bg-theme-surface/70 group-hover:shadow-md">
         <div className="flex flex-1 flex-col">
           <div className="mb-3 flex items-start justify-between gap-3">

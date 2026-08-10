@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { TOOLS_CONFIG, getToolBySlug } from "@/lib/toolsConfig";
-import { COMING_SOON_TOOLS, getComingSoonTool } from "@/lib/toolComingSoonConfig";
+import { getToolBySlug } from "@/lib/toolsConfig";
+import { getComingSoonTool } from "@/lib/toolComingSoonConfig";
 import { isSeoCategorySlug } from "@/lib/toolSeoCategories";
 import { buildMetadata } from "@/lib/seo";
 import { setRequestLocale, getMessages } from "next-intl/server";
@@ -16,19 +16,10 @@ import ToolPageShell from "@/components/tools/ToolPageShell";
 import ToolComingSoonShell from "@/components/tools/ToolComingSoonShell";
 import ToolCategoryPage, {
   generateCategoryMetadata,
-  getCategoryStaticParams,
 } from "@/components/tools/ToolCategoryPage";
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
-}
-
-export async function generateStaticParams() {
-  return [
-    ...getCategoryStaticParams(),
-    ...TOOLS_CONFIG.map((tool) => ({ slug: tool.slug })),
-    ...COMING_SOON_TOOLS.map((tool) => ({ slug: tool.slug })),
-  ];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

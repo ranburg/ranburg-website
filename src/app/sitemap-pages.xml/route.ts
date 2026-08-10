@@ -2,10 +2,12 @@ import { SERVICES_CONFIG } from "@/lib/servicesConfig";
 import { CASE_STUDIES } from "@/lib/caseStudiesConfig";
 import { PERSONAS } from "@/lib/personas";
 import { buildSitemapXml, isoDate, SITEMAP_BASE } from "@/lib/sitemapXml";
-import { locales, localizedPath } from "@/i18n/routing";
+import { routing, localizedPath } from "@/i18n/routing";
 
+/** English-only pages sitemap to reduce crawl × locale multiplier. */
 export async function GET() {
   const lastmod = isoDate();
+  const locale = routing.defaultLocale;
   const pageEntries: { path: string; changefreq: string; priority: number }[] = [
     { path: "/tools", changefreq: "weekly", priority: 0.95 },
     { path: "/blog", changefreq: "weekly", priority: 0.85 },
@@ -17,10 +19,13 @@ export async function GET() {
     { path: "/terms", changefreq: "yearly", priority: 0.3 },
     { path: "/disclaimer", changefreq: "yearly", priority: 0.3 },
   ];
-  const urls = locales.flatMap((locale) => [
+  const urls = [
     { loc: `${SITEMAP_BASE}${localizedPath(locale, "/")}`, lastmod, changefreq: "weekly", priority: 1 },
     ...pageEntries.map(({ path, changefreq, priority }) => ({
-      loc: `${SITEMAP_BASE}${localizedPath(locale, path)}`, lastmod, changefreq, priority,
+      loc: `${SITEMAP_BASE}${localizedPath(locale, path)}`,
+      lastmod,
+      changefreq,
+      priority,
     })),
     ...SERVICES_CONFIG.map((s) => ({
       loc: `${SITEMAP_BASE}${localizedPath(locale, `/services/${s.slug}`)}`,
@@ -40,12 +45,12 @@ export async function GET() {
       changefreq: "weekly",
       priority: 0.8,
     })),
-  ]);
+  ];
 
   return new Response(buildSitemapXml(urls), {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+      "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800",
     },
   });
 }

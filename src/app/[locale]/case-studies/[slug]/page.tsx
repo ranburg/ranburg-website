@@ -2,16 +2,12 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { isAppLocale } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { CASE_STUDIES, getCaseStudyBySlug } from "@/lib/caseStudiesConfig";
+import { getCaseStudyBySlug } from "@/lib/caseStudiesConfig";
 import { buildMetadata } from "@/lib/seo";
 import CaseStudyPageShell from "@/components/case-studies/CaseStudyPageShell";
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
-}
-
-export async function generateStaticParams() {
-  return CASE_STUDIES.map((c) => ({ slug: c.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

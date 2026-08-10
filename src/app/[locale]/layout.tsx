@@ -20,12 +20,12 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-/** Prerender English only; other locales generate on first request (cuts ISR fan-out ~7×). */
-export function generateStaticParams() {
-  return [{ locale: routing.defaultLocale }];
-}
-
-export const dynamicParams = true;
+/**
+ * Hobby plan: ISR durable-cache reads are exhausted.
+ * Force dynamic rendering so pages use Function Invocations (plenty of headroom)
+ * instead of ISR Read Units. Put Cloudflare (free) in front later to cache HTML.
+ */
+export const dynamic = "force-dynamic";
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
