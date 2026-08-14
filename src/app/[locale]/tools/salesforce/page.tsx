@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { isAppLocale } from "@/i18n/routing";
 import Link from "next/link";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, collectionPageJsonLd } from "@/lib/seo";
 import { SALESFORCE_TOOL_SECTIONS } from "@/lib/salesforceToolsHub";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { getComingSoonTool } from "@/lib/toolComingSoonConfig";
 import { getToolIcon } from "@/lib/toolIcons";
+import { SITE } from "@/lib/siteConfig";
+import JsonLd from "@/components/seo/JsonLd";
 import Button from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
 
@@ -58,8 +60,22 @@ const SEO_SECTIONS = [
 export default async function SalesforceToolsHubPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: raw } = await params;
   setRequestLocale(isAppLocale(raw) ? raw : "en");
+  const salesforceTools = SALESFORCE_TOOL_SECTIONS.flatMap((section) =>
+    section.slugs.map((slug) => getToolBySlug(slug)).filter(Boolean)
+  );
   return (
     <div className="pb-24">
+      <JsonLd
+        data={collectionPageJsonLd(
+          "Free Salesforce tools",
+          "Salesforce tools for admins and developers: formula generators, SOQL builder, Apex helpers, and admin utilities.",
+          `${SITE.url}/tools/salesforce`,
+          salesforceTools.map((tool) => ({
+            name: tool!.title,
+            url: `${SITE.url}/tools/${tool!.slug}`,
+          }))
+        )}
+      />
       <section className="relative overflow-hidden py-24">
         <div className="absolute inset-0 bg-grid opacity-30" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

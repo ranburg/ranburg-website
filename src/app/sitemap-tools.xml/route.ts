@@ -1,6 +1,7 @@
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { PRIORITY_INDEX_TOOL_SLUGS } from "@/lib/seoGrowthConfig";
-import { buildSitemapXml, isoDate, SITEMAP_BASE } from "@/lib/sitemapXml";
+import { TOOL_SEO_CONTENT_UPDATED } from "@/lib/toolSeoGenerator";
+import { buildSitemapXml, SITEMAP_BASE } from "@/lib/sitemapXml";
 import { routing, localizedPath } from "@/i18n/routing";
 
 /**
@@ -8,7 +9,7 @@ import { routing, localizedPath } from "@/i18n/routing";
  * language switcher + hreflang). Avoids ISR/function burn from 7× URL sets.
  */
 export async function GET() {
-  const lastmod = isoDate();
+  const lastmod = TOOL_SEO_CONTENT_UPDATED;
   const prioritySet = new Set<string>(PRIORITY_INDEX_TOOL_SLUGS);
   const locale = routing.defaultLocale;
 

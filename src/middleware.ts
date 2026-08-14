@@ -30,6 +30,6 @@ export default function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all pathnames except api, static files, and Next internals
-    "/((?!api|_next|_vercel|.*\\..*|sitemap.*\\.xml|robots\\.txt|ads\\.txt|indexnow-key\\.txt|opengraph-image).*)",
+    "/((?!api|_next|_vercel|.*\\..*|sitemap.*\\.xml|robots\\.txt|ads\\.txt|indexnow-key\\.txt|llms\\.txt|opengraph-image).*)",
   ],
 };

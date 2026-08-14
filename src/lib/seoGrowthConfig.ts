@@ -243,3 +243,232 @@ export function isIndexableBlogPost(post: {
 }): boolean {
   return !shouldNoIndexBlogPost(post);
 }
+
+/** Unique PAA-style FAQs for money pages (merged on top of tool.faq). */
+export const TOOL_UNIQUE_FAQS: Record<string, { question: string; answer: string }[]> = {
+  emi: [
+    {
+      question: "What EMI to income ratio is considered safe in India?",
+      answer:
+        "Lenders typically prefer total EMIs under 40–50% of take-home pay. Use this EMI calculator with your actual offer rate, then leave a buffer for other loans, rent, and emergencies before you sign.",
+    },
+    {
+      question: "Does this EMI calculator work for SBI, HDFC, and ICICI home loans?",
+      answer:
+        "Yes. Enter the principal, annual rate, and tenure from any Indian bank sanction letter. The formula is the standard reducing-balance EMI used by SBI, HDFC, ICICI, and most NBFCs. Confirm processing fees and floating-rate resets with the lender.",
+    },
+    {
+      question: "How do I lower EMI without changing the loan amount?",
+      answer:
+        "Extend tenure to cut the monthly installment (total interest rises), negotiate a lower rate, or make a part-prepayment. Compare 15-year vs 20-year tenures here, then check the loan foreclosure calculator if you plan to close early.",
+    },
+  ],
+  sip: [
+    {
+      question: "What is a good SIP return rate to assume?",
+      answer:
+        "Equity SIPs are often modelled at 10–12% long-term, hybrid at 8–10%, and debt lower. This SIP calculator lets you stress-test optimistic vs conservative rates so your goal amount stays realistic.",
+    },
+    {
+      question: "SIP vs lump sum — which grows faster?",
+      answer:
+        "A lump sum invested at the start compounds on the full amount immediately. SIP averages purchase cost over time and is easier for salaried investors. Run both monthly SIP and a one-time equivalent in separate scenarios before you decide.",
+    },
+    {
+      question: "Does this SIP calculator include expense ratio and tax?",
+      answer:
+        "No. Enter an expected net return after expense ratio. LTCG on equity funds and tax on debt funds are not deducted — treat the corpus as pre-tax guidance and confirm with your CA.",
+    },
+  ],
+  "gst-calculator": [
+    {
+      question: "How do I calculate GST inclusive vs exclusive in India?",
+      answer:
+        "Exclusive: GST = amount × rate / 100. Inclusive: GST = amount − (amount × 100 / (100 + rate)). Switch modes on this GST calculator to match quotes vs invoices.",
+    },
+    {
+      question: "When should I use CGST/SGST vs IGST?",
+      answer:
+        "Intra-state supplies split GST into CGST + SGST (or UTGST). Inter-state supplies use IGST at the same headline rate (5%, 12%, 18%, or 28%). The breakdown table shows both views.",
+    },
+    {
+      question: "Does this GST calculator work for 5%, 12%, 18%, and 28%?",
+      answer:
+        "Yes. Pick the slab that applies to your HSN/SAC. Composition dealers and exempt supplies follow different rules — this tool is for standard GST math on taxable value.",
+    },
+  ],
+  "loan-foreclosure-calculator": [
+    {
+      question: "Is it worth foreclosing a home loan in India?",
+      answer:
+        "Compare remaining interest vs foreclosure charges (often 0–2% plus GST on floating home loans). If interest saved is clearly larger and you still keep an emergency fund, foreclosure can win. Run your outstanding, rate, and fee here first.",
+    },
+    {
+      question: "Foreclosure vs part-prepayment — which saves more?",
+      answer:
+        "Part-prepayment cuts principal and future interest while keeping the loan alive. Full foreclosure stops interest entirely but may trigger fees. Model both before you call the bank.",
+    },
+  ],
+  "youtube-revenue-calculator": [
+    {
+      question: "What is a typical YouTube RPM in 2026?",
+      answer:
+        "RPM varies widely by niche and country. Finance and software often see higher RPM than entertainment or kids content. Use low/mid/high bands (for example $1–$8) rather than a single number when you forecast.",
+    },
+    {
+      question: "Is YouTube revenue the same as AdSense RPM?",
+      answer:
+        "YouTube RPM is revenue per 1,000 video views after YouTube’s cut. AdSense Page RPM is for websites. Use the matching calculator — this page estimates YouTube; the AdSense revenue calculator is for sites.",
+    },
+    {
+      question: "How much can I earn from 1 million YouTube views?",
+      answer:
+        "At $2.50 RPM, 1M views ≈ $2,500 before tax. Sponsorships and memberships are extra. Change RPM on this YouTube revenue calculator to match your niche.",
+    },
+  ],
+  "instagram-revenue-calculator": [
+    {
+      question: "How much do Instagram influencers charge per post?",
+      answer:
+        "Nano creators may earn a few thousand rupees per reel; mid-tier (50k–200k) often charge more based on engagement, not just followers. This Instagram earnings calculator uses follower tiers and typical sponsorship ranges as a starting point.",
+    },
+    {
+      question: "Do likes matter more than followers for Instagram income?",
+      answer:
+        "Brands look at engagement rate, saves, and story replies. A smaller highly engaged audience often prices better than a large inactive one. Pair this calculator with Instagram profile insights.",
+    },
+  ],
+  "adsense-revenue-calculator": [
+    {
+      question: "What is a good AdSense RPM for a tools website?",
+      answer:
+        "Utility and finance pages in high-CPC geos often outperform generic blogs, but RPM still depends on traffic country, season, and ad density. Model $2–$8 Page RPM scenarios rather than copying another site’s screenshot.",
+    },
+    {
+      question: "How many pageviews do I need to make $1,000 with AdSense?",
+      answer:
+        "At $4 Page RPM you need about 250,000 pageviews. This AdSense revenue calculator lets you reverse-plan traffic vs RPM so goals stay numeric.",
+    },
+  ],
+  "youtube-hashtag-generator": [
+    {
+      question: "How many hashtags should I use on YouTube Shorts?",
+      answer:
+        "YouTube allows hashtags in the title and description. 3–8 relevant tags usually beat a long spam list. Generate a mix, then keep niche + branded tags that match the video.",
+    },
+    {
+      question: "Do YouTube hashtags help ranking in 2026?",
+      answer:
+        "Hashtags help categorization and search for exact topics; watch time and title/thumbnail still dominate. Use this YouTube hashtag generator for discovery, not as a substitute for a clear title.",
+    },
+  ],
+  "instagram-hashtag-generator": [
+    {
+      question: "How many Instagram hashtags should I use in 2026?",
+      answer:
+        "Instagram allows up to 30, but 5–15 highly relevant tags often perform better than maxing out. Blend broad, niche, and branded — then deselect anything off-topic.",
+    },
+    {
+      question: "Should hashtags go in the caption or first comment?",
+      answer:
+        "Either can work. Captions keep tags with the post; first-comment keeps the caption cleaner. Generate the set here, then paste where your workflow prefers.",
+    },
+  ],
+  "youtube-tags-generator": [
+    {
+      question: "Are YouTube tags still useful?",
+      answer:
+        "Tags are a secondary signal. They help with misspellings and synonyms when the title is already clear. Generate comma-separated tags, drop duplicates of the title, and stay under spammy repetition.",
+    },
+  ],
+  "heic-to-jpg": [
+    {
+      question: "Why can’t Windows open my iPhone HEIC photos?",
+      answer:
+        "HEIC is Apple’s default camera format. Many Windows apps and email clients do not decode it. Convert HEIC to JPG with this free tool, then share or upload anywhere.",
+    },
+    {
+      question: "Is converting HEIC to JPG lossless?",
+      answer:
+        "JPG is a lossy format. For email, WhatsApp, and Windows sharing the quality is typically excellent. Keep the original HEIC if you need a camera-quality archive.",
+    },
+  ],
+  "jpg-to-png": [
+    {
+      question: "When should I convert JPG to PNG?",
+      answer:
+        "Use PNG when you need sharper graphics, screenshots, or a path to transparency. Photos often stay smaller as JPG. Convert JPG to PNG here when a designer or CMS requires PNG.",
+    },
+  ],
+  "image-compressor": [
+    {
+      question: "What size should I compress images to for a website?",
+      answer:
+        "Aim under 200–500 KB for hero images and even smaller for cards. This image compressor lets you set quality and max width (for example 1920px) and compare before/after size.",
+    },
+    {
+      question: "Does compressing images hurt SEO?",
+      answer:
+        "Oversized images slow LCP and hurt rankings. Sensible compression improves Core Web Vitals. Preview the result so text and faces stay sharp.",
+    },
+  ],
+  "pdf-merge": [
+    {
+      question: "Can I merge PDFs without Adobe Acrobat?",
+      answer:
+        "Yes. This free PDF merge tool combines files in your browser with pdf-lib — no Acrobat, no account, and no upload to Ranburg servers.",
+    },
+    {
+      question: "Is there a file limit for merging PDFs?",
+      answer:
+        "Limits depend on your device memory. For large scans, merge in smaller batches or compress PDFs first with the PDF compressor.",
+    },
+  ],
+  "json-formatter": [
+    {
+      question: "Is this JSON formatter safe for API secrets?",
+      answer:
+        "Formatting runs in your browser with JSON.parse / JSON.stringify. We do not upload the payload. Still avoid pasting production secrets into any shared screen.",
+    },
+  ],
+  "password-generator": [
+    {
+      question: "How long should a generated password be?",
+      answer:
+        "Use 16–24 characters with mixed case, numbers, and symbols for email and banking. Save the result in a password manager — do not reuse it.",
+    },
+    {
+      question: "Are these passwords stored on Ranburg?",
+      answer:
+        "No. Generation is client-side. Refreshing the page creates a new password; we do not save what you generate.",
+    },
+  ],
+  "qr-generator": [
+    {
+      question: "Can I create a Wi-Fi QR code for guests?",
+      answer:
+        "Yes. Encode the network name and password, then print the PNG/SVG. Test a scan from a second phone before you put it on a poster.",
+    },
+  ],
+  "currency-converter": [
+    {
+      question: "Are these live mid-market exchange rates?",
+      answer:
+        "Rates come from a public FX source when the tool is online and are for planning, not bank settlement. Add your payment provider’s spread when quoting clients.",
+    },
+  ],
+  "youtube-channel-insights": [
+    {
+      question: "Do I need to log into YouTube to analyze a channel?",
+      answer:
+        "No. Paste a public channel URL or @handle. Only public stats are requested — we never ask for your Google password.",
+    },
+  ],
+  "instagram-profile-insights": [
+    {
+      question: "Can I analyze a private Instagram account?",
+      answer:
+        "No. Only public profiles can be fetched. We do not ask you to log into Instagram.",
+    },
+  ],
+};

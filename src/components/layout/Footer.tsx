@@ -62,7 +62,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mb-2 mt-4 text-xs font-medium text-theme-subtle">{t("popularTools")}</p>
+            <p className="mb-2 mt-4 text-xs font-medium text-theme-subtle">{t("recentTools")}</p>
             <ul className="space-y-2">
               {recentTools.map((tool) => tool && (
                 <li key={tool.slug}>

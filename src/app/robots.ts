@@ -34,6 +34,7 @@ export default function robots(): MetadataRoute.Robots {
           "/contact",
           "/ads.txt",
           "/indexnow-key.txt",
+          "/llms.txt",
         ],
         disallow: ["/web/login", "/web/database", "/web/session", "/api/"],
       },

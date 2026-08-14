@@ -16,6 +16,8 @@ interface PageSeoInput {
   noIndex?: boolean;
   ogType?: "website" | "article";
   locale?: AppLocale;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 export function buildMetadata({
@@ -27,36 +29,62 @@ export function buildMetadata({
   noIndex = false,
   ogType = "website",
   locale = "en",
+  publishedTime,
+  modifiedTime,
 }: PageSeoInput): Metadata {
   const localized = localizedPath(locale, path);
   const url = `${SITE.url}${localized}`;
   const image = ogImage ?? SITE.defaultOgImage;
+  const imageUrl = `${SITE.url}${image}`;
 
   const languages: Record<string, string> = { "x-default": `${SITE.url}${path}` };
   for (const loc of locales) {
     languages[loc] = `${SITE.url}${localizedPath(loc, path)}`;
   }
 
+  const alternateLocales = locales
+    .filter((loc) => loc !== locale)
+    .map((loc) => localeOgMap[loc]);
+
   return {
     title,
     description,
     keywords,
     alternates: { canonical: url, languages },
-    robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
+    // Thin / coming-soon URLs stay out of the index but still pass link equity.
+    robots: noIndex
+      ? { index: false, follow: true }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        },
     openGraph: {
       title,
       description,
       url,
-      siteName: SITE.name,
+      siteName: SITE.brand,
       locale: localeOgMap[locale] ?? SITE.locale,
+      alternateLocale: alternateLocales,
       type: ogType,
-      images: [{ url: `${SITE.url}${image}`, width: 1200, height: 630, alt: title }],
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
+      ...(ogType === "article" && publishedTime
+        ? { publishedTime, modifiedTime: modifiedTime ?? publishedTime }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",
+      site: "@ranburg",
+      creator: "@ranburg",
       title,
       description,
-      images: [`${SITE.url}${image}`],
+      images: [imageUrl],
     },
   };
 }
@@ -106,7 +134,15 @@ export function organizationJsonLd() {
     image: `${SITE.url}/opengraph-image`,
     email: SITE.email,
     telephone: SITE.phone,
-    sameAs: [SITE.social.linkedin, SITE.social.twitter],
+    sameAs: [SITE.social.linkedin, SITE.social.twitter, SITE.url],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: SITE.phone,
+      email: SITE.email,
+      contactType: "customer support",
+      areaServed: "IN",
+      availableLanguage: ["English", "Hindi"],
+    },
     address: {
       "@type": "PostalAddress",
       addressLocality: SITE.address.city,
@@ -139,6 +175,14 @@ export function websiteJsonLd() {
     inLanguage: "en-IN",
     publisher: { "@id": ORGANIZATION_ID },
     about: { "@id": ORGANIZATION_ID },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE.url}/tools?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 }
 
@@ -215,15 +259,50 @@ export function softwareApplicationJsonLd(
     isAccessibleForFree: true,
     url,
     image: `${SITE.url}/opengraph-image`,
-    author: { "@type": "Organization", name: SITE.name, url: SITE.url },
-    publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
-    provider: { "@type": "Organization", name: SITE.name, url: SITE.url },
+    inLanguage: "en-IN",
+    isPartOf: { "@id": WEBSITE_ID },
+    author: { "@id": ORGANIZATION_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+    provider: { "@id": ORGANIZATION_ID },
+    potentialAction: {
+      "@type": "UseAction",
+      target: url,
+    },
     featureList: [
       "Free to use",
       "No account required",
       "Works in the browser",
       "Mobile friendly",
     ],
+  };
+}
+
+export function collectionPageJsonLd(
+  name: string,
+  description: string,
+  url: string,
+  items: { name: string; url: string }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    description,
+    url,
+    inLanguage: "en-IN",
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": ORGANIZATION_ID },
+    mainEntity: {
+      "@type": "ItemList",
+      name,
+      numberOfItems: items.length,
+      itemListElement: items.map((item, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.name,
+        url: item.url,
+      })),
+    },
   };
 }
 
@@ -267,20 +346,22 @@ export function articleJsonLd(
   title: string,
   description: string,
   url: string,
-  datePublished: string
+  datePublished: string,
+  dateModified?: string
 ) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: title,
+    headline: title.slice(0, 110),
     description,
     url,
+    image: `${SITE.url}${SITE.defaultOgImage}`,
     datePublished,
-    author: { "@type": "Organization", name: SITE.name },
-    publisher: {
-      "@type": "Organization",
-      name: SITE.name,
-      logo: { "@type": "ImageObject", url: `${SITE.url}/opengraph-image` },
-    },
+    dateModified: dateModified ?? datePublished,
+    inLanguage: "en-IN",
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    author: { "@id": ORGANIZATION_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+    isPartOf: { "@id": WEBSITE_ID },
   };
 }

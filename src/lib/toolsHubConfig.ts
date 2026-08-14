@@ -2,35 +2,35 @@
  * Prefer PRIORITY_INDEX_TOOL_SLUGS (seoGrowthConfig) so internal PageRank hits money pages.
  */
 export const FEATURED_TOOL_SLUGS = [
-  "ctc-in-hand-calculator",
-  "invoice-generator",
-  "emi",
-  "youtube-revenue-calculator",
-  "safe-zone-checker",
-  "gst-calculator",
-  "image-compressor",
-  "burn-rate-runway-calculator",
-];
-
-export const POPULAR_TOOL_SLUGS = [
-  "ctc-in-hand-calculator",
-  "invoice-generator",
   "emi",
   "sip",
   "gst-calculator",
   "youtube-revenue-calculator",
-  "safe-zone-checker",
-  "youtube-thumbnail-checker",
-  "loan-foreclosure-calculator",
-  "youtube-channel-insights",
-  "instagram-revenue-calculator",
-  "burn-rate-runway-calculator",
-  "image-compressor",
   "heic-to-jpg",
+  "image-compressor",
   "pdf-merge",
   "json-formatter",
-  "jwt-decoder",
-  "opus-to-mp3",
+];
+
+export const POPULAR_TOOL_SLUGS = [
+  "emi",
+  "sip",
+  "gst-calculator",
+  "loan-foreclosure-calculator",
+  "youtube-revenue-calculator",
+  "youtube-channel-insights",
+  "instagram-revenue-calculator",
+  "instagram-profile-insights",
+  "adsense-revenue-calculator",
+  "youtube-hashtag-generator",
+  "instagram-hashtag-generator",
+  "youtube-tags-generator",
+  "jpg-to-png",
+  "image-compressor",
+  "pdf-merge",
+  "heic-to-jpg",
+  "json-formatter",
+  "password-generator",
   "qr-generator",
   "currency-converter",
 ];

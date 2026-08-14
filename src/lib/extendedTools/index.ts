@@ -16,7 +16,6 @@ export const EXTENDED_TOOLS = [
   ...COOL_FINANCE_TOOLS,
   ...NEW_WAVE_TOOLS,
   ...INDIA_FINANCE_TOOLS,
-  QR_ALIAS_TOOL,
 ];
 
 export {

@@ -41,6 +41,8 @@ export async function generateMetadata({ params }: PageProps) {
     keywords: post.seo.keywords,
     ogType: "article",
     noIndex: shouldNoIndexBlogPost(post),
+    publishedTime: post.date,
+    modifiedTime: post.date,
   });
 }
 

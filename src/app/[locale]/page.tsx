@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { isAppLocale } from "@/i18n/routing";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, collectionPageJsonLd } from "@/lib/seo";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
+import { PRIORITY_INDEX_TOOL_SLUGS } from "@/lib/seoGrowthConfig";
+import { SITE } from "@/lib/siteConfig";
+import JsonLd from "@/components/seo/JsonLd";
 import Hero from "@/components/home/Hero";
 import ToolsVideoBanner from "@/components/home/ToolsVideoBanner";
 import ToolPlayground from "@/components/home/ToolPlayground";
@@ -12,8 +15,6 @@ import RecentlyUsedTools from "@/components/home/RecentlyUsedTools";
 import ExploreToolsStrip from "@/components/home/ExploreToolsStrip";
 import ToolCategoryCards from "@/components/home/ToolCategoryCards";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
-
-const TOOL_COUNT = TOOLS_CONFIG.length;
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -29,6 +30,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: t("metaDescription"),
     path: "/",
     locale,
+    keywords: [
+      "free online tools",
+      "EMI calculator",
+      "SIP calculator",
+      "GST calculator",
+      "HEIC to JPG",
+      "PDF merge",
+      "image compressor",
+      "YouTube revenue calculator",
+      "JSON formatter",
+      "Ranburg",
+    ],
   });
 }
 
@@ -37,6 +50,20 @@ export default async function HomePage({ params }: PageProps) {
   setRequestLocale(isAppLocale(rawLocale) ? rawLocale : "en");
   return (
     <>
+      <JsonLd
+        data={collectionPageJsonLd(
+          "Ranburg free online tools",
+          SITE.description,
+          SITE.url,
+          PRIORITY_INDEX_TOOL_SLUGS.slice(0, 12).map((slug) => {
+            const tool = TOOLS_CONFIG.find((item) => item.slug === slug);
+            return {
+              name: tool?.title ?? slug,
+              url: `${SITE.url}/tools/${slug}`,
+            };
+          })
+        )}
+      />
       <Hero />
       <ToolPlayground />
       <UseCasePaths />

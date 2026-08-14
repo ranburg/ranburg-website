@@ -61,14 +61,11 @@ export default function Hero() {
         >
           <p className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             <Sparkles className="h-4 w-4" />
-            {t("heroBrand")} Tools
+            {t("heroBrand")}
           </p>
-          <h1 className="mt-4 text-5xl font-extrabold leading-[0.95] tracking-tight text-theme-heading sm:text-6xl lg:text-7xl">
-            Ranburg
-          </h1>
-          <p className="mt-3 max-w-xl text-xl font-medium text-theme-heading sm:text-2xl">
+          <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-theme-heading sm:text-5xl lg:text-6xl">
             {t("heroHeadline")}
-          </p>
+          </h1>
           <p className="mt-4 max-w-lg text-base leading-relaxed text-theme-muted sm:text-lg">
             {t("heroSub")}
           </p>

@@ -1,9 +1,20 @@
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Noto_Sans, Noto_Sans_Arabic, Noto_Sans_Devanagari, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Providers from "@/components/theme/Providers";
 import { SITE } from "@/lib/siteConfig";
 import "./globals.css";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE.url),
+  applicationName: SITE.brand,
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
+  publisher: SITE.name,
+  category: "technology",
+  referrer: "origin-when-cross-origin",
+  formatDetection: { telephone: false, email: false, address: false },
+};
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],

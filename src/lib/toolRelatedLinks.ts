@@ -52,8 +52,7 @@ export const TOOL_RELATED_LINKS: Record<string, string[]> = {
   "sip": ["swp", "emi", "roi-calculator", "currency-converter"],
   "invoice-generator": ["gst-calculator", "profit-margin-calculator", "currency-converter", "pdf-merge"],
 
-  "qr-generator": ["qr-code-generator", "uuid-generator", "password-generator", "open-graph-generator"],
-  "qr-code-generator": ["qr-generator", "uuid-generator", "password-generator", "meta-tag-generator"],
+  "qr-generator": ["uuid-generator", "password-generator", "open-graph-generator", "invoice-generator"],
 
   swp: ["sip", "lic-maturity-calculator", "pf-calculator", "compound-interest-calculator"],
   "lic-maturity-calculator": ["swp", "pf-calculator", "sip", "ctc-in-hand-calculator"],

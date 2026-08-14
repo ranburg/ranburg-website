@@ -1,7 +1,8 @@
 import type { ToolConfig, ToolFaq } from "./toolsConfig";
 import { getCategoryById, getToolBySlug } from "./toolsConfig";
 import { getPrimarySeoCategoryForTool } from "./toolSeoCategories";
-import { TOOL_WORKED_EXAMPLES } from "./seoGrowthConfig";
+import { TOOL_WORKED_EXAMPLES, TOOL_UNIQUE_FAQS } from "./seoGrowthConfig";
+import { getToolPrimaryKeyword, formatKeywordAsHeading } from "./toolPageSeo";
 import { getExplicitRelatedSlugs } from "./toolRelatedLinks";
 import { getRecommendedTools } from "./toolRecommendations";
 
@@ -36,40 +37,33 @@ export interface ToolSeoSections {
 }
 
 /** Bump when major SEO body copy is revised (EEAT freshness). */
-export const TOOL_SEO_CONTENT_UPDATED = "2026-07-27";
+export const TOOL_SEO_CONTENT_UPDATED = "2026-08-14";
 
-const GENERIC_FAQ: ToolFaq[] = [
-  {
-    question: "Is this tool free to use?",
-    answer:
-      "Yes. This tool is completely free on Ranburg.com with no account, subscription, or credit card required. You can use it as often as you need.",
-  },
-  {
-    question: "Do I need to install software?",
-    answer:
-      "No. All Ranburg tools run in your web browser on desktop and mobile. There is no desktop app, browser extension, or install step.",
-  },
-  {
-    question: "Is my data private?",
-    answer:
-      "Most Ranburg tools process data locally in your browser. Your files and inputs are not stored on our servers unless a tool explicitly needs an external API (for example live currency rates or public social profile lookups). See our Privacy Policy for details.",
-  },
-  {
-    question: "Can I use this tool on mobile and iPhone?",
-    answer:
-      "Yes. Every Ranburg tool is responsive and works on phones, tablets, and desktops — including iPhone Safari and Android Chrome — without a separate app.",
-  },
-  {
-    question: "Does it work offline?",
-    answer:
-      "After the page loads, many browser-side tools continue to work without uploading data. A live internet connection is still needed to open the page the first time and for tools that call external APIs.",
-  },
-  {
-    question: "Do you keep my files after processing?",
-    answer:
-      "Browser-side converters and calculators do not upload files to Ranburg servers, so there is nothing for us to store or delete. If a future tool requires upload, files would be processed temporarily and not retained — we state that clearly on the tool page.",
-  },
-];
+function genericFaqsFor(tool: ToolConfig): ToolFaq[] {
+  const name = formatKeywordAsHeading(getToolPrimaryKeyword(tool));
+  return [
+    {
+      question: `Is this ${name} free to use?`,
+      answer: `Yes. The ${name} on Ranburg.com is free with no account, subscription, or credit card. Use it as often as you need.`,
+    },
+    {
+      question: `Do I need to install software for the ${name}?`,
+      answer: `No. The ${name} runs in your browser on desktop and mobile. There is no app, extension, or install step.`,
+    },
+    {
+      question: `Is my data private when I use the ${name}?`,
+      answer: `Most Ranburg tools — including this ${name} — process data in your browser whenever possible. Files and inputs are not stored on our servers unless a tool needs an external API (for example live rates or public profile lookups). See our Privacy Policy.`,
+    },
+    {
+      question: `Can I use the ${name} on mobile and iPhone?`,
+      answer: `Yes. The ${name} is responsive on iPhone Safari, Android Chrome, tablets, and desktops. No separate app is required.`,
+    },
+    {
+      question: `Does the ${name} work offline?`,
+      answer: `After the page loads, many browser-side tools keep working without uploading data. You still need internet to open the page the first time and for tools that call external APIs.`,
+    },
+  ];
+}
 
 const FORMAT_COMPARE: Record<string, SeoComparisonTable> = {
   "heic-to-jpg": {
@@ -141,6 +135,73 @@ const FORMAT_COMPARE: Record<string, SeoComparisonTable> = {
       { feature: "Editing", left: "Code / vector apps", right: "Any image editor" },
     ],
   },
+  emi: {
+    leftLabel: "Bank / spreadsheet",
+    rightLabel: "Ranburg EMI calculator",
+    caption: "EMI calculator vs doing it in a spreadsheet",
+    rows: [
+      { feature: "Speed", left: "Build the formula yourself", right: "Instant as you drag sliders" },
+      { feature: "Chart", left: "Manual charts", right: "Principal vs interest breakdown" },
+      { feature: "Cost", left: "Excel license or bank login", right: "Free, no signup" },
+      { feature: "India loans", left: "You set ₹ formatting", right: "INR-friendly inputs" },
+      { feature: "Compare tenure", left: "Copy sheets", right: "Change years and reread EMI" },
+    ],
+  },
+  sip: {
+    leftLabel: "Lump-sum invest",
+    rightLabel: "Monthly SIP",
+    caption: "SIP vs lump sum — how this calculator helps you compare",
+    rows: [
+      { feature: "Cash flow", left: "Need the full amount now", right: "Invest from salary each month" },
+      { feature: "Market timing", left: "All-in on one day", right: "Rupee-cost averaging" },
+      { feature: "Discipline", left: "One decision", right: "Automatic habit" },
+      { feature: "This tool", left: "Model a large one-time corpus separately", right: "Project monthly SIP growth instantly" },
+    ],
+  },
+  "gst-calculator": {
+    leftLabel: "GST exclusive",
+    rightLabel: "GST inclusive",
+    caption: "GST exclusive vs inclusive amounts",
+    rows: [
+      { feature: "Quote style", left: "Add tax on top", right: "Tax already in the price" },
+      { feature: "Formula", left: "Amount × rate / 100", right: "Amount − amount × 100 / (100 + rate)" },
+      { feature: "Invoices", left: "Taxable value + GST lines", right: "Extract tax from MRP-style totals" },
+      { feature: "This tool", left: "Switch exclusive mode", right: "Switch inclusive mode" },
+    ],
+  },
+  "pdf-merge": {
+    leftLabel: "Adobe Acrobat",
+    rightLabel: "Ranburg PDF merge",
+    caption: "Merge PDFs online vs Acrobat",
+    rows: [
+      { feature: "Cost", left: "Paid subscription", right: "Free" },
+      { feature: "Account", left: "Usually required", right: "No signup" },
+      { feature: "Where files go", left: "Often uploaded to Adobe cloud", right: "Processed in your browser" },
+      { feature: "Best for", left: "Heavy editing / OCR", right: "Combine invoices and scans fast" },
+    ],
+  },
+  "image-compressor": {
+    leftLabel: "Desktop editor",
+    rightLabel: "Ranburg image compressor",
+    caption: "Compress images online vs Photoshop / Preview",
+    rows: [
+      { feature: "Setup", left: "Install and export presets", right: "Open the page and compress" },
+      { feature: "Batch everyday files", left: "Overkill for WhatsApp / blogs", right: "Built for web-sized exports" },
+      { feature: "Cost", left: "License", right: "Free" },
+      { feature: "Privacy", left: "Varies", right: "Browser-side re-encode" },
+    ],
+  },
+  "password-generator": {
+    leftLabel: "Reused password",
+    rightLabel: "Generated password",
+    caption: "Why generate a new password",
+    rows: [
+      { feature: "Breach risk", left: "One leak unlocks many sites", right: "Unique per account" },
+      { feature: "Guessability", left: "Names, years, patterns", right: "High-entropy random string" },
+      { feature: "Length", left: "Often too short", right: "16–24 characters recommended" },
+      { feature: "This tool", left: "N/A", right: "Client-side, not stored" },
+    ],
+  },
 };
 
 function defaultComparison(tool: ToolConfig): SeoComparisonTable {
@@ -189,9 +250,9 @@ function buildWhatIs(
   hubLabel: string,
   catLabel: string
 ): string {
-  const primaryKw = tool.seo.keywords[0] ?? tool.title.toLowerCase();
+  const primaryKw = getToolPrimaryKeyword(tool);
 
-  return `The ${tool.title} is a free online ${hubLabel.toLowerCase().replace(/tools$/i, "tool").replace(/s$/, "")} on Ranburg.com designed for people who need ${primaryKw} without installing software or creating an account. ${tool.shortDescription}
+  return `The ${formatKeywordAsHeading(primaryKw)} is a free online ${hubLabel.toLowerCase().replace(/tools$/i, "tool").replace(/s$/, "")} on Ranburg.com designed for people who need a ${primaryKw.toLowerCase()} without installing software or creating an account. ${tool.shortDescription}
 
 ${tool.seo.description} Unlike crowded “all-in-one” converter portals that bury the action behind ads and signwalls, this page focuses on one job: help you finish ${tool.title.toLowerCase()} tasks quickly with transparent steps and clear output.
 
@@ -417,8 +478,8 @@ Tip: add this page to bookmarks or your phone home screen if you repeat the same
     .slice(0, 8);
 
   const faq = mergeFaqs(
-    [...tool.faq, ...buildToolSpecificFaqs(tool)],
-    GENERIC_FAQ
+    [...tool.faq, ...(TOOL_UNIQUE_FAQS[tool.slug] ?? []), ...buildToolSpecificFaqs(tool)],
+    genericFaqsFor(tool)
   );
 
   const combinedText = [
@@ -465,11 +526,7 @@ function mergeFaqs(primary: ToolFaq[], extra: ToolFaq[]): ToolFaq[] {
   return merged.slice(0, 14);
 }
 
-/** Display use count — merges analytics when available on client */
-export function getToolUseCountPlaceholder(slug: string): string {
-  let hash = 0;
-  for (let i = 0; i < slug.length; i++) hash = (hash * 31 + slug.charCodeAt(i)) >>> 0;
-  const count = 1200 + (hash % 48000);
-  if (count >= 10000) return `${(count / 1000).toFixed(1)}k+ uses`;
-  return `${count.toLocaleString()}+ uses`;
+/** Honest card badge — never invent usage counts (spam / E-E-A-T). */
+export function getToolUseCountPlaceholder(_slug?: string): string {
+  return "Free · No signup";
 }

@@ -1,6 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import { SITE } from "@/lib/siteConfig";
-import { buildMetadata, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { buildMetadata, breadcrumbJsonLd, faqJsonLd, collectionPageJsonLd } from "@/lib/seo";
 import type { AppLocale } from "@/i18n/routing";
 import JsonLd from "@/components/seo/JsonLd";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
@@ -66,6 +66,15 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
             { name: hub.label, url },
           ]),
           faqJsonLd(hub.faq),
+          collectionPageJsonLd(
+            hub.headline,
+            hub.description,
+            url,
+            tools.slice(0, 40).map((tool) => ({
+              name: tool.title,
+              url: `${SITE.url}/tools/${tool.slug}`,
+            }))
+          ),
         ]}
       />
 

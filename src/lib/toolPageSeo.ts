@@ -45,29 +45,53 @@ function getActionPhrase(tool: ToolConfig): string {
   return "Instant Results in Your Browser";
 }
 
+const SMALL_WORDS = new Set(["to", "vs", "and", "of", "for", "in", "or"]);
+
+/** Display casing for H1 / title: "EMI calculator" → "EMI Calculator". */
+export function formatKeywordAsHeading(keyword: string): string {
+  return keyword
+    .trim()
+    .split(/\s+/)
+    .map((word, i) => {
+      if (i > 0 && SMALL_WORDS.has(word.toLowerCase())) return word.toLowerCase();
+      if (word === word.toUpperCase() && word.length > 1) return word;
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+}
+
+/** Visible H1 — must match the primary search query, not a marketing subtitle. */
+export function buildToolPageH1(tool: ToolConfig): string {
+  return formatKeywordAsHeading(getToolPrimaryKeyword(tool));
+}
+
 /**
  * Keyword-front-loaded titles matching competitive SERP patterns.
- * Example: "HEIC to JPG Converter Online Free – Convert HEIC to JPG Instantly"
+ * Example: "EMI Calculator Online Free | Ranburg"
  */
 export function buildToolPageTitle(tool: ToolConfig): string {
+  const primary = formatKeywordAsHeading(getToolPrimaryKeyword(tool));
   const configured = tool.seo.title.trim();
-  // Prefer hand-tuned titles that already include intent keywords.
-  if (/online free/i.test(configured) || /–|—/.test(configured)) {
-    return configured.slice(0, 75);
+  const leadsWithPrimary = configured.toLowerCase().startsWith(primary.toLowerCase());
+
+  if (leadsWithPrimary && /online free/i.test(configured) && configured.length <= 60) {
+    return configured.replace(/\s*\|\s*Ranburg(?:\.com)?\s*$/i, " | Ranburg").slice(0, 60);
   }
 
-  const head = tool.title.toLowerCase().includes("online")
-    ? `${tool.title} Free`
-    : `${tool.title} Online Free`;
-  const title = `${head} – ${getActionPhrase(tool)}`;
-  return title.length <= 58 ? `${title} | Ranburg` : title.slice(0, 70);
+  const head = /\bonline\b/i.test(primary) ? `${primary} Free` : `${primary} Online Free`;
+  const withBrand = `${head} | Ranburg`;
+  const withAction = `${head} – ${getActionPhrase(tool)} | Ranburg`;
+  if (withAction.length <= 60) return withAction;
+  if (withBrand.length <= 60) return withBrand;
+  return `${primary} | Ranburg`.slice(0, 60);
 }
 
 /**
  * Intent-rich meta description (≤160 chars) with free / online / secure / no software signals.
  */
 export function buildToolPageDescription(tool: ToolConfig): string {
-  const primary = getToolPrimaryKeyword(tool).toLowerCase();
+  const primaryHeading = formatKeywordAsHeading(getToolPrimaryKeyword(tool));
+  const primary = primaryHeading.toLowerCase();
   const configured = tool.seo.description.trim();
 
   // Hand-tuned descriptions that already include convert/free/online intent.
@@ -85,12 +109,12 @@ export function buildToolPageDescription(tool: ToolConfig): string {
       return `Convert ${cleaned} online for free.`;
     }
     if (/calculator/i.test(tool.title)) {
-      return `Free ${primary} online — instant results.`;
+      return `Free ${primaryHeading} online — instant results.`;
     }
     if (/generator/i.test(tool.title)) {
-      return `Free ${primary} online — create results in seconds.`;
+      return `Free ${primaryHeading} online — create results in seconds.`;
     }
-    return `Free ${primary} online.`;
+    return `Free ${primaryHeading} online.`;
   })();
 
   const body =

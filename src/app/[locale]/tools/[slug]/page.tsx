@@ -35,8 +35,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       (messages as { tools?: { meta?: Record<string, object> } }).tools?.meta
     );
     return buildMetadata({
-      title: localizedTool.seoTitle ?? buildToolPageTitle(localizedTool),
-      description: localizedTool.seoDescription ?? buildToolPageDescription(localizedTool),
+      title: locale === "en" ? buildToolPageTitle(localizedTool) : (localizedTool.seoTitle ?? buildToolPageTitle(localizedTool)),
+      description:
+        locale === "en"
+          ? buildToolPageDescription(localizedTool)
+          : (localizedTool.seoDescription ?? buildToolPageDescription(localizedTool)),
       path: `/tools/${slug}`,
       keywords: buildToolPageKeywords(localizedTool),
       locale,

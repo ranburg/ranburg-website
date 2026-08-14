@@ -4,6 +4,7 @@ import type { ToolConfig } from "@/lib/toolsConfig";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { generateToolSeoSections } from "@/lib/toolSeoGenerator";
 import { TOOL_WORKED_EXAMPLES } from "@/lib/seoGrowthConfig";
+import { buildToolPageH1 } from "@/lib/toolPageSeo";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 interface ToolSeoContentProps {
@@ -20,6 +21,7 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
     .map((slug) => getToolBySlug(slug))
     .filter((t): t is ToolConfig => Boolean(t));
   const hasUniqueExamples = Boolean(TOOL_WORKED_EXAMPLES[tool.slug]?.length);
+  const h1 = buildToolPageH1(tool);
 
   return (
     <article className="mt-14 space-y-3 border-t border-theme-subtle pt-10">
@@ -30,7 +32,7 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
         </p>
       </div>
 
-      <SeoDetails title={`What is the ${tool.title}?`} open>
+      <SeoDetails title={`What is the ${h1}?`} open>
         {seo.whatIs.split("\n\n").map((para, i) => (
           <p key={i} className={`${i > 0 ? "mt-4" : ""} leading-relaxed text-theme-muted`}>
             {para}
@@ -38,7 +40,7 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
         ))}
       </SeoDetails>
 
-      <SeoDetails title={`Why use ${tool.title}?`} open>
+      <SeoDetails title={`Why use this ${h1}?`} open>
         {seo.whyUse.split("\n\n").map((para, i) => (
           <p key={i} className={`${i > 0 ? "mt-4" : ""} leading-relaxed text-theme-muted`}>
             {para}
@@ -46,7 +48,7 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
         ))}
       </SeoDetails>
 
-      <SeoDetails title={`How to use ${tool.title}`} open>
+      <SeoDetails title={`How to use the ${h1}`} open>
         {seo.howItWorks.split("\n\n").map((para, i) => (
           <p key={i} className={`${i > 0 ? "mt-4" : ""} leading-relaxed text-theme-muted`}>
             {para}
@@ -190,13 +192,11 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
         </SeoDetails>
       )}
 
-      <section
-        className="overflow-hidden rounded-xl border border-theme-subtle"
-        itemScope
-        itemType="https://schema.org/FAQPage"
-      >
+      <section className="overflow-hidden rounded-xl border border-theme-subtle">
         <div className="px-5 py-4">
-          <h2 className="text-lg font-bold text-theme-heading sm:text-xl">Frequently Asked Questions</h2>
+          <h2 className="text-lg font-bold text-theme-heading sm:text-xl">
+            {h1} FAQs
+          </h2>
         </div>
         <div className="border-t border-theme-subtle">
           {seo.faq.map((item, i) => (
@@ -204,25 +204,14 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
               key={i}
               className="group border-b border-theme-subtle last:border-b-0"
               open={i < 2}
-              itemScope
-              itemProp="mainEntity"
-              itemType="https://schema.org/Question"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-left marker:content-none [&::-webkit-details-marker]:hidden">
-                <span className="font-medium text-theme-heading" itemProp="name">
-                  {item.question}
-                </span>
+                <span className="font-medium text-theme-heading">{item.question}</span>
                 <ChevronDown className="h-4 w-4 shrink-0 text-theme-muted transition-transform group-open:rotate-180" />
               </summary>
-              <div
-                itemScope
-                itemProp="acceptedAnswer"
-                itemType="https://schema.org/Answer"
-              >
-                <p className="border-t border-theme-subtle px-5 py-4 text-sm leading-relaxed text-theme-muted" itemProp="text">
-                  {item.answer}
-                </p>
-              </div>
+              <p className="border-t border-theme-subtle px-5 py-4 text-sm leading-relaxed text-theme-muted">
+                {item.answer}
+              </p>
             </details>
           ))}
         </div>

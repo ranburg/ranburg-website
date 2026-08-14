@@ -61,4 +61,5 @@ export const TOOL_SLUG_REDIRECTS: Record<string, string> = {
   "governor-limit-calculator": "governor-limits-calculator",
   "revenue-cloud-calculator": "revenue-cloud-pricing-calculator",
   "date-formula-generator": "date-formula-helper",
+  "qr-code-generator": "qr-generator",
 };

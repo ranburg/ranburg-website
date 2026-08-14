@@ -9,7 +9,11 @@ import { getBlogForTool } from "@/lib/blogConfig";
 import { getToolIcon } from "@/lib/toolIcons";
 import { getPrimarySeoCategoryForTool } from "@/lib/toolSeoCategories";
 import { generateToolSeoSections } from "@/lib/toolSeoGenerator";
-import { getSoftwareApplicationCategory } from "@/lib/toolPageSeo";
+import {
+  buildToolPageDescription,
+  buildToolPageH1,
+  getSoftwareApplicationCategory,
+} from "@/lib/toolPageSeo";
 import { SITE } from "@/lib/siteConfig";
 import {
   softwareApplicationJsonLd,
@@ -55,6 +59,9 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
   const seoCategory = getPrimarySeoCategoryForTool(slug);
   const seoSections = generateToolSeoSections(tool);
   const toolUrl = `${SITE.url}${localizedPath(locale, `/tools/${slug}`)}`;
+  const h1 = buildToolPageH1(tool);
+  const pageDescription =
+    locale === "en" ? buildToolPageDescription(tool) : (tool.seoDescription ?? buildToolPageDescription(tool));
 
   const hubCrumb =
     tool.category === "salesforce"
@@ -67,7 +74,7 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
     { label: tShell("breadcrumbHome"), href: "/" },
     { label: tShell("breadcrumbTools"), href: "/tools" },
     hubCrumb,
-    { label: tool.title },
+    { label: h1 },
   ];
 
   const schema = [
@@ -75,15 +82,10 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
       { name: tShell("breadcrumbHome"), url: `${SITE.url}${localizedPath(locale, "/")}` },
       { name: tShell("breadcrumbTools"), url: `${SITE.url}${localizedPath(locale, "/tools")}` },
       { name: hubCrumb.label, url: `${SITE.url}${localizedPath(locale, hubCrumb.href)}` },
-      { name: tool.title, url: toolUrl },
+      { name: h1, url: toolUrl },
     ]),
-    softwareApplicationJsonLd(
-      tool.title,
-      tool.seo.description,
-      toolUrl,
-      getSoftwareApplicationCategory(tool.category)
-    ),
-    howToJsonLd(tool.title, tool.shortDescription, toolUrl, tool.howToUse),
+    softwareApplicationJsonLd(h1, pageDescription, toolUrl, getSoftwareApplicationCategory(tool.category)),
+    howToJsonLd(h1, tool.shortDescription, toolUrl, tool.howToUse),
     faqJsonLd(seoSections.faq),
   ];
 
@@ -116,7 +118,10 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
                   {tShell("allTools")}
                 </Link>
               </div>
-              <h1 className="mt-1 break-words text-2xl font-extrabold text-theme-heading sm:text-3xl">{tool.title}</h1>
+              <h1 className="mt-1 break-words text-2xl font-extrabold text-theme-heading sm:text-3xl">{h1}</h1>
+              {tool.title.toLowerCase() !== h1.toLowerCase() && (
+                <p className="mt-1 text-sm font-medium text-theme-muted">{tool.title}</p>
+              )}
               <p className="mt-2 max-w-2xl text-sm text-theme-muted sm:text-base">{tool.shortDescription}</p>
               <p className="mt-2 text-xs text-theme-subtle sm:text-sm">
                 Free online tool · Works in your browser · No account required · Created by Ranburg

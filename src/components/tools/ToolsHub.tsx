@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TOOLS_CONFIG, getToolBySlug } from "@/lib/toolsConfig";
 import { COMING_SOON_TOOLS } from "@/lib/toolComingSoonConfig";
 import { FEATURED_TOOL_SLUGS, POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
@@ -29,9 +29,21 @@ function ToolSection({ title, description, slugs }: { title: string; description
   );
 }
 
-export default function ToolsHub() {
-  const [searchQuery, setSearchQuery] = useState("");
+export default function ToolsHub({ initialQuery = "" }: { initialQuery?: string }) {
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
   const searchResults = searchQuery.trim() ? searchTools(searchQuery) : null;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    const next = searchQuery.trim();
+    if (next) url.searchParams.set("q", next);
+    else url.searchParams.delete("q");
+    const nextPath = `${url.pathname}${url.search}`;
+    if (`${window.location.pathname}${window.location.search}` !== nextPath) {
+      window.history.replaceState({}, "", nextPath);
+    }
+  }, [searchQuery]);
 
   const salesforceSlugs = TOOLS_CONFIG.filter((t) => t.category === "salesforce").map((t) => t.slug);
   const financialSlugs = TOOLS_CONFIG.filter((t) => t.category === "financial").map((t) => t.slug);
