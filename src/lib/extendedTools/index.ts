@@ -6,6 +6,7 @@ import { BUSINESS_TOOLS, QR_ALIAS_TOOL } from "./businessTools";
 import { COOL_FINANCE_TOOLS } from "./coolFinanceTools";
 import { NEW_WAVE_TOOLS } from "./newWaveTools";
 import { INDIA_FINANCE_TOOLS } from "./indiaFinanceTools";
+import { CATALOG_TOOLS } from "./catalogTools";
 
 export const EXTENDED_TOOLS = [
   ...IMAGE_TOOLS,
@@ -13,9 +14,11 @@ export const EXTENDED_TOOLS = [
   ...SEO_TOOLS,
   ...SOCIAL_TOOLS,
   ...BUSINESS_TOOLS,
+  QR_ALIAS_TOOL,
   ...COOL_FINANCE_TOOLS,
   ...NEW_WAVE_TOOLS,
   ...INDIA_FINANCE_TOOLS,
+  ...CATALOG_TOOLS,
 ];
 
 export {
@@ -27,6 +30,7 @@ export {
   COOL_FINANCE_TOOLS,
   NEW_WAVE_TOOLS,
   INDIA_FINANCE_TOOLS,
+  CATALOG_TOOLS,
   QR_ALIAS_TOOL,
 };
 

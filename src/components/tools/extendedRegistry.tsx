@@ -98,4 +98,15 @@ export const EXTENDED_TOOL_COMPONENTS: Record<string, ComponentType> = {
   "ifsc-finder": lazy(() => import("./finance/IndiaFinanceTools").then((m) => ({ default: m.IfscFinderTool }))),
   "lic-maturity-calculator": lazy(() => import("./finance/LicMaturityEstimator")),
   "pf-calculator": lazy(() => import("./finance/PfCalculator")),
+  "ppf-calculator": lazy(() => import("./finance/PpfCalculator")),
+
+  "pdf-page-reorder": lazy(() => import("./pdf/PdfToolComponents").then((m) => ({ default: m.PdfPageReorderTool }))),
+  "pdf-to-text": lazy(() => import("./pdf/PdfToolComponents").then((m) => ({ default: m.PdfToTextTool }))),
+
+  "text-diff-checker": lazy(() => import("./dev/DevUtilityTools").then((m) => ({ default: m.TextDiffCheckerTool }))),
+  "markdown-preview": lazy(() => import("./dev/DevUtilityTools").then((m) => ({ default: m.MarkdownPreviewTool }))),
+  "screen-recorder": lazy(() => import("./productivity/ProductivitySuite").then((m) => ({ default: m.ScreenRecorderTool }))),
+  "resume-builder": lazy(() => import("./productivity/ProductivitySuite").then((m) => ({ default: m.ResumeBuilderTool }))),
+  "pdf-signer": lazy(() => import("./productivity/ProductivitySuite").then((m) => ({ default: m.PdfSignerTool }))),
+  "color-background-remover": lazy(() => import("./productivity/ProductivitySuite").then((m) => ({ default: m.ColorBackgroundRemoverTool }))),
 };

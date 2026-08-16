@@ -7,13 +7,8 @@ import { PRIORITY_INDEX_TOOL_SLUGS } from "@/lib/seoGrowthConfig";
 import { SITE } from "@/lib/siteConfig";
 import JsonLd from "@/components/seo/JsonLd";
 import Hero from "@/components/home/Hero";
-import ToolsVideoBanner from "@/components/home/ToolsVideoBanner";
-import ToolPlayground from "@/components/home/ToolPlayground";
-import UseCasePaths from "@/components/home/UseCasePaths";
-import SocialToolsSpotlight from "@/components/home/SocialToolsSpotlight";
+import CatalogDirectory from "@/components/home/CatalogDirectory";
 import RecentlyUsedTools from "@/components/home/RecentlyUsedTools";
-import ExploreToolsStrip from "@/components/home/ExploreToolsStrip";
-import ToolCategoryCards from "@/components/home/ToolCategoryCards";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 interface PageProps {
@@ -38,7 +33,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       "HEIC to JPG",
       "PDF merge",
       "image compressor",
-      "YouTube revenue calculator",
+      "invoice generator",
+      "CTC to in-hand calculator",
       "JSON formatter",
       "Ranburg",
     ],
@@ -65,13 +61,8 @@ export default async function HomePage({ params }: PageProps) {
         )}
       />
       <Hero />
-      <ToolPlayground />
-      <UseCasePaths />
-      <ToolsVideoBanner />
-      <SocialToolsSpotlight />
+      <CatalogDirectory />
       <RecentlyUsedTools />
-      <ExploreToolsStrip />
-      <ToolCategoryCards />
       <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
     </>
   );

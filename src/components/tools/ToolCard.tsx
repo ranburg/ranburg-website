@@ -35,7 +35,7 @@ export default function ToolCard({ slug, showCategory = true, showUseCount = tru
           </div>
 
           {showCategory && (seoCat || cat) && (
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-accent">
+            <span className="mb-1 inline-flex w-fit rounded-full border border-accent/20 bg-accent/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent">
               {seoCat?.label ?? cat?.label}
             </span>
           )}

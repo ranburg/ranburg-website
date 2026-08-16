@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { TOOLS_CONFIG, getToolBySlug } from "@/lib/toolsConfig";
 import { COMING_SOON_TOOLS } from "@/lib/toolComingSoonConfig";
 import { FEATURED_TOOL_SLUGS, POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
+import { CATALOG_SECTIONS, getCatalogTools } from "@/lib/catalogDirectory";
 import { SEO_CATEGORY_HUBS, PRIMARY_CATEGORY_SLUGS, getToolsForSeoCategory } from "@/lib/toolSeoCategories";
 import { getToolIcon } from "@/lib/toolIcons";
 import { searchTools } from "@/lib/toolSearch";
@@ -46,16 +47,6 @@ export default function ToolsHub({ initialQuery = "" }: { initialQuery?: string 
   }, [searchQuery]);
 
   const salesforceSlugs = TOOLS_CONFIG.filter((t) => t.category === "salesforce").map((t) => t.slug);
-  const financialSlugs = TOOLS_CONFIG.filter((t) => t.category === "financial").map((t) => t.slug);
-  const developerSlugs = TOOLS_CONFIG.filter((t) => t.category === "developer").map((t) => t.slug);
-  const socialRevenueSlugs = [
-    "youtube-revenue-calculator",
-    "youtube-channel-insights",
-    "instagram-revenue-calculator",
-    "instagram-profile-insights",
-    "adsense-revenue-calculator",
-    "twitch-sub-revenue",
-  ];
 
   return (
     <div className="space-y-12 sm:space-y-14">
@@ -117,11 +108,17 @@ export default function ToolsHub({ initialQuery = "" }: { initialQuery?: string 
 
           <AdPlaceholder placement="between-sections" />
 
-          <ToolSection title="Social & Revenue" description="YouTube, Instagram, AdSense, and creator income." slugs={socialRevenueSlugs} />
+          {CATALOG_SECTIONS.map((section) => (
+            <ToolSection
+              key={section.id}
+              title={section.label}
+              description={section.description}
+              slugs={getCatalogTools(section.slugs).map((t) => t.slug)}
+            />
+          ))}
+
           <ToolSection title="Recently Added" slugs={RECENT_TOOL_SLUGS.filter((s) => getToolBySlug(s))} />
           <ToolSection title="Salesforce" description="Generators for admins and developers." slugs={salesforceSlugs} />
-          <ToolSection title="Financial Calculators" slugs={financialSlugs} />
-          <ToolSection title="Developer Tools" slugs={developerSlugs} />
 
           {COMING_SOON_TOOLS.length > 0 && (
             <section>

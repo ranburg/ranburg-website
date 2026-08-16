@@ -2,14 +2,14 @@
  * Prefer PRIORITY_INDEX_TOOL_SLUGS (seoGrowthConfig) so internal PageRank hits money pages.
  */
 export const FEATURED_TOOL_SLUGS = [
+  "ctc-in-hand-calculator",
+  "invoice-generator",
   "emi",
   "sip",
   "gst-calculator",
-  "youtube-revenue-calculator",
-  "heic-to-jpg",
-  "image-compressor",
-  "pdf-merge",
   "json-formatter",
+  "pdf-merge",
+  "image-compressor",
 ];
 
 export const POPULAR_TOOL_SLUGS = [
@@ -46,11 +46,12 @@ export const RECENT_TOOL_SLUGS = [
   "compress-to-exact-size",
   "burn-rate-runway-calculator",
   "opus-to-mp3",
-  "jwt-decoder",
-  "ai-crawler-robots-checker",
-  "csv-to-json",
-  "hsn-sac-finder",
-  "gratuity-calculator",
+  "invoice-generator",
+  "ctc-in-hand-calculator",
+  "text-diff-checker",
+  "markdown-preview",
+  "resume-builder",
+  "ppf-calculator",
 ];
 
 export const SEARCH_SUGGESTIONS = [

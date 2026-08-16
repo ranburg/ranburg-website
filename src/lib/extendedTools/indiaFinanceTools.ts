@@ -238,4 +238,45 @@ export const INDIA_FINANCE_TOOLS: ToolConfig[] = [
       },
     ],
   }),
+  makeTool({
+    slug: "ppf-calculator",
+    title: "PPF Calculator",
+    shortDescription:
+      "Project Public Provident Fund maturity with yearly deposits, 15-year tenure, and compound interest — India PPF planner.",
+    category: "financial",
+    icon: "Landmark",
+    gradient: "from-green-600 to-emerald-700",
+    badge: "India Savings",
+    popular: true,
+    seoTitle: "PPF Calculator - Free Online Tool | Ranburg",
+    seoDescription:
+      "Free PPF calculator India. Estimate Public Provident Fund maturity for 15 years with yearly deposits and compound interest. No signup.",
+    keywords: [
+      "ppf calculator",
+      "ppf calculator india",
+      "public provident fund calculator",
+      "ppf maturity calculator",
+      "ppf interest calculator",
+      "15 year ppf calculator",
+    ],
+    howToUse: [
+      "Enter your annual PPF deposit (max ₹1.5 lakh per FY).",
+      "Set the interest rate (currently notified by the government).",
+      "Choose 15 years or an extension block.",
+      "Review maturity value, total deposits, and interest earned.",
+    ],
+    formula:
+      "Year-start deposit: FV = P × [((1+r)^n − 1) / r] × (1+r); r = annual PPF rate, n = years (15+)",
+    faq: [
+      ...indiaFaq,
+      {
+        question: "What is the PPF lock-in?",
+        answer: "PPF has a 15-year tenure. Partial withdrawals are allowed from year 7 under scheme rules.",
+      },
+      {
+        question: "What is the maximum yearly deposit?",
+        answer: "₹1.5 lakh per financial year across all PPF accounts in your name.",
+      },
+    ],
+  }),
 ];

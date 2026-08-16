@@ -73,6 +73,13 @@ import {
   Award,
   Landmark,
   PiggyBank,
+  ArrowUpDown,
+  FileSearch,
+  BookOpen,
+  Video,
+  Contact,
+  PenLine,
+  Eraser,
   type LucideIcon,
 } from "lucide-react";
 
@@ -150,6 +157,13 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Award,
   Landmark,
   PiggyBank,
+  ArrowUpDown,
+  FileSearch,
+  BookOpen,
+  Video,
+  Contact,
+  PenLine,
+  Eraser,
 };
 
 export function getToolIcon(name: string): LucideIcon {

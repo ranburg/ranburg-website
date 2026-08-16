@@ -39,15 +39,31 @@ export const PDF_TOOLS: ToolConfig[] = [
   makeTool({
     slug: "pdf-compressor",
     title: "PDF Compressor",
-    shortDescription: "Reduce PDF file size by optimizing and re-saving in the browser.",
+    shortDescription: "Reduce PDF file size by recompressing pages as JPEG — scans and photo PDFs shrink the most.",
     category: "productivity",
     icon: "Minimize2",
     gradient: "from-yellow-500 to-orange-500",
     badge: "PDF Optimizer",
     keywords: ["compress pdf", "reduce pdf size", "pdf optimizer"],
-    howToUse: ["Upload a PDF.", "Choose compression level.", "Download optimized PDF."],
-    formula: "pdf-lib reload + save with object streams",
-    faq: pdfFaq,
+    howToUse: [
+      "Upload a PDF (scans and photo-heavy files shrink the most).",
+      "Pick High quality, Balanced, or Smallest.",
+      "Click Compress PDF and download the smaller file.",
+    ],
+    formula: "PDF.js rasterize each page → JPEG encode → pdf-lib embed at original page size",
+    faq: [
+      ...pdfFaq,
+      {
+        question: "Why didn't my PDF get smaller before?",
+        answer:
+          "Rewriting PDF structure alone rarely shrinks files. This compressor re-renders each page and saves it as a compressed JPEG, which is what reduces size on scans and image PDFs.",
+      },
+      {
+        question: "Can I still copy text after compressing?",
+        answer:
+          "Pages are stored as images, so text is no longer selectable. Keep the original if you need to copy text or search inside the PDF.",
+      },
+    ],
   }),
   makeTool({
     slug: "pdf-to-jpg",
@@ -121,5 +137,48 @@ export const PDF_TOOLS: ToolConfig[] = [
     howToUse: ["Upload a PDF.", "Enter pages to remove.", "Download PDF without those pages."],
     formula: "pdf-lib copy all except removed indices",
     faq: pdfFaq,
+  }),
+  makeTool({
+    slug: "pdf-page-reorder",
+    title: "PDF Page Reorder",
+    shortDescription: "Rearrange PDF pages with up/down controls, then download the reordered document.",
+    category: "productivity",
+    icon: "ArrowUpDown",
+    gradient: "from-violet-500 to-purple-600",
+    badge: "PDF Tool",
+    popular: true,
+    keywords: ["reorder pdf pages", "rearrange pdf", "pdf page organizer", "move pdf pages"],
+    howToUse: [
+      "Upload a PDF.",
+      "Use up/down controls to rearrange pages.",
+      "Download the reordered PDF.",
+    ],
+    formula: "pdf-lib copyPages in user-defined order → new PDFDocument",
+    faq: pdfFaq,
+  }),
+  makeTool({
+    slug: "pdf-to-text",
+    title: "PDF to Text",
+    shortDescription: "Extract selectable text from a PDF in your browser — copy or download a .txt file.",
+    category: "productivity",
+    icon: "FileSearch",
+    gradient: "from-teal-500 to-cyan-600",
+    badge: "PDF Converter",
+    popular: true,
+    keywords: ["pdf to text", "extract text from pdf", "pdf to word", "pdf text extractor", "pdf ocr alternative"],
+    howToUse: [
+      "Upload a PDF with selectable text.",
+      "Wait while pages are parsed locally.",
+      "Copy the extracted text or download a .txt file.",
+    ],
+    formula: "PDF.js getTextContent() per page → joined plain text",
+    faq: [
+      ...pdfFaq,
+      {
+        question: "Does this convert PDF to Word (.docx)?",
+        answer:
+          "It extracts plain text you can paste into Word. Scanned image PDFs have no text layer — use OCR software for those.",
+      },
+    ],
   }),
 ];

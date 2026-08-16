@@ -1,84 +1,60 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/ui/Button";
 import ToolSearch from "@/components/tools/ToolSearch";
-import { ArrowRight, Sparkles, Zap } from "lucide-react";
-import { TOOLS_CONFIG } from "@/lib/toolsConfig";
-
-const TOOL_COUNT = TOOLS_CONFIG.length;
-
-const INTENT_CHIPS = [
-  { label: "Calculate", href: "/tools/calculators" },
-  { label: "Convert", href: "/tools/image" },
-  { label: "Create", href: "/tools/generators" },
-  { label: "Analyze", href: "/tools/social-media" },
-] as const;
+import { useCommandPaletteOptional } from "@/components/search/CommandPaletteProvider";
+import { ArrowRight, Gauge, ShieldCheck, Sparkles, Wrench } from "lucide-react";
+import { FEATURED_QUICK_CHIPS, TOOL_CATALOG_COUNT } from "@/lib/catalogDirectory";
 
 export default function Hero() {
   const t = useTranslations("home");
-  const [loan, setLoan] = useState(2500000);
-  const [rate, setRate] = useState(8.5);
-  const [years, setYears] = useState(20);
-
-  const emi = useMemo(() => {
-    const r = rate / 12 / 100;
-    const n = years * 12;
-    if (r === 0) return loan / n;
-    return (loan * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-  }, [loan, rate, years]);
-
-  const fmt = (n: number) =>
-    new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(n);
+  const palette = useCommandPaletteOptional();
 
   return (
-    <section className="relative min-h-[92vh] overflow-hidden">
+    <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(15,118,110,0.18),transparent_55%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_90%_20%,rgba(245,158,11,0.1),transparent_50%)]" />
         <div className="absolute inset-0 bg-grid opacity-40" />
-        <motion.div
-          className="absolute left-[12%] top-[28%] h-72 w-72 rounded-full bg-accent/20 blur-3xl"
-          animate={{ opacity: [0.35, 0.65, 0.35], scale: [1, 1.08, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-[18%] right-[8%] h-64 w-64 rounded-full bg-amber-400/15 blur-3xl"
-          animate={{ opacity: [0.2, 0.45, 0.2], y: [0, -16, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8 lg:py-24">
+      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65 }}
-          className="min-w-0"
+          transition={{ duration: 0.55 }}
+          className="mx-auto max-w-3xl text-center"
         >
           <p className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             <Sparkles className="h-4 w-4" />
             {t("heroBrand")}
           </p>
-          <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-theme-heading sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-4xl font-extrabold leading-[1.08] tracking-tight text-theme-heading sm:text-5xl lg:text-[3.35rem]">
             {t("heroHeadline")}
           </h1>
-          <p className="mt-4 max-w-lg text-base leading-relaxed text-theme-muted sm:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-theme-muted sm:text-lg">
             {t("heroSub")}
           </p>
 
-          <div className="mt-8 max-w-xl">
+          <div className="mx-auto mt-8 max-w-xl text-left">
             <ToolSearch showSuggestions showTags showCategoryFilter maxResults={6} enableKeyboardNav trackSearches />
+            <button
+              type="button"
+              onClick={() => palette?.setOpen(true)}
+              className="mt-2 text-xs text-theme-subtle transition hover:text-accent"
+            >
+              {t("searchHint")}
+            </button>
           </div>
 
-          <div className="mt-5 flex flex-wrap gap-2">
-            {INTENT_CHIPS.map((chip) => (
+          <div className="mt-6 flex flex-wrap justify-center gap-2">
+            {FEATURED_QUICK_CHIPS.map((chip) => (
               <Link
-                key={chip.label}
-                href={chip.href}
+                key={chip.slug}
+                href={`/tools/${chip.slug}`}
                 className="rounded-full border border-theme bg-theme-surface/80 px-3.5 py-1.5 text-sm font-semibold text-theme-heading transition hover:border-accent/40 hover:bg-accent/10"
               >
                 {chip.label}
@@ -86,7 +62,7 @@ export default function Hero() {
             ))}
           </div>
 
-          <div className="mt-7 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Button href="/tools" size="lg" icon>
               {t("ctaTools")}
             </Button>
@@ -95,92 +71,29 @@ export default function Hero() {
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.12 }}
-          className="relative"
-        >
-          <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-accent/40 via-amber-400/25 to-transparent opacity-80 blur-[1px]" />
-          <div className="relative overflow-hidden rounded-3xl border border-theme bg-[var(--surface-elevated)]/90 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent">Quick pulse</p>
-                <p className="mt-1 text-lg font-bold text-theme-heading">EMI preview</p>
-              </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-1 text-xs font-medium text-accent-emerald">
-                <Zap className="h-3.5 w-3.5" />
-                Instant
-              </span>
-            </div>
-
-            <div className="mt-5 space-y-3">
-              <DemoSlider label="Loan" value={loan} min={100000} max={10000000} step={50000} display={fmt(loan)} onChange={setLoan} />
-              <DemoSlider label="Rate" value={rate} min={5} max={18} step={0.1} display={`${rate.toFixed(1)}%`} onChange={setRate} />
-              <DemoSlider label="Years" value={years} min={1} max={30} step={1} display={`${years} yrs`} onChange={setYears} />
-            </div>
-
-            <div className="mt-5 rounded-2xl border border-accent/25 bg-accent/5 p-4 text-center">
-              <p className="text-xs font-semibold uppercase tracking-wider text-theme-subtle">Monthly EMI</p>
-              <motion.p
-                key={Math.round(emi)}
-                initial={{ opacity: 0.4, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="mt-1 text-3xl font-extrabold tabular-nums text-theme-heading"
-              >
-                {fmt(emi)}
-              </motion.p>
-            </div>
-
-            <Link
-              href="/tools/emi"
-              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
-            >
-              Open full EMI calculator
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-            <p className="mt-3 text-xs text-theme-subtle">Want more live demos? Scroll to the playground below.</p>
-          </div>
+          <ul className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <MetricBadge icon={Wrench} label={t("metricTools", { count: TOOL_CATALOG_COUNT })} />
+            <MetricBadge icon={Gauge} label={t("metricSpeed")} />
+            <MetricBadge icon={ShieldCheck} label={t("metricNoSignup")} />
+          </ul>
         </motion.div>
       </div>
     </section>
   );
 }
 
-function DemoSlider({
+function MetricBadge({
+  icon: Icon,
   label,
-  value,
-  min,
-  max,
-  step,
-  display,
-  onChange,
 }: {
+  icon: typeof Wrench;
   label: string;
-  value: number;
-  min: number;
-  max: number;
-  step: number;
-  display: string;
-  onChange: (n: number) => void;
 }) {
   return (
-    <div>
-      <div className="mb-1.5 flex justify-between gap-2 text-sm">
-        <span className="text-theme-muted">{label}</span>
-        <span className="font-semibold tabular-nums text-theme-heading">{display}</span>
-      </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full"
-      />
-    </div>
+    <li className="inline-flex items-center gap-2 rounded-full border border-theme bg-theme-surface/70 px-3.5 py-1.5 text-sm font-medium text-theme-heading">
+      <Icon className="h-3.5 w-3.5 text-accent" aria-hidden />
+      {label}
+    </li>
   );
 }

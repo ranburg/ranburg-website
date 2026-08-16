@@ -24,27 +24,6 @@ export function getToolPrimaryKeyword(tool: ToolConfig): string {
   return TOOL_PRIMARY_KEYWORDS[tool.slug] ?? tool.title;
 }
 
-function getActionPhrase(tool: ToolConfig): string {
-  const t = tool.title.toLowerCase();
-  const parts = tool.slug.split("-to-");
-
-  if (parts.length === 2) {
-    const from = parts[0].replace(/-/g, " ").toUpperCase();
-    const to = parts[1].replace(/-/g, " ").toUpperCase();
-    return `Convert ${from} to ${to} Instantly`;
-  }
-  if (t.includes("converter") || t.includes("convert")) return "Convert Instantly";
-  if (t.includes("calculator")) return "Calculate Instantly";
-  if (t.includes("generator")) return "Generate Instantly";
-  if (t.includes("formatter") || t.includes("format")) return "Format Instantly";
-  if (t.includes("compressor") || t.includes("compress")) return "Compress Instantly";
-  if (t.includes("resizer") || t.includes("resize") || t.includes("crop")) return "Edit Images Instantly";
-  if (t.includes("insights") || t.includes("analytics")) return "Analyze Instantly";
-  if (t.includes("encoder") || t.includes("decoder")) return "Encode Instantly";
-  if (t.includes("merge") || t.includes("split") || t.includes("pdf")) return "Process PDFs Instantly";
-  return "Instant Results in Your Browser";
-}
-
 const SMALL_WORDS = new Set(["to", "vs", "and", "of", "for", "in", "or"]);
 
 /** Display casing for H1 / title: "EMI calculator" → "EMI Calculator". */
@@ -66,23 +45,14 @@ export function buildToolPageH1(tool: ToolConfig): string {
 }
 
 /**
- * Keyword-front-loaded titles matching competitive SERP patterns.
- * Example: "EMI Calculator Online Free | Ranburg"
+ * Title pattern: "[Tool Name] - Free Online Tool | Ranburg"
  */
 export function buildToolPageTitle(tool: ToolConfig): string {
   const primary = formatKeywordAsHeading(getToolPrimaryKeyword(tool));
-  const configured = tool.seo.title.trim();
-  const leadsWithPrimary = configured.toLowerCase().startsWith(primary.toLowerCase());
-
-  if (leadsWithPrimary && /online free/i.test(configured) && configured.length <= 60) {
-    return configured.replace(/\s*\|\s*Ranburg(?:\.com)?\s*$/i, " | Ranburg").slice(0, 60);
-  }
-
-  const head = /\bonline\b/i.test(primary) ? `${primary} Free` : `${primary} Online Free`;
-  const withBrand = `${head} | Ranburg`;
-  const withAction = `${head} – ${getActionPhrase(tool)} | Ranburg`;
-  if (withAction.length <= 60) return withAction;
-  if (withBrand.length <= 60) return withBrand;
+  const pattern = `${primary} - Free Online Tool | Ranburg`;
+  if (pattern.length <= 60) return pattern;
+  const compact = `${primary} - Free Tool | Ranburg`;
+  if (compact.length <= 60) return compact;
   return `${primary} | Ranburg`.slice(0, 60);
 }
 

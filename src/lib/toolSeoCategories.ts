@@ -64,6 +64,8 @@ export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {
   "word-to-pdf": ["pdf", "business"],
   "pdf-page-extractor": ["pdf", "business"],
   "pdf-page-remover": ["pdf", "business"],
+  "pdf-page-reorder": ["pdf", "business"],
+  "pdf-to-text": ["pdf", "text", "business"],
   "pdf-tools": ["pdf", "business"],
 
   "keyword-density-checker": ["seo", "text"],
@@ -95,6 +97,8 @@ export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {
   "case-converter": ["seo", "text"],
   "glassmorphism-generator": ["seo", "generators"],
   "json-formatter": ["developer"],
+  "text-diff-checker": ["developer", "text"],
+  "markdown-preview": ["developer", "text"],
   "sql-formatter": ["developer"],
   minifier: ["developer"],
   "regex-tester": ["developer"],
@@ -158,6 +162,11 @@ export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {
   "ifsc-finder": ["business", "generators"],
   "lic-maturity-calculator": ["calculators", "business"],
   "pf-calculator": ["calculators", "business"],
+  "ppf-calculator": ["calculators", "business"],
+  "resume-builder": ["business", "generators"],
+  "pdf-signer": ["pdf", "business"],
+  "screen-recorder": ["generators"],
+  "color-background-remover": ["image"],
 };
 
 export const SEO_CATEGORY_HUBS: SeoCategoryHub[] = [

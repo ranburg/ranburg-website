@@ -35,6 +35,7 @@ export default function JSONFormatter() {
   const [sortKeys, setSortKeys] = useState(false);
   const [lenient, setLenient] = useState(false);
   const [minify, setMinify] = useState(false);
+  const [tree, setTree] = useState<unknown>(null);
 
   const process = (mode: "format" | "minify") => {
     setError("");
@@ -44,9 +45,11 @@ export default function JSONFormatter() {
       if (sortKeys) parsed = sortObjectKeys(parsed);
       const space = mode === "minify" ? 0 : indent;
       setOutput(JSON.stringify(parsed, null, space === 0 ? undefined : space));
+      setTree(parsed);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Invalid JSON");
       setOutput("");
+      setTree(null);
     }
   };
 
@@ -89,7 +92,7 @@ export default function JSONFormatter() {
         <button type="button" onClick={() => process("minify")} className="rounded-xl border border-white/20 px-6 py-2.5 text-sm font-semibold text-theme-heading hover:bg-white/5">
           {t("minify")}
         </button>
-        <button type="button" onClick={() => { setError(""); try { JSON.parse(lenient ? stripComments(input) : input); setError(""); setOutput("✓ Valid JSON"); } catch (e) { setError(e instanceof Error ? e.message : "Invalid"); } }} className="rounded-xl border border-accent-emerald/30 px-6 py-2.5 text-sm font-semibold text-accent-emerald hover:bg-accent-emerald/10">
+        <button type="button" onClick={() => { setError(""); try { const parsed = JSON.parse(lenient ? stripComments(input) : input); setError(""); setOutput("✓ Valid JSON"); setTree(parsed); } catch (e) { setError(e instanceof Error ? e.message : "Invalid"); setTree(null); } }} className="rounded-xl border border-accent-emerald/30 px-6 py-2.5 text-sm font-semibold text-accent-emerald hover:bg-accent-emerald/10">
           {t("validate")}
         </button>
       </div>
@@ -118,6 +121,44 @@ export default function JSONFormatter() {
           </label>
         </AdvancedOptions>
       </div>
+
+      {tree !== null && (
+        <div className="glass-card p-6">
+          <p className="mb-3 text-sm font-medium text-theme-body">Tree view</p>
+          <JsonTreeNode value={tree} name="root" depth={0} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function JsonTreeNode({ value, name, depth }: { value: unknown; name: string; depth: number }) {
+  const [open, setOpen] = useState(depth < 2);
+  const isObj = value !== null && typeof value === "object";
+  if (!isObj) {
+    const display = typeof value === "string" ? `"${value}"` : String(value);
+    return (
+      <div className="font-mono text-xs leading-6 text-theme-muted" style={{ paddingLeft: depth * 12 }}>
+        <span className="text-accent">{name}</span>
+        <span>: </span>
+        <span className="text-accent-emerald">{display}</span>
+      </div>
+    );
+  }
+  const entries = Array.isArray(value)
+    ? value.map((v, i) => [String(i), v] as const)
+    : Object.entries(value as Record<string, unknown>);
+  return (
+    <div style={{ paddingLeft: depth * 12 }}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="font-mono text-xs text-theme-heading"
+      >
+        {open ? "▼" : "▶"} {name} {Array.isArray(value) ? `[${entries.length}]` : `{${entries.length}}`}
+      </button>
+      {open &&
+        entries.map(([k, v]) => <JsonTreeNode key={k} name={k} value={v} depth={depth + 1} />)}
     </div>
   );
 }

@@ -217,11 +217,27 @@ export default function QRGenerator() {
           </div>
           <div>
             <label className="mb-2 block text-sm text-theme-muted">Foreground</label>
-            <input type="color" value={darkColor} onChange={(e) => setDarkColor(e.target.value)} className="h-10 w-full cursor-pointer rounded-lg" />
+            <div className="flex gap-2">
+              <input type="color" value={darkColor} onChange={(e) => setDarkColor(e.target.value)} className="h-10 w-12 cursor-pointer rounded-lg" />
+              <input
+                value={darkColor}
+                onChange={(e) => /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(e.target.value) && setDarkColor(e.target.value)}
+                className="input-field font-mono text-sm"
+                aria-label="Foreground hex"
+              />
+            </div>
           </div>
           <div>
             <label className="mb-2 block text-sm text-theme-muted">Background</label>
-            <input type="color" value={lightColor} onChange={(e) => setLightColor(e.target.value)} className="input-field h-10 w-full cursor-pointer rounded-lg p-1" />
+            <div className="flex gap-2">
+              <input type="color" value={lightColor} onChange={(e) => setLightColor(e.target.value)} className="input-field h-10 w-12 cursor-pointer rounded-lg p-1" />
+              <input
+                value={lightColor}
+                onChange={(e) => /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(e.target.value) && setLightColor(e.target.value)}
+                className="input-field font-mono text-sm"
+                aria-label="Background hex"
+              />
+            </div>
           </div>
           <div>
             <label className="mb-2 flex items-center gap-2 text-sm text-theme-muted">

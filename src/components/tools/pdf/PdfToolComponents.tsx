@@ -7,6 +7,12 @@ import { Download } from "lucide-react";
 import FileDropzone, { FileList } from "@/components/tools/shared/FileDropzone";
 import { BeforeAfterBar } from "@/components/tools/viz";
 import { downloadBlob } from "@/lib/imageProcessing";
+import {
+  compressPdfWithJpegPages,
+  loadPdfJs,
+  PDF_COMPRESS_PRESETS,
+  type PdfCompressPreset,
+} from "@/lib/pdfCompress";
 
 async function loadPdfLib() {
   return import("pdf-lib");
@@ -79,10 +85,11 @@ export function PdfSplitTool() {
 }
 
 export function PdfCompressorTool() {
-  const { t } = useToolUi("pdf-tools" );
+  const { t } = useToolUi("pdf-tools");
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
+  const [preset, setPreset] = useState<PdfCompressPreset>("balanced");
   const [sizes, setSizes] = useState<{ before: number; after: number } | null>(null);
 
   const compress = async () => {
@@ -90,18 +97,22 @@ export function PdfCompressorTool() {
     setLoading(true);
     setSizes(null);
     try {
-      const { PDFDocument } = await loadPdfLib();
       const before = files[0].size;
-      const doc = await PDFDocument.load(await files[0].arrayBuffer(), { ignoreEncryption: true });
-      const bytes = await doc.save({ useObjectStreams: true, addDefaultPage: false });
-      const after = bytes.length;
+      const data = await files[0].arrayBuffer();
+      const bytes = await compressPdfWithJpegPages(data, preset, (page, total) => {
+        setStatus(`Compressing page ${page} of ${total}…`);
+      });
+      const after = bytes.byteLength;
       setSizes({ before, after });
-      downloadBlob(new Blob([Uint8Array.from(bytes)], { type: "application/pdf" }), "optimized.pdf");
-      const saved = before > 0 ? (((before - after) / before) * 100).toFixed(0) : "0";
+      const saved = before > 0 ? Math.round(((before - after) / before) * 100) : 0;
+      downloadBlob(
+        new Blob([Uint8Array.from(bytes)], { type: "application/pdf" }),
+        files[0].name.replace(/\.pdf$/i, "") + "-compressed.pdf"
+      );
       setStatus(
-        Number(saved) > 1
-          ? `Repacked PDF — about ${saved}% smaller. Heavy image PDFs may need image compression separately.`
-          : `Repacked PDF (structure optimized). File size may stay similar when content is already compressed — try Image Compressor for photo-heavy PDFs.`
+        saved > 0
+          ? `Compressed — about ${saved}% smaller (${formatBytes(before)} → ${formatBytes(after)}). Pages are saved as images so text is no longer selectable.`
+          : `Output is ${formatBytes(after)}. Try Smallest if the file is still large, or the PDF may already be optimized.`
       );
     } catch (e) {
       setStatus(e instanceof Error ? e.message : "Compression failed.");
@@ -112,13 +123,60 @@ export function PdfCompressorTool() {
 
   return (
     <div className="space-y-6">
-      <PdfToolShell files={files} setFiles={setFiles} onRun={compress} loading={loading} status={status} label="Optimize PDF" />
-      {sizes && <BeforeAfterBar before={sizes.before} after={sizes.after} beforeLabel="Original" afterLabel="Optimized" />}
+      <PdfToolShell
+        files={files}
+        setFiles={setFiles}
+        onRun={compress}
+        loading={loading}
+        status={status}
+        label="Compress PDF"
+        hideButton
+      />
+      <div>
+        <p className="mb-2 text-sm font-medium text-theme-heading">Compression</p>
+        <div className="grid gap-2 sm:grid-cols-3">
+          {(Object.keys(PDF_COMPRESS_PRESETS) as PdfCompressPreset[]).map((key) => {
+            const item = PDF_COMPRESS_PRESETS[key];
+            const active = preset === key;
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setPreset(key)}
+                className={`rounded-xl border px-3 py-2.5 text-left transition ${
+                  active
+                    ? "border-accent bg-accent/10 text-theme-heading"
+                    : "border-theme-subtle text-theme-muted hover:border-accent/40"
+                }`}
+              >
+                <span className="block text-sm font-semibold">{item.label}</span>
+                <span className="mt-0.5 block text-xs">{item.hint}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={compress}
+        disabled={loading || !files[0]}
+        className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white disabled:opacity-50"
+      >
+        <Download className="h-4 w-4" />
+        {loading ? "Compressing…" : "Compress PDF"}
+      </button>
+      {sizes && <BeforeAfterBar before={sizes.before} after={sizes.after} beforeLabel="Original" afterLabel="Compressed" />}
       <p className="text-xs text-theme-subtle">
-        This tool rewrites PDF object streams in your browser. It does not re-encode embedded photos — size savings vary.
+        Scanned and photo PDFs shrink the most. Each page is re-encoded as JPEG in your browser — nothing is uploaded.
       </p>
     </div>
   );
+}
+
+function formatBytes(n: number): string {
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+  return `${(n / (1024 * 1024)).toFixed(2)} MB`;
 }
 
 export function PdfPageExtractorTool() {
@@ -304,8 +362,7 @@ export function PdfToJpgTool() {
     if (!files[0]) return;
     setLoading(true);
     try {
-      const pdfjs = await import("pdfjs-dist");
-      pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
+      const pdfjs = await loadPdfJs();
       const data = await files[0].arrayBuffer();
       const pdf = await pdfjs.getDocument({ data }).promise;
       for (let i = 1; i <= pdf.numPages; i++) {
@@ -328,6 +385,149 @@ export function PdfToJpgTool() {
   };
 
   return <PdfToolShell files={files} setFiles={setFiles} onRun={convert} loading={loading} status={status} label="Convert to JPG" />;
+}
+
+export function PdfPageReorderTool() {
+  const [files, setFiles] = useState<File[]>([]);
+  const [order, setOrder] = useState<number[]>([]);
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const onFiles = async (next: File[]) => {
+    setFiles(next);
+    if (!next[0]) {
+      setOrder([]);
+      return;
+    }
+    try {
+      const { PDFDocument } = await loadPdfLib();
+      const src = await PDFDocument.load(await next[0].arrayBuffer());
+      setOrder([...Array(src.getPageCount()).keys()]);
+      setStatus(`${src.getPageCount()} pages loaded.`);
+    } catch (e) {
+      setStatus(e instanceof Error ? e.message : "Could not read PDF.");
+    }
+  };
+
+  const move = (index: number, dir: -1 | 1) => {
+    setOrder((prev) => {
+      const next = [...prev];
+      const j = index + dir;
+      if (j < 0 || j >= next.length) return prev;
+      [next[index], next[j]] = [next[j], next[index]];
+      return next;
+    });
+  };
+
+  const run = async () => {
+    if (!files[0] || order.length === 0) return;
+    setLoading(true);
+    try {
+      const { PDFDocument } = await loadPdfLib();
+      const src = await PDFDocument.load(await files[0].arrayBuffer());
+      const out = await PDFDocument.create();
+      const pages = await out.copyPages(src, order);
+      pages.forEach((p) => out.addPage(p));
+      const bytes = await out.save();
+      downloadBlob(new Blob([Uint8Array.from(bytes)], { type: "application/pdf" }), "reordered.pdf");
+      setStatus("Reordered PDF downloaded.");
+    } catch (e) {
+      setStatus(e instanceof Error ? e.message : "Reorder failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <FileDropzone accept="application/pdf,.pdf" onFiles={onFiles} hint="Drag and drop — processed in your browser" />
+      <FileList files={files} onRemove={() => { setFiles([]); setOrder([]); }} />
+      {order.length > 0 && (
+        <ol className="space-y-2">
+          {order.map((pageIndex, i) => (
+            <li
+              key={`${pageIndex}-${i}`}
+              className="flex items-center justify-between rounded-xl border border-theme-subtle bg-theme-surface/50 px-4 py-2 text-sm"
+            >
+              <span className="font-medium text-theme-heading">
+                Position {i + 1}: original page {pageIndex + 1}
+              </span>
+              <span className="flex gap-2">
+                <button type="button" onClick={() => move(i, -1)} className="rounded-lg border border-theme-subtle px-2 py-1 text-xs" disabled={i === 0}>
+                  Up
+                </button>
+                <button
+                  type="button"
+                  onClick={() => move(i, 1)}
+                  className="rounded-lg border border-theme-subtle px-2 py-1 text-xs"
+                  disabled={i === order.length - 1}
+                >
+                  Down
+                </button>
+              </span>
+            </li>
+          ))}
+        </ol>
+      )}
+      <button type="button" onClick={run} disabled={loading || !files[0]} className="rounded-xl bg-accent px-6 py-2.5 text-sm font-semibold text-white disabled:opacity-50">
+        {loading ? "Processing…" : "Download reordered PDF"}
+      </button>
+      {status && <p className="text-sm text-theme-muted">{status}</p>}
+    </div>
+  );
+}
+
+export function PdfToTextTool() {
+  const [files, setFiles] = useState<File[]>([]);
+  const [text, setText] = useState("");
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const extract = async () => {
+    if (!files[0]) return;
+    setLoading(true);
+    setText("");
+    try {
+      const pdfjs = await loadPdfJs();
+      const data = await files[0].arrayBuffer();
+      const pdf = await pdfjs.getDocument({ data }).promise;
+      const parts: string[] = [];
+      for (let i = 1; i <= pdf.numPages; i++) {
+        setStatus(`Reading page ${i} of ${pdf.numPages}…`);
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        const pageText = content.items
+          .map((item) => ("str" in item ? item.str : ""))
+          .join(" ");
+        parts.push(`--- Page ${i} ---\n${pageText}`);
+      }
+      const out = parts.join("\n\n");
+      setText(out);
+      setStatus(out.trim() ? `Extracted text from ${pdf.numPages} page(s).` : "No selectable text found (likely a scanned PDF).");
+    } catch (e) {
+      setStatus(e instanceof Error ? e.message : "Extraction failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const downloadTxt = () => {
+    downloadBlob(new Blob([text], { type: "text/plain" }), "extracted.txt");
+  };
+
+  return (
+    <div className="space-y-4">
+      <PdfToolShell files={files} setFiles={setFiles} onRun={extract} loading={loading} status={status} label="Extract text" />
+      {text && (
+        <>
+          <textarea value={text} readOnly rows={16} className="input-field font-mono text-sm" />
+          <button type="button" onClick={downloadTxt} className="rounded-xl border border-theme-subtle px-5 py-2.5 text-sm font-semibold text-theme-heading">
+            Download .txt
+          </button>
+        </>
+      )}
+    </div>
+  );
 }
 
 function parsePageRange(spec: string, total: number): number[] {
