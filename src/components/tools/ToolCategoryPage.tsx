@@ -6,6 +6,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ToolSearch from "@/components/tools/ToolSearch";
 import ToolCard from "@/components/tools/ToolCard";
+import SearchHeroPanel from "@/components/home/SearchHeroPanel";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 import ConsultingCTA from "@/components/ui/ConsultingCTA";
 import {
@@ -87,38 +88,29 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
               { label: hub.label },
             ]}
           />
-          <div className="mt-6 flex items-start gap-4">
-            {(() => {
-              const Icon = getToolIcon(hub.icon);
-              return (
-                <div className={`hidden h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br sm:flex ${hub.gradient}`}>
-                  <Icon className="h-7 w-7 text-white" />
-                </div>
-              );
-            })()}
-            <div className="flex-1">
-              <p className="text-xs font-semibold uppercase tracking-wider text-accent">Tool Category</p>
-              <h1 className="mt-1 text-3xl font-extrabold text-theme-heading sm:text-4xl">{hub.headline}</h1>
-              <p className="mt-3 max-w-3xl text-lg text-theme-muted">{hub.description}</p>
-            </div>
+          <div className="mt-6">
+            <SearchHeroPanel
+              eyebrow={<p className="text-xs font-semibold uppercase tracking-wider text-accent">Tool Category</p>}
+              title={<h1 className="mt-2 text-3xl font-extrabold text-theme-heading sm:text-4xl">{hub.headline}</h1>}
+              subtitle={<p className="mt-3 max-w-3xl text-base text-theme-muted sm:text-lg">{hub.description}</p>}
+              search={
+                <ToolSearch
+                  placeholder={`Search ${hub.label.toLowerCase()}…`}
+                  showSuggestions
+                  showTags
+                  maxResults={8}
+                  showCategoryFilter
+                  seoCategoryFilter={categorySlug}
+                />
+              }
+            />
           </div>
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <AdPlaceholder placement="below-hero" />
-      </div>
-
       <section className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ToolSearch
-            placeholder={`Search ${hub.label.toLowerCase()}…`}
-            showSuggestions
-            showTags
-            maxResults={8}
-            showCategoryFilter
-            seoCategoryFilter={categorySlug}
-          />
+          <AdPlaceholder placement="below-hero" />
         </div>
       </section>
 
@@ -126,7 +118,7 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
         <section className="py-8">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-xl font-bold text-theme-heading">Popular in {hub.label}</h2>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {popularInCategory.map((slug) => (
                 <ToolCard key={slug} slug={slug} showCategory={false} />
               ))}
@@ -140,7 +132,7 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
           <h2 className="text-2xl font-bold text-theme-heading">
             {tools.length} {hub.label}
           </h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {tools.map((t) => (
               <ToolCard key={t.slug} slug={t.slug} showCategory={false} />
             ))}
@@ -152,7 +144,7 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
         <section className="py-8">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-xl font-bold text-theme-heading">Recently Added</h2>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {recentInCategory.map((slug) => (
                 <ToolCard key={slug} slug={slug} showCategory={false} />
               ))}
@@ -201,10 +193,10 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
                   <Link
                     key={cat.slug}
                     href={`/tools/${cat.slug}`}
-                    className="glass-card group flex items-center gap-4 p-5 hover:border-accent/30"
+                    className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-5 shadow-[0_10px_24px_-16px_rgba(12,31,26,0.4)] transition-all hover:-translate-y-0.5 hover:border-accent/80 hover:shadow-[0_0_0_2px_rgba(15,118,110,0.25),0_18px_36px_-16px_rgba(15,118,110,0.45)] dark:border-white/10"
                   >
-                    <div className={`flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${cat.gradient}`}>
-                      <Icon className="h-5 w-5 text-white" />
+                    <div className={`flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-2 ring-white/40 dark:ring-white/10 ${cat.gradient}`}>
+                      <Icon className="h-5 w-5 text-white" strokeWidth={2.25} />
                     </div>
                     <div>
                       <p className="font-semibold text-theme-heading group-hover:text-accent">{cat.label}</p>

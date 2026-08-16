@@ -7,6 +7,8 @@ import { PRIORITY_INDEX_TOOL_SLUGS } from "@/lib/seoGrowthConfig";
 import { SITE } from "@/lib/siteConfig";
 import JsonLd from "@/components/seo/JsonLd";
 import Hero from "@/components/home/Hero";
+import HomeBanners from "@/components/home/HomeBanners";
+import ToolsVideoBanner from "@/components/home/ToolsVideoBanner";
 import CatalogDirectory from "@/components/home/CatalogDirectory";
 import RecentlyUsedTools from "@/components/home/RecentlyUsedTools";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
@@ -61,6 +63,8 @@ export default async function HomePage({ params }: PageProps) {
         )}
       />
       <Hero />
+      <HomeBanners />
+      <ToolsVideoBanner />
       <CatalogDirectory />
       <RecentlyUsedTools />
       <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />

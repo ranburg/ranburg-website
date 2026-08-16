@@ -63,7 +63,7 @@ export default function MetricToolsSection({ metric }: { metric: MetricType }) {
           {items.map(({ slug }) => {
             const tool = getToolBySlug(slug);
             if (!tool) return null;
-            const ToolIcon = getToolIcon(tool.icon);
+            const ToolIcon = getToolIcon(tool.icon, tool.slug);
             const cat = getCategoryById(tool.category);
             const seoCat = getPrimarySeoCategoryForTool(slug);
             const views = getToolViewCount(slug);
@@ -72,10 +72,10 @@ export default function MetricToolsSection({ metric }: { metric: MetricType }) {
               <Link
                 key={slug}
                 href={`/tools/${slug}`}
-                className="glass-card group flex gap-4 p-5 transition-all hover:border-accent/30 hover:shadow-md"
+                className="group flex gap-4 rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-5 shadow-[0_10px_24px_-16px_rgba(12,31,26,0.4)] transition-all hover:-translate-y-0.5 hover:border-accent/80 hover:shadow-[0_0_0_2px_rgba(15,118,110,0.25),0_18px_36px_-16px_rgba(15,118,110,0.45)] dark:border-white/10"
               >
-                <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${tool.gradient}`}>
-                  <ToolIcon className="h-5 w-5 text-white" />
+                <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-2 ring-white/40 dark:ring-white/10 ${tool.gradient}`}>
+                  <ToolIcon className="h-5 w-5 text-white" strokeWidth={2.25} />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-start justify-between gap-2">

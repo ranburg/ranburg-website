@@ -28,7 +28,7 @@ export default function ToolNextSteps({
       </div>
       <ul className="mt-3 grid gap-2 sm:grid-cols-3">
         {next.map((tool) => {
-          const Icon = getToolIcon(tool.icon);
+          const Icon = getToolIcon(tool.icon, tool.slug);
           return (
             <li key={tool.slug}>
               <Link
@@ -37,9 +37,9 @@ export default function ToolNextSteps({
                 className="group flex items-center gap-3 rounded-lg border border-theme-subtle/80 bg-theme-surface/60 px-3 py-2.5 transition-colors hover:border-accent hover:bg-accent/5"
               >
                 <span
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.gradient}`}
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br shadow-md ring-2 ring-white/40 dark:ring-white/10 ${tool.gradient}`}
                 >
-                  <Icon className="h-4 w-4 text-white" />
+                  <Icon className="h-4 w-4 text-white" strokeWidth={2.25} />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-medium text-theme-heading group-hover:text-accent">

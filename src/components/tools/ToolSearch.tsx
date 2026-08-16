@@ -255,7 +255,7 @@ export default function ToolSearch({
               <li className="px-3 py-4 text-center text-sm text-theme-muted">No tools found. Try another keyword.</li>
             ) : (
               results.map(({ tool }, i) => {
-                const Icon = getToolIcon(tool.icon);
+                const Icon = getToolIcon(tool.icon, tool.slug);
                 return (
                   <li key={tool.slug} role="option" aria-selected={i === activeIndex}>
                     <Link
@@ -270,8 +270,8 @@ export default function ToolSearch({
                         i === activeIndex ? "bg-accent/10" : "hover:bg-theme-surface active:bg-theme-surface"
                       )}
                     >
-                      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.gradient}`}>
-                        <Icon className="h-4 w-4 text-white" />
+                      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br shadow-sm ring-1 ring-white/40 ${tool.gradient}`}>
+                        <Icon className="h-4 w-4 text-white" strokeWidth={2.25} />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-medium text-theme-heading">

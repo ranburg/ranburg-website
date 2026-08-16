@@ -6,7 +6,6 @@ import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { SITE } from "@/lib/siteConfig";
 import JsonLd from "@/components/seo/JsonLd";
 import ToolsHub from "@/components/tools/ToolsHub";
-import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 const TOOL_COUNT = TOOLS_CONFIG.length;
 
@@ -41,7 +40,7 @@ export default async function ToolsPage({ params, searchParams }: Props) {
   const initialQuery = (q ?? "").trim();
 
   return (
-    <div className="pb-24">
+    <div className="pb-24 pt-16 sm:pt-20">
       <JsonLd
         data={collectionPageJsonLd(
           "Free online tools",
@@ -53,21 +52,12 @@ export default async function ToolsPage({ params, searchParams }: Props) {
           }))
         )}
       />
-      <section className="relative overflow-hidden pb-8 pt-16 sm:pt-20">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">{t("toolsIndex.title")}</p>
-          <h1 className="mt-3 max-w-3xl text-3xl font-extrabold tracking-tight text-theme-heading sm:text-4xl lg:text-5xl">
-            {t("toolsIndex.title")}
-          </h1>
-          <p className="mt-4 max-w-2xl text-base text-theme-muted sm:text-lg">{t("toolsIndex.description")}</p>
-        </div>
-      </section>
-
-      <AdPlaceholder placement="below-hero" className="mx-auto mb-6 max-w-7xl px-4 sm:px-6 lg:px-8" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ToolsHub initialQuery={initialQuery} />
+        <ToolsHub
+          initialQuery={initialQuery}
+          title={t("toolsIndex.title")}
+          description={t("toolsIndex.description")}
+        />
       </div>
     </div>
   );

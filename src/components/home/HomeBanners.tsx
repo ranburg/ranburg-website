@@ -1,0 +1,84 @@
+import { Link } from "@/i18n/navigation";
+import { ArrowRight, FileText, Files, ShieldCheck } from "lucide-react";
+import { CATALOG_SECTIONS } from "@/lib/catalogDirectory";
+import { getToolIcon } from "@/lib/toolIcons";
+
+const PROMOS = [
+  {
+    href: "/privacy",
+    icon: ShieldCheck,
+    gradient: "from-teal-500 to-emerald-600",
+    title: "Private by design",
+    body: "PDFs, photos, and invoices are processed on your device. Nothing is uploaded to Ranburg.",
+    cta: "Read privacy",
+  },
+  {
+    href: "/tools/invoice-generator",
+    icon: FileText,
+    gradient: "from-amber-500 to-orange-600",
+    title: "Client-ready invoices",
+    body: "Logo, GST / VAT, and PDF download in about two minutes. No account required.",
+    cta: "Create an invoice",
+  },
+  {
+    href: "/tools/pdf-merge",
+    icon: Files,
+    gradient: "from-rose-500 to-red-600",
+    title: "PDF suite in the browser",
+    body: "Merge, split, compress, reorder, and extract text — drag and drop, then download.",
+    cta: "Open PDF tools",
+  },
+] as const;
+
+export default function HomeBanners() {
+  return (
+    <section className="py-6 sm:py-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-4 lg:grid-cols-3">
+          {PROMOS.map((promo) => {
+            const Icon = promo.icon;
+            return (
+              <Link
+                key={promo.href}
+                href={promo.href}
+                className="group relative overflow-hidden rounded-2xl border border-theme bg-[var(--surface-elevated)] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
+              >
+                <div className={`absolute -right-8 -top-10 h-28 w-28 rounded-full bg-gradient-to-br ${promo.gradient} opacity-20 blur-2xl group-hover:opacity-35`} />
+                <div className={`relative mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${promo.gradient}`}>
+                  <Icon className="h-5 w-5 text-white" />
+                </div>
+                <h2 className="relative text-lg font-bold text-theme-heading">{promo.title}</h2>
+                <p className="relative mt-1.5 text-sm leading-relaxed text-theme-muted">{promo.body}</p>
+                <span className="relative mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
+                  {promo.cta}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {CATALOG_SECTIONS.map((section) => {
+            const Icon = getToolIcon(section.icon);
+            return (
+              <Link
+                key={section.id}
+                href={`#${section.id}`}
+                className="flex items-center gap-3 rounded-2xl border border-theme bg-[var(--surface-elevated)]/80 px-4 py-3 transition hover:border-accent/35 hover:bg-accent/5"
+              >
+                <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${section.gradient}`}>
+                  <Icon className="h-5 w-5 text-white" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block truncate font-semibold text-theme-heading">{section.label}</span>
+                  <span className="block truncate text-xs text-theme-muted">{section.slugs.length} tools</span>
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

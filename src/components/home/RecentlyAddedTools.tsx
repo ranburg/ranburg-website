@@ -15,7 +15,7 @@ export default function RecentlyAddedTools() {
             </p>
           </div>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {RECENT_TOOL_SLUGS.slice(0, 8).map((slug) => (
             <ToolCard key={slug} slug={slug} />
           ))}

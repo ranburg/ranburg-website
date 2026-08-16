@@ -48,7 +48,7 @@ export default function SocialToolsSpotlight() {
             const revenue = getToolBySlug(p.revenue);
             if (!analytics || !revenue) return null;
 
-            const AnalyticsIcon = getToolIcon(analytics.icon);
+            const AnalyticsIcon = getToolIcon(analytics.icon, analytics.slug);
 
             return (
               <div

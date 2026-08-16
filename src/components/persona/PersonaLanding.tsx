@@ -91,7 +91,7 @@ export default function PersonaLanding({ slug }: PersonaLandingProps) {
             <p className="mt-1.5 max-w-2xl text-sm text-theme-muted sm:text-base">
               High-impact tools we recommend first for {persona.title.toLowerCase()}s.
             </p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {featured.map((tool) => (
                 <ToolCard key={tool.slug} slug={tool.slug} showCategory />
               ))}
@@ -105,7 +105,7 @@ export default function PersonaLanding({ slug }: PersonaLandingProps) {
             <p className="mt-1.5 max-w-2xl text-sm text-theme-muted sm:text-base">
               Related utilities from your persona&apos;s categories. Search still covers every tool on Ranburg.
             </p>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {recommended.map((tool) => (
                 <ToolCard key={tool.slug} slug={tool.slug} showCategory />
               ))}

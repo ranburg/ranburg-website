@@ -27,7 +27,7 @@ function CategoryDropdown({
 }: {
   id: string;
   label: string;
-  tools: { slug: string; title: string; icon: string }[];
+  tools: { slug: string; title: string; icon: string; gradient: string }[];
   hubHref: string;
   active: boolean;
   open: boolean;
@@ -90,7 +90,7 @@ function CategoryDropdown({
       >
         <ul className="space-y-0.5 px-1">
           {tools.map((tool) => {
-            const Icon = getToolIcon(tool.icon);
+            const Icon = getToolIcon(tool.icon, tool.slug);
             return (
               <li key={tool.slug} role="none">
                 <Link
@@ -99,7 +99,9 @@ function CategoryDropdown({
                   onClick={close}
                   className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-theme-muted hover:bg-theme-surface hover:text-accent"
                 >
-                  <Icon className="h-3.5 w-3.5 shrink-0" />
+                  <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-gradient-to-br ${tool.gradient}`}>
+                    <Icon className="h-3.5 w-3.5 text-white" strokeWidth={2.25} />
+                  </span>
                   <span className="truncate">{tool.title}</span>
                 </Link>
               </li>
@@ -262,7 +264,7 @@ export default function ToolsSubNav({ className, onNavigate, variant = "bar" }: 
               key={slug}
               id={slug}
               label={hub.label.replace(/ Tools$/, "")}
-              tools={tools.map((t) => ({ slug: t.slug, title: t.title, icon: t.icon }))}
+              tools={tools.map((t) => ({ slug: t.slug, title: t.title, icon: t.icon, gradient: t.gradient }))}
               hubHref={`/tools/${slug}`}
               active={isActive}
               open={openCategory === slug}
@@ -274,7 +276,7 @@ export default function ToolsSubNav({ className, onNavigate, variant = "bar" }: 
         <CategoryDropdown
           id="salesforce"
           label="Salesforce"
-          tools={SALESFORCE_TOOLS.map((t) => ({ slug: t.slug, title: t.title, icon: t.icon }))}
+          tools={SALESFORCE_TOOLS.map((t) => ({ slug: t.slug, title: t.title, icon: t.icon, gradient: t.gradient }))}
           hubHref="/tools/salesforce"
           active={
             pathname.startsWith("/tools/salesforce") ||

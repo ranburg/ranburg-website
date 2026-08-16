@@ -28,7 +28,7 @@ function NavLink({
   hero?: boolean;
 }) {
   const tool = hero ? getToolBySlug(slug) : null;
-  const Icon = tool ? getToolIcon(tool.icon) : null;
+  const Icon = tool ? getToolIcon(tool.icon, tool.slug) : null;
 
   return (
     <Link

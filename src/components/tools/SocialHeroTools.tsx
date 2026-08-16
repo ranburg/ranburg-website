@@ -11,15 +11,15 @@ export default function SocialHeroTools({ compact = false }: { compact?: boolean
     return (
       <div className="grid gap-3 sm:grid-cols-2">
         {tools.map((tool) => {
-          const Icon = getToolIcon(tool!.icon);
+          const Icon = getToolIcon(tool!.icon, tool!.slug);
           return (
             <Link
               key={tool!.slug}
               href={`/tools/${tool!.slug}`}
               className="group flex items-center gap-3 rounded-xl border border-accent/20 bg-accent/5 px-4 py-3 transition-all hover:border-accent/40 hover:bg-accent/10"
             >
-              <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool!.gradient}`}>
-                <Icon className="h-4 w-4 text-white" />
+              <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br shadow-md ring-2 ring-white/40 ${tool!.gradient}`}>
+                <Icon className="h-4 w-4 text-white" strokeWidth={2.25} />
               </div>
               <span className="text-sm font-semibold text-theme-heading group-hover:text-accent">{tool!.title}</span>
             </Link>
@@ -49,15 +49,15 @@ export default function SocialHeroTools({ compact = false }: { compact?: boolean
         </p>
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {tools.map((tool) => {
-            const Icon = getToolIcon(tool!.icon);
+            const Icon = getToolIcon(tool!.icon, tool!.slug);
             return (
               <Link
                 key={tool!.slug}
                 href={`/tools/${tool!.slug}`}
                 className="group flex items-start gap-4 rounded-xl border border-theme-subtle bg-theme-surface/50 p-4 transition-all hover:border-accent/40 hover:bg-theme-surface/80"
               >
-                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${tool!.gradient}`}>
-                  <Icon className="h-6 w-6 text-white" />
+                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-2 ring-white/40 ${tool!.gradient}`}>
+                  <Icon className="h-6 w-6 text-white" strokeWidth={2.25} />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="font-bold text-theme-heading group-hover:text-accent">{tool!.title}</p>

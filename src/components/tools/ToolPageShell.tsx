@@ -54,7 +54,7 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
     (messages as { tools?: { meta?: Record<string, object> } }).tools?.meta
   );
 
-  const Icon = getToolIcon(tool.icon);
+  const Icon = getToolIcon(tool.icon, tool.slug);
   const category = getCategoryById(tool.category);
   const seoCategory = getPrimarySeoCategoryForTool(slug);
   const seoSections = generateToolSeoSections(tool);
@@ -100,8 +100,8 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={breadcrumbs} />
           <div className="mt-5 flex items-start gap-4">
-            <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br sm:h-14 sm:w-14 sm:rounded-2xl ${tool.gradient}`}>
-              <Icon className="h-6 w-6 text-white sm:h-7 sm:w-7" />
+            <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-lg ring-2 ring-white/40 dark:ring-white/10 sm:h-14 sm:w-14 sm:rounded-2xl ${tool.gradient}`}>
+              <Icon className="h-6 w-6 text-white sm:h-7 sm:w-7" strokeWidth={2.25} />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1">

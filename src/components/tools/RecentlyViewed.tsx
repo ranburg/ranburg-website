@@ -22,19 +22,19 @@ export default function RecentlyViewed({ excludeSlug }: { excludeSlug?: string }
         <Clock className="h-5 w-5 text-accent" />
         <h2 className="text-2xl font-bold text-theme-heading">Recently Viewed</h2>
       </div>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {slugs.map((slug) => {
           const tool = getToolBySlug(slug);
           if (!tool) return null;
-          const Icon = getToolIcon(tool.icon);
+          const Icon = getToolIcon(tool.icon, tool.slug);
           return (
             <Link
               key={slug}
               href={`/tools/${slug}`}
-              className="glass-card group flex items-center gap-3 p-4 hover:border-accent/30"
+              className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/80 hover:shadow-[0_0_0_2px_rgba(15,118,110,0.25),0_16px_28px_-14px_rgba(15,118,110,0.4)] dark:border-white/10"
             >
-              <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.gradient}`}>
-                <Icon className="h-4 w-4 text-white" />
+              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-2 ring-white/40 dark:ring-white/10 ${tool.gradient}`}>
+                <Icon className="h-5 w-5 text-white" strokeWidth={2.25} />
               </div>
               <p className="truncate text-sm font-medium text-theme-heading group-hover:text-accent">{tool.title}</p>
             </Link>

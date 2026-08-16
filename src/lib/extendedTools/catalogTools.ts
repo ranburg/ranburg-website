@@ -15,7 +15,7 @@ export const CATALOG_TOOLS: ToolConfig[] = [
     shortDescription:
       "Compare two texts side-by-side or inline. Highlight added, removed, and unchanged lines in your browser.",
     category: "developer",
-    icon: "GitCompare",
+    icon: "Diff",
     gradient: "from-indigo-500 to-blue-600",
     badge: "Developer Tool",
     popular: true,
@@ -80,7 +80,7 @@ export const CATALOG_TOOLS: ToolConfig[] = [
     shortDescription:
       "Record your screen in the browser and download a WebM video — no install, no watermark, no upload.",
     category: "productivity",
-    icon: "Video",
+    icon: "Monitor",
     gradient: "from-rose-500 to-red-600",
     badge: "Productivity",
     popular: true,
@@ -115,7 +115,7 @@ export const CATALOG_TOOLS: ToolConfig[] = [
     shortDescription:
       "Build a clean, ATS-friendly resume with your details, then print or download a PDF in minutes.",
     category: "productivity",
-    icon: "Contact",
+    icon: "UserRound",
     gradient: "from-sky-500 to-blue-600",
     badge: "Career Tool",
     popular: true,
@@ -144,7 +144,7 @@ export const CATALOG_TOOLS: ToolConfig[] = [
     shortDescription:
       "Sign a PDF in your browser — type a name or draw a signature, stamp it on the last page, and download.",
     category: "productivity",
-    icon: "PenLine",
+    icon: "Stamp",
     gradient: "from-emerald-500 to-teal-600",
     badge: "Document Tool",
     seoTitle: "PDF Signer - Free Online Tool | Ranburg",

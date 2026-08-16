@@ -9,7 +9,7 @@ interface BlogFeaturedToolProps {
 }
 
 export default function BlogFeaturedTool({ tool }: BlogFeaturedToolProps) {
-  const Icon = getToolIcon(tool.icon);
+  const Icon = getToolIcon(tool.icon, tool.slug);
 
   return (
     <div className="relative mt-8 overflow-hidden rounded-2xl border-2 border-accent/30 bg-gradient-to-br from-accent/10 via-accent-emerald/5 to-transparent p-6 shadow-lg shadow-accent/5 sm:p-8">

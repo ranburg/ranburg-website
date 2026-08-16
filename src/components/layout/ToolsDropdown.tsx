@@ -128,7 +128,7 @@ export default function ToolsDropdown() {
                         <p className="mt-0.5 text-xs text-theme-subtle line-clamp-1">{category.description}</p>
                         <ul className="mt-2 space-y-0.5">
                           {featured.map((tool) => {
-                            const Icon = getToolIcon(tool.icon);
+                            const Icon = getToolIcon(tool.icon, tool.slug);
                             return (
                               <li key={tool.slug}>
                                 <Link
@@ -139,7 +139,9 @@ export default function ToolsDropdown() {
                                     pathname === `/tools/${tool.slug}` ? "bg-accent/10 text-accent" : "hover:bg-theme-surface"
                                   )}
                                 >
-                                  <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                                  <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-gradient-to-br ${tool.gradient}`}>
+                                    <Icon className="h-3.5 w-3.5 text-white" strokeWidth={2.25} />
+                                  </span>
                                   <div className="min-w-0">
                                     <span className="block truncate text-sm font-medium text-theme-heading group-hover:text-accent">{tool.title}</span>
                                     <span className="block truncate text-xs text-theme-subtle">{tool.shortDescription}</span>

@@ -70,7 +70,7 @@ export const CATALOG_SECTIONS: CatalogSection[] = [
     label: "Business & Professional Documents",
     description:
       "Invoices, resumes, signatures, and ROI tools for freelancers and growing teams.",
-    icon: "FileText",
+    icon: "Receipt",
     gradient: "from-amber-500 to-orange-600",
     hubSlug: "business",
     slugs: [
@@ -133,7 +133,7 @@ export const CATALOG_SECTIONS: CatalogSection[] = [
     label: "Media & Image Utilities",
     description:
       "Compress photos, convert formats, generate branded QR codes, and key out backgrounds.",
-    icon: "Image",
+    icon: "Images",
     gradient: "from-pink-500 to-rose-600",
     hubSlug: "image",
     slugs: [
@@ -154,7 +154,7 @@ export const CATALOG_SECTIONS: CatalogSection[] = [
     label: "Productivity & Everyday Tools",
     description:
       "Word counts, passwords, screen recording, and unit conversion for daily work.",
-    icon: "Sparkles",
+    icon: "Wand",
     gradient: "from-violet-500 to-purple-600",
     hubSlug: "generators",
     slugs: [

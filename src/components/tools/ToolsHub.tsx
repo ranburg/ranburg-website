@@ -5,14 +5,16 @@ import { useState, useEffect } from "react";
 import { TOOLS_CONFIG, getToolBySlug } from "@/lib/toolsConfig";
 import { COMING_SOON_TOOLS } from "@/lib/toolComingSoonConfig";
 import { FEATURED_TOOL_SLUGS, POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
-import { CATALOG_SECTIONS, getCatalogTools } from "@/lib/catalogDirectory";
+import { CATALOG_SECTIONS, getCatalogTools, TOOL_CATALOG_COUNT } from "@/lib/catalogDirectory";
 import { SEO_CATEGORY_HUBS, PRIMARY_CATEGORY_SLUGS, getToolsForSeoCategory } from "@/lib/toolSeoCategories";
 import { getToolIcon } from "@/lib/toolIcons";
 import { searchTools } from "@/lib/toolSearch";
 import ToolSearch from "@/components/tools/ToolSearch";
 import ToolCard from "@/components/tools/ToolCard";
+import SearchHeroPanel from "@/components/home/SearchHeroPanel";
 import SocialHeroTools from "@/components/tools/SocialHeroTools";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
+import { Sparkles } from "lucide-react";
 
 function ToolSection({ title, description, slugs }: { title: string; description?: string; slugs: string[] }) {
   const tools = slugs.map(getToolBySlug).filter(Boolean);
@@ -21,7 +23,7 @@ function ToolSection({ title, description, slugs }: { title: string; description
     <section>
       <h2 className="text-xl font-bold text-theme-heading sm:text-2xl">{title}</h2>
       {description && <p className="mt-1.5 max-w-2xl text-sm text-theme-muted sm:text-base">{description}</p>}
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {slugs.map((slug) => (
           <ToolCard key={slug} slug={slug} showCategory />
         ))}
@@ -30,7 +32,15 @@ function ToolSection({ title, description, slugs }: { title: string; description
   );
 }
 
-export default function ToolsHub({ initialQuery = "" }: { initialQuery?: string }) {
+export default function ToolsHub({
+  initialQuery = "",
+  title = "Free Online Tools",
+  description,
+}: {
+  initialQuery?: string;
+  title?: string;
+  description?: string;
+}) {
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const searchResults = searchQuery.trim() ? searchTools(searchQuery) : null;
 
@@ -50,12 +60,36 @@ export default function ToolsHub({ initialQuery = "" }: { initialQuery?: string 
 
   return (
     <div className="space-y-12 sm:space-y-14">
-      <div className="sticky top-[var(--nav-height)] z-30 -mx-4 border-b border-theme-subtle bg-[var(--background)]/95 px-4 py-3 backdrop-blur-md sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <SearchHeroPanel
+        eyebrow={
+          <p className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">
+            <Sparkles className="h-4 w-4" />
+            {TOOL_CATALOG_COUNT}+ free tools · no signup
+          </p>
+        }
+        title={<h1 className="mt-4 text-3xl font-extrabold tracking-tight text-theme-heading sm:text-4xl lg:text-5xl">{title}</h1>}
+        subtitle={
+          description ? <p className="mt-3 max-w-2xl text-base text-theme-muted sm:text-lg">{description}</p> : null
+        }
+        search={
+          <ToolSearch
+            placeholder="Search tools, calculators, hashtags, Salesforce…"
+            showResults={false}
+            showSuggestions
+            showTags
+            value={searchQuery}
+            onQueryChange={setSearchQuery}
+          />
+        }
+      />
+
+      <AdPlaceholder placement="below-hero" />
+
+      <div className="sticky top-[var(--nav-height)] z-30 rounded-2xl border border-theme bg-[var(--surface-elevated)]/95 px-3 py-3 shadow-lg backdrop-blur-md sm:px-4">
         <ToolSearch
-          placeholder="Search tools, calculators, hashtags, Salesforce…"
+          placeholder="Filter the catalog…"
           showResults={false}
-          showSuggestions
-          showTags
+          compact
           value={searchQuery}
           onQueryChange={setSearchQuery}
         />
@@ -69,7 +103,7 @@ export default function ToolsHub({ initialQuery = "" }: { initialQuery?: string 
           {searchResults.length === 0 ? (
             <p className="mt-6 text-theme-muted">No tools found. Try another keyword.</p>
           ) : (
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {searchResults.map((t) => (
                 <ToolCard key={t.slug} slug={t.slug} showCategory />
               ))}
@@ -90,9 +124,11 @@ export default function ToolsHub({ initialQuery = "" }: { initialQuery?: string 
                   <Link
                     key={cat.slug}
                     href={`/tools/${cat.slug}`}
-                    className="inline-flex shrink-0 items-center gap-2 rounded-full border border-theme-subtle bg-theme-surface/60 px-3.5 py-2 text-sm font-medium text-theme-heading transition-colors hover:border-accent/40 hover:bg-accent/5 hover:text-accent"
+                    className="inline-flex shrink-0 items-center gap-2 rounded-full border border-theme-subtle bg-[var(--surface-elevated)] px-3.5 py-2 text-sm font-medium text-theme-heading shadow-sm transition-colors hover:border-accent/40 hover:bg-accent/5 hover:text-accent"
                   >
-                    <Icon className="h-3.5 w-3.5 text-accent" aria-hidden />
+                    <span className={`flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br ${cat.gradient}`}>
+                      <Icon className="h-3.5 w-3.5 text-white" strokeWidth={2.25} aria-hidden />
+                    </span>
                     {cat.label}
                     <span className="text-xs text-theme-subtle">{count}</span>
                   </Link>

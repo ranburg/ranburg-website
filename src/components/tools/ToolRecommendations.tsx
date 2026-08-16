@@ -26,7 +26,7 @@ export default function ToolRecommendations({
         <p className="mt-2 text-theme-muted">
           Keep going — open another free tool to continue your workflow
         </p>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {recommended.map((tool: ToolConfig) => (
             <RelatedToolCard key={tool.slug} tool={tool} />
           ))}
@@ -49,17 +49,17 @@ export default function ToolRecommendations({
 }
 
 function RelatedToolCard({ tool, compact }: { tool: ToolConfig; compact?: boolean }) {
-  const Icon = getToolIcon(tool.icon);
+  const Icon = getToolIcon(tool.icon, tool.slug);
   const seoCat = getPrimarySeoCategoryForTool(tool.slug);
 
   return (
     <Link
       href={`/tools/${tool.slug}`}
       prefetch
-      className="glass-card group flex items-center gap-4 p-4 transition-all hover:border-accent/30"
+      className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-4 shadow-[0_10px_24px_-16px_rgba(12,31,26,0.4)] transition-all hover:-translate-y-0.5 hover:border-accent/80 hover:shadow-[0_0_0_2px_rgba(15,118,110,0.25),0_18px_36px_-16px_rgba(15,118,110,0.45)] dark:border-white/10"
     >
-      <div className={`flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${tool.gradient} ${compact ? "h-10 w-10" : "h-11 w-11"}`}>
-        <Icon className={`text-white ${compact ? "h-5 w-5" : "h-5 w-5"}`} />
+      <div className={`flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-2 ring-white/40 dark:ring-white/10 ${tool.gradient} ${compact ? "h-10 w-10" : "h-11 w-11"}`}>
+        <Icon className="h-5 w-5 text-white" strokeWidth={2.25} />
       </div>
       <div className="min-w-0 flex-1">
         <p className="truncate font-medium text-theme-heading group-hover:text-accent">{tool.title}</p>

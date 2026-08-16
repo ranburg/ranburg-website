@@ -43,10 +43,11 @@ function ResultIcon({ result }: { result: SearchResult }) {
     );
   }
   if (result.type === "tool" && result.icon && result.gradient) {
-    const Icon = getToolIcon(result.icon);
+    const slug = result.href.startsWith("/tools/") ? result.href.slice("/tools/".length).split("/")[0] : undefined;
+    const Icon = getToolIcon(result.icon, slug);
     return (
-      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${result.gradient}`}>
-        <Icon className="h-4 w-4 text-white" />
+      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br shadow-sm ring-1 ring-white/40 ${result.gradient}`}>
+        <Icon className="h-4 w-4 text-white" strokeWidth={2.25} />
       </div>
     );
   }
