@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "32x32" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/brand/ranburg-logo-mark-128.png", sizes: "128x128", type: "image/png" },
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
     shortcut: "/favicon.ico",
