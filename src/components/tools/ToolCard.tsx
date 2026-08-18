@@ -23,7 +23,7 @@ export default function ToolCard({ slug, showCategory = true, showUseCount = tru
 
   return (
     <Link href={`/tools/${tool.slug}`} prefetch={false} className={cn("group block h-full", className)}>
-      <article className="relative flex h-full min-h-[220px] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-5 shadow-[0_12px_32px_-16px_rgba(12,31,26,0.38)] transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-accent/80 group-hover:shadow-[0_0_0_2px_rgba(15,118,110,0.28),0_24px_48px_-16px_rgba(15,118,110,0.5)] dark:border-white/10 dark:shadow-[0_16px_40px_-18px_rgba(0,0,0,0.65)] dark:group-hover:shadow-[0_0_0_2px_rgba(45,212,191,0.45),0_28px_52px_-16px_rgba(0,0,0,0.7)]">
+      <article className="relative flex h-full min-h-[220px] flex-col overflow-hidden rounded-2xl border border-theme bg-[var(--surface-elevated)] p-5 shadow-[0_12px_32px_-16px_rgb(var(--shadow-color)/0.28)] transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-accent/80 group-hover:shadow-[0_0_0_2px_color-mix(in_srgb,var(--accent)_30%,transparent),0_24px_48px_-16px_color-mix(in_srgb,var(--accent)_45%,transparent)]">
         <div
           className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-[0.11] transition-opacity duration-300 group-hover:opacity-[0.2]`}
         />

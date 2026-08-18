@@ -7,7 +7,7 @@ const PROMOS = [
   {
     href: "/privacy",
     icon: ShieldCheck,
-    gradient: "from-teal-500 to-emerald-600",
+    gradient: "from-[#0D9B8A] to-[#0B1220]",
     title: "Private by design",
     body: "PDFs, photos, and invoices are processed on your device. Nothing is uploaded to Ranburg.",
     cta: "Read privacy",
@@ -15,7 +15,7 @@ const PROMOS = [
   {
     href: "/tools/invoice-generator",
     icon: FileText,
-    gradient: "from-amber-500 to-orange-600",
+    gradient: "from-[#0B1220] to-[#0D9B8A]",
     title: "GST-ready invoices",
     body: "Logo, GST / VAT, and PDF download in about two minutes. No account required.",
     cta: "Create an invoice",
@@ -23,7 +23,7 @@ const PROMOS = [
   {
     href: "/tools/pdf-merge",
     icon: Files,
-    gradient: "from-rose-500 to-red-600",
+    gradient: "from-[#0D9B8A] to-[#2EE6C8]",
     title: "Merge PDF files in the browser",
     body: "Merge, split, compress, reorder, and extract text — drag and drop, then download.",
     cta: "Open PDF merge",

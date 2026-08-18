@@ -49,7 +49,7 @@ export default function ToolsVideoBanner() {
           </Link>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-theme bg-[var(--surface-elevated)] shadow-[0_20px_50px_-28px_rgba(15,118,110,0.45)] sm:rounded-3xl">
+        <div className="overflow-hidden rounded-2xl border border-theme bg-[var(--surface-elevated)] shadow-[0_20px_50px_-28px_color-mix(in_srgb,var(--accent)_40%,transparent)] sm:rounded-3xl">
           <div className="relative aspect-[16/9] overflow-hidden sm:aspect-[21/9]">
             <div className={`absolute inset-0 bg-gradient-to-br ${scene.accent} opacity-90`} />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.22),transparent_45%)]" />

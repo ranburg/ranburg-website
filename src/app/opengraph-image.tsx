@@ -19,7 +19,7 @@ export default async function OgImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: 80,
-          background: "linear-gradient(135deg, #0B1220 0%, #12352F 50%, #0B1220 100%)",
+          background: "#0B1220",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 24, marginBottom: 32 }}>

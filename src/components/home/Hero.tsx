@@ -15,7 +15,7 @@ export default async function Hero() {
   return (
     <section className="relative overflow-hidden pb-6 pt-10 sm:pt-14">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(15,118,110,0.2),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,color-mix(in_srgb,var(--accent)_18%,transparent),transparent_55%)]" />
         <div className="absolute inset-0 bg-grid opacity-25" />
       </div>
 

@@ -24,14 +24,14 @@ export default function SearchHeroPanel({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-3xl border border-theme shadow-[0_28px_70px_-32px_rgba(15,118,110,0.55)]",
+        "relative overflow-hidden rounded-3xl border border-theme shadow-[0_28px_70px_-32px_color-mix(in_srgb,var(--accent)_45%,transparent)]",
         className
       )}
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/25 via-[var(--surface-elevated)] to-amber-400/20" />
-        <div className="absolute -left-20 -top-24 h-80 w-80 rounded-full bg-accent/30 blur-3xl" />
-        <div className="absolute -bottom-28 right-[-10%] h-96 w-96 rounded-full bg-amber-400/25 blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-[var(--surface-elevated)] to-[color-mix(in_srgb,var(--foreground)_08%,transparent)]" />
+        <div className="absolute -left-20 -top-24 h-80 w-80 rounded-full bg-accent/25 blur-3xl" />
+        <div className="absolute -bottom-28 right-[-10%] h-96 w-96 rounded-full bg-[color-mix(in_srgb,var(--foreground)_12%,transparent)] blur-3xl" />
         <div className="absolute inset-0 bg-grid opacity-35" />
       </div>
 

@@ -37,11 +37,8 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-6">
           <div className="space-y-4 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center" aria-label="Ranburg home">
               <BrandLogo />
-              <span className="text-xl font-bold text-theme-heading">
-                Ranburg<span className="text-accent">.com</span>
-              </span>
             </Link>
             <p className="text-sm leading-relaxed text-theme-muted">{t("tagline")}</p>
             <LanguageSwitcher />
@@ -152,7 +149,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-theme-subtle pt-8 text-center text-xs text-slate-500">
+        <div className="mt-12 border-t border-theme-subtle pt-8 text-center text-xs text-theme-subtle">
           {t("rights", { year: new Date().getFullYear() })}
         </div>
       </div>

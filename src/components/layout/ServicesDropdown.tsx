@@ -20,7 +20,7 @@ export default function ServicesDropdown() {
         href="/services"
         className={cn(
           "relative flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-medium transition-colors",
-          isActive ? "text-slate-900 dark:text-white" : "text-theme-muted hover:text-slate-900 dark:hover:text-white"
+          isActive ? "text-theme-heading" : "text-theme-muted hover:text-theme-heading"
         )}
       >
         Services

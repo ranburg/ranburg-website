@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 320" role="img" aria-label="Ranburg LLP">
+  <title>Ranburg LLP</title>
+  <rect width="256" height="320" rx="40" fill="#F4F1EB"/>
+  <g transform="translate(40,18) scale(0.69)">
+    <polygon fill="none" stroke="#0B1220" stroke-width="7" stroke-linejoin="miter" points="224,128 176,211.14 80,211.14 32,128 80,44.86 176,44.86"/>
+    <polygon fill="none" stroke="#0B1220" stroke-width="1.5" opacity="0.35" points="212,128 170,200.75 86,200.75 44,128 86,55.25 170,55.25"/>
+    <path fill="#0D9B8A" d="M86 78h24v100H86zM110 78h28c28 0 46 14 46 36 0 18-12 30-32 34l32 30h-28l-30-30h-16zM110 96v36h14c12 0 20-6 20-18s-8-18-20-18z"/>
+  </g>
+  <text x="128" y="248" text-anchor="middle" fill="#0B1220" font-family="Avenir Next, Avenir, Futura, Century Gothic, Gill Sans, sans-serif" font-size="22" font-weight="600" letter-spacing="4">RANBURG</text>
+  <text x="128" y="276" text-anchor="middle" fill="#0D9B8A" font-family="Avenir Next, Avenir, Futura, Century Gothic, Gill Sans, sans-serif" font-size="11" font-weight="500" letter-spacing="6">LLP</text>
+</svg>
