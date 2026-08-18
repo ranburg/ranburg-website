@@ -1,7 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { isAppLocale } from "@/i18n/routing";
 import { buildMetadata } from "@/lib/seo";
-import { SITE } from "@/lib/siteConfig";
+import EmailLink from "@/components/contact/EmailLink";
 import Link from "next/link";
 
 export const metadata = buildMetadata({
@@ -45,7 +45,7 @@ export default async function DisclaimerPage({ params }: { params: Promise<{ loc
             Ranburg LLP is not liable for damages arising from use of free tools or website content. Maximum liability for paid consulting services is governed by separate agreements.
           </p>
           <p>
-            Questions: <a href={`mailto:${SITE.email}`} className="text-accent hover:underline">{SITE.email}</a>
+            Questions: <EmailLink className="text-accent hover:underline" />
           </p>
         </div>
       </div>

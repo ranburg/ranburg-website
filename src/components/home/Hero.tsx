@@ -1,21 +1,16 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import ToolSearch from "@/components/tools/ToolSearch";
 import SearchHeroPanel from "@/components/home/SearchHeroPanel";
-import { useCommandPaletteOptional } from "@/components/search/CommandPaletteProvider";
+import HeroSearch from "@/components/home/HeroSearch";
 import { ArrowRight, FileText, Gauge, ShieldCheck, Sparkles, Wrench } from "lucide-react";
 import { FEATURED_QUICK_CHIPS, TOOL_CATALOG_COUNT } from "@/lib/catalogDirectory";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
 
-const ASIDE_TOOLS = ["invoice-generator", "pdf-merge", "ctc-in-hand-calculator"] as const;
+const ASIDE_TOOLS = ["emi", "gst-calculator", "pdf-merge"] as const;
 
-export default function Hero() {
-  const t = useTranslations("home");
-  const palette = useCommandPaletteOptional();
+export default async function Hero() {
+  const t = await getTranslations("home");
 
   return (
     <section className="relative overflow-hidden pb-6 pt-10 sm:pt-14">
@@ -25,60 +20,40 @@ export default function Hero() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <SearchHeroPanel
-            eyebrow={
-              <p className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">
-                <Sparkles className="h-4 w-4" />
-                {t("heroBrand")} · {t("metricTools", { count: TOOL_CATALOG_COUNT })}
-              </p>
-            }
-            title={
-              <h1 className="mt-4 max-w-xl text-3xl font-extrabold leading-[1.12] tracking-tight text-theme-heading sm:text-4xl lg:text-[2.75rem]">
-                {t("heroHeadline")}
-              </h1>
-            }
-            subtitle={
-              <p className="mt-3 max-w-xl text-base leading-relaxed text-theme-muted sm:text-lg">{t("heroSub")}</p>
-            }
-            search={
-              <>
-                <ToolSearch
-                  showSuggestions
-                  showTags
-                  maxResults={6}
-                  enableKeyboardNav
-                  trackSearches
-                  placeholder="Search EMI, invoice, PDF, JSON, GST…"
-                />
-                <button
-                  type="button"
-                  onClick={() => palette?.setOpen(true)}
-                  className="mt-2 text-xs text-theme-subtle transition hover:text-accent"
+        <SearchHeroPanel
+          eyebrow={
+            <p className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">
+              <Sparkles className="h-4 w-4" />
+              {t("heroBrand")} · {t("metricTools", { count: TOOL_CATALOG_COUNT })}
+            </p>
+          }
+          title={
+            <h1 className="mt-4 max-w-xl text-3xl font-extrabold leading-[1.12] tracking-tight text-theme-heading sm:text-4xl lg:text-[2.75rem]">
+              {t("heroHeadline")}
+            </h1>
+          }
+          subtitle={
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-theme-muted sm:text-lg">{t("heroSub")}</p>
+          }
+          search={<HeroSearch />}
+          belowSearch={
+            <div className="mt-5 flex flex-wrap gap-2">
+              {FEATURED_QUICK_CHIPS.map((chip) => (
+                <Link
+                  key={chip.slug}
+                  href={`/tools/${chip.slug}`}
+                  className="rounded-full border border-theme bg-[var(--surface-elevated)]/80 px-3.5 py-1.5 text-sm font-semibold text-theme-heading shadow-sm transition hover:border-accent/40 hover:bg-accent/10"
                 >
-                  {t("searchHint")}
-                </button>
-              </>
-            }
-            belowSearch={
-              <div className="mt-5 flex flex-wrap gap-2">
-                {FEATURED_QUICK_CHIPS.map((chip) => (
-                  <Link
-                    key={chip.slug}
-                    href={`/tools/${chip.slug}`}
-                    className="rounded-full border border-theme bg-[var(--surface-elevated)]/80 px-3.5 py-1.5 text-sm font-semibold text-theme-heading shadow-sm transition hover:border-accent/40 hover:bg-accent/10"
-                  >
-                    {chip.label}
-                  </Link>
-                ))}
-              </div>
-            }
-            aside={<HeroFeaturedAside />}
-          />
-        </motion.div>
+                  {chip.label}
+                </Link>
+              ))}
+            </div>
+          }
+          aside={<HeroFeaturedAside />}
+        />
 
         <ul className="mt-6 grid gap-3 sm:grid-cols-3">
-          <MetricCard icon={Wrench} label={t("metricTools", { count: TOOL_CATALOG_COUNT })} hint="Calculators, converters, generators" />
+          <MetricCard icon={Wrench} label={t("metricTools", { count: TOOL_CATALOG_COUNT })} hint="EMI, SIP, GST, PDF, and developer tools" />
           <MetricCard icon={Gauge} label={t("metricSpeed")} hint="Most tools finish in under a second" />
           <MetricCard icon={ShieldCheck} label={t("metricNoSignup")} hint="Files stay in your browser" />
         </ul>

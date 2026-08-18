@@ -16,7 +16,7 @@ const PROMOS = [
     href: "/tools/invoice-generator",
     icon: FileText,
     gradient: "from-amber-500 to-orange-600",
-    title: "Client-ready invoices",
+    title: "GST-ready invoices",
     body: "Logo, GST / VAT, and PDF download in about two minutes. No account required.",
     cta: "Create an invoice",
   },
@@ -24,9 +24,9 @@ const PROMOS = [
     href: "/tools/pdf-merge",
     icon: Files,
     gradient: "from-rose-500 to-red-600",
-    title: "PDF suite in the browser",
+    title: "Merge PDF files in the browser",
     body: "Merge, split, compress, reorder, and extract text — drag and drop, then download.",
-    cta: "Open PDF tools",
+    cta: "Open PDF merge",
   },
 ] as const;
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { isAppLocale } from "@/i18n/routing";
 import { buildMetadata, collectionPageJsonLd } from "@/lib/seo";
@@ -8,10 +9,11 @@ import { SITE } from "@/lib/siteConfig";
 import JsonLd from "@/components/seo/JsonLd";
 import Hero from "@/components/home/Hero";
 import HomeBanners from "@/components/home/HomeBanners";
-import ToolsVideoBanner from "@/components/home/ToolsVideoBanner";
-import CatalogDirectory from "@/components/home/CatalogDirectory";
-import RecentlyUsedTools from "@/components/home/RecentlyUsedTools";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
+
+const ToolsVideoBanner = dynamic(() => import("@/components/home/ToolsVideoBanner"));
+const CatalogDirectory = dynamic(() => import("@/components/home/CatalogDirectory"));
+const RecentlyUsedTools = dynamic(() => import("@/components/home/RecentlyUsedTools"));
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -50,7 +52,7 @@ export default async function HomePage({ params }: PageProps) {
     <>
       <JsonLd
         data={collectionPageJsonLd(
-          "Ranburg free online tools",
+          "Ranburg free EMI, SIP, GST calculators and PDF tools",
           SITE.description,
           SITE.url,
           PRIORITY_INDEX_TOOL_SLUGS.slice(0, 12).map((slug) => {

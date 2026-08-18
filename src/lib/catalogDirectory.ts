@@ -18,11 +18,12 @@ export interface CatalogSection {
 
 /** Hero quick-jump chips — high-intent tools. */
 export const FEATURED_QUICK_CHIPS: CatalogChip[] = [
-  { slug: "ctc-in-hand-calculator", label: "CTC to In-Hand" },
+  { slug: "emi", label: "EMI Calculator" },
+  { slug: "sip", label: "SIP Calculator" },
+  { slug: "gst-calculator", label: "GST Calculator" },
+  { slug: "pdf-merge", label: "PDF Merge" },
   { slug: "invoice-generator", label: "Invoice Generator" },
   { slug: "json-formatter", label: "JSON Formatter" },
-  { slug: "pdf-merge", label: "PDF Tools" },
-  { slug: "sip", label: "SIP Calculator" },
 ];
 
 /** Featured “pick a tool” strip on the homepage. */

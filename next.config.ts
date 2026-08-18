@@ -33,6 +33,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   serverExternalPackages: ["got-scraping"],
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30,
@@ -45,6 +48,9 @@ const nextConfig: NextConfig = {
     ],
   },
   poweredByHeader: false,
+  async rewrites() {
+    return [{ source: "/favicon.ico", destination: "/icon" }];
+  },
   async redirects() {
     return withLocaleRedirects([
       {

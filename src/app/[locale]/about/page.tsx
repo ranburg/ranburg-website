@@ -5,6 +5,7 @@ import { buildMetadata } from "@/lib/seo";
 import TeamCards from "@/components/about/TeamCards";
 import ValuesGrid from "@/components/about/ValuesGrid";
 import { Building2, Target, Users } from "lucide-react";
+import { SITE } from "@/lib/siteConfig";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -59,7 +60,11 @@ export default async function AboutPage({ params }: Props) {
               <a href="https://www.ranburg.com" className="text-accent underline-offset-2 hover:underline">
                 ranburg.com
               </a>
-              : free browser tools for finance, creators, and developers, plus Salesforce consulting from Jaipur, India.
+              : free browser tools for finance, creators, and developers, plus Salesforce consulting from {SITE.address.formatted}. Phone:{" "}
+              <a href={`tel:${SITE.phoneTel}`} className="text-accent underline-offset-2 hover:underline">
+                {SITE.phone}
+              </a>
+              .
             </p>
           </div>
         </div>

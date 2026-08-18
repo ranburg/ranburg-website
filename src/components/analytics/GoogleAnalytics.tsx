@@ -1,6 +1,5 @@
 /**
- * Legacy component — GA is installed in src/app/layout.tsx <head> via siteConfig.gaMeasurementId.
- * Kept for optional client-side pageview tracking if needed later.
+ * Loads GA after first paint so it does not compete with LCP on mobile.
  */
 "use client";
 

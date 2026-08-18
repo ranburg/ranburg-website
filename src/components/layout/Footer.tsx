@@ -2,14 +2,20 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Zap, Mail, MapPin, Phone, Linkedin, Twitter } from "lucide-react";
+import { Zap, Mail, MapPin, Phone, Linkedin, Twitter, Facebook, Instagram, Youtube } from "lucide-react";
 import { SITE } from "@/lib/siteConfig";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { SEO_CATEGORY_HUBS } from "@/lib/toolSeoCategories";
 import { POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 
-const MAPS_URL = "https://maps.app.goo.gl/Cm1m7Qv2vF5cS7vr7";
+const SOCIAL_LINKS = [
+  { href: SITE.social.linkedin, label: "LinkedIn", Icon: Linkedin },
+  { href: SITE.social.twitter, label: "X (Twitter)", Icon: Twitter },
+  { href: SITE.social.facebook, label: "Facebook", Icon: Facebook },
+  { href: SITE.social.instagram, label: "Instagram", Icon: Instagram },
+  { href: SITE.social.youtube, label: "YouTube", Icon: Youtube },
+] as const;
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -17,10 +23,10 @@ export default function Footer() {
 
   // Use canonical English titles from TOOLS_CONFIG — avoids shipping tools.meta (~153KB) to every page.
   const popularTools = POPULAR_TOOL_SLUGS.slice(0, 6)
-    .map((s) => TOOLS_CONFIG.find((t) => t.slug === s))
+    .map((s) => TOOLS_CONFIG.find((item) => item.slug === s))
     .filter(Boolean);
   const recentTools = RECENT_TOOL_SLUGS.slice(0, 5)
-    .map((s) => TOOLS_CONFIG.find((t) => t.slug === s))
+    .map((s) => TOOLS_CONFIG.find((item) => item.slug === s))
     .filter(Boolean);
 
   return (
@@ -40,13 +46,19 @@ export default function Footer() {
             </Link>
             <p className="text-sm leading-relaxed text-theme-muted">{t("tagline")}</p>
             <LanguageSwitcher />
-            <div className="flex gap-3">
-              <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-lg border border-theme bg-theme-surface text-theme-muted hover:border-accent/30 hover:text-accent" aria-label="LinkedIn">
-                <Linkedin className="h-4 w-4" />
-              </a>
-              <a href={SITE.social.twitter} target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-lg border border-theme bg-theme-surface text-theme-muted hover:border-accent/30 hover:text-accent" aria-label="Twitter">
-                <Twitter className="h-4 w-4" />
-              </a>
+            <div className="flex flex-wrap gap-3">
+              {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-theme bg-theme-surface text-theme-muted hover:border-accent/30 hover:text-accent"
+                  aria-label={label}
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -118,23 +130,26 @@ export default function Footer() {
               ))}
             </ul>
             <h3 className="mb-3 mt-6 text-sm font-semibold uppercase tracking-wider text-theme-body">{t("contact")}</h3>
-            <ul className="space-y-2 text-sm text-theme-muted">
-              <li>
-                <a href={`mailto:${SITE.email}`} className="flex items-center gap-1.5 hover:text-accent">
-                  <Mail className="h-3.5 w-3.5" />{SITE.email}
-                </a>
-              </li>
-              <li>
-                <a href={`tel:${SITE.phoneTel}`} className="flex items-center gap-1.5 hover:text-accent">
-                  <Phone className="h-3.5 w-3.5" />{SITE.phone}
-                </a>
-              </li>
-              <li>
-                <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-accent">
-                  <MapPin className="h-3.5 w-3.5" />Jaipur, India
-                </a>
-              </li>
-            </ul>
+            <address className="not-italic">
+              <ul className="space-y-2 text-sm text-theme-muted">
+                <li>
+                  <Link href="/contact" className="flex items-center gap-1.5 hover:text-accent">
+                    <Mail className="h-3.5 w-3.5" />{t("contact")}
+                  </Link>
+                </li>
+                <li>
+                  <a href={`tel:${SITE.phoneTel}`} className="flex items-center gap-1.5 hover:text-accent">
+                    <Phone className="h-3.5 w-3.5" />{SITE.phone}
+                  </a>
+                </li>
+                <li>
+                  <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-1.5 hover:text-accent">
+                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                    <span>{SITE.address.formatted}</span>
+                  </a>
+                </li>
+              </ul>
+            </address>
           </div>
         </div>
 

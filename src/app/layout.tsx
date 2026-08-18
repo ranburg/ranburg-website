@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Noto_Sans, Noto_Sans_Arabic, Noto_Sans_Devanagari, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 import Providers from "@/components/theme/Providers";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import FacebookPixel from "@/components/analytics/FacebookPixel";
 import { SITE } from "@/lib/siteConfig";
 import "./globals.css";
 
@@ -13,7 +16,13 @@ export const metadata: Metadata = {
   publisher: SITE.name,
   category: "technology",
   referrer: "origin-when-cross-origin",
-  formatDetection: { telephone: false, email: false, address: false },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
+  },
 };
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -26,35 +35,39 @@ const notoSans = Noto_Sans({
   subsets: ["latin", "latin-ext"],
   variable: "--font-noto-sans",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
 });
 
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari"],
   variable: "--font-noto-devanagari",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"],
+  preload: false,
 });
 
 const notoArabic = Noto_Sans_Arabic({
   subsets: ["arabic"],
   variable: "--font-noto-arabic",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"],
+  preload: false,
 });
 
 const notoJp = Noto_Sans_JP({
   subsets: ["latin"],
   variable: "--font-noto-jp",
   display: "swap",
-  weight: ["400", "500", "700"],
+  weight: ["400", "700"],
+  preload: false,
 });
 
 const notoKr = Noto_Sans_KR({
   subsets: ["latin"],
   variable: "--font-noto-kr",
   display: "swap",
-  weight: ["400", "500", "700"],
+  weight: ["400", "700"],
+  preload: false,
 });
 
 export const viewport: Viewport = {
@@ -74,22 +87,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+
   return (
     <html className={fontVars} suppressHydrationWarning>
       <head>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaMeasurementId}`} />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${SITE.gaMeasurementId}');`,
-          }}
-        />
-        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT ? (
-          <script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT}`}
-            crossOrigin="anonymous"
-          />
-        ) : null}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('ranburg-theme');var d=t==='dark';document.documentElement.classList.toggle('dark',d);var p=localStorage.getItem('user_persona');if(p)document.documentElement.setAttribute('data-persona',p);}catch(e){}})();`,
@@ -98,6 +100,15 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen overflow-x-hidden font-sans antialiased">
         <Providers>{children}</Providers>
+        <GoogleAnalytics />
+        <FacebookPixel />
+        {adsenseClient ? (
+          <Script
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            strategy="lazyOnload"
+            crossOrigin="anonymous"
+          />
+        ) : null}
         <Analytics />
       </body>
     </html>

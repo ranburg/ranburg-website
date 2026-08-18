@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "./siteConfig";
+import { SITE, SITE_SOCIAL_URLS } from "./siteConfig";
 import {
   localeOgMap,
   localizedPath,
@@ -134,7 +134,7 @@ export function organizationJsonLd() {
     image: `${SITE.url}/opengraph-image`,
     email: SITE.email,
     telephone: SITE.phone,
-    sameAs: [SITE.social.linkedin, SITE.social.twitter, SITE.url],
+    sameAs: [...SITE_SOCIAL_URLS, SITE.url],
     contactPoint: {
       "@type": "ContactPoint",
       telephone: SITE.phone,
@@ -145,6 +145,7 @@ export function organizationJsonLd() {
     },
     address: {
       "@type": "PostalAddress",
+      streetAddress: SITE.address.street,
       addressLocality: SITE.address.city,
       addressRegion: SITE.address.region,
       postalCode: SITE.address.postalCode,
@@ -189,16 +190,19 @@ export function websiteJsonLd() {
 export function localBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": ["LocalBusiness", "ProfessionalService"],
     "@id": `${SITE.url}/#localbusiness`,
     name: SITE.name,
     alternateName: SITE.brand,
     image: `${SITE.url}/opengraph-image`,
+    logo: `${SITE.url}/icon`,
     url: SITE.url,
     telephone: SITE.phone,
     email: SITE.email,
     priceRange: "$$",
     parentOrganization: { "@id": ORGANIZATION_ID },
+    sameAs: SITE_SOCIAL_URLS,
+    hasMap: SITE.mapsUrl,
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE.address.street,
@@ -212,6 +216,12 @@ export function localBusinessJsonLd() {
       latitude: SITE.geo.latitude,
       longitude: SITE.geo.longitude,
     },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00",
+    },
     areaServed: { "@type": "Country", name: "India" },
     serviceType: [
       "Salesforce Consulting",
@@ -219,6 +229,13 @@ export function localBusinessJsonLd() {
       "OmniStudio Development",
       "Revenue Cloud Implementation",
       "Free Online Tools",
+    ],
+    knowsAbout: [
+      "EMI calculator",
+      "SIP calculator",
+      "GST calculator",
+      "PDF merge",
+      "Free online tools",
     ],
   };
 }

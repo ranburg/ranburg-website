@@ -1,21 +1,28 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/siteConfig";
 
-/** AI / scraper bots that burn crawl budget without ranking benefit. Search engines stay on `*`. */
+/**
+ * Explicit allow-list for AI search / LLM crawlers (GEO).
+ * Search engines already match User-agent: *; these rules make GPTBot,
+ * Claude, Gemini training, Perplexity, and related agents unambiguously allowed.
+ */
 const AI_CRAWLER_AGENTS = [
   "GPTBot",
   "ChatGPT-User",
-  "CCBot",
-  "anthropic-ai",
+  "OAI-SearchBot",
   "ClaudeBot",
   "Claude-Web",
+  "anthropic-ai",
   "Google-Extended",
-  "Bytespider",
-  "PetalBot",
-  "DataForSeoBot",
+  "Google-CloudVertexBot",
+  "PerplexityBot",
+  "Applebot-Extended",
+  "Amazonbot",
+  "CCBot",
   "cohere-ai",
-  "Diffbot",
-  "ImagesiftBot",
+  "meta-externalagent",
+  "FacebookBot",
+  "Bytespider",
 ] as const;
 
 export default function robots(): MetadataRoute.Robots {
@@ -40,7 +47,8 @@ export default function robots(): MetadataRoute.Robots {
       },
       ...AI_CRAWLER_AGENTS.map((userAgent) => ({
         userAgent,
-        disallow: ["/"] as string[],
+        allow: ["/"] as string[],
+        disallow: ["/api/", "/web/login", "/web/database", "/web/session"],
       })),
     ],
     sitemap: `${SITE.url}/sitemap.xml`,
