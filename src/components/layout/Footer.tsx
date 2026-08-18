@@ -2,12 +2,13 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Zap, Mail, MapPin, Phone, Linkedin, Twitter, Facebook, Instagram, Youtube } from "lucide-react";
+import { Mail, MapPin, Phone, Linkedin, Twitter, Facebook, Instagram, Youtube } from "lucide-react";
 import { SITE } from "@/lib/siteConfig";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { SEO_CATEGORY_HUBS } from "@/lib/toolSeoCategories";
 import { POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
+import BrandLogo from "@/components/brand/BrandLogo";
 
 const SOCIAL_LINKS = [
   { href: SITE.social.linkedin, label: "LinkedIn", Icon: Linkedin },
@@ -37,9 +38,7 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-6">
           <div className="space-y-4 lg:col-span-2">
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-emerald">
-                <Zap className="h-5 w-5 text-white" />
-              </div>
+              <BrandLogo />
               <span className="text-xl font-bold text-theme-heading">
                 Ranburg<span className="text-accent">.com</span>
               </span>

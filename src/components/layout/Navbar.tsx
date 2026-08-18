@@ -4,12 +4,13 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap, Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ToolsSubNav from "@/components/layout/ToolsSubNav";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import PersonaSelector from "@/components/persona/PersonaSelector";
+import BrandLogo from "@/components/brand/BrandLogo";
 import { useCommandPaletteOptional } from "@/components/search/CommandPaletteProvider";
 
 const navLinkClass = (active: boolean) =>
@@ -63,9 +64,7 @@ export default function Navbar() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-3 sm:px-6 lg:px-8">
           <Link href="/" className="group flex min-w-0 shrink items-center gap-2">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-emerald shadow-glow transition-transform group-hover:scale-105">
-              <Zap className="h-5 w-5 text-white" />
-            </div>
+            <BrandLogo className="transition-transform group-hover:scale-105" />
             <span className="truncate text-lg font-bold tracking-tight text-theme-heading sm:text-xl">
               {t("brand")}
             </span>

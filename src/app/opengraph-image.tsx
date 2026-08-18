@@ -1,11 +1,14 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-export const alt = "Ranburg LLP — Salesforce Consulting & Development";
+export const alt = "Ranburg — Free EMI, SIP, GST calculators and online tools";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OgImage() {
+export default async function OgImage() {
+  const mark = await readFile(join(process.cwd(), "public/apple-touch-icon.png"));
+
   return new ImageResponse(
     (
       <div
@@ -16,35 +19,26 @@ export default function OgImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: 80,
-          background: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%)",
+          background: "linear-gradient(135deg, #0B1220 0%, #12352F 50%, #0B1220 100%)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 32 }}>
-          <div
-            style={{
-              width: 72,
-              height: 72,
-              borderRadius: 16,
-              background: "linear-gradient(135deg, #3b82f6, #10b981)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 36,
-              color: "white",
-              fontWeight: 800,
-            }}
-          >
-            R
-          </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 24, marginBottom: 32 }}>
+          <img
+            src={`data:image/png;base64,${mark.toString("base64")}`}
+            width={88}
+            height={88}
+            alt=""
+            style={{ borderRadius: 20 }}
+          />
           <span style={{ fontSize: 48, fontWeight: 800, color: "white" }}>
-            Ranburg<span style={{ color: "#3b82f6" }}>.com</span>
+            Ranburg<span style={{ color: "#2EE6C8" }}>.com</span>
           </span>
         </div>
-        <p style={{ fontSize: 42, fontWeight: 700, color: "#e2e8f0", lineHeight: 1.3, maxWidth: 900 }}>
-          Salesforce Consulting & Development
+        <p style={{ fontSize: 42, fontWeight: 700, color: "#e2e8f0", lineHeight: 1.3, maxWidth: 920 }}>
+          Free EMI, SIP, GST calculators, PDF tools, and more
         </p>
         <p style={{ fontSize: 24, color: "#94a3b8", marginTop: 20 }}>
-          OmniStudio · Revenue Cloud · Industries · LWC · Jaipur, India
+          No signup · In-browser · Jaipur, India
         </p>
       </div>
     ),

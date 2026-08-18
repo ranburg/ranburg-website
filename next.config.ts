@@ -48,9 +48,6 @@ const nextConfig: NextConfig = {
     ],
   },
   poweredByHeader: false,
-  async rewrites() {
-    return [{ source: "/favicon.ico", destination: "/icon" }];
-  },
   async redirects() {
     return withLocaleRedirects([
       {
