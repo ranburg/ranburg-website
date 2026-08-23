@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Calendar, Clock, User } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
 import { isAppLocale } from "@/i18n/routing";
-import { getBlogBySlug, getFeaturedToolSlug } from "@/lib/blogConfig";
+import { BLOG_POSTS, getBlogBySlug, getFeaturedToolSlug } from "@/lib/blogConfig";
 import { getRelatedBlogPosts } from "@/lib/blogCategories";
 import { inferBlogCategory, BLOG_CATEGORIES } from "@/lib/blogCategories";
 import { SERVICES_CONFIG } from "@/lib/servicesConfig";
@@ -27,6 +27,12 @@ import { cn } from "@/lib/utils";
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
+
+export function generateStaticParams() {
+  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+}
+
+export const dynamicParams = false;
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale: raw, slug } = await params;

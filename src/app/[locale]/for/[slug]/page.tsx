@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { isAppLocale } from "@/i18n/routing";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/siteConfig";
-import { getPersonaBySlug } from "@/lib/personas";
+import { PERSONAS, getPersonaBySlug } from "@/lib/personas";
 import PersonaLanding from "@/components/persona/PersonaLanding";
 import JsonLd from "@/components/seo/JsonLd";
 import { localizedPath } from "@/i18n/routing";
@@ -12,6 +12,12 @@ import { localizedPath } from "@/i18n/routing";
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
+
+export function generateStaticParams() {
+  return PERSONAS.map((persona) => ({ slug: persona.slug }));
+}
+
+export const dynamicParams = false;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale: raw, slug } = await params;

@@ -21,11 +21,16 @@ type Props = {
 };
 
 /**
- * Hobby plan: ISR durable-cache reads are exhausted.
- * Force dynamic rendering so pages use Function Invocations (plenty of headroom)
- * instead of ISR Read Units. Put Cloudflare (free) in front later to cache HTML.
+ * Pre-render every locale at build time so HTML/RSC is served from the CDN.
+ * `force-dynamic` was a Hobby-plan workaround (ISR read units) and must not
+ * return — it sends every page view through Vercel Compute and burns Fast
+ * Origin Transfer (CDN to Compute).
  */
-export const dynamic = "force-dynamic";
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export const dynamicParams = false;
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;

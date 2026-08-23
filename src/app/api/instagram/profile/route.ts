@@ -94,6 +94,10 @@ export async function GET(request: Request) {
       revenue,
       growthSeries,
       recommendations,
+    }, {
+      headers: {
+        "Cache-Control": "public, s-maxage=900, stale-while-revalidate=3600",
+      },
     });
   } catch {
     return NextResponse.json({ error: "Failed to analyze Instagram profile." }, { status: 500 });

@@ -65,27 +65,11 @@ export function trackToolView(slug: string): void {
     weekStart: ws,
   };
   saveAnalytics(store);
-
-  if (typeof navigator !== "undefined" && navigator.sendBeacon) {
-    navigator.sendBeacon(
-      "/api/analytics/event",
-      JSON.stringify({ type: "tool_view", slug, ts: now })
-    );
-  }
 }
 
-export function trackPageExit(slug: string, dwellMs?: number): void {
-  if (typeof navigator !== "undefined" && navigator.sendBeacon) {
-    navigator.sendBeacon(
-      "/api/analytics/event",
-      JSON.stringify({
-        type: "page_exit",
-        slug,
-        ts: Date.now(),
-        dwell_ms: typeof dwellMs === "number" ? Math.max(0, Math.round(dwellMs)) : undefined,
-      })
-    );
-  }
+export function trackPageExit(_slug: string, _dwellMs?: number): void {
+  // Local-only for now. A previous sendBeacon to /api/analytics/event was a
+  // no-op and still billed Fast Origin Transfer on every tool visit.
 }
 
 export function trackSearch(query: string): void {

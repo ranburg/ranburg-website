@@ -9,7 +9,7 @@ import ToolsHub from "@/components/tools/ToolsHub";
 
 const TOOL_COUNT = TOOLS_CONFIG.length;
 
-type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ q?: string }> };
+type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
@@ -32,12 +32,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default async function ToolsPage({ params, searchParams }: Props) {
+export default async function ToolsPage({ params }: Props) {
   const { locale: raw } = await params;
   setRequestLocale(isAppLocale(raw) ? raw : "en");
   const t = await getTranslations("pages");
-  const { q } = await searchParams;
-  const initialQuery = (q ?? "").trim();
 
   return (
     <div className="pb-24 pt-16 sm:pt-20">
@@ -54,7 +52,6 @@ export default async function ToolsPage({ params, searchParams }: Props) {
       />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ToolsHub
-          initialQuery={initialQuery}
           title={t("toolsIndex.title")}
           description={t("toolsIndex.description")}
         />

@@ -8,6 +8,12 @@ interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
 
+export function generateStaticParams() {
+  return SERVICES_CONFIG.map((service) => ({ slug: service.slug }));
+}
+
+export const dynamicParams = false;
+
 export async function generateMetadata({ params }: PageProps) {
   const { locale: raw, slug } = await params;
   setRequestLocale(isAppLocale(raw) ? raw : "en");

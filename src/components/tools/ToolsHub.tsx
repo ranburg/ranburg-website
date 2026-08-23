@@ -42,10 +42,17 @@ export default function ToolsHub({
   description?: string;
 }) {
   const [searchQuery, setSearchQuery] = useState(initialQuery);
+  const [searchHydrated, setSearchHydrated] = useState(false);
   const searchResults = searchQuery.trim() ? searchTools(searchQuery) : null;
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const q = new URLSearchParams(window.location.search).get("q")?.trim() ?? "";
+    if (q) setSearchQuery(q);
+    setSearchHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!searchHydrated) return;
     const url = new URL(window.location.href);
     const next = searchQuery.trim();
     if (next) url.searchParams.set("q", next);
@@ -54,7 +61,7 @@ export default function ToolsHub({
     if (`${window.location.pathname}${window.location.search}` !== nextPath) {
       window.history.replaceState({}, "", nextPath);
     }
-  }, [searchQuery]);
+  }, [searchQuery, searchHydrated]);
 
   const salesforceSlugs = TOOLS_CONFIG.filter((t) => t.category === "salesforce").map((t) => t.slug);
 

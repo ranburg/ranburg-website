@@ -209,5 +209,9 @@ export async function GET(request: Request) {
     revenue,
     growthSeries,
     recommendations,
+  }, {
+    headers: {
+      "Cache-Control": "public, s-maxage=1800, stale-while-revalidate=86400",
+    },
   });
 }
