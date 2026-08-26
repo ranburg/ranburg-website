@@ -86,9 +86,9 @@ export default function EMICalculator() {
   const tenureMax = tenureUnit === "years" ? 30 : 360;
 
   return (
-    <div className="grid gap-8 lg:grid-cols-2">
-      <div className="glass-card space-y-8 p-8">
-        <h2 className="text-xl font-bold text-theme-heading">{t("inputs")}</h2>
+    <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-8">
+      <div className="tool-surface space-y-7 p-5 sm:p-7">
+        <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-theme-subtle">{t("inputs")}</h2>
         <CalculatorSlider
           label={t("loanAmount")}
           value={loanAmount}
@@ -174,7 +174,7 @@ export default function EMICalculator() {
           highlight
         />
 
-        <div className="glass-card p-6">
+        <div className="tool-surface p-5 sm:p-6">
           <h3 className="mb-4 text-sm font-semibold text-theme-body">
             {t("results")}
           </h3>
@@ -223,7 +223,7 @@ export default function EMICalculator() {
           </div>
         </div>
 
-        <div className="glass-card p-6">
+        <div className="tool-surface p-5 sm:p-6">
           <h3 className="mb-4 text-sm font-semibold text-theme-body">
             {t("principal")} vs {t("totalInterest")}
           </h3>

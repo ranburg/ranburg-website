@@ -7,7 +7,7 @@ export default function WorkedExampleBanner({ slug }: { slug: string }) {
   if (!examples?.length) return null;
 
   return (
-    <aside className="mb-6 rounded-xl border border-theme-subtle bg-theme-surface/40 px-4 py-3.5 sm:px-5">
+    <aside className="mt-8 rounded-xl border border-theme-subtle bg-theme-surface/40 px-4 py-3.5 sm:px-5">
       <div className="flex gap-3">
         <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
         <div className="min-w-0">

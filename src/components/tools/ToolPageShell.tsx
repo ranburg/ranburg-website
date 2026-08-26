@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getMessages, getTranslations } from "next-intl/server";
-import { BookOpen, LayoutGrid } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { getToolBySlug, getCategoryById } from "@/lib/toolsConfig";
 import { localizeTool } from "@/lib/i18n/localizeTool";
@@ -96,72 +96,52 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
       <ToolViewTracker slug={slug} />
       <JsonLd data={schema} />
 
-      <section className="border-b border-theme-subtle/60 pb-8 pt-10">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <section className="pt-8 sm:pt-10">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={breadcrumbs} />
-          <div className="mt-5 flex items-start gap-4">
-            <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-lg ring-2 ring-white/40 dark:ring-white/10 sm:h-14 sm:w-14 sm:rounded-2xl ${tool.gradient}`}>
-              <Icon className="h-6 w-6 text-white sm:h-7 sm:w-7" strokeWidth={2.25} />
+
+          <header className="mt-6 flex items-start gap-4">
+            <div
+              className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-1 ring-white/40 dark:ring-white/10 sm:h-12 sm:w-12 ${tool.gradient}`}
+            >
+              <Icon className="h-5 w-5 text-white sm:h-6 sm:w-6" strokeWidth={2.25} />
             </div>
             <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                 {category && (
-                  <Link href={hubCrumb.href} prefetch className="text-xs font-semibold uppercase tracking-wider text-accent hover:underline">
+                  <Link href={hubCrumb.href} prefetch className="font-semibold uppercase tracking-wider text-accent hover:underline">
                     {seoCategory?.label ?? category.label}
                   </Link>
                 )}
-                <Link
-                  href="/tools"
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-theme-subtle transition-colors hover:text-accent"
-                >
-                  <LayoutGrid className="h-3.5 w-3.5" />
+                <Link href="/tools" className="text-theme-subtle hover:text-accent">
                   {tShell("allTools")}
                 </Link>
               </div>
-              <h1 className="mt-1 break-words text-2xl font-extrabold text-theme-heading sm:text-3xl">{h1}</h1>
-              {tool.title.toLowerCase() !== h1.toLowerCase() && (
-                <p className="mt-1 text-sm font-medium text-theme-muted">{tool.title}</p>
-              )}
-              <p className="mt-2 max-w-2xl text-sm text-theme-muted sm:text-base">{tool.shortDescription}</p>
-              <p className="mt-2 text-xs text-theme-subtle sm:text-sm">
-                Free online tool · Works in your browser · No account required · Created by Ranburg
-              </p>
-              <p className="mt-1 text-xs text-theme-subtle">
-                Privacy-first where possible —{" "}
-                <Link href="/privacy" className="underline-offset-2 hover:text-accent hover:underline">
-                  Privacy Policy
-                </Link>
-                {" · "}
-                <Link href="/contact" className="underline-offset-2 hover:text-accent hover:underline">
-                  Contact
-                </Link>
+              <h1 className="mt-1 text-2xl font-bold tracking-tight text-theme-heading sm:text-3xl">{h1}</h1>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-theme-muted sm:text-[15px]">
+                {tool.shortDescription}
               </p>
               {guideBlog && (
                 <Link
                   href={`/blog/${guideBlog.slug}`}
                   prefetch
-                  className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+                  className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
                 >
-                  <BookOpen className="h-4 w-4 shrink-0" />
-                  Read the full guide
+                  <BookOpen className="h-3.5 w-3.5 shrink-0" />
+                  Guide
                 </Link>
               )}
             </div>
-          </div>
-        </div>
-      </section>
+          </header>
 
-      <section className="py-8">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <ToolProcessFlow tool={tool} />
-          <WorkedExampleBanner slug={slug} />
-
-          <div className="min-w-0" data-tool-interactive>
+          <div className="mt-8 min-w-0" data-tool-interactive>
             <ToolUiMessages>
               <ToolRenderer slug={slug} />
             </ToolUiMessages>
           </div>
 
+          <WorkedExampleBanner slug={slug} />
+          <ToolProcessFlow tool={tool} />
           <ToolNextSteps currentSlug={slug} limit={3} />
 
           <AdPlaceholder placement="after-tool-mobile" />

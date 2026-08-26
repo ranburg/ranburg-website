@@ -21,7 +21,7 @@ function ToolSection({ title, description, slugs }: { title: string; description
   if (tools.length === 0) return null;
   return (
     <section>
-      <h2 className="text-xl font-bold text-theme-heading sm:text-2xl">{title}</h2>
+      <h2 className="text-lg font-semibold tracking-tight text-theme-heading sm:text-xl">{title}</h2>
       {description && <p className="mt-1.5 max-w-2xl text-sm text-theme-muted sm:text-base">{description}</p>}
       <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {slugs.map((slug) => (
@@ -66,7 +66,7 @@ export default function ToolsHub({
   const salesforceSlugs = TOOLS_CONFIG.filter((t) => t.category === "salesforce").map((t) => t.slug);
 
   return (
-    <div className="space-y-12 sm:space-y-14">
+    <div className="space-y-14 sm:space-y-16">
       <SearchHeroPanel
         eyebrow={
           <p className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">
@@ -74,7 +74,7 @@ export default function ToolsHub({
             {TOOL_CATALOG_COUNT}+ free tools · no signup
           </p>
         }
-        title={<h1 className="mt-4 text-3xl font-extrabold tracking-tight text-theme-heading sm:text-4xl lg:text-5xl">{title}</h1>}
+        title={<h1 className="mt-4 text-3xl font-semibold tracking-tight text-theme-heading sm:text-4xl lg:text-[2.75rem]">{title}</h1>}
         subtitle={
           description ? <p className="mt-3 max-w-2xl text-base text-theme-muted sm:text-lg">{description}</p> : null
         }
@@ -91,16 +91,6 @@ export default function ToolsHub({
       />
 
       <AdPlaceholder placement="below-hero" />
-
-      <div className="sticky top-[var(--nav-height)] z-30 rounded-2xl border border-theme bg-[var(--surface-elevated)]/95 px-3 py-3 shadow-lg backdrop-blur-md sm:px-4">
-        <ToolSearch
-          placeholder="Filter the catalog…"
-          showResults={false}
-          compact
-          value={searchQuery}
-          onQueryChange={setSearchQuery}
-        />
-      </div>
 
       {searchResults ? (
         <section>
@@ -165,7 +155,7 @@ export default function ToolsHub({
 
           {COMING_SOON_TOOLS.length > 0 && (
             <section>
-              <h2 className="text-xl font-bold text-theme-heading sm:text-2xl">Coming Soon</h2>
+              <h2 className="text-lg font-semibold tracking-tight text-theme-heading sm:text-xl">Coming Soon</h2>
               <p className="mt-1.5 text-sm text-theme-muted">New utilities in development.</p>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {COMING_SOON_TOOLS.map((t) => (

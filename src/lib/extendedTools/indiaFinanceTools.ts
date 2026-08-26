@@ -279,4 +279,55 @@ export const INDIA_FINANCE_TOOLS: ToolConfig[] = [
       },
     ],
   }),
+  makeTool({
+    slug: "home-loan-vs-mutual-fund",
+    title: "Home Loan vs Mutual Fund",
+    shortDescription:
+      "Compare buying a house on a home loan, renting it out, and paying EMI plus costs versus investing the same monthly cash in a mutual fund SIP.",
+    category: "financial",
+    icon: "Scale",
+    gradient: "from-teal-600 to-cyan-500",
+    badge: "Wealth Compare",
+    popular: true,
+    seoTitle: "Home Loan vs Mutual Fund SIP Calculator — Rent Out vs Invest | Ranburg",
+    seoDescription:
+      "Free home loan vs mutual fund calculator. Compare EMI, rent, appreciation, maintenance and utilities against a SIP matched to that month’s net housing cash. Fair, month-by-month, no signup.",
+    keywords: [
+      "home loan vs mutual fund",
+      "home loan vs SIP",
+      "EMI vs SIP calculator",
+      "buy house and rent vs invest",
+      "home loan vs SIP India",
+      "should I buy a house or invest in mutual funds",
+      "rent out home loan vs SIP",
+      "property vs mutual fund calculator",
+    ],
+    howToUse: [
+      "Enter property price, down payment, loan rate, and tenure.",
+      "Set expected rent, yearly rent hike, maintenance, and utilities.",
+      "Choose property appreciation and expected mutual fund return.",
+      "Keep “Match SIP to monthly housing cash” on for a fair comparison (EMI + costs − rent).",
+      "Read ending net worth for the home path versus the SIP corpus.",
+    ],
+    formula:
+      "Each month: net housing cash = EMI + maintenance + utilities − rent. Matched SIP = max(0, net). Home net worth = property value − loan + invested surplus. SIP corpus compounds monthly at MF return; down payment is a day-one lump sum when enabled.",
+    faq: [
+      ...indiaFaq,
+      {
+        question: "What does matching the SIP mean?",
+        answer:
+          "Each month the SIP equals that month’s EMI plus maintenance and utilities minus rent. As rent rises, the matched SIP falls. If rent covers costs, SIP that month is zero and any surplus can be invested on the home side.",
+      },
+      {
+        question: "Is rental income taxed in this model?",
+        answer:
+          "No. The calculator is a cash-flow and net-worth planner. Tax on rent, home-loan interest deduction, and capital gains are omitted — confirm with a CA before deciding.",
+      },
+      {
+        question: "Does this include stamp duty and registration?",
+        answer:
+          "No. Add those to your down payment mentally, or treat them as extra cash that would otherwise go into the SIP lump sum.",
+      },
+    ],
+  }),
 ];

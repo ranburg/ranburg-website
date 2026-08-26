@@ -82,9 +82,9 @@ export default function SIPCalculator() {
   }, [monthlyInvestment, returnRate, years, inflationRate, stepUpPercent]);
 
   return (
-    <div className="grid gap-8 lg:grid-cols-2">
-      <div className="glass-card space-y-6 p-8">
-        <h2 className="text-xl font-bold text-theme-heading">{t("adjustParameters")}</h2>
+    <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-8">
+      <div className="tool-surface space-y-6 p-5 sm:p-7">
+        <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-theme-subtle">{t("adjustParameters")}</h2>
         <CalculatorSlider
           label={t("monthlyInvestment")}
           value={monthlyInvestment}
@@ -158,7 +158,7 @@ export default function SIPCalculator() {
           highlight
         />
 
-        <div className="glass-card p-6">
+        <div className="tool-surface p-5 sm:p-6">
           <h3 className="mb-4 text-sm font-semibold text-theme-body">
             {t("investmentBreakdown")}
           </h3>
@@ -207,7 +207,7 @@ export default function SIPCalculator() {
           </div>
         </div>
 
-        <div className="glass-card p-6">
+        <div className="tool-surface p-5 sm:p-6">
           <h3 className="mb-4 text-sm font-semibold text-theme-body">{t("growthOverTime")}</h3>
           <ResponsiveContainer width="100%" height={200}>
             <AreaChart data={results.chartData}>

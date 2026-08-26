@@ -227,6 +227,25 @@
     transform: translateY(-1px);
   }
 
+  .tool-surface {
+    @apply rounded-2xl;
+    background: var(--surface-elevated);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 28px rgb(var(--shadow-color) / 0.05);
+  }
+
+  .dark .tool-surface {
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(244, 241, 235, 0.04);
+  }
+
+  details > summary {
+    list-style: none;
+  }
+
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+
   .dropdown-panel {
     background: var(--dropdown-bg);
     border: 1px solid var(--dropdown-border);
@@ -372,9 +391,3 @@
   }
 }
 
-@media (min-width: 1024px) {
-  :root,
-  .dark {
-    --nav-height: 6.25rem;
-  }
-}

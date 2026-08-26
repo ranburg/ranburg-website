@@ -2,6 +2,7 @@
  * Prefer PRIORITY_INDEX_TOOL_SLUGS (seoGrowthConfig) so internal PageRank hits money pages.
  */
 export const FEATURED_TOOL_SLUGS = [
+  "home-loan-vs-mutual-fund",
   "ctc-in-hand-calculator",
   "invoice-generator",
   "emi",
@@ -9,10 +10,10 @@ export const FEATURED_TOOL_SLUGS = [
   "gst-calculator",
   "json-formatter",
   "pdf-merge",
-  "image-compressor",
 ];
 
 export const POPULAR_TOOL_SLUGS = [
+  "home-loan-vs-mutual-fund",
   "emi",
   "sip",
   "gst-calculator",
@@ -36,6 +37,7 @@ export const POPULAR_TOOL_SLUGS = [
 ];
 
 export const RECENT_TOOL_SLUGS = [
+  "home-loan-vs-mutual-fund",
   "lic-maturity-calculator",
   "pf-calculator",
   "swp",
@@ -55,6 +57,7 @@ export const RECENT_TOOL_SLUGS = [
 ];
 
 export const SEARCH_SUGGESTIONS = [
+  "Home loan vs SIP",
   "CTC to in-hand",
   "Invoice",
   "EMI",
@@ -72,6 +75,7 @@ export const SEARCH_SUGGESTIONS = [
 ];
 
 export const SEARCH_TAGS = [
+  { label: "Home vs SIP", query: "home loan" },
   { label: "EMI", query: "emi" },
   { label: "SIP", query: "sip" },
   { label: "GST", query: "gst" },

@@ -18,6 +18,7 @@ export interface CatalogSection {
 
 /** Hero quick-jump chips — high-intent tools. */
 export const FEATURED_QUICK_CHIPS: CatalogChip[] = [
+  { slug: "home-loan-vs-mutual-fund", label: "Home vs SIP" },
   { slug: "emi", label: "EMI Calculator" },
   { slug: "sip", label: "SIP Calculator" },
   { slug: "gst-calculator", label: "GST Calculator" },
@@ -28,6 +29,7 @@ export const FEATURED_QUICK_CHIPS: CatalogChip[] = [
 
 /** Featured “pick a tool” strip on the homepage. */
 export const HOMEPAGE_FEATURED_SLUGS = [
+  "home-loan-vs-mutual-fund",
   "ctc-in-hand-calculator",
   "invoice-generator",
   "pdf-merge",
@@ -61,6 +63,8 @@ export const CATALOG_SECTIONS: CatalogSection[] = [
       "pf-calculator",
       "ppf-calculator",
       "loan-foreclosure-calculator",
+      "home-loan-vs-mutual-fund",
+      "rent-vs-buy-calculator",
       "tds-calculator",
       "hra-exemption-calculator",
       "gratuity-calculator",

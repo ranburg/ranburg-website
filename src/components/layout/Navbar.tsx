@@ -6,12 +6,12 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
-import ToolsSubNav from "@/components/layout/ToolsSubNav";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import PersonaSelector from "@/components/persona/PersonaSelector";
 import BrandLogo from "@/components/brand/BrandLogo";
 import { useCommandPaletteOptional } from "@/components/search/CommandPaletteProvider";
+import { getSeoCategoryHub, PRIMARY_CATEGORY_SLUGS } from "@/lib/toolSeoCategories";
 
 const navLinkClass = (active: boolean) =>
   cn(
@@ -127,10 +127,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="hidden lg:block">
-          <ToolsSubNav />
-        </div>
-
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -166,8 +162,22 @@ export default function Navbar() {
                   >
                     {t("tools")}
                   </Link>
-
-                  <ToolsSubNav variant="stack" onNavigate={closeMobile} className="px-1" />
+                  <div className="grid grid-cols-2 gap-1 px-1 pb-2">
+                    {PRIMARY_CATEGORY_SLUGS.map((slug) => {
+                      const hub = getSeoCategoryHub(slug);
+                      if (!hub) return null;
+                      return (
+                        <Link
+                          key={slug}
+                          href={`/tools/${slug}`}
+                          onClick={closeMobile}
+                          className="rounded-lg px-3 py-2 text-xs font-medium text-theme-muted hover:bg-theme-surface hover:text-accent"
+                        >
+                          {hub.label.replace(/ Tools$/, "")}
+                        </Link>
+                      );
+                    })}
+                  </div>
 
                   {navLinks.map((link) => (
                     <Link

@@ -99,6 +99,7 @@ export const EXTENDED_TOOL_COMPONENTS: Record<string, ComponentType> = {
   "lic-maturity-calculator": lazy(() => import("./finance/LicMaturityEstimator")),
   "pf-calculator": lazy(() => import("./finance/PfCalculator")),
   "ppf-calculator": lazy(() => import("./finance/PpfCalculator")),
+  "home-loan-vs-mutual-fund": lazy(() => import("./finance/HomeLoanVsMutualFund")),
 
   "pdf-page-reorder": lazy(() => import("./pdf/PdfToolComponents").then((m) => ({ default: m.PdfPageReorderTool }))),
   "pdf-to-text": lazy(() => import("./pdf/PdfToolComponents").then((m) => ({ default: m.PdfToTextTool }))),

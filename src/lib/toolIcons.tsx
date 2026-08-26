@@ -337,6 +337,7 @@ const SLUG_ICONS: Record<string, string> = {
   "lic-maturity-calculator": "ShieldCheck",
   "pf-calculator": "PiggyBank",
   "ppf-calculator": "Landmark",
+  "home-loan-vs-mutual-fund": "Scale",
 
   "csv-to-json": "Braces",
   "json-to-csv": "Table",

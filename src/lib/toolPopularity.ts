@@ -25,6 +25,7 @@ export const TOOL_POPULARITY_ORDER: string[] = [
   "gst-calculator",
   "invoice-generator",
   "loan-foreclosure-calculator",
+  "home-loan-vs-mutual-fund",
   "emi",
   "sip",
   "regex-tester",

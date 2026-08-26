@@ -51,6 +51,7 @@ export function getPriorityIndexUrls(): string[] {
 export const TOOL_PRIMARY_KEYWORDS: Record<string, string> = {
   emi: "EMI calculator",
   sip: "SIP calculator",
+  "home-loan-vs-mutual-fund": "home loan vs mutual fund",
   swp: "SWP calculator",
   "gst-calculator": "GST calculator",
   "loan-foreclosure-calculator": "loan foreclosure calculator",
@@ -130,6 +131,10 @@ export const TOOL_WORKED_EXAMPLES: Record<string, string[]> = {
     "Example: ₹10,000/month SIP at 12% for 15 years. Project corpus, invested amount, and wealth gained side by side.",
     "Model a step-up SIP mentally by comparing two scenarios (e.g. ₹10k vs ₹15k monthly) and screenshot for your advisor.",
     "Check today's purchasing power of the maturity value so long-term goals stay realistic.",
+  ],
+  "home-loan-vs-mutual-fund": [
+    "Example: ₹75 lakh home, 20% down, 8.5% loan, ₹25,000 rent with 5% yearly hike. Match SIP to EMI + maintenance + utilities − rent and compare 20-year net worth.",
+    "Turn off matched SIP to test a fixed monthly investment, or leave it on so both paths use the same cash each month.",
   ],
   "gst-calculator": [
     "Example: ₹50,000 exclusive of GST at 18% → add CGST/SGST or IGST and see net vs gross instantly.",

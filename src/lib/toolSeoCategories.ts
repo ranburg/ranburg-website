@@ -163,6 +163,8 @@ export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {
   "lic-maturity-calculator": ["calculators", "business"],
   "pf-calculator": ["calculators", "business"],
   "ppf-calculator": ["calculators", "business"],
+  "home-loan-vs-mutual-fund": ["calculators", "business"],
+  "rent-vs-buy-calculator": ["calculators", "business"],
   "resume-builder": ["business", "generators"],
   "pdf-signer": ["pdf", "business"],
   "screen-recorder": ["generators"],
