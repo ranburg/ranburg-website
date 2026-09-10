@@ -225,10 +225,10 @@ export const IMAGE_TOOLS: ToolConfig[] = [
     keywords: [
       "heic to jpg",
       "convert heic to jpeg",
+      "how to convert heic to jpg",
       "iphone photo converter",
       "heic to jpg online free",
       "heic converter",
-      "convert heic to jpg",
       "open heic on windows",
     ],
     howToUse: [
@@ -239,9 +239,9 @@ export const IMAGE_TOOLS: ToolConfig[] = [
     ],
     formula: "HEIC decode → canvas → JPEG export",
     faq: heicFaq,
-    seoTitle: "HEIC to JPG Converter Online Free – Convert HEIC Images to JPG Instantly",
+    seoTitle: "Convert HEIC to JPG Online Free – iPhone Photos, No App",
     seoDescription:
-      "Convert HEIC to JPG online for free. Fast, secure, no software required. Turn iPhone HEIC photos into high-quality JPG files in seconds — no signup.",
+      "How to convert HEIC to JPG online for free. Turn iPhone photos into JPG in your browser — no software, no signup, files stay on your device.",
   }),
   makeTool({
     slug: "svg-to-png",

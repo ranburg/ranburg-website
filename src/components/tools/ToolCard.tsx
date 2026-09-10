@@ -5,6 +5,7 @@ import { getToolIcon } from "@/lib/toolIcons";
 import { getPrimarySeoCategoryForTool } from "@/lib/toolSeoCategories";
 import { getToolUseCountPlaceholder } from "@/lib/toolSeoGenerator";
 import { cn } from "@/lib/utils";
+import { iconWell } from "@/components/tools/iconWell";
 
 interface ToolCardProps {
   slug: string;
@@ -33,10 +34,8 @@ export default function ToolCard({ slug, showCategory = true, showUseCount = tru
 
         <div className="relative flex flex-1 flex-col">
           <div className="mb-4 flex items-start justify-between gap-3">
-            <div
-              className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br shadow-[0_10px_20px_-8px_rgba(15,23,42,0.55)] ring-2 ring-white/50 dark:ring-white/15 ${tool.gradient}`}
-            >
-              <Icon className="h-7 w-7 text-white drop-shadow" strokeWidth={2.25} aria-hidden />
+            <div {...iconWell(tool.gradient, "h-14 w-14 rounded-2xl")}>
+              <Icon className="h-7 w-7 drop-shadow" strokeWidth={2.25} aria-hidden />
             </div>
             {showUseCount && (
               <span className="rounded-full bg-theme-surface px-2 py-0.5 text-[11px] font-medium text-theme-subtle">

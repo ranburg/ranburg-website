@@ -8,9 +8,9 @@ import { setRequestLocale, getMessages } from "next-intl/server";
 import { localizeTool } from "@/lib/i18n/localizeTool";
 import { isAppLocale, type AppLocale } from "@/i18n/routing";
 import {
-  buildToolPageDescription,
+  buildLocalizedToolDescription,
+  buildLocalizedToolDocumentTitle,
   buildToolPageKeywords,
-  buildToolPageTitle,
 } from "@/lib/toolPageSeo";
 import ToolPageShell from "@/components/tools/ToolPageShell";
 import ToolComingSoonShell from "@/components/tools/ToolComingSoonShell";
@@ -32,6 +32,7 @@ export function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+export const dynamic = "force-static";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale: rawLocale, slug } = await params;
@@ -46,11 +47,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       (messages as { tools?: { meta?: Record<string, object> } }).tools?.meta
     );
     return buildMetadata({
-      title: locale === "en" ? buildToolPageTitle(localizedTool) : (localizedTool.seoTitle ?? buildToolPageTitle(localizedTool)),
-      description:
-        locale === "en"
-          ? buildToolPageDescription(localizedTool)
-          : (localizedTool.seoDescription ?? buildToolPageDescription(localizedTool)),
+      title: buildLocalizedToolDocumentTitle(localizedTool, locale),
+      description: buildLocalizedToolDescription(localizedTool, locale),
       path: `/tools/${slug}`,
       keywords: buildToolPageKeywords(localizedTool),
       locale,

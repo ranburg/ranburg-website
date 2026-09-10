@@ -1,5 +1,6 @@
 import type { ToolConfig } from "@/lib/toolsConfig";
 import { CheckCircle2 } from "lucide-react";
+import { iconWell } from "@/components/tools/iconWell";
 
 interface ToolProcessFlowProps {
   tool: ToolConfig;
@@ -48,9 +49,7 @@ export default function ToolProcessFlow({ tool }: ToolProcessFlowProps) {
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((step, i) => (
             <li key={i} className="flex gap-3 rounded-xl bg-[var(--background)]/50 p-3">
-              <span
-                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-xs font-bold text-white ${tool.gradient}`}
-              >
+              <span {...iconWell(tool.gradient, "h-7 w-7 rounded-full text-xs font-bold")}>
                 {i + 1}
               </span>
               <p className="text-sm leading-snug text-theme-muted">{step}</p>

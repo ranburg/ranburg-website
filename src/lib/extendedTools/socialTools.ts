@@ -44,7 +44,7 @@ export const SOCIAL_TOOLS: ToolConfig[] = [
     icon: "Hash",
     gradient: "from-rose-500 to-pink-500",
     badge: "YouTube SEO",
-    keywords: ["youtube hashtag generator", "youtube hashtags", "shorts hashtags", "trending youtube hashtags"],
+    keywords: ["youtube hashtag generator", "hashtag generator youtube", "youtube hashtags", "shorts hashtags", "trending youtube hashtags"],
     howToUse: [
       "Enter your video topic.",
       "Choose Shorts or long-form, tag count (5–30), and mix (balanced / broad / niche / branded).",
@@ -52,6 +52,9 @@ export const SOCIAL_TOOLS: ToolConfig[] = [
     ],
     formula: "Datamuse-related terms + platform trend packs + topic variants → ranked hashtag set",
     faq: socialFaq,
+    seoTitle: "YouTube Hashtag Generator Free — Shorts & Videos | Ranburg",
+    seoDescription:
+      "Free YouTube hashtag generator for Shorts and long-form. Enter a topic, pick count and mix, then copy tags. No signup.",
   }),
   makeTool({
     slug: "instagram-hashtag-generator",

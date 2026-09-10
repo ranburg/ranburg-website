@@ -11,6 +11,7 @@ import { getRecentSearches, getPopularSearches, trackSearch } from "@/lib/toolAn
 import { TOOL_CATEGORIES, type ToolCategoryId } from "@/lib/toolsConfig";
 import type { SeoCategorySlug } from "@/lib/toolSeoCategories";
 import { cn } from "@/lib/utils";
+import { iconWell } from "@/components/tools/iconWell";
 
 interface ToolSearchProps {
   placeholder?: string;
@@ -270,8 +271,8 @@ export default function ToolSearch({
                         i === activeIndex ? "bg-accent/10" : "hover:bg-theme-surface active:bg-theme-surface"
                       )}
                     >
-                      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br shadow-sm ring-1 ring-white/40 ${tool.gradient}`}>
-                        <Icon className="h-4 w-4 text-white" strokeWidth={2.25} />
+                      <div {...iconWell(tool.gradient, "h-8 w-8 rounded-lg")}>
+                        <Icon className="h-4 w-4" strokeWidth={2.25} />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-medium text-theme-heading">

@@ -6,8 +6,9 @@ import { ArrowRight, FileText, Gauge, ShieldCheck, Sparkles, Wrench } from "luci
 import { FEATURED_QUICK_CHIPS, TOOL_CATALOG_COUNT } from "@/lib/catalogDirectory";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
+import { iconWell } from "@/components/tools/iconWell";
 
-const ASIDE_TOOLS = ["emi", "gst-calculator", "pdf-merge"] as const;
+const ASIDE_TOOLS = ["instagram-profile-insights", "heic-to-jpg", "age-calculator"] as const;
 
 export default async function Hero() {
   const t = await getTranslations("home");
@@ -76,8 +77,8 @@ function HeroFeaturedAside() {
             href={`/tools/${slug}`}
             className="group flex items-center gap-3 rounded-2xl border border-theme bg-[var(--surface-elevated)]/80 p-3.5 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
           >
-            <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-2 ring-white/40 dark:ring-white/10 ${tool.gradient}`}>
-              <Icon className="h-5 w-5 text-white" strokeWidth={2.25} />
+            <div {...iconWell(tool.gradient, "h-11 w-11 rounded-xl")}>
+              <Icon className="h-5 w-5" strokeWidth={2.25} />
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate font-semibold text-theme-heading group-hover:text-accent">{tool.title}</p>

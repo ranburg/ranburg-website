@@ -21,5 +21,6 @@
   "noSignupNeeded": "No signup needed",
   "formula": "Formula",
   "inputs": "Your inputs",
-  "results": "Results"
+  "results": "Results",
+  "inBrowser": "Runs in your browser"
 }

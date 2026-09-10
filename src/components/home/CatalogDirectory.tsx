@@ -10,6 +10,7 @@ import { CATALOG_SECTIONS, HOMEPAGE_FEATURED_SLUGS, getCatalogTools } from "@/li
 import { searchTools } from "@/lib/toolSearch";
 import { getToolIcon } from "@/lib/toolIcons";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
+import { iconWell } from "@/components/tools/iconWell";
 
 export default function CatalogDirectory() {
   const t = useTranslations("home");
@@ -108,10 +109,8 @@ export default function CatalogDirectory() {
                       <div className={`absolute inset-0 bg-gradient-to-r ${section.gradient} opacity-15`} />
                       <div className="relative flex flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-5">
                         <div className="flex items-center gap-3">
-                          <div
-                            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-2 ring-white/40 dark:ring-white/10 ${section.gradient}`}
-                          >
-                            <Icon className="h-6 w-6 text-white" strokeWidth={2.25} aria-hidden />
+                          <div {...iconWell(section.gradient, "h-12 w-12 rounded-xl")}>
+                            <Icon className="h-6 w-6" strokeWidth={2.25} aria-hidden />
                           </div>
                           <div>
                             <h3 className="text-lg font-bold text-theme-heading sm:text-xl">{section.label}</h3>

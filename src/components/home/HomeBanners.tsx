@@ -2,6 +2,7 @@ import { Link } from "@/i18n/navigation";
 import { ArrowRight, FileText, Files, ShieldCheck } from "lucide-react";
 import { CATALOG_SECTIONS } from "@/lib/catalogDirectory";
 import { getToolIcon } from "@/lib/toolIcons";
+import { iconWell } from "@/components/tools/iconWell";
 
 const PROMOS = [
   {
@@ -44,8 +45,8 @@ export default function HomeBanners() {
                 className="group relative overflow-hidden rounded-2xl border border-theme bg-[var(--surface-elevated)] p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
               >
                 <div className={`absolute -right-8 -top-10 h-28 w-28 rounded-full bg-gradient-to-br ${promo.gradient} opacity-20 blur-2xl group-hover:opacity-35`} />
-                <div className={`relative mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${promo.gradient}`}>
-                  <Icon className="h-5 w-5 text-white" />
+                <div {...iconWell(promo.gradient, "relative mb-3 h-11 w-11 rounded-xl")}>
+                  <Icon className="h-5 w-5" />
                 </div>
                 <h2 className="relative text-lg font-bold text-theme-heading">{promo.title}</h2>
                 <p className="relative mt-1.5 text-sm leading-relaxed text-theme-muted">{promo.body}</p>
@@ -67,8 +68,8 @@ export default function HomeBanners() {
                 href={`#${section.id}`}
                 className="flex items-center gap-3 rounded-2xl border border-theme bg-[var(--surface-elevated)]/80 px-4 py-3 transition hover:border-accent/35 hover:bg-accent/5"
               >
-                <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${section.gradient}`}>
-                  <Icon className="h-5 w-5 text-white" />
+                <span {...iconWell(section.gradient, "h-10 w-10 rounded-xl")}>
+                  <Icon className="h-5 w-5" />
                 </span>
                 <span className="min-w-0">
                   <span className="block truncate font-semibold text-theme-heading">{section.label}</span>

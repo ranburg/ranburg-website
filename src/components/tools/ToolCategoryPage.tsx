@@ -19,6 +19,7 @@ import { POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { TOOL_SEO_CATEGORY_MAP } from "@/lib/toolSeoCategories";
 import { getToolIcon } from "@/lib/toolIcons";
+import { iconWell } from "@/components/tools/iconWell";
 import type { Metadata } from "next";
 
 interface ToolCategoryPageProps {
@@ -195,8 +196,8 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
                     href={`/tools/${cat.slug}`}
                     className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-5 shadow-[0_10px_24px_-16px_rgba(12,31,26,0.4)] transition-all hover:-translate-y-0.5 hover:border-accent/80 hover:shadow-[0_0_0_2px_rgba(15,118,110,0.25),0_18px_36px_-16px_rgba(15,118,110,0.45)] dark:border-white/10"
                   >
-                    <div className={`flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-2 ring-white/40 dark:ring-white/10 ${cat.gradient}`}>
-                      <Icon className="h-5 w-5 text-white" strokeWidth={2.25} />
+                    <div {...iconWell(cat.gradient, "h-11 w-11 rounded-xl")}>
+                      <Icon className="h-5 w-5" strokeWidth={2.25} />
                     </div>
                     <div>
                       <p className="font-semibold text-theme-heading group-hover:text-accent">{cat.label}</p>

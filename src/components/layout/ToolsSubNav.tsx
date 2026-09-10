@@ -11,7 +11,7 @@ import {
 } from "@/lib/toolSeoCategories";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
-import { cn } from "@/lib/utils";
+import { iconWell } from "@/components/tools/iconWell";
 
 const SALESFORCE_TOOLS = TOOLS_CONFIG.filter((t) => t.category === "salesforce");
 
@@ -99,7 +99,7 @@ function CategoryDropdown({
                   onClick={close}
                   className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-theme-muted hover:bg-theme-surface hover:text-accent"
                 >
-                  <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-gradient-to-br ${tool.gradient}`}>
+                  <span {...iconWell(tool.gradient, "h-6 w-6 rounded-md")}>
                     <Icon className="h-3.5 w-3.5 text-white" strokeWidth={2.25} />
                   </span>
                   <span className="truncate">{tool.title}</span>

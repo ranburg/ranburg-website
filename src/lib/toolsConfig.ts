@@ -659,8 +659,8 @@ export const TOOLS_CONFIG: ToolConfig[] = [
     seo: {
       title: "Age Calculator — Calculate Age from Date of Birth | Ranburg.com",
       description:
-        "Calculate your exact age in years, months, and days from your date of birth. See next birthday countdown and total days lived.",
-      keywords: ["age calculator", "calculate age", "date of birth calculator", "how old am I"],
+        "Free age calculator online. Enter date of birth to see exact age in years, months, and days, next birthday countdown, and total days lived. No signup.",
+      keywords: ["age calculator", "आयु कैलकुलेटर", "calculate age", "date of birth calculator", "how old am I"],
     },
     howToUse: [
       "Enter your date of birth.",
@@ -781,7 +781,7 @@ export const TOOLS_CONFIG: ToolConfig[] = [
       title: "Instagram Profile Analytics — Free Instagram Stats & Revenue Estimator | Ranburg.com",
       description:
         "Free Instagram profile analyzer. See followers, posts, sponsorship revenue estimates, growth trend charts, and actionable content strategy recommendations.",
-      keywords: ["Instagram analytics", "Instagram stats checker", "Instagram follower count", "Instagram revenue estimator", "profile analyzer"],
+      keywords: ["Instagram analytics", "Instagram stats checker", "Instagram follower count", "Instagram revenue estimator", "instagram profile stats", "instagram profile statistics"],
     },
     howToUse: [
       "Enter an Instagram @username or profile URL.",
@@ -844,7 +844,14 @@ export const TOOLS_CONFIG: ToolConfig[] = [
       title: "Instagram Revenue Calculator — Estimate Creator Earnings | Ranburg.com",
       description:
         "Free Instagram revenue calculator. Estimate sponsorship income, affiliate earnings, and annual creator revenue based on followers and engagement rate.",
-      keywords: ["Instagram revenue calculator", "Instagram earnings estimator", "influencer income calculator", "sponsorship rate calculator"],
+      keywords: [
+        "Instagram revenue calculator",
+        "Instagram earnings estimator",
+        "instagram 1k followers income india",
+        "instagram 1k followers income free",
+        "influencer income calculator",
+        "sponsorship rate calculator",
+      ],
     },
     howToUse: [
       "Enter follower count and engagement rate.",

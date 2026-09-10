@@ -346,6 +346,11 @@ function buildToolSpecificFaqs(tool: ToolConfig): ToolFaq[] {
   if (tool.slug === "heic-to-jpg") {
     faqs.push(
       {
+        question: "How do I convert HEIC to JPG?",
+        answer:
+          "Open this page, upload your iPhone .heic photo, wait for the in-browser conversion, then download the JPG. No app install or account is required.",
+      },
+      {
         question: "What is HEIC?",
         answer:
           "HEIC (High Efficiency Image Container) is the default photo format on many iPhones. It stores high-quality images in smaller files than traditional JPG, but older Windows apps and some websites cannot open it.",

@@ -556,27 +556,27 @@
   },
   "age-calculator": {
     "title": "आयु कैलकुलेटर",
-    "shortDescription": "वर्षों, महीनों, दिनों और जीवित कुल दिनों में सटीक आयु की गणना करें।",
-    "seoTitle": "Age Calculator — Calculate Age from Date of Birth | Ranburg.com",
-    "seoDescription": "Calculate your exact age in years, months, and days from your date of birth. See next birthday countdown and total days lived.",
+    "shortDescription": "जन्म तिथि से वर्षों, महीनों और दिनों में सटीक आयु निकालें — मुफ़्त, बिना साइनअप।",
+    "seoTitle": "आयु कैलकुलेटर — जन्म तिथि से उम्र निकालें | Ranburg",
+    "seoDescription": "मुफ़्त आयु कैलकुलेटर: जन्म तिथि से साल, महीने, दिन और अगले जन्मदिन की गिनती तुरंत देखें। बिना साइनअप, ब्राउज़र में।",
     "howToUse": [
-      "Enter your date of birth.",
-      "Optionally set a 'calculate as of' date (defaults to today).",
-      "View age in years, months, and days.",
-      "See days until next birthday and total days lived."
+      "अपनी जन्म तिथि चुनें।",
+      "आवश्यक हो तो 'इस तारीख तक' बदलें (डिफ़ॉल्ट आज है)।",
+      "वर्ष, महीने और दिन में आयु देखें।",
+      "अगले जन्मदिन तक के दिन और कुल जीवित दिन देखें।"
     ],
     "faq": [
       {
-        "question": "Does it handle leap years?",
-        "answer": "Yes. February 29 birthdays and leap years are handled correctly."
+        "question": "क्या यह लीप ईयर संभालता है?",
+        "answer": "हाँ। 29 फरवरी और लीप वर्ष सही से गिने जाते हैं।"
       },
       {
-        "question": "Can I calculate age on a past date?",
-        "answer": "Yes. Set the 'as of' date to any future or past date."
+        "question": "क्या पिछली तारीख पर आयु निकाली जा सकती है?",
+        "answer": "हाँ। 'इस तारीख तक' में कोई भी पिछली या आने वाली तारीख चुनें।"
       },
       {
-        "question": "What timezone is used?",
-        "answer": "Dates are interpreted in your local timezone at midnight."
+        "question": "टाइमज़ोन कौन सा है?",
+        "answer": "तिथियाँ आपके डिवाइस के स्थानीय टाइमज़ोन की मध्यरात्रि पर मानी जाती हैं।"
       }
     ]
   },

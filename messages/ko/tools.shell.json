@@ -21,5 +21,6 @@
   "noSignupNeeded": "가입이 필요하지 않습니다",
   "formula": "공식",
   "inputs": "귀하의 의견",
-  "results": "결과"
+  "results": "결과",
+  "inBrowser": "브라우저에서 실행"
 }

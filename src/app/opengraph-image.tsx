@@ -5,6 +5,7 @@ import { ImageResponse } from "next/og";
 export const alt = "Ranburg — Free EMI, SIP, GST calculators and online tools";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const dynamic = "force-static";
 
 export default async function OgImage() {
   const mark = await readFile(join(process.cwd(), "public/apple-touch-icon.png"));

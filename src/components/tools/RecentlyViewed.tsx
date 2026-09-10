@@ -6,6 +6,7 @@ import { getRecentlyViewedSlugs } from "@/lib/toolAnalytics";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
 import { Clock } from "lucide-react";
+import { iconWell } from "@/components/tools/iconWell";
 
 export default function RecentlyViewed({ excludeSlug }: { excludeSlug?: string }) {
   const [slugs, setSlugs] = useState<string[]>([]);
@@ -33,8 +34,8 @@ export default function RecentlyViewed({ excludeSlug }: { excludeSlug?: string }
               href={`/tools/${slug}`}
               className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/80 hover:shadow-[0_0_0_2px_rgba(15,118,110,0.25),0_16px_28px_-14px_rgba(15,118,110,0.4)] dark:border-white/10"
             >
-              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-2 ring-white/40 dark:ring-white/10 ${tool.gradient}`}>
-                <Icon className="h-5 w-5 text-white" strokeWidth={2.25} />
+              <div {...iconWell(tool.gradient, "h-10 w-10 rounded-xl")}>
+                <Icon className="h-5 w-5" strokeWidth={2.25} />
               </div>
               <p className="truncate text-sm font-medium text-theme-heading group-hover:text-accent">{tool.title}</p>
             </Link>

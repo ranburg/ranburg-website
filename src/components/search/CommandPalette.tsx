@@ -10,6 +10,7 @@ import { getRecentSearches, getPopularSearches, trackSearch } from "@/lib/toolAn
 import { getPersonaToolSlugs } from "@/lib/personas";
 import { usePersonaOptional } from "@/hooks/usePersona";
 import { cn } from "@/lib/utils";
+import { iconWell } from "@/components/tools/iconWell";
 
 interface CommandPaletteProps {
   open: boolean;
@@ -46,8 +47,8 @@ function ResultIcon({ result }: { result: SearchResult }) {
     const slug = result.href.startsWith("/tools/") ? result.href.slice("/tools/".length).split("/")[0] : undefined;
     const Icon = getToolIcon(result.icon, slug);
     return (
-      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br shadow-sm ring-1 ring-white/40 ${result.gradient}`}>
-        <Icon className="h-4 w-4 text-white" strokeWidth={2.25} />
+      <div {...iconWell(result.gradient, "h-8 w-8 rounded-lg")}>
+        <Icon className="h-4 w-4" strokeWidth={2.25} />
       </div>
     );
   }
@@ -249,7 +250,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
               <li key={`${result.type}-${result.href}`} role="option" aria-selected={i === activeIndex}>
                 <Link
                   href={result.href}
-                  prefetch
+                  prefetch={false}
                   onClick={() => selectResult(result.href)}
                   className={cn(
                     "flex items-start gap-3 rounded-lg px-3 py-2.5",

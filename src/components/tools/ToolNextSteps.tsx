@@ -2,6 +2,7 @@ import { Link } from "@/i18n/navigation";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { getRecommendedTools } from "@/lib/toolRecommendations";
 import { getToolIcon } from "@/lib/toolIcons";
+import { iconWell } from "@/components/tools/iconWell";
 
 /** Compact post-tool CTA to encourage multi-page sessions (time-on-site). */
 export default function ToolNextSteps({
@@ -33,13 +34,11 @@ export default function ToolNextSteps({
             <li key={tool.slug}>
               <Link
                 href={`/tools/${tool.slug}`}
-                prefetch
+                prefetch={false}
                 className="group flex items-center gap-3 rounded-lg border border-theme-subtle/80 bg-theme-surface/60 px-3 py-2.5 transition-colors hover:border-accent hover:bg-accent/5"
               >
-                <span
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br shadow-md ring-2 ring-white/40 dark:ring-white/10 ${tool.gradient}`}
-                >
-                  <Icon className="h-4 w-4 text-white" strokeWidth={2.25} />
+                <span {...iconWell(tool.gradient, "h-9 w-9 rounded-lg")}>
+                  <Icon className="h-4 w-4" strokeWidth={2.25} />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-medium text-theme-heading group-hover:text-accent">

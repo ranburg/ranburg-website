@@ -17,10 +17,13 @@ export const SEO_TOOLS: ToolConfig[] = [
     gradient: "from-emerald-500 to-teal-500",
     badge: "SEO Analyzer",
     popular: true,
-    keywords: ["keyword density checker", "keyword frequency", "seo keyword tool"],
+    keywords: ["keyword density checker", "keyword density tool", "keyword frequency", "seo keyword tool", "word density checker"],
     howToUse: ["Paste your article or page copy.", "View word count and keyword percentages.", "Optimize over-stuffed terms."],
     formula: "keyword count / total words × 100",
     faq: seoFaq,
+    seoTitle: "Free Keyword Density Checker Online | Ranburg",
+    seoDescription:
+      "Free keyword density checker: paste your text to see word count, keyword frequency, and density percentages. No signup — runs in your browser.",
   }),
   makeTool({
     slug: "meta-tag-generator",

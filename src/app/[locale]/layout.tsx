@@ -31,6 +31,7 @@ export function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+export const dynamic = "force-static";
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
@@ -61,7 +62,9 @@ export default async function LocaleLayout({ children, params }: Props) {
         <CommandPaletteProvider>
           <div className={fontClass || undefined}>
             <Navbar />
-            <main className="pt-[var(--nav-height)]">{children}</main>
+            <main id="main-content" className="pt-[var(--nav-height)]">
+              {children}
+            </main>
             <Footer />
           </div>
         </CommandPaletteProvider>

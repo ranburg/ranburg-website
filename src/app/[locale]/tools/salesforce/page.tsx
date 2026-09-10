@@ -11,6 +11,7 @@ import { SITE } from "@/lib/siteConfig";
 import JsonLd from "@/components/seo/JsonLd";
 import Button from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
+import { iconWell } from "@/components/tools/iconWell";
 
 export const metadata: Metadata = buildMetadata({
   title: "Free Salesforce Tools — Developer & Admin Utilities | Ranburg",
@@ -114,8 +115,8 @@ export default async function SalesforceToolsHubPage({ params }: { params: Promi
                     const Icon = getToolIcon(tool.icon, tool.slug);
                     return (
                       <Link key={slug} href={`/tools/${tool.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-6 shadow-[0_12px_32px_-16px_rgba(12,31,26,0.38)] transition-all hover:-translate-y-1 hover:border-accent/80 hover:shadow-[0_0_0_2px_rgba(15,118,110,0.28),0_24px_48px_-16px_rgba(15,118,110,0.5)] dark:border-white/10">
-                        <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg ring-2 ring-white/40 dark:ring-white/10 ${tool.gradient}`}>
-                          <Icon className="h-6 w-6 text-white" strokeWidth={2.25} />
+                        <div {...iconWell(tool.gradient, "mb-4 h-12 w-12 rounded-2xl")}>
+                          <Icon className="h-6 w-6" strokeWidth={2.25} />
                         </div>
                         <h3 className="text-lg font-bold text-theme-heading group-hover:text-accent">{tool.title}</h3>
                         <p className="mt-2 flex-1 text-sm text-theme-muted">{tool.shortDescription}</p>
@@ -131,8 +132,8 @@ export default async function SalesforceToolsHubPage({ params }: { params: Promi
                     const Icon = getToolIcon(tool.icon, tool.slug);
                     return (
                       <Link key={slug} href={`/tools/${tool.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-6 shadow-[0_12px_32px_-16px_rgba(12,31,26,0.38)] transition-all hover:-translate-y-1 hover:border-amber-500/70 hover:shadow-[0_0_0_2px_rgba(245,158,11,0.28),0_24px_48px_-16px_rgba(245,158,11,0.35)] dark:border-white/10">
-                        <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg ring-2 ring-white/40 dark:ring-white/10 ${tool.gradient}`}>
-                          <Icon className="h-6 w-6 text-white" strokeWidth={2.25} />
+                        <div {...iconWell(tool.gradient, "mb-4 h-12 w-12 rounded-2xl")}>
+                          <Icon className="h-6 w-6" strokeWidth={2.25} />
                         </div>
                         <span className="text-xs font-semibold text-amber-600 dark:text-amber-400">Coming Soon</span>
                         <h3 className="mt-1 text-lg font-bold text-theme-heading group-hover:text-accent">{tool.title}</h3>

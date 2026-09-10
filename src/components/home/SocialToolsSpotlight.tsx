@@ -2,6 +2,7 @@ import { Link } from "@/i18n/navigation";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
 import { ArrowRight, BarChart3, DollarSign, TrendingUp, Users } from "lucide-react";
+import { iconWell } from "@/components/tools/iconWell";
 
 const PLATFORMS = [
   {
@@ -59,8 +60,8 @@ export default function SocialToolsSpotlight() {
 
                 <div className="relative">
                   <div className="flex items-center gap-3">
-                    <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${p.gradient}`}>
-                      <AnalyticsIcon className="h-7 w-7 text-white" />
+                    <div {...iconWell(p.gradient, "h-14 w-14 rounded-2xl")}>
+                      <AnalyticsIcon className="h-7 w-7" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-theme-heading">{p.platform}</h3>
@@ -82,8 +83,8 @@ export default function SocialToolsSpotlight() {
                       href={`/tools/${analytics.slug}`}
                       className={`group flex items-center gap-4 rounded-xl border border-theme-subtle bg-theme-bg/60 p-4 transition-all hover:border-accent/30 hover:shadow-md`}
                     >
-                      <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${analytics.gradient}`}>
-                        <BarChart3 className="h-5 w-5 text-white" />
+                      <div {...iconWell(analytics.gradient, "h-11 w-11 rounded-xl")}>
+                        <BarChart3 className="h-5 w-5" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="font-bold text-theme-heading group-hover:text-accent">
@@ -100,8 +101,8 @@ export default function SocialToolsSpotlight() {
                       href={`/tools/${revenue.slug}`}
                       className="group flex items-center gap-4 rounded-xl border border-theme-subtle bg-theme-bg/60 p-4 transition-all hover:border-accent/30 hover:shadow-md"
                     >
-                      <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${revenue.gradient}`}>
-                        <DollarSign className="h-5 w-5 text-white" />
+                      <div {...iconWell(revenue.gradient, "h-11 w-11 rounded-xl")}>
+                        <DollarSign className="h-5 w-5" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="font-bold text-theme-heading group-hover:text-accent">

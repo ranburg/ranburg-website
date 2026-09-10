@@ -21,5 +21,6 @@
   "noSignupNeeded": "لا حاجة للتسجيل",
   "formula": "صيغة",
   "inputs": "المدخلات الخاصة بك",
-  "results": "نتائج"
+  "results": "نتائج",
+  "inBrowser": "يعمل في المتصفح"
 }

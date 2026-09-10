@@ -1,8 +1,9 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { HERO_TOOL_SLUGS } from "@/lib/toolPopularity";
 import { getToolIcon } from "@/lib/toolIcons";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { iconWell } from "@/components/tools/iconWell";
 
 export default function SocialHeroTools({ compact = false }: { compact?: boolean }) {
   const tools = HERO_TOOL_SLUGS.map(getToolBySlug).filter(Boolean);
@@ -18,8 +19,8 @@ export default function SocialHeroTools({ compact = false }: { compact?: boolean
               href={`/tools/${tool!.slug}`}
               className="group flex items-center gap-3 rounded-xl border border-accent/20 bg-accent/5 px-4 py-3 transition-all hover:border-accent/40 hover:bg-accent/10"
             >
-              <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br shadow-md ring-2 ring-white/40 ${tool!.gradient}`}>
-                <Icon className="h-4 w-4 text-white" strokeWidth={2.25} />
+              <div {...iconWell(tool!.gradient, "h-9 w-9 rounded-lg")}>
+                <Icon className="h-4 w-4" strokeWidth={2.25} />
               </div>
               <span className="text-sm font-semibold text-theme-heading group-hover:text-accent">{tool!.title}</span>
             </Link>
@@ -56,8 +57,8 @@ export default function SocialHeroTools({ compact = false }: { compact?: boolean
                 href={`/tools/${tool!.slug}`}
                 className="group flex items-start gap-4 rounded-xl border border-theme-subtle bg-theme-surface/50 p-4 transition-all hover:border-accent/40 hover:bg-theme-surface/80"
               >
-                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-2 ring-white/40 ${tool!.gradient}`}>
-                  <Icon className="h-6 w-6 text-white" strokeWidth={2.25} />
+                <div {...iconWell(tool!.gradient, "h-12 w-12 rounded-xl")}>
+                  <Icon className="h-6 w-6" strokeWidth={2.25} />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="font-bold text-theme-heading group-hover:text-accent">{tool!.title}</p>

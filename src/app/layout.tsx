@@ -95,11 +95,17 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('ranburg-theme');var d=t==='dark';document.documentElement.classList.toggle('dark',d);var p=localStorage.getItem('user_persona');if(p)document.documentElement.setAttribute('data-persona',p);}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('ranburg-theme');var d=t==='dark';document.documentElement.classList.toggle('dark',d);var p=localStorage.getItem('user_persona');if(p)document.documentElement.setAttribute('data-persona',p);var path=location.pathname.split('/').filter(Boolean)[0];var locales=['es','pt','hi','ar','ja','ko'];var loc=locales.indexOf(path)>=0?path:'en';document.documentElement.lang=loc;document.documentElement.dir=loc==='ar'?'rtl':'ltr';document.documentElement.setAttribute('data-locale',loc);}catch(e){}})();`,
           }}
         />
       </head>
       <body className="min-h-screen overflow-x-hidden font-sans antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-[var(--surface-elevated)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-theme-heading focus:shadow-lg"
+        >
+          Skip to content
+        </a>
         <Providers>{children}</Providers>
         <GoogleAnalytics />
         <FacebookPixel />

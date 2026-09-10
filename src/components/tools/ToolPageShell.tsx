@@ -10,7 +10,7 @@ import { getToolIcon } from "@/lib/toolIcons";
 import { getPrimarySeoCategoryForTool } from "@/lib/toolSeoCategories";
 import { generateToolSeoSections } from "@/lib/toolSeoGenerator";
 import {
-  buildToolPageDescription,
+  buildLocalizedToolDescription,
   buildToolPageH1,
   getSoftwareApplicationCategory,
 } from "@/lib/toolPageSeo";
@@ -36,6 +36,7 @@ import ToolInternalLinks from "@/components/tools/ToolInternalLinks";
 import ToolRenderer from "@/components/tools/ToolRenderer";
 import ToolUiMessages from "@/components/i18n/ToolUiMessages";
 import AffiliateCta from "@/components/ui/AffiliateCta";
+import { iconWell } from "@/components/tools/iconWell";
 
 interface ToolPageProps {
   slug: string;
@@ -59,9 +60,8 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
   const seoCategory = getPrimarySeoCategoryForTool(slug);
   const seoSections = generateToolSeoSections(tool);
   const toolUrl = `${SITE.url}${localizedPath(locale, `/tools/${slug}`)}`;
-  const h1 = buildToolPageH1(tool);
-  const pageDescription =
-    locale === "en" ? buildToolPageDescription(tool) : (tool.seoDescription ?? buildToolPageDescription(tool));
+  const h1 = buildToolPageH1(tool, locale);
+  const pageDescription = buildLocalizedToolDescription(tool, locale);
 
   const hubCrumb =
     tool.category === "salesforce"
@@ -101,15 +101,13 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
           <Breadcrumbs items={breadcrumbs} />
 
           <header className="mt-6 flex items-start gap-4">
-            <div
-              className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br shadow-md ring-1 ring-white/40 dark:ring-white/10 sm:h-12 sm:w-12 ${tool.gradient}`}
-            >
-              <Icon className="h-5 w-5 text-white sm:h-6 sm:w-6" strokeWidth={2.25} />
+            <div {...iconWell(tool.gradient, "mt-0.5 h-11 w-11 rounded-xl sm:h-12 sm:w-12")}>
+              <Icon className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.25} />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                 {category && (
-                  <Link href={hubCrumb.href} prefetch className="font-semibold uppercase tracking-wider text-accent hover:underline">
+                  <Link href={hubCrumb.href} className="font-semibold uppercase tracking-wider text-accent hover:underline">
                     {seoCategory?.label ?? category.label}
                   </Link>
                 )}
@@ -119,12 +117,23 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
               </div>
               <h1 className="mt-1 text-2xl font-bold tracking-tight text-theme-heading sm:text-3xl">{h1}</h1>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-theme-muted sm:text-[15px]">
-                {tool.shortDescription}
+                {pageDescription}
               </p>
+              <ul className="mt-3 flex flex-wrap gap-2 text-xs font-medium text-theme-muted">
+                <li className="rounded-full border border-theme bg-[var(--surface-elevated)] px-2.5 py-1">
+                  {tShell("freeOnline")}
+                </li>
+                <li className="rounded-full border border-theme bg-[var(--surface-elevated)] px-2.5 py-1">
+                  {tShell("noSignupNeeded")}
+                </li>
+                <li className="rounded-full border border-theme bg-[var(--surface-elevated)] px-2.5 py-1">
+                  {tShell("inBrowser")}
+                </li>
+              </ul>
               {guideBlog && (
                 <Link
                   href={`/blog/${guideBlog.slug}`}
-                  prefetch
+                  prefetch={false}
                   className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
                 >
                   <BookOpen className="h-3.5 w-3.5 shrink-0" />
@@ -165,7 +174,7 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
           <ToolInternalLinks slug={slug} />
 
           <AdPlaceholder placement="between-content" className="hidden lg:flex" />
-          <ToolSeoContent tool={tool} />
+          <ToolSeoContent tool={tool} locale={locale} />
         </div>
       </section>
     </div>

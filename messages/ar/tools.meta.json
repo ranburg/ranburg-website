@@ -556,27 +556,27 @@
   },
   "age-calculator": {
     "title": "حاسبة العمر",
-    "shortDescription": "احسب العمر الدقيق بالسنوات والأشهر والأيام وإجمالي الأيام التي عاشها.",
-    "seoTitle": "Age Calculator — Calculate Age from Date of Birth | Ranburg.com",
-    "seoDescription": "Calculate your exact age in years, months, and days from your date of birth. See next birthday countdown and total days lived.",
+    "shortDescription": "احسب عمرك بالسنوات والأشهر والأيام من تاريخ الميلاد — مجانًا وبدون تسجيل.",
+    "seoTitle": "حاسبة العمر من تاريخ الميلاد | Ranburg",
+    "seoDescription": "حاسبة عمر مجانية: اعرف عمرك بالسنوات والشهور والأيام وعدّاد عيد الميلاد التالي مباشرة في المتصفح وبدون حساب.",
     "howToUse": [
-      "Enter your date of birth.",
-      "Optionally set a 'calculate as of' date (defaults to today).",
-      "View age in years, months, and days.",
-      "See days until next birthday and total days lived."
+      "أدخل تاريخ ميلادك.",
+      "اختياريًا غيّر تاريخ الحساب (الافتراضي اليوم).",
+      "اعرض العمر بالسنوات والأشهر والأيام.",
+      "شاهد الأيام حتى عيد الميلاد التالي وإجمالي الأيام."
     ],
     "faq": [
       {
-        "question": "Does it handle leap years?",
-        "answer": "Yes. February 29 birthdays and leap years are handled correctly."
+        "question": "هل تُحتسب السنوات الكبيسة؟",
+        "answer": "نعم. يتم التعامل مع 29 فبراير والسنوات الكبيسة بشكل صحيح."
       },
       {
-        "question": "Can I calculate age on a past date?",
-        "answer": "Yes. Set the 'as of' date to any future or past date."
+        "question": "هل يمكن حساب العمر في تاريخ سابق؟",
+        "answer": "نعم. عيّن تاريخ الحساب لأي يوم سابق أو لاحق."
       },
       {
-        "question": "What timezone is used?",
-        "answer": "Dates are interpreted in your local timezone at midnight."
+        "question": "ما المنطقة الزمنية المستخدمة؟",
+        "answer": "تُفسَّر التواريخ حسب المنطقة الزمنية لجهازك عند منتصف الليل."
       }
     ]
   },

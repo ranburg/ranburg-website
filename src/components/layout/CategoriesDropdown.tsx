@@ -7,6 +7,7 @@ import { ChevronDown, Grid3X3 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { SEO_CATEGORY_HUBS, PRIMARY_CATEGORY_SLUGS } from "@/lib/toolSeoCategories";
 import { getToolIcon } from "@/lib/toolIcons";
+import { iconWell } from "@/components/tools/iconWell";
 import { cn } from "@/lib/utils";
 
 export default function CategoriesDropdown() {
@@ -78,7 +79,7 @@ export default function CategoriesDropdown() {
                         pathname === `/tools/${cat.slug}` && "bg-accent/10"
                       )}
                     >
-                      <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${cat.gradient}`}>
+                      <div {...iconWell(cat.gradient, "h-9 w-9 rounded-lg")}>
                         <Icon className="h-4 w-4 text-white" />
                       </div>
                       <div className="min-w-0">

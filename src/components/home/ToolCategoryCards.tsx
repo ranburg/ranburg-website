@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { SEO_CATEGORY_HUBS } from "@/lib/toolSeoCategories";
 import { getToolsForSeoCategory } from "@/lib/toolSeoCategories";
 import { getToolIcon } from "@/lib/toolIcons";
+import { iconWell } from "@/components/tools/iconWell";
 
 export default function ToolCategoryCards() {
   return (
@@ -28,8 +29,8 @@ export default function ToolCategoryCards() {
               >
                 <div className={`absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br ${cat.gradient} opacity-10 blur-2xl group-hover:opacity-20`} />
                 <div className="relative">
-                  <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${cat.gradient}`}>
-                    <Icon className="h-6 w-6 text-white" />
+                  <div {...iconWell(cat.gradient, "mb-4 h-12 w-12 rounded-2xl")}>
+                    <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold text-theme-heading group-hover:text-accent">{cat.label}</h3>
                   <p className="mt-2 text-sm text-theme-muted line-clamp-2">{cat.description}</p>

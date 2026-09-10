@@ -21,5 +21,6 @@
   "noSignupNeeded": "No es necesario registrarse",
   "formula": "Fórmula",
   "inputs": "Tus aportes",
-  "results": "Resultados"
+  "results": "Resultados",
+  "inBrowser": "Funciona en el navegador"
 }

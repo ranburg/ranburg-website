@@ -21,5 +21,6 @@
   "noSignupNeeded": "किसी साइनअप की आवश्यकता नहीं",
   "formula": "FORMULA",
   "inputs": "आपके इनपुट",
-  "results": "परिणाम"
+  "results": "परिणाम",
+  "inBrowser": "ब्राउज़र में चलता है"
 }

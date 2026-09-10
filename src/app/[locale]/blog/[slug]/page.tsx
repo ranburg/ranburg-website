@@ -33,6 +33,7 @@ export function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+export const dynamic = "force-static";
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale: raw, slug } = await params;

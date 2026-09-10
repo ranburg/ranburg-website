@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import type { ToolConfig } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
 import Button from "@/components/ui/Button";
+import { iconWell } from "@/components/tools/iconWell";
 
 interface BlogFeaturedToolProps {
   tool: ToolConfig;
@@ -16,10 +17,8 @@ export default function BlogFeaturedTool({ tool }: BlogFeaturedToolProps) {
       <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-accent/10 blur-2xl" />
       <div className="relative">
         <div className="flex items-start gap-4">
-          <div
-            className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br shadow-md ${tool.gradient}`}
-          >
-            <Icon className="h-7 w-7 text-white" />
+          <div {...iconWell(tool.gradient, "h-14 w-14 rounded-2xl")}>
+            <Icon className="h-7 w-7" />
           </div>
           <div className="min-w-0 flex-1">
             <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-accent">

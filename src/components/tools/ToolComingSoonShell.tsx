@@ -7,6 +7,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Button from "@/components/ui/Button";
 import { getToolIcon } from "@/lib/toolIcons";
+import { iconWell } from "@/components/tools/iconWell";
 
 interface ToolComingSoonShellProps {
   tool: ComingSoonTool;
@@ -37,8 +38,8 @@ export default function ToolComingSoonShell({ tool }: ToolComingSoonShellProps) 
             ]}
           />
           <div className="flex items-start gap-4">
-            <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg ring-2 ring-white/40 dark:ring-white/10 ${tool.gradient}`}>
-              <Icon className="h-7 w-7 text-white" strokeWidth={2.25} />
+            <div {...iconWell(tool.gradient, "h-14 w-14 rounded-2xl")}>
+              <Icon className="h-7 w-7" strokeWidth={2.25} />
             </div>
             <div>
               <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-400">

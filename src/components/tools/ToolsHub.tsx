@@ -15,6 +15,7 @@ import SearchHeroPanel from "@/components/home/SearchHeroPanel";
 import SocialHeroTools from "@/components/tools/SocialHeroTools";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 import { Sparkles } from "lucide-react";
+import { iconWell } from "@/components/tools/iconWell";
 
 function ToolSection({ title, description, slugs }: { title: string; description?: string; slugs: string[] }) {
   const tools = slugs.map(getToolBySlug).filter(Boolean);
@@ -123,8 +124,8 @@ export default function ToolsHub({
                     href={`/tools/${cat.slug}`}
                     className="inline-flex shrink-0 items-center gap-2 rounded-full border border-theme-subtle bg-[var(--surface-elevated)] px-3.5 py-2 text-sm font-medium text-theme-heading shadow-sm transition-colors hover:border-accent/40 hover:bg-accent/5 hover:text-accent"
                   >
-                    <span className={`flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br ${cat.gradient}`}>
-                      <Icon className="h-3.5 w-3.5 text-white" strokeWidth={2.25} aria-hidden />
+                    <span {...iconWell(cat.gradient, "h-6 w-6 rounded-full shadow-none")}>
+                      <Icon className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden />
                     </span>
                     {cat.label}
                     <span className="text-xs text-theme-subtle">{count}</span>

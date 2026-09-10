@@ -1,6 +1,7 @@
 import { Link } from "@/i18n/navigation";
 import { ChevronDown } from "lucide-react";
 import type { ToolConfig } from "@/lib/toolsConfig";
+import type { AppLocale } from "@/i18n/routing";
 import { getToolBySlug } from "@/lib/toolsConfig";
 import { generateToolSeoSections } from "@/lib/toolSeoGenerator";
 import { TOOL_WORKED_EXAMPLES } from "@/lib/seoGrowthConfig";
@@ -9,19 +10,20 @@ import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 interface ToolSeoContentProps {
   tool: ToolConfig;
+  locale?: AppLocale;
 }
 
 /**
  * Server-rendered SEO body using native <details>.
  * Content stays in the HTML for crawlers even when sections are closed.
  */
-export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
+export default function ToolSeoContent({ tool, locale = "en" }: ToolSeoContentProps) {
   const seo = generateToolSeoSections(tool);
   const relatedTools = seo.relatedSlugs
     .map((slug) => getToolBySlug(slug))
     .filter((t): t is ToolConfig => Boolean(t));
   const hasUniqueExamples = Boolean(TOOL_WORKED_EXAMPLES[tool.slug]?.length);
-  const h1 = buildToolPageH1(tool);
+  const h1 = buildToolPageH1(tool, locale);
 
   return (
     <article className="mt-14 space-y-3 border-t border-theme-subtle pt-10">
@@ -171,7 +173,7 @@ export default function ToolSeoContent({ tool }: ToolSeoContentProps) {
               <li key={related.slug}>
                 <Link
                   href={`/tools/${related.slug}`}
-                  prefetch
+                  prefetch={false}
                   className="block rounded-lg border border-theme-subtle px-3 py-2.5 text-sm font-medium text-theme-heading transition-colors hover:border-accent hover:text-accent"
                 >
                   {related.title}

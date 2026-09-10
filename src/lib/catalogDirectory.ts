@@ -18,13 +18,15 @@ export interface CatalogSection {
 
 /** Hero quick-jump chips — high-intent tools. */
 export const FEATURED_QUICK_CHIPS: CatalogChip[] = [
-  { slug: "home-loan-vs-mutual-fund", label: "Home vs SIP" },
-  { slug: "emi", label: "EMI Calculator" },
-  { slug: "sip", label: "SIP Calculator" },
-  { slug: "gst-calculator", label: "GST Calculator" },
+  { slug: "instagram-profile-insights", label: "Instagram Stats" },
+  { slug: "instagram-revenue-calculator", label: "IG Earnings" },
+  { slug: "heic-to-jpg", label: "HEIC to JPG" },
+  { slug: "age-calculator", label: "Age Calculator" },
+  { slug: "youtube-channel-insights", label: "YouTube Analytics" },
+  { slug: "percentage-calculator", label: "Percentage" },
+  { slug: "bmi-calculator", label: "BMI" },
+  { slug: "discount-calculator", label: "Discount" },
   { slug: "pdf-merge", label: "PDF Merge" },
-  { slug: "invoice-generator", label: "Invoice Generator" },
-  { slug: "json-formatter", label: "JSON Formatter" },
 ];
 
 /** Featured “pick a tool” strip on the homepage. */
@@ -54,8 +56,13 @@ export const CATALOG_SECTIONS: CatalogSection[] = [
     gradient: "from-cyan-500 to-blue-600",
     hubSlug: "calculators",
     slugs: [
-      "ctc-in-hand-calculator",
-      "gst-calculator",
+      "percentage-calculator",
+      "bmi-calculator",
+      "discount-calculator",
+      "rd-calculator",
+      "calorie-calculator",
+      "cagr-calculator",
+      "fd-calculator",
       "emi",
       "sip",
       "swp",
@@ -128,7 +135,10 @@ export const CATALOG_SECTIONS: CatalogSection[] = [
       "markdown-preview",
       "password-generator",
       "jwt-decoder",
-      "csv-to-json",
+      "unix-timestamp-converter",
+      "sha256-hash-generator",
+      "password-strength-checker",
+      "html-encoder",
       "sql-formatter",
       "uuid-generator",
     ],
@@ -164,7 +174,10 @@ export const CATALOG_SECTIONS: CatalogSection[] = [
     hubSlug: "generators",
     slugs: [
       "word-counter",
-      "password-generator",
+      "working-days-calculator",
+      "date-difference-calculator",
+      "number-to-words",
+      "find-and-replace",
       "screen-recorder",
       "unit-converter",
       "age-calculator",

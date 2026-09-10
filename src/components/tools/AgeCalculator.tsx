@@ -45,11 +45,11 @@ export default function AgeCalculator() {
       <div className="glass-card grid gap-6 p-6 sm:grid-cols-2">
         <div>
           <label className="mb-2 block text-sm font-medium text-theme-body">{t("dateOfBirth")}</label>
-          <input type="date" value={dob} onChange={(e) => setDob(e.target.value)} className="input-field" max={asOf} />
+          <input type="date" value={dob} onChange={(e) => setDob(e.target.value)} className="input-field min-h-11" max={asOf} />
         </div>
         <div>
           <label className="mb-2 block text-sm font-medium text-theme-body">{t("calculateAgeAsOf")}</label>
-          <input type="date" value={asOf} onChange={(e) => setAsOf(e.target.value)} className="input-field" />
+          <input type="date" value={asOf} onChange={(e) => setAsOf(e.target.value)} className="input-field min-h-11" />
         </div>
       </div>
 
@@ -75,7 +75,7 @@ export default function AgeCalculator() {
         </>
       ) : (
         <p className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-400">
-          Please enter a valid date of birth that is on or before the reference date.
+          {t("invalidDateOfBirth")}
         </p>
       )}
     </div>

@@ -4,6 +4,7 @@ declare global {
   interface Window {
     gtag?: GtagFn;
     dataLayer?: unknown[];
+    fbq?: (...args: unknown[]) => void;
   }
 }
 

@@ -21,5 +21,6 @@
   "noSignupNeeded": "Não é necessária inscrição",
   "formula": "Fórmula",
   "inputs": "Suas entradas",
-  "results": "Resultados"
+  "results": "Resultados",
+  "inBrowser": "Funciona no navegador"
 }
