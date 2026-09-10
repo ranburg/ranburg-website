@@ -11,6 +11,7 @@ import {
 } from "@/lib/toolSeoCategories";
 import { TOOLS_CONFIG } from "@/lib/toolsConfig";
 import { getToolIcon } from "@/lib/toolIcons";
+import { cn } from "@/lib/utils";
 import { iconWell } from "@/components/tools/iconWell";
 
 const SALESFORCE_TOOLS = TOOLS_CONFIG.filter((t) => t.category === "salesforce");
