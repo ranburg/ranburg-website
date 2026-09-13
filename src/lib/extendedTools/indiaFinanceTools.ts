@@ -283,15 +283,15 @@ export const INDIA_FINANCE_TOOLS: ToolConfig[] = [
     slug: "home-loan-vs-mutual-fund",
     title: "Home Loan vs Mutual Fund",
     shortDescription:
-      "Compare buying a house on a home loan, renting it out, and paying EMI plus costs versus investing the same monthly cash in a mutual fund SIP.",
+      "Compare buying a home (live in it or rent it out) versus investing the same cash in a mutual fund SIP — with city 10-year CAGRs, vacancy, stamp duty, and sell-at-horizon.",
     category: "financial",
     icon: "Scale",
     gradient: "from-teal-600 to-cyan-500",
     badge: "Wealth Compare",
     popular: true,
-    seoTitle: "Home Loan vs Mutual Fund SIP Calculator — Rent Out vs Invest | Ranburg",
+    seoTitle: "Home Loan vs Mutual Fund SIP Calculator — Live In or Rent Out | Ranburg",
     seoDescription:
-      "Free home loan vs mutual fund calculator. Compare EMI, rent, appreciation, maintenance and utilities against a SIP matched to that month’s net housing cash. Fair, month-by-month, no signup.",
+      "Free home vs SIP calculator. Live-in or rent-out paths, city 10-year housing CAGRs, stamp duty, vacancy, and a SIP matched to the same cash. Month-by-month, no signup.",
     keywords: [
       "home loan vs mutual fund",
       "home loan vs SIP",
@@ -301,32 +301,39 @@ export const INDIA_FINANCE_TOOLS: ToolConfig[] = [
       "should I buy a house or invest in mutual funds",
       "rent out home loan vs SIP",
       "property vs mutual fund calculator",
+      "city housing CAGR",
+      "Bengaluru property vs SIP",
     ],
     howToUse: [
-      "Enter property price, down payment, loan rate, and tenure.",
-      "Set expected rent, yearly rent hike, maintenance, and utilities.",
-      "Choose property appreciation and expected mutual fund return.",
-      "Keep “Match SIP to monthly housing cash” on for a fair comparison (EMI + costs − rent).",
-      "Read ending net worth for the home path versus the SIP corpus.",
+      "Choose live-in (rent vs buy) or buy-to-rent-out.",
+      "Pick a city to load an indicative 10-year housing CAGR, or set CAGR yourself (including above 12%).",
+      "Enter price, down payment, loan, rent, and costs. Open Advanced Options for stamp duty, vacancy, tax, and insurance.",
+      "Keep SIP matching on so both paths use the same cash each month.",
+      "Read ending net worth, including keep-the-home vs sell-at-horizon.",
     ],
     formula:
-      "Each month: net housing cash = EMI + maintenance + utilities − rent. Matched SIP = max(0, net). Home net worth = property value − loan + invested surplus. SIP corpus compounds monthly at MF return; down payment is a day-one lump sum when enabled.",
+      "Live-in: matched SIP = max(0, EMI + costs − comparable rent). Rent-out: matched SIP = max(0, EMI + costs − rent after vacancy and rental tax). Home net worth = property − loan + surplus (− selling costs if sold). SIP compounds monthly; upfront cash (down payment + stamp duty) is a day-one lump sum when enabled.",
     faq: [
       ...indiaFaq,
       {
         question: "What does matching the SIP mean?",
         answer:
-          "Each month the SIP equals that month’s EMI plus maintenance and utilities minus rent. As rent rises, the matched SIP falls. If rent covers costs, SIP that month is zero and any surplus can be invested on the home side.",
+          "Both paths spend the same cash. Live-in: the renter invests whatever EMI + costs exceed comparable rent. Rent-out: the SIP equals EMI + costs minus rent received. If the home path is cheaper that month, leftover cash is invested on the home side.",
       },
       {
-        question: "Is rental income taxed in this model?",
+        question: "Why was CAGR limited to 12% before?",
         answer:
-          "No. The calculator is a cash-flow and net-worth planner. Tax on rent, home-loan interest deduction, and capital gains are omitted — confirm with a CA before deciding.",
+          "That was only a slider cap, not a market rule. Property CAGR can now be set from −10% to 30%, or loaded from city 10-year price history (some US metros exceeded 12% over the last decade).",
       },
       {
-        question: "Does this include stamp duty and registration?",
+        question: "Are city CAGRs a forecast?",
         answer:
-          "No. Add those to your down payment mentally, or treat them as extra cash that would otherwise go into the SIP lump sum.",
+          "No. They are indicative 10-year nominal price CAGRs from public indices and market reports. Micro-markets differ. Use them as a starting assumption, then stress-test cautious / base / optimistic presets.",
+      },
+      {
+        question: "Does this include stamp duty and tax?",
+        answer:
+          "Yes, optionally. Stamp duty and other closing costs are added to day-one cash. Vacancy, rental-income tax, property tax, insurance, and selling costs are under Advanced Options. Capital-gains tax detail is still omitted — confirm with a CA.",
       },
     ],
   }),

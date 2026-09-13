@@ -54,15 +54,21 @@ export const COOL_FINANCE_TOOLS: ToolConfig[] = [
   makeTool({
     slug: "rent-vs-buy-calculator",
     title: "Rent vs Buy Calculator",
-    shortDescription: "Compare renting vs buying a home over your time horizon with EMI, down payment, and appreciation.",
+    shortDescription:
+      "Should you rent or buy? Same-cash SIP comparison using city 10-year housing CAGRs, EMI, stamp duty, and sell-at-horizon.",
     category: "financial",
     icon: "Home",
     gradient: "from-cyan-500 to-teal-600",
     badge: "Housing",
     popular: true,
     keywords: ["rent vs buy calculator", "should I rent or buy", "home loan vs rent"],
-    howToUse: ["Enter rent and home price.", "Set down payment, rate, and tenure.", "Compare costs over your horizon."],
-    formula: "compare cumulative rent vs EMI+down adjusted for rough equity",
+    howToUse: [
+      "This tool opens in live-in mode: buy the home you occupy vs rent a similar place and SIP the difference.",
+      "Pick a city for a 10-year price CAGR, or set CAGR yourself.",
+      "Match SIP to extra housing cash and compare net worth over your horizon.",
+    ],
+    formula:
+      "Matched SIP = max(0, EMI + costs − comparable rent). Home net worth = property − loan + leftover vs rent. Optional sell-at-horizon net of selling costs.",
     faq: disclaimerFaq,
   }),
   makeTool({

@@ -62,18 +62,31 @@ export const DEMAND_TOOLS: ToolConfig[] = [
   makeTool({
     slug: "cagr-calculator",
     title: "CAGR Calculator",
-    shortDescription: "Compute compound annual growth rate between a starting and ending value.",
+    shortDescription:
+      "Compute CAGR from start and end values, plus indicative 10-year housing CAGRs for 20 Indian cities, 20 US metros, Singapore, and more.",
     category: "financial",
     icon: "TrendingUp",
     gradient: "from-indigo-500 to-violet-600",
     badge: "Investing",
     popular: true,
-    keywords: ["cagr calculator", "cagr calculator online", "compound annual growth rate", "cagr formula"],
-    howToUse: ["Enter starting value.", "Enter ending value and years.", "Read CAGR as a percent."],
+    keywords: [
+      "cagr calculator",
+      "cagr calculator online",
+      "compound annual growth rate",
+      "cagr formula",
+      "property CAGR India",
+      "city housing CAGR",
+    ],
+    howToUse: [
+      "Enter starting value, ending value, and years.",
+      "Read CAGR as a percent.",
+      "Use the city table for 10-year housing price CAGRs, then compare buy vs SIP on the housing tools.",
+    ],
     formula: "CAGR = (end/start)^(1/years) − 1",
     faq,
     seoTitle: "CAGR Calculator Online Free | Ranburg",
-    seoDescription: "Free CAGR calculator for mutual funds, stocks, and business growth. Compound annual growth rate in seconds.",
+    seoDescription:
+      "Free CAGR calculator plus 10-year housing CAGRs for Indian cities, US metros, Singapore, and other markets. No signup.",
   }),
   makeTool({
     slug: "fd-calculator",

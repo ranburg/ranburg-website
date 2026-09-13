@@ -19,6 +19,7 @@ import AdvancedOptions from "@/components/ui/AdvancedOptions";
 import ResultCard from "@/components/tools/ResultCard";
 import PurchasingPowerCard from "@/components/tools/PurchasingPowerCard";
 import { formatCurrency, presentValue } from "@/lib/utils";
+import { sipFutureValue } from "@/lib/finance/sipProjection";
 
 const COLORS = ["#3b82f6", "#10b981"];
 
@@ -31,55 +32,33 @@ export default function SIPCalculator() {
   const [stepUpPercent, setStepUpPercent] = useState(0);
 
   const results = useMemo(() => {
-    const monthlyRate = returnRate / 12 / 100;
-    const months = years * 12;
-    const totalInvestment = monthlyInvestment * months;
+    const { futureValue, totalInvested, chart } = sipFutureValue({
+      monthlyInvestment,
+      annualReturnPct: returnRate,
+      years,
+      stepUpPercent,
+    });
 
-    let futureValue: number;
-    if (monthlyRate === 0) {
-      futureValue = totalInvestment;
-    } else {
-      futureValue =
-        monthlyInvestment *
-        ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) *
-        (1 + monthlyRate);
-    }
-
-    const estimatedReturns = futureValue - totalInvestment;
+    const estimatedReturns = futureValue - totalInvested;
     const futureValuePV = presentValue(futureValue, inflationRate, years);
 
-    const chartData = [];
-    let balance = 0;
-    for (let y = 1; y <= years; y++) {
-      const m = y * 12;
-      if (monthlyRate === 0) {
-        balance = monthlyInvestment * m;
-      } else {
-        balance =
-          monthlyInvestment *
-          ((Math.pow(1 + monthlyRate, m) - 1) / monthlyRate) *
-          (1 + monthlyRate);
-      }
-      chartData.push({
-        year: `Y${y}`,
-        invested: monthlyInvestment * m,
-        value: Math.round(balance),
-        valuePV: Math.round(presentValue(balance, inflationRate, y)),
-      });
-    }
-
     return {
-      totalInvestment,
+      totalInvestment: totalInvested,
       estimatedReturns,
       totalValue: futureValue,
       totalValuePV: futureValuePV,
       pieData: [
-        { name: t("investedAmount"), value: totalInvestment },
+        { name: t("investedAmount"), value: totalInvested },
         { name: t("wealthGained"), value: Math.max(estimatedReturns, 0) },
       ],
-      chartData,
+      chartData: chart.map((row) => ({
+        year: `Y${row.year}`,
+        invested: row.invested,
+        value: Math.round(row.value),
+        valuePV: Math.round(presentValue(row.value, inflationRate, row.year)),
+      })),
     };
-  }, [monthlyInvestment, returnRate, years, inflationRate, stepUpPercent]);
+  }, [monthlyInvestment, returnRate, years, inflationRate, stepUpPercent, t]);
 
   return (
     <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-8">

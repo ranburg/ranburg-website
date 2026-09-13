@@ -41,6 +41,7 @@ import {
   passwordStrength,
   waterLiters,
 } from "@/lib/demandMath";
+import { CityHousingCagrTable } from "@/components/tools/finance/CityHousingCagrUi";
 
 function Shell({ children }: { children: React.ReactNode }) {
   return <div className="space-y-5">{children}</div>;
@@ -115,10 +116,22 @@ export function CagrCalculatorTool() {
   const rate = cagr(start, end, years);
   return (
     <Shell>
-      <CalculatorSlider label="Starting value" value={start} min={1} max={50_000_000} step={1000} prefix="₹" onChange={setStart} />
-      <CalculatorSlider label="Ending value" value={end} min={1} max={50_000_000} step={1000} prefix="₹" onChange={setEnd} />
-      <CalculatorSlider label="Years" value={years} min={0.5} max={40} step={0.5} unit=" yrs" onChange={setYears} />
+      <CalculatorSlider label="Starting value" value={start} min={1} max={1_00_00_00_000} step={1000} prefix="₹" onChange={setStart} />
+      <CalculatorSlider label="Ending value" value={end} min={1} max={1_00_00_00_000} step={1000} prefix="₹" onChange={setEnd} />
+      <CalculatorSlider label="Years" value={years} min={0.5} max={50} step={0.5} unit=" yrs" onChange={setYears} />
       <KPIStrip items={[{ label: "CAGR", value: rate === null ? "—" : `${(rate * 100).toFixed(2)}%`, highlight: true }]} />
+      <p className="text-sm text-theme-muted">
+        Housing price CAGRs for 50+ cities are listed below. To run a full live-in or rent-out vs SIP comparison, open{" "}
+        <a className="font-medium text-accent underline-offset-2 hover:underline" href="/tools/home-loan-vs-mutual-fund">
+          Home loan vs SIP
+        </a>{" "}
+        or{" "}
+        <a className="font-medium text-accent underline-offset-2 hover:underline" href="/tools/rent-vs-buy-calculator">
+          Rent vs buy
+        </a>
+        .
+      </p>
+      <CityHousingCagrTable />
     </Shell>
   );
 }
@@ -132,7 +145,7 @@ export function FdCalculatorTool() {
   return (
     <Shell>
       <CalculatorSlider label="Principal" value={p} min={1000} max={20_000_000} step={1000} prefix="₹" onChange={setP} />
-      <CalculatorSlider label="Interest rate" value={rate} min={1} max={12} step={0.05} unit="%" onChange={setRate} />
+      <CalculatorSlider label="Interest rate" value={rate} min={1} max={15} step={0.05} unit="%" onChange={setRate} />
       <CalculatorSlider label="Tenure" value={years} min={0.25} max={10} step={0.25} unit=" yrs" onChange={setYears} />
       <CalculatorSlider label="Compounds per year" value={n} min={1} max={12} step={1} onChange={setN} />
       <KPIStrip

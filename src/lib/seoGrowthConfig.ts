@@ -152,8 +152,8 @@ export const TOOL_WORKED_EXAMPLES: Record<string, string[]> = {
     "Check today's purchasing power of the maturity value so long-term goals stay realistic.",
   ],
   "home-loan-vs-mutual-fund": [
-    "Example: ₹75 lakh home, 20% down, 8.5% loan, ₹25,000 rent with 5% yearly hike. Match SIP to EMI + maintenance + utilities − rent and compare 20-year net worth.",
-    "Turn off matched SIP to test a fixed monthly investment, or leave it on so both paths use the same cash each month.",
+    "Example: ₹75 lakh home, 20% down, 8.5% loan. Switch Live in vs Rent out, pick Bengaluru’s 10-year CAGR, and match SIP to the same monthly cash.",
+    "Stress-test Cautious / Base / Optimistic, add stamp duty under Advanced Options, and compare keep-the-home vs sell-at-horizon net worth.",
   ],
   "gst-calculator": [
     "Example: ₹50,000 exclusive of GST at 18% → add CGST/SGST or IGST and see net vs gross instantly.",

@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:finance": "npx --yes tsx src/lib/finance/runFinanceTests.ts",
+    "test:tools": "npx --yes tsx src/lib/tools/runAllToolsTests.ts",
+    "test": "npx --yes tsx src/lib/finance/runFinanceTests.ts && npx --yes tsx src/lib/tools/runAllToolsTests.ts"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.15",
