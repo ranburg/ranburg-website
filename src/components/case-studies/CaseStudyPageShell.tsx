@@ -33,7 +33,7 @@ export default function CaseStudyPageShell({ slug }: CaseStudyPageShellProps) {
         ]}
       />
       <div className="pb-24">
-        <section className="py-12">
+        <section className="pb-10 pt-8 sm:pt-10">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <Breadcrumbs
               items={[
@@ -42,32 +42,38 @@ export default function CaseStudyPageShell({ slug }: CaseStudyPageShellProps) {
                 { label: study.title },
               ]}
             />
-            <p className="text-sm font-semibold uppercase tracking-wider text-accent">{study.industry}</p>
-            <h1 className="mt-4 text-3xl font-extrabold text-theme-heading sm:text-4xl">{study.title}</h1>
-            <p className="mt-4 text-lg text-theme-muted">{study.excerpt}</p>
+            <p className="eyebrow rise-soft">
+              <span className="status-dot" aria-hidden />
+              {study.industry}
+            </p>
+            <h1 className="rise mt-6 text-3xl font-light leading-[1.1] tracking-[-0.03em] text-theme-heading sm:text-5xl">{study.title}</h1>
+            <p className="rise-soft mt-5 text-lg leading-relaxed text-theme-muted">{study.excerpt}</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {study.products.map((p) => (
-                <span key={p} className="rounded-full border border-theme-subtle px-3 py-1 text-xs text-theme-muted">{p}</span>
+                <span key={p} className="rounded-full border border-theme-subtle bg-theme-surface px-3 py-1 text-xs text-theme-muted">{p}</span>
               ))}
             </div>
           </div>
         </section>
 
         <section className="py-4">
-          <div className="mx-auto max-w-4xl space-y-12 px-4 sm:px-6 lg:px-8">
-            <div>
-              <h2 className="text-2xl font-bold text-theme-heading">Client Challenge</h2>
-              <p className="mt-4 leading-relaxed text-theme-muted">{study.challenge}</p>
+          <div className="mx-auto max-w-4xl space-y-4 px-4 sm:px-6 lg:px-8">
+            <div className="card p-6 sm:p-8" data-reveal="up">
+              <span className="text-sm tabular-nums text-accent">01</span>
+              <h2 className="mt-2 text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl">Client Challenge</h2>
+              <p className="mt-4 text-base leading-[1.8] text-theme-muted">{study.challenge}</p>
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-theme-heading">Solution Architecture</h2>
-              <p className="mt-4 leading-relaxed text-theme-muted">{study.solution}</p>
+            <div className="card p-6 sm:p-8" data-reveal="up">
+              <span className="text-sm tabular-nums text-accent">02</span>
+              <h2 className="mt-2 text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl">Solution Architecture</h2>
+              <p className="mt-4 text-base leading-[1.8] text-theme-muted">{study.solution}</p>
               <p className="mt-4 text-sm text-theme-subtle">
                 <strong className="text-theme-heading">Technology stack:</strong> {study.stack.join(" · ")}
               </p>
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-theme-heading">Business Impact</h2>
+            <div className="card p-6 sm:p-8" data-reveal="up">
+              <span className="text-sm tabular-nums text-accent">03</span>
+              <h2 className="mt-2 text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl">Business Impact</h2>
               <ul className="mt-4 space-y-3">
                 {study.impact.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-theme-muted">
@@ -77,8 +83,9 @@ export default function CaseStudyPageShell({ slug }: CaseStudyPageShellProps) {
                 ))}
               </ul>
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-theme-heading">Key Outcomes</h2>
+            <div className="card p-6 sm:p-8" data-reveal="up">
+              <span className="text-sm tabular-nums text-accent">04</span>
+              <h2 className="mt-2 text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl">Key Outcomes</h2>
               <ul className="mt-4 list-disc space-y-2 pl-5 text-theme-muted">
                 {study.outcomes.map((o) => (
                   <li key={o}>{o}</li>
@@ -87,13 +94,13 @@ export default function CaseStudyPageShell({ slug }: CaseStudyPageShellProps) {
             </div>
 
             {related.length > 0 && (
-              <div>
-                <h2 className="text-xl font-bold text-theme-heading">Related Services</h2>
+              <div className="pt-10">
+                <h2 className="text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl">Related Services</h2>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   {related.map((rel) => {
                     const Icon = getServiceIcon(rel.icon);
                     return (
-                      <Link key={rel.slug} href={`/services/${rel.slug}`} className="glass-card group flex items-center gap-4 p-4 hover:border-accent/30">
+                      <Link key={rel.slug} href={`/services/${rel.slug}`} className="card spotlight group flex items-center gap-4 p-4 transition-colors duration-300 hover:border-accent/50">
                         <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${rel.gradient}`}>
                           <Icon className="h-5 w-5 text-white" />
                         </div>
@@ -106,12 +113,13 @@ export default function CaseStudyPageShell({ slug }: CaseStudyPageShellProps) {
               </div>
             )}
 
-            <div className="glass-card p-8 text-center">
-              <h2 className="text-xl font-bold text-theme-heading">Start Your Salesforce Project</h2>
-              <p className="mx-auto mt-3 max-w-md text-theme-muted">Discuss a similar initiative with Ranburg LLP consultants.</p>
-              <div className="mt-6 flex flex-wrap justify-center gap-4">
-                <Button href="/contact" icon>Schedule Consultation</Button>
-                <Button href="/case-studies" variant="outline">More Case Studies</Button>
+            <div className="card spotlight relative !mt-14 overflow-hidden rounded-[1.75rem] px-6 py-12 text-center sm:px-10 sm:py-16" data-reveal="scale">
+              <div className="pointer-events-none absolute left-1/2 top-0 h-56 w-[36rem] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 blur-3xl" aria-hidden />
+              <h2 className="relative text-3xl font-light leading-[1.1] tracking-[-0.03em] text-theme-heading sm:text-4xl">Start Your Salesforce Project</h2>
+              <p className="section-lede relative mx-auto mt-3 max-w-md">Discuss a similar initiative with Ranburg LLP consultants.</p>
+              <div className="relative mt-8 flex flex-wrap justify-center gap-3">
+                <Button href="/contact" size="lg" icon>Schedule Consultation</Button>
+                <Button href="/case-studies" size="lg" variant="secondary">More Case Studies</Button>
               </div>
             </div>
           </div>

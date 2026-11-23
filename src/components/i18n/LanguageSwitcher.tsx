@@ -20,7 +20,7 @@ export default function LanguageSwitcher({ className = "" }: { className?: strin
           const next = e.target.value as AppLocale;
           router.replace(pathname, { locale: next });
         }}
-        className="rounded-lg border border-theme-subtle bg-theme-surface/70 px-2 py-1.5 text-sm text-theme-heading outline-none focus:border-accent/40"
+        className="h-10 w-full cursor-pointer rounded-xl border border-theme-subtle bg-theme-surface px-2.5 text-sm text-theme-heading outline-none transition-colors hover:border-accent/40 focus:border-accent/40"
       >
         {locales.map((code) => (
           <option key={code} value={code}>

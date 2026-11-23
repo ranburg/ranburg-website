@@ -9,37 +9,39 @@ export default function NotFound() {
     .filter(Boolean);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-24 sm:px-6 lg:px-8">
-      <p className="text-sm font-semibold uppercase tracking-wider text-accent">404</p>
-      <h1 className="mt-3 text-3xl font-extrabold text-theme-heading sm:text-4xl">
+    <div className="mx-auto max-w-3xl px-4 pb-24 pt-12 sm:px-6 sm:pt-20 lg:px-8">
+      <p className="rise float-slow w-fit select-none text-[7rem] font-light leading-none tracking-[-0.06em] text-gradient-accent sm:text-[11rem]">
+        404
+      </p>
+      <h1 className="rise mt-4 text-4xl font-light leading-[1.08] tracking-[-0.035em] text-theme-heading sm:text-5xl">
         Page not found
       </h1>
-      <p className="mt-4 text-theme-muted">
+      <p className="rise-soft mt-5 text-lg leading-relaxed text-theme-muted">
         That URL is not on {SITE.brand}. Try a free tool below or go back to the homepage.
       </p>
       <div className="mt-8 flex flex-wrap gap-3">
         <Link
           href="/"
-          className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+          className="rounded-xl bg-accent px-6 py-3 text-sm font-medium text-on-accent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_44px_color-mix(in_srgb,var(--accent)_45%,transparent)]"
         >
           Home
         </Link>
         <Link
           href="/tools"
-          className="rounded-lg border border-theme-subtle px-4 py-2 text-sm font-semibold text-theme-heading hover:border-accent"
+          className="rounded-xl border border-theme-subtle bg-theme-surface px-6 py-3 text-sm font-medium text-theme-heading transition-colors hover:border-accent"
         >
           All tools
         </Link>
       </div>
-      <h2 className="mt-12 text-lg font-bold text-theme-heading">Popular free tools</h2>
-      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+      <h2 className="mt-14 text-2xl font-medium tracking-tight text-theme-heading">Popular free tools</h2>
+      <ul className="mt-5 grid gap-3 sm:grid-cols-2">
         {tools.map(
           (tool) =>
             tool && (
               <li key={tool.slug}>
                 <Link
                   href={`/tools/${tool.slug}`}
-                  className="block rounded-lg border border-theme-subtle px-3 py-2.5 text-sm font-medium text-theme-heading hover:border-accent hover:text-accent"
+                  className="card block px-4 py-3.5 text-sm font-medium text-theme-heading transition-colors duration-300 hover:border-accent/60 hover:text-accent"
                 >
                   {tool.title}
                 </Link>

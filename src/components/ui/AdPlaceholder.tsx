@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { SITE } from "@/lib/siteConfig";
 
 type AdPlacement =
   | "below-hero"
@@ -9,21 +10,13 @@ type AdPlacement =
   | "between-content"
   | "after-tool-mobile"
   | "between-sections"
-  | "after-faq";
+  | "after-faq"
+  | "in-article";
 
 interface AdPlaceholderProps {
   placement: AdPlacement;
   className?: string;
 }
-
-const LABELS: Record<AdPlacement, string> = {
-  "below-hero": "Advertisement",
-  sidebar: "Advertisement",
-  "between-content": "Advertisement",
-  "after-tool-mobile": "Advertisement",
-  "between-sections": "Advertisement",
-  "after-faq": "Advertisement",
-};
 
 const SIZE: Record<AdPlacement, string> = {
   sidebar: "min-h-[250px] w-full",
@@ -32,47 +25,29 @@ const SIZE: Record<AdPlacement, string> = {
   "after-tool-mobile": "min-h-[100px] w-full my-8 lg:hidden",
   "between-sections": "min-h-[90px] w-full my-10",
   "after-faq": "min-h-[120px] w-full my-8",
+  "in-article": "min-h-[120px] w-full mt-14",
 };
 
 /**
- * Renders a real AdSense unit when NEXT_PUBLIC_ADSENSE_CLIENT is set (ca-pub-…).
- * Otherwise shows a dashed placeholder so layout and UX stay stable pre-approval.
+ * Sparse AdSense display unit.
+ * The adsbygoogle.js loader lives once in the root layout <head>.
+ * Each placement renders the AdSense <ins> + push({}) for slot SITE.adsenseSlot.
  */
 export default function AdPlaceholder({ placement, className }: AdPlaceholderProps) {
-  const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
-  const slot = process.env.NEXT_PUBLIC_ADSENSE_SLOT;
-  const enabled = Boolean(client && slot);
+  const client = SITE.adsenseClient;
+  const slot = SITE.adsenseSlot;
   const pushed = useRef(false);
 
   useEffect(() => {
-    if (!enabled || pushed.current) return;
+    if (pushed.current) return;
     try {
-      // @ts-expect-error adsbygoogle global
+      // @ts-expect-error adsbygoogle global injected by the layout loader
       (window.adsbygoogle = window.adsbygoogle || []).push({});
       pushed.current = true;
     } catch {
-      /* AdSense may be blocked */
+      /* AdSense may be blocked by an extension or network policy */
     }
-  }, [enabled]);
-
-  if (!enabled) {
-    return (
-      <div
-        role="complementary"
-        aria-label="Advertisement placeholder"
-        data-ad-placement={placement}
-        className={cn(
-          "ad-placeholder flex items-center justify-center rounded-xl border border-dashed border-theme-subtle bg-theme-surface/50 text-center",
-          SIZE[placement],
-          className
-        )}
-      >
-        <span className="text-xs font-medium uppercase tracking-wider text-theme-subtle">
-          {LABELS[placement]}
-        </span>
-      </div>
-    );
-  }
+  }, []);
 
   return (
     <div
@@ -81,6 +56,7 @@ export default function AdPlaceholder({ placement, className }: AdPlaceholderPro
       data-ad-placement={placement}
       className={cn("overflow-hidden rounded-xl text-center", SIZE[placement], className)}
     >
+      {/* Ad unit: client ca-pub-4423485654472888 / slot 4454149586 ("test") */}
       <ins
         className="adsbygoogle"
         style={{ display: "block" }}

@@ -21,6 +21,7 @@ import BlogCoverImage from "@/components/blog/BlogCoverImage";
 import BlogContent from "@/components/blog/BlogContent";
 import BlogTableOfContents from "@/components/blog/BlogTableOfContents";
 import BlogRelatedPosts from "@/components/blog/BlogRelatedPosts";
+import AdPlaceholder from "@/components/ui/AdPlaceholder";
 import { formatBlogDate } from "@/components/blog/BlogCard";
 import { cn } from "@/lib/utils";
 
@@ -84,70 +85,65 @@ export default async function BlogPostPage({ params }: PageProps) {
       />
       <div className="pb-24">
         {/* Hero */}
-        <header className="relative">
+        <header className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Blog", href: "/blog" },
+              { label: post.title },
+            ]}
+          />
+          <div className="max-w-4xl">
+            {categoryLabel && (
+              <span
+                className={cn(
+                  "rise-soft inline-flex rounded-full bg-gradient-to-r px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.16em] text-white",
+                  accent
+                )}
+              >
+                {categoryLabel}
+              </span>
+            )}
+            <h1 className="rise mt-6 text-3xl font-light leading-[1.1] tracking-[-0.035em] text-theme-heading sm:text-5xl lg:text-6xl">
+              {post.title}
+            </h1>
+            <p className="rise-soft mt-6 max-w-2xl text-lg leading-relaxed text-theme-muted">{post.excerpt}</p>
+            <div className="mt-6 flex flex-wrap items-center gap-2 text-sm text-theme-muted">
+              <span className="flex items-center gap-1.5 rounded-full border border-theme-subtle bg-theme-surface px-3.5 py-1.5">
+                <User className="h-4 w-4 text-accent" />
+                Ranburg Team
+              </span>
+              <span className="flex items-center gap-1.5 rounded-full border border-theme-subtle bg-theme-surface px-3.5 py-1.5">
+                <Calendar className="h-4 w-4 text-accent" />
+                {formatBlogDate(post.date)}
+              </span>
+              <span className="flex items-center gap-1.5 rounded-full border border-theme-subtle bg-theme-surface px-3.5 py-1.5">
+                <Clock className="h-4 w-4 text-accent" />
+                {post.readTime} read
+              </span>
+            </div>
+          </div>
           <BlogCoverImage
             post={post}
             priority
-            overlay="strong"
-            className="aspect-[21/9] min-h-[240px] max-h-[420px] w-full sm:min-h-[320px]"
-            sizes="100vw"
+            overlay="light"
+            className="mt-10 aspect-[21/9] min-h-[200px] w-full rounded-[1.75rem] border border-theme-subtle"
+            sizes="(max-width: 1280px) 100vw, 1216px"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-[var(--background)]/20 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0">
-            <div className="mx-auto max-w-4xl px-4 pb-8 pt-16 sm:px-6 sm:pb-10 lg:px-8">
-              {categoryLabel && (
-                <span
-                  className={cn(
-                    "inline-flex rounded-full bg-gradient-to-r px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white",
-                    accent
-                  )}
-                >
-                  {categoryLabel}
-                </span>
-              )}
-              <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-theme-heading sm:text-4xl lg:text-5xl">
-                {post.title}
-              </h1>
-              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-theme-muted">{post.excerpt}</p>
-              <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-theme-subtle">
-                <span className="flex items-center gap-1.5">
-                  <User className="h-4 w-4" />
-                  Ranburg Team
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Calendar className="h-4 w-4" />
-                  {formatBlogDate(post.date)}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4" />
-                  {post.readTime} read
-                </span>
-              </div>
-            </div>
-          </div>
         </header>
 
         <article>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-4xl pt-6">
-              <Breadcrumbs
-                items={[
-                  { label: "Home", href: "/" },
-                  { label: "Blog", href: "/blog" },
-                  { label: post.title },
-                ]}
-              />
-            </div>
-
-            <div className="mx-auto grid max-w-7xl gap-10 pt-8 lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_260px]">
+            <div className="mx-auto grid max-w-7xl gap-10 pt-10 lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_260px]">
               <div className="mx-auto min-w-0 max-w-4xl">
                 {featuredTool && <BlogFeaturedTool tool={featuredTool} />}
                 <BlogContent post={post} />
+                <AdPlaceholder placement="in-article" />
                 <BlogFaq faq={post.faq} />
 
                 {(relatedServices.length > 0 || relatedTools.length > 0) && (
-                  <div className="mt-16 rounded-2xl border border-theme-subtle bg-[var(--glass-bg)] p-6 sm:p-8">
-                    <h2 className="text-xl font-bold text-theme-heading">Continue exploring</h2>
+                  <div className="card mt-16 p-6 sm:p-8" data-reveal="up">
+                    <h2 className="text-2xl font-medium tracking-tight text-theme-heading">Continue exploring</h2>
                     {relatedTools.length > 0 && (
                       <div className="mt-6">
                         <p className="text-sm font-medium text-theme-body">Free tools</p>
@@ -156,7 +152,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             <Link
                               key={t.slug}
                               href={`/tools/${t.slug}`}
-                              className="rounded-lg bg-accent-emerald/10 px-3 py-1.5 text-sm text-accent-emerald hover:bg-accent-emerald/20"
+                              className="rounded-full border border-theme-subtle bg-theme-surface px-3.5 py-1.5 text-sm text-theme-body transition-colors duration-300 hover:border-accent/60 hover:text-accent"
                             >
                               {t.title}
                             </Link>
@@ -172,7 +168,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                             <Link
                               key={s.slug}
                               href={`/services/${s.slug}`}
-                              className="rounded-lg bg-accent/10 px-3 py-1.5 text-sm text-accent hover:bg-accent/20"
+                              className="rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 text-sm text-accent transition-colors duration-300 hover:bg-accent/20"
                             >
                               {s.title}
                             </Link>
@@ -185,16 +181,17 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                 <BlogRelatedPosts posts={relatedPosts} />
 
-                <div className="mt-16 rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/10 to-accent-emerald/5 p-8 text-center sm:p-10">
-                  <h2 className="text-xl font-bold text-theme-heading sm:text-2xl">Explore more free tools</h2>
-                  <p className="mx-auto mt-3 max-w-lg text-theme-muted">
+                <div className="card spotlight relative mt-16 overflow-hidden rounded-[1.75rem] px-6 py-12 text-center sm:px-10 sm:py-14" data-reveal="scale">
+                  <div className="pointer-events-none absolute left-1/2 top-0 h-56 w-[36rem] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 blur-3xl" aria-hidden />
+                  <h2 className="relative text-3xl font-light leading-[1.1] tracking-[-0.03em] text-theme-heading sm:text-4xl">Explore more free tools</h2>
+                  <p className="section-lede relative mx-auto mt-3 max-w-lg">
                     Browse calculators, formatters, SEO utilities, and Salesforce admin tools on Ranburg.
                   </p>
-                  <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                    <Button href="/tools" icon>
+                  <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                    <Button href="/tools" size="lg" icon>
                       Browse Tools
                     </Button>
-                    <Button href="/blog" variant="outline">
+                    <Button href="/blog" size="lg" variant="secondary">
                       More Articles
                     </Button>
                   </div>

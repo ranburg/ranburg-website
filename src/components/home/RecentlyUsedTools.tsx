@@ -18,11 +18,11 @@ export default function RecentlyUsedTools() {
   return (
     <section className="pb-8 pt-4">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-theme-heading sm:text-3xl">Continue where you left off</h2>
-          <p className="mt-2 text-theme-muted">Tools you opened recently on this device.</p>
+        <div className="mb-8" data-reveal="up">
+          <h2 className="section-heading">Continue where you left off</h2>
+          <p className="section-lede mt-3">Tools you opened recently on this device.</p>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {slugs.map((slug) => (
             <ToolCard key={slug} slug={slug} />
           ))}

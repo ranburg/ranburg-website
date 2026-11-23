@@ -3,6 +3,8 @@ import { isAppLocale } from "@/i18n/routing";
 import { BLOG_POSTS } from "@/lib/blogConfig";
 import BlogList from "@/components/blog/BlogList";
 import { buildMetadata } from "@/lib/seo";
+import PageHero from "@/components/ui/PageHero";
+import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 export const metadata = buildMetadata({
   title: "Blog — Creator Tips, SEO, Calculators & Free Tools | Ranburg",
@@ -25,34 +27,36 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   setRequestLocale(isAppLocale(raw) ? raw : "en");
   return (
     <div className="pb-24">
-      <section className="relative overflow-hidden border-b border-theme-subtle py-16 sm:py-20">
-        <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
-        <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
-        <div className="pointer-events-none absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-accent-emerald/10 blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">Insights & guides</p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-theme-heading sm:text-5xl lg:text-6xl">
-            The Ranburg <span className="text-gradient-accent">Blog</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-theme-muted">
+      <PageHero
+        eyebrow="Insights & guides"
+        title={
+          <>
+            The Ranburg <span className="text-gradient-accent font-semibold">Blog</span>
+          </>
+        }
+        lede={
+          <>
             Practical guides on creators, SEO, calculators, developer tools, and business growth — each paired with
             free tools you can use right away.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3 text-sm text-theme-subtle">
-            <span className="rounded-full border border-theme-subtle bg-[var(--glass-bg)] px-4 py-1.5">
-              {BLOG_POSTS.length}+ articles
-            </span>
-            <span className="rounded-full border border-theme-subtle bg-[var(--glass-bg)] px-4 py-1.5">
-              Free tool guides
-            </span>
-            <span className="rounded-full border border-theme-subtle bg-[var(--glass-bg)] px-4 py-1.5">
-              Updated regularly
-            </span>
-          </div>
+          </>
+        }
+      >
+        <div className="flex flex-wrap gap-2 text-sm text-theme-muted">
+          <span className="rounded-full border border-theme-subtle bg-theme-surface px-4 py-1.5">
+            {BLOG_POSTS.length}+ articles
+          </span>
+          <span className="rounded-full border border-theme-subtle bg-theme-surface px-4 py-1.5">
+            Free tool guides
+          </span>
+          <span className="rounded-full border border-theme-subtle bg-theme-surface px-4 py-1.5">
+            Updated regularly
+          </span>
         </div>
-      </section>
+      </PageHero>
 
-      <section className="py-12 sm:py-16">
+      <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
+
+      <section className="py-6 sm:py-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <BlogList posts={BLOG_POSTS} />
         </div>

@@ -138,6 +138,23 @@ export const TOOL_RELATED_LINKS: Record<string, string[]> = {
   "average-calculator": ["percentage-calculator", "bmi-calculator", "cagr-calculator", "readability-checker"],
   "px-to-rem-converter": ["color-converter", "glassmorphism-generator", "minifier", "html-encoder"],
   "water-intake-calculator": ["calorie-calculator", "bmi-calculator", "age-calculator", "sleep-calculator"],
+
+  "step-up-sip-calculator": ["sip", "goal-sip-calculator", "lumpsum-calculator", "fire-calculator"],
+  "lumpsum-calculator": ["sip", "step-up-sip-calculator", "cagr-calculator", "inflation-calculator"],
+  "goal-sip-calculator": ["step-up-sip-calculator", "sip", "fire-calculator", "inflation-calculator"],
+  "xirr-calculator": ["cagr-calculator", "sip", "stock-average-calculator", "lumpsum-calculator"],
+  "stock-average-calculator": ["xirr-calculator", "percentage-change-calculator", "cagr-calculator", "roi-calculator"],
+  "fire-calculator": ["swp", "step-up-sip-calculator", "goal-sip-calculator", "inflation-calculator"],
+  "home-loan-eligibility-calculator": ["emi", "home-loan-vs-mutual-fund", "loan-foreclosure-calculator", "rent-vs-buy-calculator"],
+  "css-gradient-generator": ["box-shadow-generator", "color-palette-generator", "glassmorphism-generator", "color-contrast-checker"],
+  "box-shadow-generator": ["css-gradient-generator", "glassmorphism-generator", "color-palette-generator", "px-to-rem-converter"],
+  "color-palette-generator": ["color-contrast-checker", "color-converter", "css-gradient-generator", "box-shadow-generator"],
+  "json-to-typescript": ["json-formatter", "csv-to-json", "json-to-csv", "jwt-decoder"],
+  "number-base-converter": ["text-to-binary", "base64-encoder", "unix-timestamp-converter", "sha256-hash-generator"],
+  "pomodoro-timer": ["typing-speed-test", "hours-calculator", "time-zone-converter", "working-days-calculator"],
+  "typing-speed-test": ["pomodoro-timer", "word-counter", "readability-checker", "case-converter"],
+  "time-zone-converter": ["unix-timestamp-converter", "working-days-calculator", "date-difference-calculator", "pomodoro-timer"],
+  "cgpa-to-percentage-calculator": ["percentage-calculator", "average-calculator", "percentage-change-calculator", "age-calculator"],
 };
 
 export function getExplicitRelatedSlugs(slug: string): string[] {

@@ -38,7 +38,7 @@ export default async function ToolsPage({ params }: Props) {
   const t = await getTranslations("pages");
 
   return (
-    <div className="pb-24 pt-16 sm:pt-20">
+    <div className="pb-24 pt-12 sm:pt-20">
       <JsonLd
         data={collectionPageJsonLd(
           "Free online tools",

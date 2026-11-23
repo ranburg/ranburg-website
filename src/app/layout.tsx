@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Noto_Sans, Noto_Sans_Arabic, Noto_Sans_Devanagari, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
+import { Poppins, Caveat, Noto_Sans, Noto_Sans_Arabic, Noto_Sans_Devanagari, Noto_Sans_JP, Noto_Sans_KR } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import Script from "next/script";
 import Providers from "@/components/theme/Providers";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import FacebookPixel from "@/components/analytics/FacebookPixel";
+import AmbientBackground from "@/components/motion/AmbientBackground";
+import MotionEffects from "@/components/motion/MotionEffects";
 import { SITE } from "@/lib/siteConfig";
 import "./globals.css";
 
@@ -26,10 +27,20 @@ export const metadata: Metadata = {
   },
 };
 
-const plusJakarta = Plus_Jakarta_Sans({
+const poppins = Poppins({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-plus-jakarta",
+  variable: "--font-poppins",
   display: "swap",
+  weight: ["300", "400", "500", "600"],
+});
+
+/** Handwritten accent for small annotations only — never preloaded. */
+const hand = Caveat({
+  subsets: ["latin"],
+  variable: "--font-hand",
+  display: "swap",
+  weight: ["500"],
+  preload: false,
 });
 
 const notoSans = Noto_Sans({
@@ -77,25 +88,29 @@ export const viewport: Viewport = {
   maximumScale: 5,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#F4F1EB" },
-    { media: "(prefers-color-scheme: dark)", color: "#0B1220" },
+    { media: "(prefers-color-scheme: dark)", color: "#0D0D0D" },
   ],
 };
 
-const fontVars = `${plusJakarta.variable} ${notoSans.variable} ${notoDevanagari.variable} ${notoArabic.variable} ${notoJp.variable} ${notoKr.variable}`;
+const fontVars = `${poppins.variable} ${hand.variable} ${notoSans.variable} ${notoDevanagari.variable} ${notoArabic.variable} ${notoJp.variable} ${notoKr.variable}`;
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
-
   return (
-    <html className={fontVars} suppressHydrationWarning>
+    <html className={`dark ${fontVars}`} suppressHydrationWarning>
       <head>
+        {/* Google AdSense — exact loader issued for ca-pub-4423485654472888. Present on every page. */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4423485654472888"
+          crossOrigin="anonymous"
+        />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('ranburg-theme');var d=t==='dark';document.documentElement.classList.toggle('dark',d);var p=localStorage.getItem('user_persona');if(p)document.documentElement.setAttribute('data-persona',p);var path=location.pathname.split('/').filter(Boolean)[0];var locales=['es','pt','hi','ar','ja','ko'];var loc=locales.indexOf(path)>=0?path:'en';document.documentElement.lang=loc;document.documentElement.dir=loc==='ar'?'rtl':'ltr';document.documentElement.setAttribute('data-locale',loc);}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('ranburg-theme');var d=t!=='light';document.documentElement.classList.toggle('dark',d);var p=localStorage.getItem('user_persona');if(p)document.documentElement.setAttribute('data-persona',p);var path=location.pathname.split('/').filter(Boolean)[0];var locales=['es','pt','hi','ar','ja','ko'];var loc=locales.indexOf(path)>=0?path:'en';document.documentElement.lang=loc;document.documentElement.dir=loc==='ar'?'rtl':'ltr';document.documentElement.setAttribute('data-locale',loc);}catch(e){}try{if(!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)){document.documentElement.classList.add('js-motion');setTimeout(function(){if(!window.__ranburgMotion)document.documentElement.classList.remove('js-motion');},3500);}}catch(e){}})();`,
           }}
         />
       </head>
@@ -106,16 +121,11 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <AmbientBackground />
         <Providers>{children}</Providers>
+        <MotionEffects />
         <GoogleAnalytics />
         <FacebookPixel />
-        {adsenseClient ? (
-          <Script
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
-            strategy="lazyOnload"
-            crossOrigin="anonymous"
-          />
-        ) : null}
         <Analytics />
       </body>
     </html>

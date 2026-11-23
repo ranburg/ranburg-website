@@ -10,11 +10,11 @@ export default function BlogRelatedPosts({ posts }: BlogRelatedPostsProps) {
 
   return (
     <section className="mt-16 border-t border-theme-subtle pt-12">
-      <h2 className="text-2xl font-bold text-theme-heading">Related articles</h2>
+      <h2 className="text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl" data-reveal="up">Related articles</h2>
       <p className="mt-2 text-theme-muted">More guides from the same topic area.</p>
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
-          <BlogCard key={post.slug} post={post} />
+          <BlogCard key={post.slug} post={post} headingLevel="h3" />
         ))}
       </div>
     </section>

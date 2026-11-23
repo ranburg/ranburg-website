@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
+import { SITE } from "@/lib/siteConfig";
 
 /**
  * ads.txt for Google AdSense.
- * Set NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=pub-XXXXXXXX (without ca- prefix) in env.
- * Until set, serves a commented placeholder so the route exists for verification prep.
+ * Uses the site's AdSense publisher ID; NEXT_PUBLIC_ADSENSE_PUBLISHER_ID can override it.
  */
 export async function GET() {
-  const pub = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID?.replace(/^ca-/, "").trim();
+  const pub = (process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID?.trim() || SITE.adsenseClient).replace(/^ca-/, "");
 
   const body = pub
     ? `google.com, ${pub}, DIRECT, f08c47fec0942fa0\n`

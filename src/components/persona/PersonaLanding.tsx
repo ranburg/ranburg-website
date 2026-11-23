@@ -36,33 +36,26 @@ export default function PersonaLanding({ slug }: PersonaLandingProps) {
 
   return (
     <div className="pb-24" data-persona-page={persona.id}>
-      <section className="relative overflow-hidden pb-10 pt-14 sm:pb-12 sm:pt-16">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div
-          className={cn(
-            "pointer-events-none absolute inset-0 bg-gradient-to-b",
-            persona.theme.heroGradient
-          )}
-        />
+      <section className="relative pb-10 pt-12 sm:pb-14 sm:pt-20">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-accent">
-            <Sparkles className="h-4 w-4" aria-hidden />
+          <p className="eyebrow rise-soft">
+            <Sparkles className="h-4 w-4 text-accent" aria-hidden />
             Tools for {persona.title}s
           </p>
           <h1
             className={cn(
-              "mt-3 max-w-3xl text-3xl font-extrabold tracking-tight text-theme-heading sm:text-4xl lg:text-5xl",
-              persona.theme.fontHint === "mono" && "font-mono tracking-tight"
+              "rise mt-6 max-w-4xl text-4xl font-light leading-[1.08] tracking-[-0.035em] text-theme-heading sm:text-6xl lg:text-7xl",
+              persona.theme.fontHint === "mono" && "font-mono"
             )}
           >
             {persona.title}
           </h1>
-          <p className="mt-4 max-w-2xl text-base text-theme-muted sm:text-lg">{persona.description}</p>
+          <p className="rise-soft mt-6 max-w-2xl text-lg leading-relaxed text-theme-muted">{persona.description}</p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
               href="/tools"
-              className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-medium text-on-accent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_44px_color-mix(in_srgb,var(--accent)_45%,transparent)]"
             >
               Browse all tools
               <ArrowRight className="h-4 w-4" aria-hidden />
@@ -70,7 +63,7 @@ export default function PersonaLanding({ slug }: PersonaLandingProps) {
             <button
               type="button"
               onClick={() => clearPersona()}
-              className="inline-flex items-center rounded-xl border border-theme-subtle bg-theme-surface/60 px-4 py-2.5 text-sm font-medium text-theme-muted transition-colors hover:border-accent/30 hover:text-theme-heading"
+              className="inline-flex items-center rounded-xl border border-theme-subtle bg-theme-surface px-6 py-3 text-sm font-medium text-theme-muted transition-colors hover:border-accent/40 hover:text-theme-heading"
             >
               Reset / View all
             </button>
@@ -84,16 +77,16 @@ export default function PersonaLanding({ slug }: PersonaLandingProps) {
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8 sm:space-y-14">
+      <div className="mx-auto max-w-7xl space-y-16 px-4 sm:space-y-20 sm:px-6 lg:px-8">
         {featured.length > 0 && (
           <section>
-            <h2 className="text-xl font-bold text-theme-heading sm:text-2xl">Featured for you</h2>
-            <p className="mt-1.5 max-w-2xl text-sm text-theme-muted sm:text-base">
+            <h2 className="section-heading" data-reveal="up">Featured for you</h2>
+            <p className="section-lede mt-3 max-w-2xl">
               High-impact tools we recommend first for {persona.title.toLowerCase()}s.
             </p>
-            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {featured.map((tool) => (
-                <ToolCard key={tool.slug} slug={tool.slug} showCategory />
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {featured.map((tool, i) => (
+                <ToolCard key={tool.slug} slug={tool.slug} showCategory revealIndex={i} />
               ))}
             </div>
           </section>
@@ -101,20 +94,20 @@ export default function PersonaLanding({ slug }: PersonaLandingProps) {
 
         {recommended.length > 0 && (
           <section>
-            <h2 className="text-xl font-bold text-theme-heading sm:text-2xl">More recommended tools</h2>
-            <p className="mt-1.5 max-w-2xl text-sm text-theme-muted sm:text-base">
+            <h2 className="section-heading" data-reveal="up">More recommended tools</h2>
+            <p className="section-lede mt-3 max-w-2xl">
               Related utilities from your persona&apos;s categories. Search still covers every tool on Ranburg.
             </p>
-            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {recommended.map((tool) => (
-                <ToolCard key={tool.slug} slug={tool.slug} showCategory />
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {recommended.map((tool, i) => (
+                <ToolCard key={tool.slug} slug={tool.slug} showCategory revealIndex={i} />
               ))}
             </div>
           </section>
         )}
 
-        <section className="rounded-2xl border border-theme-subtle bg-theme-surface/40 px-6 py-8 text-center sm:px-10">
-          <h2 className="text-lg font-bold text-theme-heading sm:text-xl">Need something else?</h2>
+        <section className="card spotlight px-6 py-12 text-center sm:px-10" data-reveal="scale">
+          <h2 className="text-2xl font-light tracking-tight text-theme-heading sm:text-4xl">Need something else?</h2>
           <p className="mx-auto mt-2 max-w-xl text-sm text-theme-muted">
             Your persona preference only highlights relevant tools. Direct URLs, the tools hub, and ⌘K search always
             stay available for the full catalog.

@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
 import { TOOLS_CONFIG, getToolBySlug } from "@/lib/toolsConfig";
 import { COMING_SOON_TOOLS } from "@/lib/toolComingSoonConfig";
-import { FEATURED_TOOL_SLUGS, POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
+import { FEATURED_TOOL_SLUGS, NEW_TOOL_SLUGS, POPULAR_TOOL_SLUGS, RECENT_TOOL_SLUGS } from "@/lib/toolsHubConfig";
 import { CATALOG_SECTIONS, getCatalogTools, TOOL_CATALOG_COUNT } from "@/lib/catalogDirectory";
 import { SEO_CATEGORY_HUBS, PRIMARY_CATEGORY_SLUGS, getToolsForSeoCategory } from "@/lib/toolSeoCategories";
 import { getToolIcon } from "@/lib/toolIcons";
@@ -14,7 +14,6 @@ import ToolCard from "@/components/tools/ToolCard";
 import SearchHeroPanel from "@/components/home/SearchHeroPanel";
 import SocialHeroTools from "@/components/tools/SocialHeroTools";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
-import { Sparkles } from "lucide-react";
 import { iconWell } from "@/components/tools/iconWell";
 
 function ToolSection({ title, description, slugs }: { title: string; description?: string; slugs: string[] }) {
@@ -22,11 +21,16 @@ function ToolSection({ title, description, slugs }: { title: string; description
   if (tools.length === 0) return null;
   return (
     <section>
-      <h2 className="text-lg font-semibold tracking-tight text-theme-heading sm:text-xl">{title}</h2>
-      {description && <p className="mt-1.5 max-w-2xl text-sm text-theme-muted sm:text-base">{description}</p>}
-      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {slugs.map((slug) => (
-          <ToolCard key={slug} slug={slug} showCategory />
+      <div className="flex flex-wrap items-end justify-between gap-3 border-b border-theme-subtle pb-5" data-reveal="up">
+        <div>
+          <h2 className="text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl">{title}</h2>
+          {description && <p className="mt-2 max-w-2xl text-sm text-theme-muted sm:text-base">{description}</p>}
+        </div>
+        <span className="text-sm tabular-nums text-theme-subtle">{tools.length} tools</span>
+      </div>
+      <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {slugs.map((slug, i) => (
+          <ToolCard key={slug} slug={slug} showCategory revealIndex={i} />
         ))}
       </div>
     </section>
@@ -65,19 +69,25 @@ export default function ToolsHub({
   }, [searchQuery, searchHydrated]);
 
   const salesforceSlugs = TOOLS_CONFIG.filter((t) => t.category === "salesforce").map((t) => t.slug);
+  const newSlugs = NEW_TOOL_SLUGS.filter((s) => getToolBySlug(s));
 
   return (
-    <div className="space-y-14 sm:space-y-16">
+    <div className="space-y-16 sm:space-y-20">
       <SearchHeroPanel
+        className="rise"
         eyebrow={
-          <p className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">
-            <Sparkles className="h-4 w-4" />
+          <p className="eyebrow">
+            <span className="status-dot" aria-hidden />
             {TOOL_CATALOG_COUNT}+ free tools · no signup
           </p>
         }
-        title={<h1 className="mt-4 text-3xl font-semibold tracking-tight text-theme-heading sm:text-4xl lg:text-[2.75rem]">{title}</h1>}
+        title={
+          <h1 className="mt-5 text-4xl font-light leading-[1.08] tracking-[-0.035em] text-theme-heading sm:text-5xl lg:text-6xl">
+            {title}
+          </h1>
+        }
         subtitle={
-          description ? <p className="mt-3 max-w-2xl text-base text-theme-muted sm:text-lg">{description}</p> : null
+          description ? <p className="section-lede mt-4 max-w-2xl">{description}</p> : null
         }
         search={
           <ToolSearch
@@ -91,17 +101,15 @@ export default function ToolsHub({
         }
       />
 
-      <AdPlaceholder placement="below-hero" />
-
       {searchResults ? (
         <section>
-          <h2 className="text-xl font-bold text-theme-heading">
+          <h2 className="text-2xl font-medium tracking-tight text-theme-heading">
             {searchResults.length} result{searchResults.length !== 1 ? "s" : ""} for &ldquo;{searchQuery}&rdquo;
           </h2>
           {searchResults.length === 0 ? (
             <p className="mt-6 text-theme-muted">No tools found. Try another keyword.</p>
           ) : (
-            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {searchResults.map((t) => (
                 <ToolCard key={t.slug} slug={t.slug} showCategory />
               ))}
@@ -112,7 +120,7 @@ export default function ToolsHub({
         <>
           <section>
             <h2 className="sr-only">Browse by category</h2>
-            <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
+            <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 scrollbar-none sm:flex-wrap">
               {PRIMARY_CATEGORY_SLUGS.map((slug) => {
                 const cat = SEO_CATEGORY_HUBS.find((c) => c.slug === slug);
                 if (!cat) return null;
@@ -122,13 +130,13 @@ export default function ToolsHub({
                   <Link
                     key={cat.slug}
                     href={`/tools/${cat.slug}`}
-                    className="inline-flex shrink-0 items-center gap-2 rounded-full border border-theme-subtle bg-[var(--surface-elevated)] px-3.5 py-2 text-sm font-medium text-theme-heading shadow-sm transition-colors hover:border-accent/40 hover:bg-accent/5 hover:text-accent"
+                    className="inline-flex shrink-0 items-center gap-2.5 rounded-full border border-theme-subtle bg-[var(--surface-elevated)] py-2 pe-4 ps-2 text-sm text-theme-heading transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent"
                   >
-                    <span {...iconWell(cat.gradient, "h-6 w-6 rounded-full shadow-none")}>
+                    <span {...iconWell(cat.gradient, "h-7 w-7 rounded-full shadow-none")}>
                       <Icon className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden />
                     </span>
                     {cat.label}
-                    <span className="text-xs text-theme-subtle">{count}</span>
+                    <span className="text-xs tabular-nums text-theme-subtle">{count}</span>
                   </Link>
                 );
               })}
@@ -136,6 +144,14 @@ export default function ToolsHub({
           </section>
 
           <SocialHeroTools />
+
+          {newSlugs.length > 0 && (
+            <ToolSection
+              title="Just Added"
+              description="Fresh calculators, design generators and focus tools — new this season."
+              slugs={newSlugs}
+            />
+          )}
 
           <ToolSection title="Popular Tools" description="Most used this month — jump in and get an answer fast." slugs={POPULAR_TOOL_SLUGS} />
           <ToolSection title="Featured" description="Our strongest calculators and creator utilities." slugs={FEATURED_TOOL_SLUGS} />
@@ -156,20 +172,22 @@ export default function ToolsHub({
 
           {COMING_SOON_TOOLS.length > 0 && (
             <section>
-              <h2 className="text-lg font-semibold tracking-tight text-theme-heading sm:text-xl">Coming Soon</h2>
-              <p className="mt-1.5 text-sm text-theme-muted">New utilities in development.</p>
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div className="border-b border-theme-subtle pb-5" data-reveal="up">
+                <h2 className="text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl">Coming Soon</h2>
+                <p className="mt-2 text-sm text-theme-muted">New utilities in development.</p>
+              </div>
+              <div className="mt-7 grid gap-3 sm:grid-cols-2">
                 {COMING_SOON_TOOLS.map((t) => (
                   <Link
                     key={t.slug}
                     href={`/tools/${t.slug}`}
-                    className="flex items-center justify-between gap-4 rounded-xl border border-theme-subtle bg-theme-surface/40 px-5 py-4 transition-colors hover:border-accent/30"
+                    className="card flex items-center justify-between gap-4 px-5 py-4 transition-colors duration-300 hover:border-accent/40"
                   >
                     <div className="min-w-0">
-                      <p className="font-semibold text-theme-heading">{t.title}</p>
+                      <p className="font-medium text-theme-heading">{t.title}</p>
                       <p className="mt-0.5 line-clamp-1 text-sm text-theme-muted">{t.shortDescription}</p>
                     </div>
-                    <span className="shrink-0 rounded-md bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-600 dark:text-amber-400">
+                    <span className="shrink-0 rounded-full bg-amber-500/10 px-2.5 py-1 text-xs font-medium text-amber-600 dark:text-amber-400">
                       Soon
                     </span>
                   </Link>

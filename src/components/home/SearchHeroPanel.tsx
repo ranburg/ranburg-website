@@ -22,22 +22,16 @@ export default function SearchHeroPanel({
   className,
 }: SearchHeroPanelProps) {
   return (
-    <div
-      className={cn(
-        "relative overflow-hidden rounded-3xl border border-theme shadow-[0_28px_70px_-32px_color-mix(in_srgb,var(--accent)_45%,transparent)]",
-        className
-      )}
-    >
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-[var(--surface-elevated)] to-[color-mix(in_srgb,var(--foreground)_08%,transparent)]" />
-        <div className="absolute -left-20 -top-24 h-80 w-80 rounded-full bg-accent/25 blur-3xl" />
-        <div className="absolute -bottom-28 right-[-10%] h-96 w-96 rounded-full bg-[color-mix(in_srgb,var(--foreground)_12%,transparent)] blur-3xl" />
-        <div className="absolute inset-0 bg-grid opacity-35" />
+    <div className={cn("card spotlight relative overflow-visible rounded-[1.75rem]", className)}>
+      <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]" aria-hidden>
+        <div className="absolute -left-24 -top-28 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
+        <div className="absolute -bottom-32 right-[-8%] h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
+        <div className="absolute inset-0 bg-dots opacity-60 mask-fade-b" />
       </div>
 
       <div
         className={cn(
-          "relative grid gap-8 p-6 sm:p-8 lg:p-12",
+          "relative grid gap-8 p-6 sm:p-9 lg:p-12",
           aside && "lg:grid-cols-[minmax(0,1.2fr)_minmax(16rem,0.8fr)] lg:items-center"
         )}
       >
@@ -45,7 +39,7 @@ export default function SearchHeroPanel({
           {eyebrow}
           {title}
           {subtitle}
-          <div className="mt-6 rounded-2xl border border-theme bg-[var(--surface-elevated)]/95 p-3 shadow-xl backdrop-blur-md sm:p-4">
+          <div className="mt-7 rounded-2xl border border-theme-subtle bg-[var(--surface)] p-3 sm:p-4">
             {search}
           </div>
           {belowSearch}

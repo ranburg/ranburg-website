@@ -13,35 +13,35 @@ export default function BlogFeaturedTool({ tool }: BlogFeaturedToolProps) {
   const Icon = getToolIcon(tool.icon, tool.slug);
 
   return (
-    <div className="relative mt-8 overflow-hidden rounded-2xl border-2 border-accent/30 bg-gradient-to-br from-accent/10 via-accent-emerald/5 to-transparent p-6 shadow-lg shadow-accent/5 sm:p-8">
-      <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-accent/10 blur-2xl" />
+    <div className="card spotlight relative mb-10 overflow-hidden border-accent/30 p-6 sm:p-8">
+      <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-accent/20 blur-3xl" aria-hidden />
       <div className="relative">
         <div className="flex items-start gap-4">
           <div {...iconWell(tool.gradient, "h-14 w-14 rounded-2xl")}>
             <Icon className="h-7 w-7" />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-accent">
+            <p className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.16em] text-accent">
               <Sparkles className="h-3.5 w-3.5" />
               Featured free tool
             </p>
-            <h2 className="mt-1 text-lg font-bold leading-snug text-theme-heading sm:text-xl">{tool.title}</h2>
+            <h2 className="mt-2 text-xl font-medium leading-snug tracking-tight text-theme-heading sm:text-2xl">{tool.title}</h2>
             <p className="mt-2 text-sm leading-relaxed text-theme-muted">{tool.shortDescription}</p>
-            <span className="mt-3 inline-block rounded-full bg-accent-emerald/10 px-2.5 py-0.5 text-xs font-medium text-accent-emerald">
+            <span className="mt-3 inline-block rounded-full border border-theme-subtle bg-theme-surface px-3 py-1 text-xs font-medium text-theme-muted">
               {tool.badge}
             </span>
           </div>
         </div>
-        <div className="mt-5 flex flex-col gap-3 border-t border-accent/15 pt-5 sm:flex-row sm:flex-wrap sm:items-center">
+        <div className="mt-6 flex flex-col gap-4 border-t border-theme-subtle pt-5 sm:flex-row sm:flex-wrap sm:items-center">
           <Button href={`/tools/${tool.slug}`} icon size="sm" className="w-fit">
             Open tool
           </Button>
           <Link
             href={`/tools/${tool.slug}`}
-            className="inline-flex w-fit items-center gap-1 text-sm font-medium text-accent hover:underline"
+            className="group/link inline-flex w-fit items-center gap-1 text-sm font-medium text-accent"
           >
-            View tool page
-            <ArrowRight className="h-4 w-4" />
+            <span className="link-underline">View tool page</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1 rtl:rotate-180" />
           </Link>
         </div>
       </div>

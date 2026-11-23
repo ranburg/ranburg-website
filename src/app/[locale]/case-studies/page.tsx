@@ -4,7 +4,8 @@ import { isAppLocale } from "@/i18n/routing";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 import { CASE_STUDIES } from "@/lib/caseStudiesConfig";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
 
 export const metadata: Metadata = buildMetadata({
   title: "Salesforce Case Studies & Success Stories | Ranburg LLP",
@@ -19,33 +20,43 @@ export default async function CaseStudiesPage({ params }: { params: Promise<{ lo
   setRequestLocale(isAppLocale(raw) ? raw : "en");
   return (
     <div className="pb-24">
-      <section className="py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">Success Stories</p>
-          <h1 className="mt-4 text-4xl font-extrabold text-theme-heading sm:text-5xl">
-            Salesforce <span className="text-gradient-accent">Case Studies</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-theme-muted">
-            Real-world outcomes from Revenue Cloud, OmniStudio, Industries Cloud, and integration programs delivered by Ranburg LLP.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Success Stories"
+        title={
+          <>
+            Salesforce <span className="text-gradient-accent font-semibold">Case Studies</span>
+          </>
+        }
+        lede="Real-world outcomes from Revenue Cloud, OmniStudio, Industries Cloud, and integration programs delivered by Ranburg LLP."
+      />
       <section className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 md:grid-cols-2">
-            {CASE_STUDIES.map((study) => (
-              <Link key={study.slug} href={`/case-studies/${study.slug}`} className="glass-card group block p-8 hover:border-accent/30">
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent">{study.industry}</p>
-                <h2 className="mt-2 text-xl font-bold text-theme-heading group-hover:text-accent">{study.title}</h2>
-                <p className="mt-3 text-sm text-theme-muted line-clamp-3">{study.excerpt}</p>
-                <ul className="mt-4 flex flex-wrap gap-2">
+          <div className="grid gap-4 md:grid-cols-2">
+            {CASE_STUDIES.map((study, i) => (
+              <Link
+                key={study.slug}
+                href={`/case-studies/${study.slug}`}
+                data-reveal="up"
+                style={{ "--reveal-delay": `${(i % 2) * 100}ms` } as React.CSSProperties}
+                className="card spotlight group flex flex-col p-6 transition-[border-color] duration-500 hover:border-accent/50 sm:p-8"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <span className="text-3xl font-light tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
+                    <p className="text-xs font-medium uppercase tracking-[0.16em] text-theme-subtle">{study.industry}</p>
+                  </div>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-theme-subtle bg-theme-surface text-theme-muted transition-all duration-500 ease-out-expo group-hover:rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-on-accent">
+                    <ArrowUpRight className="h-4 w-4" />
+                  </span>
+                </div>
+                <h2 className="mt-8 text-2xl font-medium leading-snug tracking-tight text-theme-heading transition-colors group-hover:text-accent sm:text-3xl">{study.title}</h2>
+                <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-theme-muted sm:text-base">{study.excerpt}</p>
+                <ul className="mt-6 flex flex-wrap gap-2">
                   {study.products.slice(0, 3).map((p) => (
-                    <li key={p} className="rounded-full bg-theme-surface px-2 py-0.5 text-xs text-theme-subtle">{p}</li>
+                    <li key={p} className="rounded-full border border-theme-subtle bg-theme-surface px-3 py-1 text-xs text-theme-muted">{p}</li>
                   ))}
                 </ul>
-                <span className="mt-6 flex items-center gap-2 text-sm font-medium text-accent">
-                  Read case study <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
+                <span className="mt-6 text-sm font-medium text-accent">Read case study</span>
               </Link>
             ))}
           </div>

@@ -8,6 +8,7 @@ import { NEW_WAVE_TOOLS } from "./newWaveTools";
 import { INDIA_FINANCE_TOOLS } from "./indiaFinanceTools";
 import { CATALOG_TOOLS } from "./catalogTools";
 import { DEMAND_TOOLS } from "./demandTools";
+import { PLANNER_TOOLS } from "./plannerTools";
 
 export const EXTENDED_TOOLS = [
   ...IMAGE_TOOLS,
@@ -21,6 +22,7 @@ export const EXTENDED_TOOLS = [
   ...INDIA_FINANCE_TOOLS,
   ...CATALOG_TOOLS,
   ...DEMAND_TOOLS,
+  ...PLANNER_TOOLS,
 ];
 
 export {
@@ -34,6 +36,7 @@ export {
   INDIA_FINANCE_TOOLS,
   CATALOG_TOOLS,
   DEMAND_TOOLS,
+  PLANNER_TOOLS,
   QR_ALIAS_TOOL,
 };
 

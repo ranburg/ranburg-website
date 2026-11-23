@@ -10,7 +10,13 @@ import { getToolIcon } from "@/lib/toolIcons";
 import { SITE } from "@/lib/siteConfig";
 import JsonLd from "@/components/seo/JsonLd";
 import Button from "@/components/ui/Button";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
+
+const sfCard =
+  "card spotlight group flex h-full flex-col overflow-hidden p-6 transition-[border-color,transform] duration-500 ease-out-expo hover:-translate-y-1";
+const sfArrow =
+  "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-theme-subtle bg-theme-surface text-theme-muted transition-all duration-500 ease-out-expo group-hover:rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-on-accent";
 import { iconWell } from "@/components/tools/iconWell";
 
 export const metadata: Metadata = buildMetadata({
@@ -77,23 +83,25 @@ export default async function SalesforceToolsHubPage({ params }: { params: Promi
           }))
         )}
       />
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">Salesforce Tool Hub</p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-extrabold text-theme-heading sm:text-5xl">
-            Free <span className="text-gradient-accent">Salesforce</span> Developer & Admin Tools
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-theme-muted">
+      <PageHero
+        eyebrow="Salesforce Tool Hub"
+        title={
+          <>
+            Free <span className="text-gradient-accent font-semibold">Salesforce</span> Developer & Admin Tools
+          </>
+        }
+        lede={
+          <>
             Salesforce productivity tools for formula builders, query builders, Apex helpers, and admin utilities.
             No signup required.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button href="/tools" icon>Browse All Tools</Button>
-            <Button href="/blog" variant="outline">Salesforce Guides</Button>
-          </div>
+          </>
+        }
+      >
+        <div className="flex flex-wrap gap-3">
+          <Button href="/tools" size="lg" icon>Browse All Tools</Button>
+          <Button href="/blog" size="lg" variant="secondary">Salesforce Guides</Button>
         </div>
-      </section>
+      </PageHero>
 
       <section className="py-8">
         <div className="mx-auto max-w-7xl space-y-16 px-4 sm:px-6 lg:px-8">
@@ -106,23 +114,26 @@ export default async function SalesforceToolsHubPage({ params }: { params: Promi
 
             return (
               <div key={section.id}>
-                <h2 className="text-2xl font-bold text-theme-heading">{section.label}</h2>
-                <p className="mt-2 max-w-2xl text-theme-muted">{section.description}</p>
-                <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <h2 className="section-heading" data-reveal="up">{section.label}</h2>
+                <p className="section-lede mt-3 max-w-2xl">{section.description}</p>
+                <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {liveSlugs.map((slug) => {
                     const tool = getToolBySlug(slug);
                     if (!tool) return null;
                     const Icon = getToolIcon(tool.icon, tool.slug);
                     return (
-                      <Link key={slug} href={`/tools/${tool.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-6 shadow-[0_12px_32px_-16px_rgba(12,31,26,0.38)] transition-all hover:-translate-y-1 hover:border-accent/80 hover:shadow-[0_0_0_2px_rgba(15,118,110,0.28),0_24px_48px_-16px_rgba(15,118,110,0.5)] dark:border-white/10">
-                        <div {...iconWell(tool.gradient, "mb-4 h-12 w-12 rounded-2xl")}>
-                          <Icon className="h-6 w-6" strokeWidth={2.25} />
+                      <Link key={slug} href={`/tools/${tool.slug}`} data-reveal="up" className={`${sfCard} hover:border-accent/60`}>
+                        <div className="mb-6 flex items-start justify-between">
+                          <div {...iconWell(tool.gradient, "h-12 w-12 rounded-2xl")}>
+                            <Icon className="h-6 w-6" strokeWidth={2.25} />
+                          </div>
+                          <span className={sfArrow}>
+                            <ArrowUpRight className="h-4 w-4" aria-hidden />
+                          </span>
                         </div>
-                        <h3 className="text-lg font-bold text-theme-heading group-hover:text-accent">{tool.title}</h3>
-                        <p className="mt-2 flex-1 text-sm text-theme-muted">{tool.shortDescription}</p>
-                        <span className="mt-4 flex items-center gap-2 text-sm font-medium text-accent">
-                          Open Tool <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </span>
+                        <h3 className="text-lg font-medium text-theme-heading transition-colors group-hover:text-accent">{tool.title}</h3>
+                        <p className="mt-2 flex-1 text-sm leading-relaxed text-theme-muted">{tool.shortDescription}</p>
+                        <span className="mt-5 text-sm font-medium text-accent">Open Tool</span>
                       </Link>
                     );
                   })}
@@ -131,13 +142,15 @@ export default async function SalesforceToolsHubPage({ params }: { params: Promi
                     if (!tool) return null;
                     const Icon = getToolIcon(tool.icon, tool.slug);
                     return (
-                      <Link key={slug} href={`/tools/${tool.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-6 shadow-[0_12px_32px_-16px_rgba(12,31,26,0.38)] transition-all hover:-translate-y-1 hover:border-amber-500/70 hover:shadow-[0_0_0_2px_rgba(245,158,11,0.28),0_24px_48px_-16px_rgba(245,158,11,0.35)] dark:border-white/10">
-                        <div {...iconWell(tool.gradient, "mb-4 h-12 w-12 rounded-2xl")}>
-                          <Icon className="h-6 w-6" strokeWidth={2.25} />
+                      <Link key={slug} href={`/tools/${tool.slug}`} data-reveal="up" className={`${sfCard} hover:border-amber-500/60`}>
+                        <div className="mb-6 flex items-start justify-between">
+                          <div {...iconWell(tool.gradient, "h-12 w-12 rounded-2xl")}>
+                            <Icon className="h-6 w-6" strokeWidth={2.25} />
+                          </div>
+                          <span className="rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-600 dark:text-amber-400">Coming Soon</span>
                         </div>
-                        <span className="text-xs font-semibold text-amber-600 dark:text-amber-400">Coming Soon</span>
-                        <h3 className="mt-1 text-lg font-bold text-theme-heading group-hover:text-accent">{tool.title}</h3>
-                        <p className="mt-2 flex-1 text-sm text-theme-muted">{tool.shortDescription}</p>
+                        <h3 className="text-lg font-medium text-theme-heading transition-colors group-hover:text-accent">{tool.title}</h3>
+                        <p className="mt-2 flex-1 text-sm leading-relaxed text-theme-muted">{tool.shortDescription}</p>
                         <span className="mt-4 text-sm font-medium text-accent">Join waitlist →</span>
                       </Link>
                     );
@@ -149,13 +162,13 @@ export default async function SalesforceToolsHubPage({ params }: { params: Promi
         </div>
       </section>
 
-      <section className="border-t border-theme-subtle py-16">
-        <div className="mx-auto max-w-3xl space-y-10 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl space-y-12 px-4 sm:px-6 lg:px-8">
           {SEO_SECTIONS.map((s) => (
-            <div key={s.heading}>
-              <h2 className="text-2xl font-bold text-theme-heading">{s.heading}</h2>
+            <div key={s.heading} data-reveal="up">
+              <h2 className="text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl">{s.heading}</h2>
               {s.paragraphs.map((p, i) => (
-                <p key={i} className="mt-4 leading-relaxed text-theme-muted">{p}</p>
+                <p key={i} className="mt-4 text-base leading-[1.8] text-theme-muted sm:text-lg">{p}</p>
               ))}
             </div>
           ))}
@@ -164,14 +177,15 @@ export default async function SalesforceToolsHubPage({ params }: { params: Promi
 
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="glass-card p-10 text-center">
-            <h2 className="text-2xl font-bold text-theme-heading">Explore More Free Tools</h2>
-            <p className="mx-auto mt-4 max-w-xl text-theme-muted">
+          <div className="card spotlight relative overflow-hidden rounded-[1.75rem] px-6 py-12 text-center sm:px-10 sm:py-16" data-reveal="scale">
+            <div className="pointer-events-none absolute left-1/2 top-0 h-56 w-[36rem] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 blur-3xl" aria-hidden />
+            <h2 className="relative text-3xl font-light leading-[1.1] tracking-[-0.03em] text-theme-heading sm:text-4xl">Explore More Free Tools</h2>
+            <p className="section-lede relative mx-auto mt-4 max-w-xl">
               Calculators, PDF utilities, SEO tools, and more — all free and browser-based.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="relative mt-8 flex flex-wrap justify-center gap-3">
               <Button href="/tools" size="lg" icon>Browse All Tools</Button>
-              <Button href="/blog" variant="outline" size="lg">Read Guides</Button>
+              <Button href="/blog" variant="secondary" size="lg">Read Guides</Button>
             </div>
           </div>
         </div>

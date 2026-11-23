@@ -2,6 +2,7 @@ import { AI_BLOG_POSTS } from "./blogConfigAi";
 import { EXTRA_SALESFORCE_BLOG_POSTS } from "./blogConfigSalesforceExtra";
 import { SEO_CLUSTER_BLOG_POSTS } from "./blogConfigSeoClusters";
 import { TOOL_GUIDE_BLOG_POSTS, buildToolToBlogMap } from "./blogConfigToolGuides";
+import { GUIDES_2026_BLOG_POSTS } from "./blogConfigGuides2026";
 import type { BlogPost } from "./blogTypes";
 
 export type { BlogPost, BlogSection, BlogFaq } from "./blogTypes";
@@ -1021,6 +1022,8 @@ export const BLOG_POSTS: BlogPost[] = [
   ...AI_BLOG_POSTS,
   ...SEO_CLUSTER_BLOG_POSTS,
   ...TOOL_GUIDE_BLOG_POSTS,
+  // Hand-written guides go last so every existing tool → guide mapping keeps its order.
+  ...GUIDES_2026_BLOG_POSTS,
 ];
 
 const TOOL_TO_BLOG_MAP = buildToolToBlogMap(BLOG_POSTS);

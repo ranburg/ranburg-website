@@ -45,6 +45,28 @@ import { getAllComingSoonSlugs } from "../toolComingSoonConfig";
 import { TOOLS_CONFIG } from "../toolsConfig";
 import { sipFutureValue } from "../finance/sipProjection";
 import { monthlyEmi } from "../finance/homeLoanVsSip";
+import {
+  buildBoxShadowCss,
+  buildGradientCss,
+  buildPalette,
+  cgpaToPercentage,
+  convertBase,
+  fireProjection,
+  formatClock,
+  formatUtcOffset,
+  homeLoanEligibility,
+  jsonToTypescript,
+  lumpsumGrowth,
+  nextPomodoroPhase,
+  percentageToCgpa,
+  requiredMonthlySip,
+  shadeScale,
+  sharesToReachAverage,
+  stockAverage,
+  typingStats,
+  xirr,
+  zonedTimeToUtc,
+} from "../plannerMath";
 
 function registryKeys(file: string): string[] {
   const src = readFileSync(join(process.cwd(), file), "utf8");
@@ -106,6 +128,120 @@ assert.ok(numberToIndianWords(150000).includes("lakh"));
 const sip = sipFutureValue({ monthlyInvestment: 10000, annualReturnPct: 12, years: 1 });
 assert.ok(sip.futureValue > sip.totalInvested);
 assert.ok(monthlyEmi(5000000, 8.5, 240) > 40000);
+
+// Planner, design, developer and focus tools (plannerMath)
+const near = (actual: number, expected: number, tolerance = 0.01) =>
+  assert.ok(Math.abs(actual - expected) <= tolerance, `expected ${expected}, got ${actual}`);
+
+for (const slug of [
+  "step-up-sip-calculator",
+  "lumpsum-calculator",
+  "goal-sip-calculator",
+  "xirr-calculator",
+  "stock-average-calculator",
+  "fire-calculator",
+  "home-loan-eligibility-calculator",
+  "css-gradient-generator",
+  "box-shadow-generator",
+  "color-palette-generator",
+  "json-to-typescript",
+  "number-base-converter",
+  "pomodoro-timer",
+  "typing-speed-test",
+  "time-zone-converter",
+  "cgpa-to-percentage-calculator",
+]) {
+  assert.ok(componentSlugs.has(slug) && uniqueConfig.has(slug), `${slug} must be configured and rendered`);
+}
+
+near(lumpsumGrowth(100000, 12, 10).futureValue, 310584.82);
+near(requiredMonthlySip({ target: 1e7, annualReturnPct: 12, years: 15 }).monthly, 19818.62);
+const stepUp = sipFutureValue({ monthlyInvestment: 10000, annualReturnPct: 12, years: 20, stepUpPercent: 10 });
+const flatSip = sipFutureValue({ monthlyInvestment: 10000, annualReturnPct: 12, years: 20 });
+assert.ok(stepUp.futureValue > flatSip.futureValue * 1.9, "a 10% step-up should roughly double a 20-year SIP");
+
+near(xirr([{ date: "2024-01-01", amount: -100000 }, { date: "2025-01-01", amount: 112000 }]) ?? 0, 0.11965, 1e-4);
+near(
+  xirr([
+    { date: "2024-01-01", amount: -100000 },
+    { date: "2025-01-01", amount: -100000 },
+    { date: "2026-01-01", amount: 236000 },
+  ]) ?? 0,
+  0.11543,
+  1e-4
+);
+assert.equal(xirr([{ date: "2024-01-01", amount: -100000 }]), null);
+
+assert.equal(stockAverage([{ quantity: 10, price: 100 }, { quantity: 30, price: 80 }]).averagePrice, 85);
+assert.equal(sharesToReachAverage(100, 500, 400, 450), 100);
+assert.equal(sharesToReachAverage(100, 500, 400, 420), 400);
+assert.equal(sharesToReachAverage(100, 500, 400, 390), null);
+
+const fire = fireProjection({
+  monthlyExpenses: 50000,
+  currentCorpus: 1000000,
+  monthlyInvestment: 40000,
+  annualStepUpPct: 8,
+  annualReturnPct: 11,
+  inflationPct: 6,
+  withdrawalRatePct: 4,
+});
+assert.equal(fire.fireNumberToday, 15000000);
+near(fire.yearsToFire ?? 0, 15.75, 0.26);
+
+const eligibility = homeLoanEligibility({
+  monthlyIncome: 150000,
+  existingEmis: 10000,
+  emiShareOfIncomePct: 50,
+  annualRatePct: 8.5,
+  tenureYears: 20,
+  downPaymentPct: 20,
+});
+assert.equal(eligibility.maxEmi, 65000);
+near(eligibility.loanAmount, 7490004.59, 1);
+near(eligibility.propertyBudget, eligibility.loanAmount / 0.8, 1);
+near(monthlyEmi(eligibility.loanAmount, 8.5, 240), 65000, 0.01);
+
+assert.equal(
+  buildGradientCss("linear", 135, [
+    { color: "#2ee6c8", position: 0 },
+    { color: "#6366f1", position: 100 },
+  ]),
+  "linear-gradient(135deg, #2ee6c8 0%, #6366f1 100%)"
+);
+assert.equal(
+  buildBoxShadowCss([{ x: 0, y: 12, blur: 32, spread: -8, color: "#000000", opacity: 35, inset: false }]),
+  "0px 12px 32px -8px rgba(0, 0, 0, 0.35)"
+);
+assert.equal(buildPalette("#2ee6c8", "triadic").length, 5);
+assert.equal(shadeScale("#2ee6c8").length, 10);
+
+assert.equal(
+  jsonToTypescript('[{"a":1},{"a":2,"b":true}]').code,
+  "export type Root = RootItem[];\n\nexport interface RootItem {\n  a: number;\n  b?: boolean;\n}"
+);
+assert.ok(jsonToTypescript("{oops").error);
+assert.equal(convertBase("255", 10, 16), "ff");
+assert.equal(convertBase("ff", 16, 2), "11111111");
+assert.equal(convertBase("0xFF", 16, 10), "255");
+assert.equal(convertBase("-1010", 2, 10), "-10");
+assert.equal(convertBase("12", 2, 10), null);
+
+assert.equal(formatClock(1500), "25:00");
+assert.equal(nextPomodoroPhase("focus", 4, 4), "long-break");
+assert.equal(nextPomodoroPhase("focus", 3, 4), "short-break");
+assert.equal(nextPomodoroPhase("long-break", 4, 4), "focus");
+const typing = typingStats("hello wurld", "hello world", 6000);
+assert.equal(Math.round(typing.grossWpm), 22);
+assert.equal(Math.round(typing.netWpm), 20);
+assert.equal(typing.errors, 1);
+assert.equal(zonedTimeToUtc("2026-01-15T09:00", "Asia/Kolkata")?.toISOString(), "2026-01-15T03:30:00.000Z");
+assert.equal(zonedTimeToUtc("2026-07-15T09:00", "America/New_York")?.toISOString(), "2026-07-15T13:00:00.000Z");
+assert.equal(formatUtcOffset(19800000), "UTC+5:30");
+near(cgpaToPercentage(8.4, "multiplier-9.5"), 79.8, 1e-9);
+near(cgpaToPercentage(8.4, "minus-0.75"), 76.5, 1e-9);
+near(cgpaToPercentage(3.6, "proportional", 4), 90, 1e-9);
+near(percentageToCgpa(79.8, "multiplier-9.5"), 8.4, 1e-9);
 
 const cards = rankCreditCards({
   country: "IN",

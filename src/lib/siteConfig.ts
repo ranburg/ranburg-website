@@ -28,6 +28,10 @@ export const SITE = {
   description:
     "Free online tools for developers, businesses, and SEO professionals — EMI, SIP and GST calculators, PDF merge, converters, formatters, and Salesforce utilities by Ranburg LLP.",
   gaMeasurementId: "G-EBRQ9D5R3Q",
+  /** Google AdSense publisher (client) ID — public, appears in every page's HTML. */
+  adsenseClient: "ca-pub-4423485654472888",
+  /** Default display ad unit ("test") — used by sparse AdPlaceholder slots site-wide. */
+  adsenseSlot: "4454149586",
 } as const;
 
 export const SITE_SOCIAL_URLS = Object.values(SITE.social);

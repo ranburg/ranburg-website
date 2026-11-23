@@ -80,7 +80,7 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
         ]}
       />
 
-      <section className="py-12">
+      <section className="pb-8 pt-8 sm:pt-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Breadcrumbs
             items={[
@@ -89,11 +89,20 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
               { label: hub.label },
             ]}
           />
-          <div className="mt-6">
+          <div className="rise mt-6">
             <SearchHeroPanel
-              eyebrow={<p className="text-xs font-semibold uppercase tracking-wider text-accent">Tool Category</p>}
-              title={<h1 className="mt-2 text-3xl font-extrabold text-theme-heading sm:text-4xl">{hub.headline}</h1>}
-              subtitle={<p className="mt-3 max-w-3xl text-base text-theme-muted sm:text-lg">{hub.description}</p>}
+              eyebrow={
+                <p className="eyebrow">
+                  <span className="status-dot" aria-hidden />
+                  Tool Category
+                </p>
+              }
+              title={
+                <h1 className="mt-5 text-4xl font-light leading-[1.08] tracking-[-0.035em] text-theme-heading sm:text-5xl lg:text-6xl">
+                  {hub.headline}
+                </h1>
+              }
+              subtitle={<p className="section-lede mt-4 max-w-3xl">{hub.description}</p>}
               search={
                 <ToolSearch
                   placeholder={`Search ${hub.label.toLowerCase()}…`}
@@ -109,19 +118,15 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
         </div>
       </section>
 
-      <section className="py-8">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AdPlaceholder placement="below-hero" />
-        </div>
-      </section>
-
       {popularInCategory.length > 0 && (
         <section className="py-8">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-xl font-bold text-theme-heading">Popular in {hub.label}</h2>
-            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {popularInCategory.map((slug) => (
-                <ToolCard key={slug} slug={slug} showCategory={false} />
+            <h2 className="border-b border-theme-subtle pb-5 text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl" data-reveal="up">
+              Popular in {hub.label}
+            </h2>
+            <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {popularInCategory.map((slug, i) => (
+                <ToolCard key={slug} slug={slug} showCategory={false} revealIndex={i} />
               ))}
             </div>
           </div>
@@ -130,12 +135,12 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
 
       <section className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-theme-heading">
+          <h2 className="border-b border-theme-subtle pb-5 text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl" data-reveal="up">
             {tools.length} {hub.label}
           </h2>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {tools.map((t) => (
-              <ToolCard key={t.slug} slug={t.slug} showCategory={false} />
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {tools.map((t, i) => (
+              <ToolCard key={t.slug} slug={t.slug} showCategory={false} revealIndex={i} />
             ))}
           </div>
         </div>
@@ -144,10 +149,12 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
       {recentInCategory.length > 0 && (
         <section className="py-8">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-xl font-bold text-theme-heading">Recently Added</h2>
-            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {recentInCategory.map((slug) => (
-                <ToolCard key={slug} slug={slug} showCategory={false} />
+            <h2 className="border-b border-theme-subtle pb-5 text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl" data-reveal="up">
+              Recently Added
+            </h2>
+            <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {recentInCategory.map((slug, i) => (
+                <ToolCard key={slug} slug={slug} showCategory={false} revealIndex={i} />
               ))}
             </div>
           </div>
@@ -158,9 +165,9 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
 
       <section className="py-12">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-invert max-w-none">
+          <div className="max-w-none" data-reveal="up">
             {hub.intro.split("\n\n").map((para, i) => (
-              <p key={i} className="mb-4 leading-relaxed text-theme-muted">
+              <p key={i} className="mb-5 text-base leading-[1.8] text-theme-muted sm:text-lg">
                 {para}
               </p>
             ))}
@@ -170,12 +177,17 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
 
       <section className="py-12">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-theme-heading">Frequently Asked Questions</h2>
-          <div className="mt-6 space-y-4">
-            {hub.faq.map((item) => (
-              <div key={item.question} className="glass-card p-5">
-                <h3 className="font-semibold text-theme-heading">{item.question}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-theme-muted">{item.answer}</p>
+          <h2 className="section-heading" data-reveal="up">Frequently Asked Questions</h2>
+          <div className="mt-8 space-y-3">
+            {hub.faq.map((item, i) => (
+              <div
+                key={item.question}
+                className="card spotlight p-5 sm:p-6"
+                data-reveal="up"
+                style={{ "--reveal-delay": `${Math.min(i, 5) * 60}ms` } as React.CSSProperties}
+              >
+                <h3 className="text-lg font-medium text-theme-heading">{item.question}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-theme-muted sm:text-base">{item.answer}</p>
               </div>
             ))}
           </div>
@@ -185,7 +197,7 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
       {related.length > 0 && (
         <section className="py-12">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-theme-heading">Related Categories</h2>
+            <h2 className="section-heading" data-reveal="up">Related Categories</h2>
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((cat) => {
                 if (!cat) return null;
@@ -194,13 +206,14 @@ export default function ToolCategoryPage({ categorySlug }: ToolCategoryPageProps
                   <Link
                     key={cat.slug}
                     href={`/tools/${cat.slug}`}
-                    className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-5 shadow-[0_10px_24px_-16px_rgba(12,31,26,0.4)] transition-all hover:-translate-y-0.5 hover:border-accent/80 hover:shadow-[0_0_0_2px_rgba(15,118,110,0.25),0_18px_36px_-16px_rgba(15,118,110,0.45)] dark:border-white/10"
+                    data-reveal="up"
+                    className="card spotlight group flex items-center gap-4 p-5 transition-colors duration-300 hover:border-accent/50"
                   >
                     <div {...iconWell(cat.gradient, "h-11 w-11 rounded-xl")}>
                       <Icon className="h-5 w-5" strokeWidth={2.25} />
                     </div>
                     <div>
-                      <p className="font-semibold text-theme-heading group-hover:text-accent">{cat.label}</p>
+                      <p className="font-medium text-theme-heading transition-colors group-hover:text-accent">{cat.label}</p>
                       <p className="text-xs text-theme-subtle line-clamp-1">{cat.description}</p>
                     </div>
                   </Link>

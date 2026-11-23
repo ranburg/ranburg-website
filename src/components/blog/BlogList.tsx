@@ -42,13 +42,13 @@ export default function BlogList({ posts }: BlogListProps) {
     <>
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative max-w-md flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-theme-subtle" />
+          <Search className="pointer-events-none absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2 text-theme-subtle" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search articles…"
-            className="w-full rounded-xl border border-theme-subtle bg-[var(--input-bg)] py-2.5 pl-10 pr-4 text-sm text-theme-heading placeholder:text-theme-subtle outline-none transition-colors focus:border-accent/40"
+            className="w-full rounded-full border border-theme-subtle bg-[var(--input-bg)] py-3 pe-4 ps-11 text-sm text-theme-heading outline-none transition-[border-color,box-shadow] duration-300 placeholder:text-theme-subtle focus:border-accent/60 focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--accent)_14%,transparent)]"
           />
         </div>
         <p className="flex items-center gap-2 text-sm text-theme-muted">
@@ -57,15 +57,15 @@ export default function BlogList({ posts }: BlogListProps) {
         </p>
       </div>
 
-      <div className="mb-8 flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+      <div className="mask-fade-x mb-10 flex gap-2 overflow-x-auto pb-1 scrollbar-none">
         <button
           type="button"
           onClick={() => setActive("all")}
           className={cn(
-            "shrink-0 rounded-full px-4 py-2 text-sm font-medium transition",
+            "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-300",
             active === "all"
-              ? "bg-accent text-white shadow-glow"
-              : "border border-theme-subtle text-theme-muted hover:border-accent/30 hover:text-theme-heading"
+              ? "border-accent bg-accent text-on-accent"
+              : "border-theme-subtle bg-theme-surface text-theme-muted hover:border-accent/40 hover:text-theme-heading"
           )}
         >
           All topics
@@ -76,10 +76,10 @@ export default function BlogList({ posts }: BlogListProps) {
             type="button"
             onClick={() => setActive(cat.id)}
             className={cn(
-              "shrink-0 rounded-full px-4 py-2 text-sm font-medium transition",
+              "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-300",
               active === cat.id
-                ? "bg-accent text-white shadow-glow"
-                : "border border-theme-subtle text-theme-muted hover:border-accent/30 hover:text-theme-heading"
+                ? "border-accent bg-accent text-on-accent"
+                : "border-theme-subtle bg-theme-surface text-theme-muted hover:border-accent/40 hover:text-theme-heading"
             )}
           >
             {cat.label}
@@ -88,20 +88,23 @@ export default function BlogList({ posts }: BlogListProps) {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-theme-subtle py-16 text-center">
+        <div className="card border-dashed py-16 text-center">
           <p className="text-theme-muted">No articles match your search.</p>
         </div>
       ) : (
         <div className="space-y-10">
           {featured && (
             <div>
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-accent">Featured</p>
+              <p className="mb-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-accent">
+                <span className="status-dot" aria-hidden />
+                Featured
+              </p>
               <BlogCard post={featured} variant="horizontal" priority />
             </div>
           )}
 
           {gridPosts.length > 0 && (
-            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {gridPosts.map((post) => (
                 <BlogCard key={post.slug} post={post} />
               ))}

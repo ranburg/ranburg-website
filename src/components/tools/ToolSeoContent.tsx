@@ -6,7 +6,6 @@ import { getToolBySlug } from "@/lib/toolsConfig";
 import { generateToolSeoSections } from "@/lib/toolSeoGenerator";
 import { TOOL_WORKED_EXAMPLES } from "@/lib/seoGrowthConfig";
 import { buildToolPageH1 } from "@/lib/toolPageSeo";
-import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 interface ToolSeoContentProps {
   tool: ToolConfig;
@@ -26,9 +25,12 @@ export default function ToolSeoContent({ tool, locale = "en" }: ToolSeoContentPr
   const h1 = buildToolPageH1(tool, locale);
 
   return (
-    <article className="mt-14 space-y-3 border-t border-theme-subtle pt-10">
-      <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
-        <p className="text-sm font-medium text-theme-subtle">Learn more about this tool</p>
+    <article className="mt-16 space-y-3 border-t border-theme-subtle pt-12">
+      <div className="mb-5 flex flex-wrap items-end justify-between gap-2">
+        <p className="eyebrow">
+          <span className="status-dot" aria-hidden />
+          Learn more about this tool
+        </p>
         <p className="text-xs text-theme-subtle">
           Created by Ranburg · Updated {seo.lastUpdated}
         </p>
@@ -56,7 +58,7 @@ export default function ToolSeoContent({ tool, locale = "en" }: ToolSeoContentPr
             {para}
           </p>
         ))}
-        <h3 id="how-to-use" className="mt-6 scroll-mt-28 text-base font-semibold text-theme-heading">
+        <h3 id="how-to-use" className="mt-6 scroll-mt-28 text-base font-medium text-theme-heading">
           Step-by-step
         </h3>
         <ol className="mt-3 list-decimal space-y-2 pl-5 text-theme-muted">
@@ -174,7 +176,7 @@ export default function ToolSeoContent({ tool, locale = "en" }: ToolSeoContentPr
                 <Link
                   href={`/tools/${related.slug}`}
                   prefetch={false}
-                  className="block rounded-lg border border-theme-subtle px-3 py-2.5 text-sm font-medium text-theme-heading transition-colors hover:border-accent hover:text-accent"
+                  className="block rounded-xl border border-theme-subtle bg-theme-surface px-4 py-3 text-sm font-medium text-theme-heading transition-colors duration-300 hover:border-accent/60 hover:text-accent"
                 >
                   {related.title}
                   <span className="mt-0.5 block text-xs font-normal text-theme-muted">
@@ -194,9 +196,9 @@ export default function ToolSeoContent({ tool, locale = "en" }: ToolSeoContentPr
         </SeoDetails>
       )}
 
-      <section className="overflow-hidden rounded-xl border border-theme-subtle">
-        <div className="px-5 py-4">
-          <h2 className="text-lg font-bold text-theme-heading sm:text-xl">
+      <section className="card overflow-hidden">
+        <div className="px-5 py-5 sm:px-6">
+          <h2 className="text-xl font-medium tracking-tight text-theme-heading sm:text-2xl">
             {h1} FAQs
           </h2>
         </div>
@@ -207,11 +209,11 @@ export default function ToolSeoContent({ tool, locale = "en" }: ToolSeoContentPr
               className="group border-b border-theme-subtle last:border-b-0"
               open={i < 2}
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-left marker:content-none [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-left transition-colors marker:content-none hover:text-accent sm:px-6 [&::-webkit-details-marker]:hidden">
                 <span className="font-medium text-theme-heading">{item.question}</span>
-                <ChevronDown className="h-4 w-4 shrink-0 text-theme-muted transition-transform group-open:rotate-180" />
+                <ChevronDown className="h-4 w-4 shrink-0 text-theme-muted transition-transform duration-300 group-open:rotate-180 group-open:text-accent" />
               </summary>
-              <p className="border-t border-theme-subtle px-5 py-4 text-sm leading-relaxed text-theme-muted">
+              <p className="border-t border-theme-subtle px-5 py-4 text-sm leading-relaxed text-theme-muted sm:px-6">
                 {item.answer}
               </p>
             </details>
@@ -219,7 +221,6 @@ export default function ToolSeoContent({ tool, locale = "en" }: ToolSeoContentPr
         </div>
       </section>
 
-      <AdPlaceholder placement="after-faq" />
     </article>
   );
 }
@@ -234,12 +235,14 @@ function SeoDetails({
   children: React.ReactNode;
 }) {
   return (
-    <details open={open} className="group overflow-hidden rounded-xl border border-theme-subtle">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-left marker:content-none [&::-webkit-details-marker]:hidden">
-        <h2 className="text-lg font-bold text-theme-heading sm:text-xl">{title}</h2>
-        <ChevronDown className="h-5 w-5 shrink-0 text-theme-muted transition-transform group-open:rotate-180" />
+    <details open={open} className="card group overflow-hidden transition-colors duration-300 hover:border-[var(--line-strong)]">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-left marker:content-none sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden">
+        <h2 className="text-lg font-medium tracking-tight text-theme-heading sm:text-xl">{title}</h2>
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-theme-subtle bg-theme-surface text-theme-muted transition-all duration-300 group-open:rotate-180 group-open:border-accent/50 group-open:text-accent">
+          <ChevronDown className="h-4 w-4" />
+        </span>
       </summary>
-      <div className="border-t border-theme-subtle px-5 py-5">{children}</div>
+      <div className="border-t border-theme-subtle px-5 py-5 sm:px-6">{children}</div>
     </details>
   );
 }

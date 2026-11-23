@@ -6,6 +6,7 @@ import TeamCards from "@/components/about/TeamCards";
 import ValuesGrid from "@/components/about/ValuesGrid";
 import { Building2, Target, Users } from "lucide-react";
 import { SITE } from "@/lib/siteConfig";
+import PageHero from "@/components/ui/PageHero";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -47,39 +48,44 @@ export default async function AboutPage({ params }: Props) {
 
   return (
     <div className="pb-24">
-      <section className="relative overflow-hidden py-24">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-wider text-accent">About Ranburg</p>
-            <h1 className="mt-4 text-4xl font-extrabold text-theme-heading sm:text-5xl">
-              Ranburg — free tools &amp; digital excellence
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-theme-muted">
-              <strong className="font-semibold text-theme-heading">Ranburg</strong> (legal name Ranburg LLP) runs{" "}
-              <a href="https://www.ranburg.com" className="text-accent underline-offset-2 hover:underline">
-                ranburg.com
-              </a>
-              : free browser tools for finance, creators, and developers, plus Salesforce consulting from {SITE.address.formatted}. Phone:{" "}
-              <a href={`tel:${SITE.phoneTel}`} className="text-accent underline-offset-2 hover:underline">
-                {SITE.phone}
-              </a>
-              .
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="About Ranburg"
+        title={<>Ranburg — free tools &amp; digital excellence</>}
+        lede={
+          <>
+            <strong className="font-medium text-theme-heading">Ranburg</strong> (legal name Ranburg LLP) runs{" "}
+            <a href="https://www.ranburg.com" className="text-accent underline-offset-2 hover:underline">
+              ranburg.com
+            </a>
+            : free browser tools for finance, creators, and developers, plus Salesforce consulting from {SITE.address.formatted}. Phone:{" "}
+            <a href={`tel:${SITE.phoneTel}`} className="text-accent underline-offset-2 hover:underline">
+              {SITE.phone}
+            </a>
+            .
+          </>
+        }
+      />
 
-      <section className="py-16">
+      <section className="py-10 sm:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 md:grid-cols-3">
-            {highlights.map((item) => {
+          <div className="grid gap-4 md:grid-cols-3">
+            {highlights.map((item, i) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className="glass-card p-6">
-                  <Icon className="mb-4 h-8 w-8 text-accent" />
-                  <h3 className="text-lg font-semibold text-theme-heading">{item.title}</h3>
-                  <p className="mt-2 text-sm text-theme-muted">{item.description}</p>
+                <div
+                  key={item.title}
+                  className="card spotlight group p-6 sm:p-8"
+                  data-reveal="up"
+                  style={{ "--reveal-delay": `${i * 100}ms` } as React.CSSProperties}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-4xl font-light tabular-nums text-accent">0{i + 1}</span>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-theme-subtle bg-theme-surface text-theme-muted transition-all duration-500 ease-out-expo group-hover:-translate-y-1 group-hover:border-accent/50 group-hover:text-accent">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                  </div>
+                  <h3 className="mt-8 text-xl font-medium text-theme-heading">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-theme-muted sm:text-base">{item.description}</p>
                 </div>
               );
             })}
@@ -87,21 +93,21 @@ export default async function AboutPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-theme-heading">Our Leadership</h2>
-            <p className="mt-4 text-theme-muted">Meet the founding partners driving Ranburg&apos;s vision forward.</p>
+          <div className="mb-12 text-center" data-reveal="up">
+            <h2 className="section-heading">Our Leadership</h2>
+            <p className="section-lede mt-4">Meet the founding partners driving Ranburg&apos;s vision forward.</p>
           </div>
           <TeamCards />
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-theme-heading">Our Values</h2>
-            <p className="mt-4 text-theme-muted">The principles that guide every project we undertake.</p>
+          <div className="mb-12 text-center" data-reveal="up">
+            <h2 className="section-heading">Our Values</h2>
+            <p className="section-lede mt-4">The principles that guide every project we undertake.</p>
           </div>
           <ValuesGrid />
         </div>

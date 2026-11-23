@@ -6,3 +6,5 @@ export { ScenarioCompare } from "./ScenarioCompare";
 export type { ScenarioRow } from "./ScenarioCompare";
 export { CopyResultPanel } from "./CopyResultPanel";
 export { SerpPreview, OgCardPreview } from "./SerpOgPreview";
+export { GrowthChart } from "./GrowthChart";
+export type { GrowthSeries } from "./GrowthChart";

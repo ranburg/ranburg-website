@@ -15,18 +15,18 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "bg-gradient-to-r from-accent to-accent-emerald text-on-accent shadow-glow hover:shadow-[0_0_50px_color-mix(in_srgb,var(--accent)_35%,transparent)] hover:scale-[1.02] active:scale-[0.98]",
+    "bg-accent text-on-accent hover:shadow-[0_0_44px_color-mix(in_srgb,var(--accent)_45%,transparent)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]",
   secondary:
-    "bg-accent-emerald/10 text-accent-emerald border border-accent-emerald/30 hover:bg-accent-emerald/20 hover:border-accent-emerald/50",
+    "btn-dot border border-theme-subtle bg-theme-surface text-theme-heading hover:border-transparent active:scale-[0.98]",
   ghost: "text-theme-body hover:bg-theme-hover hover:text-theme-heading",
   outline:
-    "border border-theme bg-theme-surface text-theme-heading hover:border-accent/40 hover:bg-accent/10",
+    "border border-theme bg-transparent text-theme-heading hover:border-accent/50 hover:bg-accent/10 active:scale-[0.98]",
 };
 
 const sizes: Record<ButtonSize, string> = {
   sm: "px-4 py-2 text-sm",
   md: "px-6 py-3 text-sm",
-  lg: "px-8 py-4 text-base",
+  lg: "px-7 py-3.5 text-base",
 };
 
 export default function Button({
@@ -39,25 +39,33 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200",
+    "group/btn inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-300 ease-out-expo",
     variants[variant],
     sizes[size],
     className
   );
 
+  const content = (
+    <>
+      {variant === "secondary" && <span className="status-dot" aria-hidden />}
+      {children}
+      {icon && (
+        <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out-expo group-hover/btn:translate-x-1 rtl:rotate-180 rtl:group-hover/btn:-translate-x-1" />
+      )}
+    </>
+  );
+
   if (href) {
     return (
       <Link href={href} className={classes}>
-        {children}
-        {icon && <ArrowRight className="h-4 w-4" />}
+        {content}
       </Link>
     );
   }
 
   return (
     <button className={classes} {...props}>
-      {children}
-      {icon && <ArrowRight className="h-4 w-4" />}
+      {content}
     </button>
   );
 }

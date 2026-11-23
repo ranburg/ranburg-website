@@ -16,12 +16,12 @@ export default function ToolInternalLinks({ slug }: ToolInternalLinksProps) {
   const recent = RECENT_TOOL_SLUGS.filter((s) => s !== slug).slice(0, 4);
 
   return (
-    <nav className="mt-12 rounded-xl border border-theme-subtle bg-theme-surface/30 p-6" aria-label="Related navigation">
-      <h2 className="text-lg font-bold text-theme-heading">Explore More Tools</h2>
+    <nav className="card mt-12 p-6 sm:p-8" aria-label="Related navigation" data-reveal="up">
+      <h2 className="text-xl font-medium tracking-tight text-theme-heading sm:text-2xl">Explore More Tools</h2>
       <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {seoCat && (
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-accent">Category</p>
+            <p className="text-xs font-medium uppercase tracking-[0.16em] text-accent">Category</p>
             <Link href={`/tools/${seoCat.slug}`} className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-theme-heading hover:text-accent">
               {seoCat.label}
               <ArrowRight className="h-3.5 w-3.5" />
@@ -29,14 +29,14 @@ export default function ToolInternalLinks({ slug }: ToolInternalLinksProps) {
           </div>
         )}
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-accent">Popular</p>
-          <ul className="mt-2 space-y-1">
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-accent">Popular</p>
+          <ul className="mt-3 space-y-2">
             {popular.map((s) => {
               const t = getToolBySlug(s);
               if (!t) return null;
               return (
                 <li key={s}>
-                  <Link href={`/tools/${s}`} className="text-sm text-theme-muted hover:text-accent">
+                  <Link href={`/tools/${s}`} className="link-underline text-sm text-theme-muted transition-colors hover:text-theme-heading">
                     {t.title}
                   </Link>
                 </li>
@@ -45,14 +45,14 @@ export default function ToolInternalLinks({ slug }: ToolInternalLinksProps) {
           </ul>
         </div>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-accent">Recently Added</p>
-          <ul className="mt-2 space-y-1">
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-accent">Recently Added</p>
+          <ul className="mt-3 space-y-2">
             {recent.map((s) => {
               const t = getToolBySlug(s);
               if (!t) return null;
               return (
                 <li key={s}>
-                  <Link href={`/tools/${s}`} className="text-sm text-theme-muted hover:text-accent">
+                  <Link href={`/tools/${s}`} className="link-underline text-sm text-theme-muted transition-colors hover:text-theme-heading">
                     {t.title}
                   </Link>
                 </li>

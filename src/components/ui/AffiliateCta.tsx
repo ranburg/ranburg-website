@@ -37,7 +37,7 @@ export default function AffiliateCta({
           };
 
   return (
-    <aside className="mt-8 rounded-xl border border-theme-subtle bg-theme-surface/40 p-5">
+    <aside className="card mt-8 p-5 sm:p-6">
       <p className="text-sm font-semibold text-theme-heading">{copy.title}</p>
       <p className="mt-1 text-sm text-theme-muted">{copy.body}</p>
       <Link

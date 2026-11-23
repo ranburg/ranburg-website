@@ -141,15 +141,16 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-end justify-center bg-black/50 p-0 sm:items-start sm:p-4 sm:pt-[10vh]"
+      className="fixed inset-0 z-[100] flex items-end justify-center bg-black/60 p-0 backdrop-blur-sm sm:items-start sm:p-4 sm:pt-[10vh]"
       onClick={onClose}
     >
       <div
-        className="dropdown-panel flex max-h-[90dvh] w-full flex-col overflow-hidden rounded-t-2xl shadow-2xl sm:max-h-[85dvh] sm:max-w-xl sm:rounded-2xl"
+        className="dropdown-panel rise flex max-h-[90dvh] w-full flex-col overflow-hidden rounded-t-[1.75rem] shadow-2xl sm:max-h-[85dvh] sm:max-w-2xl sm:rounded-[1.75rem]"
+        style={{ animationDuration: "0.35s" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-3 border-b border-theme-subtle px-4">
-          <Search className="h-4 w-4 shrink-0 text-theme-subtle" />
+        <div className="flex items-center gap-3 border-b border-theme-subtle px-5">
+          <Search className="h-5 w-5 shrink-0 text-accent" />
           <input
             autoFocus
             value={query}
@@ -158,17 +159,17 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
               setActiveIndex(0);
             }}
             placeholder="Search tools and blog posts…"
-            className="flex-1 bg-transparent py-4 text-sm text-theme-heading placeholder:text-theme-subtle focus:outline-none"
+            className="flex-1 bg-transparent py-5 text-base text-theme-heading placeholder:text-theme-subtle focus:outline-none"
             role="combobox"
             aria-expanded={hasQuery}
           />
-          <kbd className="hidden rounded border border-theme-subtle px-1.5 py-0.5 text-xs text-theme-subtle sm:inline">Esc</kbd>
-          <button type="button" onClick={onClose} className="text-theme-subtle hover:text-theme-heading" aria-label="Close">
+          <kbd className="hidden rounded-md border border-theme-subtle bg-theme-surface px-2 py-0.5 text-xs text-theme-subtle sm:inline">Esc</kbd>
+          <button type="button" onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-full text-theme-subtle transition-colors hover:bg-theme-surface hover:text-theme-heading" aria-label="Close">
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="border-b border-theme-subtle px-4 py-2">
+        <div className="border-b border-theme-subtle px-5 py-2.5">
           <div className="flex flex-wrap gap-1.5">
             {FILTER_TABS.map((tab) => (
               <button
@@ -179,8 +180,10 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
                   setActiveIndex(0);
                 }}
                 className={cn(
-                  "rounded-full px-2.5 py-0.5 text-xs font-medium",
-                  filter === tab.id ? "bg-accent text-white" : "text-theme-muted hover:text-accent"
+                  "rounded-full border px-3 py-1 text-xs font-medium transition-colors duration-200",
+                  filter === tab.id
+                    ? "border-accent bg-accent text-on-accent"
+                    : "border-transparent text-theme-muted hover:border-theme-subtle hover:text-theme-heading"
                 )}
               >
                 {tab.label}
@@ -191,17 +194,17 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
 
         <div className="min-h-0 flex-1 overflow-y-auto">
           {!hasQuery && (
-            <div className="space-y-3 border-b border-theme-subtle px-4 py-3">
+            <div className="space-y-4 border-b border-theme-subtle px-5 py-4">
               {recentSearches.length > 0 && (
                 <div>
-                  <p className="mb-2 text-xs font-medium text-theme-subtle">Recent searches</p>
+                  <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.16em] text-theme-subtle">Recent searches</p>
                   <div className="flex flex-wrap gap-2">
                     {recentSearches.map((s) => (
                       <button
                         key={s}
                         type="button"
                         onClick={() => setQuery(s)}
-                        className="rounded-full border border-theme-subtle px-3 py-1 text-xs text-theme-muted hover:border-accent/40 hover:text-accent"
+                        className="rounded-full border border-theme-subtle bg-theme-surface px-3 py-1 text-xs text-theme-muted transition-colors duration-200 hover:border-accent/50 hover:text-accent"
                       >
                         {s}
                       </button>
@@ -210,14 +213,14 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
                 </div>
               )}
               <div>
-                <p className="mb-2 text-xs font-medium text-theme-subtle">Popular searches</p>
+                <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.16em] text-theme-subtle">Popular searches</p>
                 <div className="flex flex-wrap gap-2">
                   {popularSearches.slice(0, 8).map((s) => (
                     <button
                       key={s}
                       type="button"
                       onClick={() => setQuery(s)}
-                      className="rounded-full border border-theme-subtle px-3 py-1 text-xs text-theme-muted hover:border-accent/40 hover:text-accent"
+                      className="rounded-full border border-theme-subtle bg-theme-surface px-3 py-1 text-xs text-theme-muted transition-colors duration-200 hover:border-accent/50 hover:text-accent"
                     >
                       {s}
                     </button>
@@ -225,14 +228,14 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
                 </div>
               </div>
               <div>
-                <p className="mb-2 text-xs font-medium text-theme-subtle">Suggested</p>
+                <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.16em] text-theme-subtle">Suggested</p>
                 <div className="flex flex-wrap gap-2">
                   {SEARCH_SUGGESTIONS.map((s) => (
                     <button
                       key={s}
                       type="button"
                       onClick={() => setQuery(s)}
-                      className="rounded-full border border-theme-subtle px-3 py-1 text-xs text-theme-muted hover:border-accent/40 hover:text-accent"
+                      className="rounded-full border border-theme-subtle bg-theme-surface px-3 py-1 text-xs text-theme-muted transition-colors duration-200 hover:border-accent/50 hover:text-accent"
                     >
                       {s}
                     </button>
@@ -253,8 +256,8 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
                   prefetch={false}
                   onClick={() => selectResult(result.href)}
                   className={cn(
-                    "flex items-start gap-3 rounded-lg px-3 py-2.5",
-                    i === activeIndex ? "bg-accent/10" : "hover:bg-theme-surface"
+                    "flex items-start gap-3 rounded-xl border px-3 py-2.5 transition-colors duration-150",
+                    i === activeIndex ? "border-accent/30 bg-accent/10" : "border-transparent hover:bg-theme-surface"
                   )}
                 >
                   <ResultIcon result={result} />
@@ -270,7 +273,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
                     className={cn(
                       "shrink-0 rounded-full px-2 py-0.5 text-xs",
                       result.badge === "For you"
-                        ? "bg-accent text-white"
+                        ? "bg-accent text-on-accent"
                         : result.type === "blog"
                           ? "bg-accent/10 text-accent"
                           : "bg-accent-emerald/10 text-accent-emerald"
@@ -284,7 +287,7 @@ export default function CommandPalette({ open, onClose }: CommandPaletteProps) {
           </ul>
         </div>
 
-        <div className="hidden items-center gap-2 border-t border-theme-subtle px-4 py-2 text-xs text-theme-subtle sm:flex">
+        <div className="hidden items-center gap-2 border-t border-theme-subtle px-5 py-2.5 text-xs text-theme-subtle sm:flex">
           <Command className="h-3 w-3" />
           <span>Ctrl+K or ⌘+K · ↑↓ navigate · Enter select</span>
         </div>

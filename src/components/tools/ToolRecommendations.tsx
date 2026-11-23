@@ -23,11 +23,11 @@ export default function ToolRecommendations({
   if (layout === "grid") {
     return (
       <section className="mt-16 border-t border-theme-subtle pt-16">
-        <h2 className="text-2xl font-bold text-theme-heading">Related Tools</h2>
-        <p className="mt-2 text-theme-muted">
+        <h2 className="section-heading" data-reveal="up">Related Tools</h2>
+        <p className="section-lede mt-3" data-reveal="up">
           Keep going — open another free tool to continue your workflow
         </p>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-reveal="up">
           {recommended.map((tool: ToolConfig) => (
             <RelatedToolCard key={tool.slug} tool={tool} />
           ))}
@@ -38,8 +38,8 @@ export default function ToolRecommendations({
 
   return (
     <aside className="space-y-4">
-      <h3 className="text-lg font-bold text-theme-heading">Related Tools</h3>
-      <p className="text-sm text-slate-500">More utilities you might find helpful</p>
+      <h3 className="text-lg font-medium text-theme-heading">Related Tools</h3>
+      <p className="text-sm text-theme-muted">More utilities you might find helpful</p>
       <div className="space-y-3">
         {recommended.map((tool: ToolConfig) => (
           <RelatedToolCard key={tool.slug} tool={tool} compact />
@@ -57,7 +57,7 @@ function RelatedToolCard({ tool, compact }: { tool: ToolConfig; compact?: boolea
     <Link
       href={`/tools/${tool.slug}`}
       prefetch={false}
-      className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-[var(--surface-elevated)] p-4 shadow-[0_10px_24px_-16px_rgba(12,31,26,0.4)] transition-all hover:-translate-y-0.5 hover:border-accent/80 hover:shadow-[0_0_0_2px_rgba(15,118,110,0.25),0_18px_36px_-16px_rgba(15,118,110,0.45)] dark:border-white/10"
+      className="card spotlight group flex items-center gap-4 p-4 transition-[border-color,transform] duration-500 ease-out-expo hover:-translate-y-0.5 hover:border-accent/50"
     >
       <div {...iconWell(tool.gradient, compact ? "h-10 w-10 rounded-xl" : "h-11 w-11 rounded-xl")}>
         <Icon className="h-5 w-5" strokeWidth={2.25} />
@@ -65,13 +65,13 @@ function RelatedToolCard({ tool, compact }: { tool: ToolConfig; compact?: boolea
       <div className="min-w-0 flex-1">
         <p className="truncate font-medium text-theme-heading group-hover:text-accent">{tool.title}</p>
         {!compact && (
-          <p className="truncate text-xs text-slate-500">{tool.shortDescription}</p>
+          <p className="truncate text-xs text-theme-muted">{tool.shortDescription}</p>
         )}
         <p className="mt-0.5 text-xs text-theme-subtle">
           {seoCat?.label ?? tool.badge} · {getToolUseCountPlaceholder(tool.slug)}
         </p>
       </div>
-      <ArrowRight className="h-4 w-4 shrink-0 text-slate-600 transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
+      <ArrowRight className="h-4 w-4 shrink-0 text-theme-subtle transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent rtl:rotate-180" />
     </Link>
   );
 }

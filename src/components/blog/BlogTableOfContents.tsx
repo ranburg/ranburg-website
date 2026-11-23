@@ -12,14 +12,17 @@ export default function BlogTableOfContents({ post, className }: BlogTableOfCont
   if (headings.length < 3) return null;
 
   return (
-    <nav className={cn("rounded-2xl border border-theme-subtle bg-[var(--glass-bg)] p-5", className)} aria-label="Table of contents">
-      <p className="text-xs font-semibold uppercase tracking-wider text-accent">On this page</p>
-      <ol className="mt-3 space-y-2">
+    <nav className={cn("card p-5", className)} aria-label="Table of contents">
+      <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-accent">
+        <span className="status-dot" aria-hidden />
+        On this page
+      </p>
+      <ol className="mt-4 space-y-1 border-s border-theme-subtle">
         {headings.map((heading, index) => (
           <li key={index}>
             <a
               href={`#${slugifyHeading(heading.text)}`}
-              className="block text-sm leading-snug text-theme-muted transition-colors hover:text-accent"
+              className="-ms-px block border-s border-transparent py-1.5 ps-4 text-sm leading-snug text-theme-muted transition-colors duration-300 hover:border-accent hover:text-accent"
             >
               {heading.text}
             </a>

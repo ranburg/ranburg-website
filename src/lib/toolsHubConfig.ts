@@ -56,6 +56,26 @@ export const RECENT_TOOL_SLUGS = [
   "ppf-calculator",
 ];
 
+/** Newest launches — shown in the "Just added" strip on the homepage and tools hub. */
+export const NEW_TOOL_SLUGS = [
+  "step-up-sip-calculator",
+  "xirr-calculator",
+  "fire-calculator",
+  "css-gradient-generator",
+  "color-palette-generator",
+  "json-to-typescript",
+  "typing-speed-test",
+  "pomodoro-timer",
+  "lumpsum-calculator",
+  "goal-sip-calculator",
+  "stock-average-calculator",
+  "home-loan-eligibility-calculator",
+  "box-shadow-generator",
+  "number-base-converter",
+  "time-zone-converter",
+  "cgpa-to-percentage-calculator",
+];
+
 export const SEARCH_SUGGESTIONS = [
   "Home loan vs SIP",
   "CTC to in-hand",

@@ -76,10 +76,10 @@ export default function ContactForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="glass-card flex flex-col items-center p-12 text-center"
+        className="card flex flex-col items-center p-12 text-center"
       >
         <CheckCircle className="mb-4 h-16 w-16 text-accent-emerald" />
-        <h3 className="text-2xl font-bold text-theme-heading">Message Sent!</h3>
+        <h3 className="text-2xl font-medium text-theme-heading">Message Sent!</h3>
         <p className="mt-2 text-theme-muted">
           Thank you for reaching out. We&apos;ll get back to you within 24 hours.
         </p>
@@ -88,8 +88,8 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glass-card space-y-6 p-8" noValidate>
-      <h2 className="text-2xl font-bold text-theme-heading">Send Us a Message</h2>
+    <form onSubmit={handleSubmit} className="card space-y-6 p-6 sm:p-8" noValidate>
+      <h2 className="text-2xl font-medium tracking-tight text-theme-heading sm:text-3xl">Send Us a Message</h2>
 
       {(["name", "email"] as const).map((field) => (
         <div key={field} className="relative">
@@ -136,7 +136,7 @@ export default function ContactForm() {
             Service Needed
           </option>
           {services.map((s) => (
-            <option key={s} value={s} className="bg-slate-900">
+            <option key={s} value={s}>
               {s}
             </option>
           ))}
@@ -178,9 +178,9 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-blue-600 py-4 font-semibold text-theme-heading shadow-glow transition-all hover:scale-[1.01] hover:shadow-[0_0_50px_rgba(59,130,246,0.4)] active:scale-[0.99]"
+        className="group flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-4 font-medium text-on-accent transition-all duration-300 ease-out-expo hover:-translate-y-0.5 hover:shadow-[0_0_44px_color-mix(in_srgb,var(--accent)_45%,transparent)] active:translate-y-0 active:scale-[0.99]"
       >
-        <Send className="h-4 w-4" />
+        <Send className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         Send Message
       </button>
     </form>

@@ -1,5 +1,20 @@
 import type { Config } from "tailwindcss";
 
+/** Neutral (non-blue) grey ramp so legacy `slate-*` / `gray-*` utilities match the near-black canvas. */
+const neutralRamp = {
+  50: "#fafafa",
+  100: "#f5f5f5",
+  200: "#e5e5e5",
+  300: "#d4d4d4",
+  400: "#a3a3a3",
+  500: "#737373",
+  600: "#525252",
+  700: "#404040",
+  800: "#262626",
+  900: "#171717",
+  950: "#0d0d0d",
+};
+
 const config: Config = {
   darkMode: "class",
   content: [
@@ -11,14 +26,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        slate: {
-          950: "#0B1220",
-        },
+        slate: neutralRamp,
+        gray: neutralRamp,
         cream: {
           DEFAULT: "#F4F1EB",
         },
         navy: {
-          DEFAULT: "#0B1220",
+          DEFAULT: "#0D0D0D",
+        },
+        ink: {
+          DEFAULT: "#0D0D0D",
+          soft: "#1D1D1D",
         },
         accent: {
           DEFAULT: "var(--accent)",
@@ -28,15 +46,16 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-plus-jakarta)", "var(--font-noto-sans)", "system-ui", "sans-serif"],
-        hi: ["var(--font-noto-devanagari)", "var(--font-plus-jakarta)", "system-ui", "sans-serif"],
-        ar: ["var(--font-noto-arabic)", "var(--font-plus-jakarta)", "system-ui", "sans-serif"],
-        ja: ["var(--font-noto-jp)", "var(--font-plus-jakarta)", "system-ui", "sans-serif"],
-        ko: ["var(--font-noto-kr)", "var(--font-plus-jakarta)", "system-ui", "sans-serif"],
+        sans: ["var(--font-poppins)", "var(--font-noto-sans)", "system-ui", "sans-serif"],
+        hi: ["var(--font-noto-devanagari)", "var(--font-poppins)", "system-ui", "sans-serif"],
+        ar: ["var(--font-noto-arabic)", "var(--font-poppins)", "system-ui", "sans-serif"],
+        ja: ["var(--font-noto-jp)", "var(--font-poppins)", "system-ui", "sans-serif"],
+        ko: ["var(--font-noto-kr)", "var(--font-poppins)", "system-ui", "sans-serif"],
+        hand: ["var(--font-hand)", "Segoe Script", "cursive"],
       },
       backgroundImage: {
         "grid-pattern":
-          "linear-gradient(rgba(13, 155, 138, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(13, 155, 138, 0.06) 1px, transparent 1px)",
+          "linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px)",
         "hero-gradient":
           "radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--accent) 20%, transparent), transparent)",
       },
@@ -63,6 +82,9 @@ const config: Config = {
         glass: "0 8px 32px rgb(var(--shadow-color) / 0.16), inset 0 1px 0 rgba(244, 241, 235, 0.05)",
         glow: "0 0 36px color-mix(in srgb, var(--accent) 28%, transparent)",
         "glow-emerald": "0 0 36px color-mix(in srgb, var(--accent) 28%, transparent)",
+      },
+      transitionTimingFunction: {
+        "out-expo": "cubic-bezier(0.22, 1, 0.36, 1)",
       },
     },
   },

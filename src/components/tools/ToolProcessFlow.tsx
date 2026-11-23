@@ -39,7 +39,7 @@ export default function ToolProcessFlow({ tool }: ToolProcessFlowProps) {
   if (steps.length === 0) return null;
 
   return (
-    <details className="group mt-10 rounded-2xl border border-theme-subtle bg-theme-surface/30">
+    <details className="card group mt-10">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 text-sm font-medium text-theme-heading sm:px-5">
         <span>How this tool works</span>
         <span className="text-xs font-normal text-theme-subtle group-open:hidden">Show steps</span>
@@ -48,7 +48,7 @@ export default function ToolProcessFlow({ tool }: ToolProcessFlowProps) {
       <div className="border-t border-theme-subtle px-4 py-4 sm:px-5 sm:py-5">
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((step, i) => (
-            <li key={i} className="flex gap-3 rounded-xl bg-[var(--background)]/50 p-3">
+            <li key={i} className="flex gap-3 rounded-xl border border-theme-subtle bg-theme-surface p-3">
               <span {...iconWell(tool.gradient, "h-7 w-7 rounded-full text-xs font-bold")}>
                 {i + 1}
               </span>

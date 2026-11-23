@@ -22,19 +22,20 @@ export default function ConsultingCTA({ className, variant = "default" }: Consul
 
   return (
     <section className={className}>
-      <div className="rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/10 to-accent-emerald/5 p-8 text-center sm:p-10">
-        <h2 className="text-2xl font-bold text-theme-heading sm:text-3xl">
+      <div className="card spotlight relative overflow-hidden rounded-[1.75rem] px-6 py-12 text-center sm:px-10 sm:py-16" data-reveal="scale">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-56 w-[36rem] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 blur-3xl" aria-hidden />
+        <h2 className="relative text-3xl font-light leading-[1.1] tracking-[-0.03em] text-theme-heading sm:text-5xl">
           More free tools to explore
         </h2>
-        <p className="mx-auto mt-3 max-w-xl text-theme-muted">
+        <p className="section-lede relative mx-auto mt-4 max-w-xl">
           Calculators, formatters, SEO utilities, PDF tools, and Salesforce admin helpers —
           all free, browser-based, and ready to use.
         </p>
-        <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button href="/tools" size="lg" icon>
             Browse All Tools
           </Button>
-          <Button href="/blog" variant="outline" size="lg">
+          <Button href="/blog" variant="secondary" size="lg">
             Read Guides
           </Button>
         </div>

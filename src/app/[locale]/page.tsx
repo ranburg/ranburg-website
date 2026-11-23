@@ -9,6 +9,11 @@ import { SITE } from "@/lib/siteConfig";
 import JsonLd from "@/components/seo/JsonLd";
 import Hero from "@/components/home/Hero";
 import HomeBanners from "@/components/home/HomeBanners";
+import HomeMarquee from "@/components/home/HomeMarquee";
+import HowItWorks from "@/components/home/HowItWorks";
+import NewToolsSection from "@/components/home/NewToolsSection";
+import BlogPreview from "@/components/home/BlogPreview";
+import HomeCta from "@/components/home/HomeCta";
 import AdPlaceholder from "@/components/ui/AdPlaceholder";
 
 const ToolsVideoBanner = dynamic(() => import("@/components/home/ToolsVideoBanner"));
@@ -65,11 +70,16 @@ export default async function HomePage({ params }: PageProps) {
         )}
       />
       <Hero />
+      <HomeMarquee />
       <HomeBanners />
       <ToolsVideoBanner />
+      <HowItWorks />
+      <NewToolsSection />
       <CatalogDirectory />
       <RecentlyUsedTools />
       <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
+      <BlogPreview />
+      <HomeCta />
     </>
   );
 }

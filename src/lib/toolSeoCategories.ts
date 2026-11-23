@@ -202,6 +202,23 @@ export const TOOL_SEO_CATEGORY_MAP: Record<string, SeoCategorySlug[]> = {
   "average-calculator": ["calculators"],
   "px-to-rem-converter": ["developer"],
   "water-intake-calculator": ["calculators"],
+
+  "step-up-sip-calculator": ["calculators"],
+  "lumpsum-calculator": ["calculators"],
+  "goal-sip-calculator": ["calculators"],
+  "xirr-calculator": ["calculators", "business"],
+  "stock-average-calculator": ["calculators"],
+  "fire-calculator": ["calculators"],
+  "home-loan-eligibility-calculator": ["calculators"],
+  "css-gradient-generator": ["generators", "developer"],
+  "box-shadow-generator": ["generators", "developer"],
+  "color-palette-generator": ["generators", "developer"],
+  "json-to-typescript": ["developer"],
+  "number-base-converter": ["developer"],
+  "pomodoro-timer": ["business"],
+  "typing-speed-test": ["text", "business"],
+  "time-zone-converter": ["business", "calculators"],
+  "cgpa-to-percentage-calculator": ["calculators"],
 };
 
 export const SEO_CATEGORY_HUBS: SeoCategoryHub[] = [

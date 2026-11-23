@@ -94,7 +94,7 @@ export default function PersonaSelector({
         type="button"
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "flex max-w-[14rem] items-center gap-1.5 rounded-xl border border-theme-subtle bg-theme-surface/50 px-2.5 py-2 text-sm transition-colors hover:border-accent/30 hover:text-theme-heading",
+          "flex h-10 max-w-[14rem] items-center gap-1.5 rounded-xl border border-theme-subtle bg-theme-surface px-2.5 text-sm transition-colors hover:border-accent/40 hover:text-theme-heading",
           open && "border-accent/40 bg-accent/5"
         )}
         aria-haspopup="listbox"

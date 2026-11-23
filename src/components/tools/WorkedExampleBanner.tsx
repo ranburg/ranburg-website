@@ -7,11 +7,11 @@ export default function WorkedExampleBanner({ slug }: { slug: string }) {
   if (!examples?.length) return null;
 
   return (
-    <aside className="mt-8 rounded-xl border border-theme-subtle bg-theme-surface/40 px-4 py-3.5 sm:px-5">
+    <aside className="card mt-8 px-4 py-4 sm:px-6">
       <div className="flex gap-3">
         <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
         <div className="min-w-0">
-          <p className="text-xs font-semibold uppercase tracking-wider text-accent">
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-accent">
             Quick example
           </p>
           <p className="mt-1 text-sm leading-relaxed text-theme-muted">{examples[0]}</p>

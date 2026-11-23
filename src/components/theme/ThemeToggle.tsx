@@ -10,24 +10,30 @@ interface ThemeToggleProps {
 
 export default function ThemeToggle({ className }: ThemeToggleProps) {
   const { theme, toggleTheme, mounted } = useTheme();
+  const isDark = theme === "dark";
 
   return (
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       className={cn(
-        "flex h-11 w-11 items-center justify-center rounded-lg border transition-all",
-        "border-slate-200 bg-slate-100 text-slate-600 hover:border-accent/40 hover:text-accent",
-        "dark:border-theme dark:bg-theme-surface dark:text-theme-muted dark:hover:text-slate-900 dark:hover:text-white",
+        "group relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-theme-subtle bg-theme-surface text-theme-muted transition-colors hover:border-accent/40 hover:text-accent",
         className
       )}
     >
-      {mounted ? (
-        theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />
-      ) : (
-        <Sun className="h-4 w-4 opacity-0" />
-      )}
+      <Sun
+        className={cn(
+          "absolute h-4 w-4 transition-all duration-500 ease-out-expo",
+          mounted && isDark ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0"
+        )}
+      />
+      <Moon
+        className={cn(
+          "absolute h-4 w-4 transition-all duration-500 ease-out-expo",
+          mounted && !isDark ? "rotate-0 scale-100 opacity-100" : "rotate-90 scale-50 opacity-0"
+        )}
+      />
     </button>
   );
 }

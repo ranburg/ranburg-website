@@ -1,6 +1,7 @@
 import type { BlogPost } from "./blogTypes";
 import { TOOLS_CONFIG } from "./toolsConfig";
 import { SEO_CLUSTER_BLOG_POSTS } from "./blogConfigSeoClusters";
+import { GUIDES_2026_BLOG_POSTS } from "./blogConfigGuides2026";
 import { generateToolGuideBlog } from "./generateToolGuideBlog";
 
 function getFeaturedToolSlug(post: BlogPost): string | undefined {
@@ -16,7 +17,8 @@ function getCoveredToolSlugs(posts: BlogPost[]): Set<string> {
   return covered;
 }
 
-const coveredBySeo = getCoveredToolSlugs(SEO_CLUSTER_BLOG_POSTS);
+/** Tools that already have a hand-written article do not need an auto-generated guide. */
+const coveredBySeo = getCoveredToolSlugs([...SEO_CLUSTER_BLOG_POSTS, ...GUIDES_2026_BLOG_POSTS]);
 const missingTools = TOOLS_CONFIG.filter((t) => !coveredBySeo.has(t.slug));
 
 /** Dedicated guides for tools not yet featured as primary in any SEO cluster blog */
