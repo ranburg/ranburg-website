@@ -153,8 +153,8 @@ export default async function ToolPageShell({ slug, locale }: ToolPageProps) {
           <ToolProcessFlow tool={tool} />
           <ToolNextSteps currentSlug={slug} limit={3} />
 
-          <AdPlaceholder placement="after-tool-mobile" />
-          <AdPlaceholder placement="between-content" className="hidden lg:flex" />
+          {/* One responsive unit — avoid a second hidden unit (AdSense skips/blocks hidden ads). */}
+          <AdPlaceholder placement="between-content" />
 
           <ToolRecommendations currentSlug={slug} layout="grid" limit={6} />
           <RecentlyViewed excludeSlug={slug} />

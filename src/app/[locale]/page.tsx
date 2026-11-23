@@ -74,10 +74,10 @@ export default async function HomePage({ params }: PageProps) {
       <HomeBanners />
       <ToolsVideoBanner />
       <HowItWorks />
+      <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
       <NewToolsSection />
       <CatalogDirectory />
       <RecentlyUsedTools />
-      <AdPlaceholder placement="between-sections" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" />
       <BlogPreview />
       <HomeCta />
     </>

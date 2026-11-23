@@ -154,9 +154,10 @@ export default function ToolsHub({
           )}
 
           <ToolSection title="Popular Tools" description="Most used this month — jump in and get an answer fast." slugs={POPULAR_TOOL_SLUGS} />
-          <ToolSection title="Featured" description="Our strongest calculators and creator utilities." slugs={FEATURED_TOOL_SLUGS} />
 
           <AdPlaceholder placement="between-sections" />
+
+          <ToolSection title="Featured" description="Our strongest calculators and creator utilities." slugs={FEATURED_TOOL_SLUGS} />
 
           {CATALOG_SECTIONS.map((section) => (
             <ToolSection

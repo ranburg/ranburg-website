@@ -19,45 +19,81 @@ interface AdPlaceholderProps {
 }
 
 const SIZE: Record<AdPlacement, string> = {
-  sidebar: "min-h-[250px] w-full",
-  "below-hero": "min-h-[90px] w-full",
+  sidebar: "min-h-[280px] w-full",
+  "below-hero": "min-h-[100px] w-full",
   "between-content": "min-h-[120px] w-full my-8",
-  "after-tool-mobile": "min-h-[100px] w-full my-8 lg:hidden",
-  "between-sections": "min-h-[90px] w-full my-10",
+  "after-tool-mobile": "min-h-[100px] w-full my-8",
+  "between-sections": "min-h-[100px] w-full my-10",
   "after-faq": "min-h-[120px] w-full my-8",
-  "in-article": "min-h-[120px] w-full mt-14",
+  "in-article": "min-h-[120px] w-full my-10",
 };
 
+declare global {
+  interface Window {
+    adsbygoogle?: unknown[] & { loaded?: boolean };
+  }
+}
+
 /**
- * Sparse AdSense display unit.
- * The adsbygoogle.js loader lives once in the root layout <head>.
- * Each placement renders the AdSense <ins> + push({}) for slot SITE.adsenseSlot.
+ * Sparse AdSense display unit (client + slot from SITE).
+ * Loader script is injected once in the root layout <head>.
  */
 export default function AdPlaceholder({ placement, className }: AdPlaceholderProps) {
   const client = SITE.adsenseClient;
   const slot = SITE.adsenseSlot;
+  const insRef = useRef<HTMLModElement>(null);
   const pushed = useRef(false);
 
   useEffect(() => {
     if (pushed.current) return;
-    try {
-      // @ts-expect-error adsbygoogle global injected by the layout loader
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    const el = insRef.current;
+    if (!el) return;
+    // Already initialized by a previous mount / HMR.
+    if (el.getAttribute("data-adsbygoogle-status")) {
       pushed.current = true;
-    } catch {
-      /* AdSense may be blocked by an extension or network policy */
+      return;
     }
+
+    let cancelled = false;
+    let attempts = 0;
+
+    const pushAd = () => {
+      if (cancelled || pushed.current || !insRef.current) return true;
+      if (insRef.current.getAttribute("data-adsbygoogle-status")) {
+        pushed.current = true;
+        return true;
+      }
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        pushed.current = true;
+        return true;
+      } catch {
+        return false;
+      }
+    };
+
+    if (pushAd()) return;
+
+    const timer = window.setInterval(() => {
+      attempts += 1;
+      if (pushAd() || attempts > 40) window.clearInterval(timer);
+    }, 250);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
   }, []);
 
   return (
-    <div
-      role="complementary"
+    <aside
       aria-label="Advertisement"
       data-ad-placement={placement}
-      className={cn("overflow-hidden rounded-xl text-center", SIZE[placement], className)}
+      className={cn("w-full text-center", SIZE[placement], className)}
     >
-      {/* Ad unit: client ca-pub-4423485654472888 / slot 4454149586 ("test") */}
+      {/* Exact AdSense unit: ca-pub-4423485654472888 / 4454149586 */}
       <ins
+        ref={insRef}
         className="adsbygoogle"
         style={{ display: "block" }}
         data-ad-client={client}
@@ -65,6 +101,6 @@ export default function AdPlaceholder({ placement, className }: AdPlaceholderPro
         data-ad-format="auto"
         data-full-width-responsive="true"
       />
-    </div>
+    </aside>
   );
 }
